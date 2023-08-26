@@ -3,7 +3,7 @@
 | Game     | Online     | Fabian      | Jonathan  | 
 |---       |---         |---          |---        |
 | Thymesia | 6,5h, 7/10 | 7,5h, 7/10  | 19h, 8/10 |
-| Everhood | 6,5h, 8/10 | 8h, 6/10    | xh, x/10  | 
+| Everhood | 6,5h, 8/10 | 8h, 6/10    | 10h, 7/10  | 
 
 Online:
 - length: howlongtobeat main story
