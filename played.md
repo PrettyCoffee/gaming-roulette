@@ -7,7 +7,7 @@
 | Needy Streamer Overload         | 2023-08-26 |   3h,   -/10 |   5h, 6/10 |   6h, 7/10 |
 | Sonic Mania                     | 2023-09-02 |   6h, 8,6/10 | 5,5h, 5/10 | 7,5h, 3/10 |
 | Endling - Extinction is Forever | 2023-10-02 |   4h, 7,5/10 |   5h, 9/10 | 5,5h, 8/10 |
-| Figment                         | 2023-10-09 |   5h,   X/10 |   Xh, X/10 |   5h, 6/10 |
+| Figment                         | 2023-10-09 |   5h, 7,5/10 |   Xh, X/10 |   5h, 6/10 |
 
 Online:
 - length: howlongtobeat main story
