@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
   import { cva, type VariantProps } from "class-variance-authority"
+
   import { cn } from "./utils/cn"
   import { focusRing } from "./utils/styles"
 
@@ -31,7 +32,7 @@
 </script>
 
 <script lang="ts">
-  let className: string = ""
+  let className = ""
   export { className as class }
   export let variant: VariantProps<typeof button>["variant"] = undefined
   export let size: VariantProps<typeof button>["size"] = undefined
