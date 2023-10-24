@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --write --plugin prettier-plugin-svelte ./src"
+    "format": "prettier --write --plugin prettier-plugin-svelte ./src",
+    "validate": "pnpm run format && pnpm run check"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
