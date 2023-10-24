@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    --page: theme(colors.black);
+    --background: theme(colors.black);
+    --foreground: theme(colors.neutral.50);
+    
+    --hover: theme(colors.neutral.900);
+
+    --button: theme(colors.neutral.900);
+    --button-hover: theme(colors.neutral.800);
+    
+    --muted: theme(colors.neutral.800);
+    --muted-foreground: theme(colors.neutral.400);
+
+    --border: theme(colors.neutral.800);
+    --input: theme(colors.neutral.700);
+    --ring: theme(colors.neutral.300);
+
+    --accent: theme(colors.red.300);
+    --success: theme(colors.green.300);
+    --warning: theme(colors.yellow.300);
+    --error: theme(colors.red.300);
+    --info: theme(colors.blue.300);
+  }
+}
+
+@layer base {
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html, body {
+    @apply h-full
+  }
+  #app {
+    @apply max-w-sm;
+  }
+  body {
+    @apply bg-page;
+    @apply text-foreground;
+
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+  }
+
+  *:focus-visible {
+    outline-color: hsl(var(--ring));
+    outline-style: solid;
+    outline-width: 0.125rem;
+  }
+}
+ 
+/* ===== Scrollbar CSS ===== */
+/* web standard */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--background));
+}
+
+*:focus-visible {
+  scrollbar-color: hsl(var(--accent)) hsl(var(--background));
+}
+
+/* browsers that are not applying the web standard since 2018 */
+*::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground));
+  border-radius: 0.75rem;
+  border: 0.25rem solid hsl(var(--background));
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  border-width: 0.2rem;
+}
