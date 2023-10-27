@@ -44,17 +44,16 @@
   html,
   body {
     @apply h-full;
+    @apply min-h-full;
   }
-  #app {
-    @apply max-w-sm;
-  }
+
   body {
     @apply bg-page;
     @apply text-foreground;
 
-    @apply flex;
-    @apply justify-center;
-    @apply items-center;
+    @apply lg:flex;
+    @apply lg:justify-center;
+    @apply lg:items-center;
   }
 
   *:focus-visible {

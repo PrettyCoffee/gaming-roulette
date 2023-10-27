@@ -6,7 +6,7 @@
 
   const button = cva(
     cn(
-      "inline-flex items-center justify-center rounded-md text-sm font-medium",
+      "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium",
       focusRing
     ),
     {
@@ -22,6 +22,9 @@
           default: "h-10 px-4 py-2",
           icon: "h-10 w-10 min-w-[theme(width.10)] min-h-[theme(height.10)] max-w-[theme(width.10)] max-h-[theme(height.10)]",
         },
+        disabled: {
+          true: "opacity-50 pointer-events-none",
+        },
       },
       defaultVariants: {
         variant: "default",
@@ -36,8 +39,13 @@
   export { className as class }
   export let variant: VariantProps<typeof button>["variant"] = undefined
   export let size: VariantProps<typeof button>["size"] = undefined
+  export let disabled = false
 </script>
 
-<button class={cn(button({ variant, size }), className)}>
+<button
+  {disabled}
+  on:click
+  class={cn(button({ variant, size, disabled }), className)}
+>
   <slot />
 </button>
