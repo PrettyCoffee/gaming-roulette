@@ -13,8 +13,14 @@
       .map(item => item.trim())
       .filter(Boolean)
 
-  const store1 = storage("text1", "")
-  const store2 = storage("text2", "")
+  const store1 = storage(
+    "text1",
+    "Game 1.1\nGame 1.2\nGame 1.3\nGame 1.4\nGame 1.5\nGame 1.6\nGame 1.7\nGame 1.8\nGame 1.9\nGame 1.10"
+  )
+  const store2 = storage(
+    "text2",
+    "Game 2.1\nGame 2.2\nGame 2.3\nGame 2.4\nGame 2.5\nGame 2.6\nGame 2.7\nGame 2.8\nGame 2.9\nGame 2.10"
+  )
   const winners = storage<string[]>("winners", [])
 
   let list: string[]
