@@ -1,7 +1,23 @@
-import { defineConfig } from "vite"
-import { svelte } from "@sveltejs/vite-plugin-svelte"
+import react from "@vitejs/plugin-react";
+import { resolve } from "node:path"
+import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
-})
+  base: "./",
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "~": resolve(__dirname, "./src"),
+    },
+  },
+
+  // Vite options tailored for Tauri development and only applied in
+  // `tauri dev` or`tauri build`
+  // 1. prevent vite from obscuring rust errors
+  clearScreen: false,
+  // 2. tauri expects a fixed port, fail if that port is not available
+  server: {
+    port: 1420,
+    strictPort: true,
+  }
+});
