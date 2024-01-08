@@ -20,7 +20,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.test.dev",
+      "identifier": "com.tauri.gaming-roulette",
       "icon": [
         "icons/logo.svg"
       ]
