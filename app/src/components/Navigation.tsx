@@ -1,5 +1,7 @@
 import { Dispatch, PropsWithChildren } from "react"
+
 import { cn } from "~/utils/utils"
+
 import { ClassNameProp, DisabledProp } from "./base/BaseProps"
 
 interface NavButtonProps extends ClassNameProp, DisabledProp {
@@ -7,7 +9,11 @@ interface NavButtonProps extends ClassNameProp, DisabledProp {
   onClick: () => void
 }
 
-const NavButton = ({active, className, ...delegated}: PropsWithChildren<NavButtonProps>) => (
+const NavButton = ({
+  active,
+  className,
+  ...delegated
+}: PropsWithChildren<NavButtonProps>) => (
   <button
     className={cn(
       "px-3 py-1.5 w-full rounded-sm transition-all",
@@ -33,11 +39,15 @@ interface NavigationProps {
   onClick: Dispatch<string>
 }
 
-export const Navigation = ({items: routes, value, onClick}: NavigationProps) => { 
+export const Navigation = ({
+  items: routes,
+  value,
+  onClick,
+}: NavigationProps) => {
   return (
     <nav>
       <ul className="flex flex-col items-stretch gap-1">
-        {routes.map((route) => (
+        {routes.map(route => (
           <li key={route.value}>
             <NavButton
               active={route.value === value}

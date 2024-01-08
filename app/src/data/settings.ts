@@ -1,15 +1,15 @@
-import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react";
+import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react"
 
 interface Settings {
-  pickerView: "tags" | "wheel";
+  pickerView: "tags" | "wheel"
 }
 
 const settingsAtom = atom<Settings>({
-  name: 'settings',
+  name: "settings",
   defaultValue: {
     pickerView: "tags",
   },
-  middleware: [localStorage(), reduxDevtools()]
-});
+  middleware: [localStorage(), reduxDevtools()],
+})
 
-export const useSettings = () => useAtom(settingsAtom);
+export const useSettings = () => useAtom(settingsAtom)

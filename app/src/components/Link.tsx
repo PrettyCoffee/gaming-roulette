@@ -1,6 +1,8 @@
 import { PropsWithChildren } from "react"
-import { ClassNameProp } from "./base/BaseProps"
+
 import { cn } from "~/utils/utils"
+
+import { ClassNameProp } from "./base/BaseProps"
 
 interface LinkProps extends ClassNameProp {
   href: string
@@ -8,7 +10,11 @@ interface LinkProps extends ClassNameProp {
   onClick?: () => void
 }
 
-export const Link = ({ children, className, ...delegated }: PropsWithChildren<LinkProps>) => (
+export const Link = ({
+  children,
+  className,
+  ...delegated
+}: PropsWithChildren<LinkProps>) => (
   <a
     className={cn(
       "inline-flex gap-1 items-center",

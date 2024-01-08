@@ -1,4 +1,4 @@
-import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react";
+import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react"
 
 const gamesA = [
   "Baba is You",
@@ -10,7 +10,7 @@ const gamesA = [
   "Melatonin",
   "Hatoful Boyfriend",
   "Undungeon",
-  "Eldest Souls"
+  "Eldest Souls",
 ]
 
 const gamesB = [
@@ -23,16 +23,16 @@ const gamesB = [
   "FEZ",
   "One Step From Edenlea",
   "Oxenfree",
-  "Blaster Master Zero"
+  "Blaster Master Zero",
 ]
 
 interface Player {
-  name: string,
+  name: string
   games: string[]
 }
 
 interface Players {
-  player1: Player,
+  player1: Player
   player2: Player
 }
 
@@ -41,20 +41,24 @@ const playersAtom = atom<Players>({
   defaultValue: {
     player1: {
       name: "Player 1",
-      games: gamesA
+      games: gamesA,
     },
     player2: {
       name: "Player 2",
-      games: gamesB
+      games: gamesB,
     },
   },
-  middleware: [localStorage(), reduxDevtools()]
+  middleware: [localStorage(), reduxDevtools()],
 })
 
 export const usePlayers = () => {
   const [players, setPlayers] = useAtom(playersAtom)
 
-  const setPlayerAttribute = <Attribute extends keyof Player>(player: keyof Players, attribute: Attribute, value: Player[Attribute]) => {
+  const setPlayerAttribute = <Attribute extends keyof Player>(
+    player: keyof Players,
+    attribute: Attribute,
+    value: Player[Attribute]
+  ) => {
     setPlayers(data => {
       const next = { ...data }
       next[player] = { ...next[player], [attribute]: value }

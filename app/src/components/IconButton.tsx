@@ -42,11 +42,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         {...delegated}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
-        <Icon
-          icon={icon}
-          size="md"
-          color="current"
-        />
+        <Icon icon={icon} size="md" color="current" />
       </Button>
     </TitleTooltip>
   )

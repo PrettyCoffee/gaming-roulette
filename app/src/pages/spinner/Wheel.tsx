@@ -1,6 +1,7 @@
-import { cn } from "~/utils/utils"
-import styled from "@emotion/styled"
 import { css } from "@emotion/react"
+import styled from "@emotion/styled"
+
+import { cn } from "~/utils/utils"
 
 const Preserve3D = styled.div`
   perspective: 800;
@@ -84,12 +85,9 @@ const getStyles = (items: number, index: number, active: number) => {
   if (position === 4) return "display: none;"
 
   return css`
-  opacity: ${opacityByPosition[position] ?? 0};
-  transform:
-    perspective(1000px)
-    translateY(${y}rem)
-    translateZ(${z}rem)
-    rotateX(${rotate}deg);
+    opacity: ${opacityByPosition[position] ?? 0};
+    transform: perspective(1000px) translateY(${y}rem) translateZ(${z}rem)
+      rotateX(${rotate}deg);
   `
 }
 
@@ -99,18 +97,25 @@ interface WheelSegmentProps {
   active: number
 }
 
-const WheelSegment = styled.div<WheelSegmentProps>(({active, index, items}) => css`
-  transition: 250ms;
-  ${getStyles(items, index, active)}
-`)
+const WheelSegment = styled.div<WheelSegmentProps>(
+  ({ active, index, items }) => css`
+    transition: 250ms;
+    ${getStyles(items, index, active)}
+  `
+)
 
-interface WheelProps { 
+interface WheelProps {
   items: string[]
   current?: number
   winner?: string
   transitionDuration: number
 }
-export const Wheel = ({ current, items, winner, transitionDuration }: WheelProps) => {
+export const Wheel = ({
+  current,
+  items,
+  winner,
+  transitionDuration,
+}: WheelProps) => {
   return (
     <Preserve3D className="w-80 flex flex-col items-center h-72 relative">
       {items.map((item, index) => (
@@ -118,24 +123,23 @@ export const Wheel = ({ current, items, winner, transitionDuration }: WheelProps
           active={current ?? 0}
           index={index}
           items={items.length}
-
-          key={item + index}
+          // eslint-disable-next-line react/no-array-index-key
+          key={item + String(index)}
           className={cn(
             "absolute w-96 h-20 text-3xl px-4 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
             item === winner && "bg-green-500"
           )}
-
           style={{
             transitionDuration: `${transitionDuration + 10}ms`,
-            transitionTimingFunction: "linear"
+            transitionTimingFunction: "linear",
           }}
         >
           <span className="whitespace-nowrap text-ellipsis overflow-hidden">
             {item}
           </span>
-          {item === winner &&
+          {item === winner && (
             <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
-          }
+          )}
         </WheelSegment>
       ))}
     </Preserve3D>
