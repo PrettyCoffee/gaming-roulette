@@ -107,7 +107,7 @@ const WheelSegment = styled.div<WheelSegmentProps>(
 interface WheelProps {
   items: string[]
   current?: number
-  winner?: string
+  winner?: number
   transitionDuration: number
 }
 export const Wheel = ({
@@ -127,7 +127,7 @@ export const Wheel = ({
           key={item + String(index)}
           className={cn(
             "absolute w-96 h-20 text-3xl px-4 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
-            item === winner && "bg-green-500"
+            index === winner && "bg-green-500"
           )}
           style={{
             transitionDuration: `${transitionDuration + 10}ms`,
@@ -137,7 +137,7 @@ export const Wheel = ({
           <span className="whitespace-nowrap text-ellipsis overflow-hidden">
             {item}
           </span>
-          {item === winner && (
+          {index === winner && (
             <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
           )}
         </WheelSegment>

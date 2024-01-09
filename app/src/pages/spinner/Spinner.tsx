@@ -1,61 +1,21 @@
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import { Dices } from "lucide-react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click.mp3"
-import { ClassNameProp } from "~/components/base/BaseProps"
 import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { shuffle } from "~/utils/array"
 import { randomIntBetween } from "~/utils/number"
-import { noOverflow } from "~/utils/styles"
-import { cn } from "~/utils/utils"
 
+import { Tags } from "./Tags"
 import { Wheel } from "./Wheel"
 
 new Audio(clickSound) // preload
 const playClickSound = () => new Audio(clickSound).play()
-
-interface PillProps extends ClassNameProp {
-  color: "blue" | "red"
-  transition?: number
-}
-
-const Pill = ({
-  color,
-  children,
-  className,
-  transition,
-}: PropsWithChildren<PillProps>) => (
-  <span
-    className={cn(
-      "transition-all duration-150",
-      "px-2 py-0.5 bg-muted rounded-md max-w-[theme(width.48)] font-medium",
-      noOverflow,
-      color === "red" ? "bg-red-200 text-red-950" : "bg-blue-200 text-blue-950",
-      className
-    )}
-    style={
-      !transition
-        ? undefined
-        : {
-            transitionDuration: `${transition}ms`,
-          }
-    }
-  >
-    {children}
-  </span>
-)
 
 const useNumberRotation = (max: number) => {
   const [current, setCurrent] = useState<number | null>(null)
@@ -92,6 +52,7 @@ const useNumberRotation = (max: number) => {
   const reset = useCallback(() => {
     setCurrent(null)
     setWinner(null)
+    setTransition(null)
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
       timeoutRef.current = null
@@ -117,7 +78,7 @@ export const Spinner = () => {
     return shuffle(items)
   }, [games1, games2])
 
-  const { current, rotate, winner, transition } = useNumberRotation(
+  const { current, rotate, reset, winner, transition } = useNumberRotation(
     items.length
   )
 
@@ -127,33 +88,25 @@ export const Spinner = () => {
         <Wheel
           items={items}
           current={current ?? undefined}
-          winner={winner != null ? items[winner] : undefined}
+          winner={winner ?? undefined}
           transitionDuration={transition ?? 0}
         />
       ) : (
-        <div className="flex flex-wrap justify-center gap-2">
-          {items.map((value, i) => (
-            <Pill
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              color={games1.includes(value) ? "red" : "blue"}
-              className={cn(
-                current == null
-                  ? ""
-                  : current === i
-                  ? "scale-105"
-                  : "opacity-10"
-              )}
-              transition={transition ?? undefined}
-            >
-              {i + 1}. {value}
-            </Pill>
-          ))}
-        </div>
+        <Tags
+          items={items}
+          items1={games1}
+          items2={games2}
+          current={current ?? undefined}
+          winner={winner ?? undefined}
+          transitionDuration={transition ?? 0}
+        />
       )}
       <Button
         variant={"outline"}
-        onClick={() => rotate()}
+        onClick={() => {
+          reset()
+          rotate()
+        }}
         className="w-1/2 gap-2"
       >
         <Icon icon={Dices} />
