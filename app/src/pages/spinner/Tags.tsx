@@ -31,7 +31,12 @@ const Pill = ({
     }}
   >
     <span className={cn(noOverflow, "flex-1")}>{children}</span>
-    {winner && <span className="absolute -top-6 -right-6 text-3xl">🎉</span>}
+    {winner && <span className="absolute -bottom-3 -left-3 text-3xl">🎉</span>}
+    {winner && (
+      <span className="absolute -bottom-3 -right-3 text-3xl scale-x-[-1]">
+        🎉
+      </span>
+    )}
   </span>
 )
 

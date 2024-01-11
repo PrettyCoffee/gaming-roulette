@@ -1,21 +1,25 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
+import { create as createConfetti } from "canvas-confetti"
 import { Dices } from "lucide-react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click.mp3"
+// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
+import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { shuffle } from "~/utils/array"
 import { randomIntBetween } from "~/utils/number"
+import { playAudio } from "~/utils/playAudio"
 
 import { Tags } from "./Tags"
 import { Wheel } from "./Wheel"
 
-new Audio(clickSound) // preload
-const playClickSound = () => new Audio(clickSound).play()
+const playClickSound = () => void playAudio(clickSound)
+const playVictory = () => void playAudio(victorySound)
 
 const useNumberRotation = (max: number) => {
   const [current, setCurrent] = useState<number | null>(null)
@@ -40,7 +44,7 @@ const useNumberRotation = (max: number) => {
       const transition = Math.max(Math.abs(speed), 10)
       setTransition(transition)
 
-      setTimeout(() => void playClickSound(), transition / 2)
+      setTimeout(() => playClickSound(), transition / 2)
       timeoutRef.current = setTimeout(
         () => rotate(next, winner, speed + change),
         transition
@@ -82,8 +86,38 @@ export const Spinner = () => {
     items.length
   )
 
+  const canvas = useRef<HTMLCanvasElement | null>(null)
+  useEffect(() => {
+    if (!canvas.current || winner == null) return
+    playVictory()
+
+    const confetti = createConfetti(canvas.current, { resize: true })
+    const settings = {
+      particleCount: 100,
+      spread: 75,
+      colors: [
+        "#ef4444",
+        "#f59e0b",
+        "#22c55e",
+        "#06b6d4",
+        "#3b82f6",
+        "#a855f7",
+      ],
+    }
+    void confetti({
+      ...settings,
+      origin: { x: 0, y: 1 },
+      angle: 90 - 30,
+    })
+    void confetti({
+      ...settings,
+      origin: { x: 1, y: 1 },
+      angle: 90 + 30,
+    })
+  }, [winner])
+
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-2">
+    <div className="relative h-full flex-1 flex flex-col items-center justify-center gap-2">
       {settings.pickerView === "wheel" ? (
         <Wheel
           items={items}
@@ -101,6 +135,10 @@ export const Spinner = () => {
           transitionDuration={transition ?? 0}
         />
       )}
+      <canvas
+        className="absolute -inset-4 h-[calc(100%+theme(height.4)*2)] w-[calc(100%+theme(width.4)*2)]  pointer-events-none"
+        ref={canvas}
+      />
       <Button
         variant={"outline"}
         onClick={() => {

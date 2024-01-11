@@ -15,7 +15,7 @@ export const Settings = () => {
   const [settings, setSettings] = useSettings()
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-2 gap-2 p-4">
       <div className="col-span-1">
         <InputLabel className="mb-2" htmlFor="player-1">
           Player 1
