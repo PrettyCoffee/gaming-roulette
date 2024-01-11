@@ -2,12 +2,14 @@ import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react"
 
 interface Settings {
   pickerView: "tags" | "wheel"
+  volume: number
 }
 
-const settingsAtom = atom<Settings>({
+export const settingsAtom = atom<Settings>({
   name: "settings",
   defaultValue: {
     pickerView: "tags",
+    volume: 0.5,
   },
   middleware: [localStorage(), reduxDevtools()],
 })

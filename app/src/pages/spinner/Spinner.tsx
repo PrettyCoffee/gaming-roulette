@@ -30,6 +30,10 @@ const useNumberRotation = (max: number) => {
 
   const rotate = useCallback(
     (prev = current, winner = randomIntBetween(0, max - 1), speed = -100) => {
+      const transition = Math.max(Math.abs(speed), 10)
+      setTransition(transition)
+      setTimeout(() => playClickSound(), transition / 2)
+
       const next = prev == null ? 0 : (prev + 1) % max
       setCurrent(next)
 
@@ -41,10 +45,7 @@ const useNumberRotation = (max: number) => {
       }
 
       const change = Math.max(Math.abs(speed) / 20, 1)
-      const transition = Math.max(Math.abs(speed), 10)
-      setTransition(transition)
 
-      setTimeout(() => playClickSound(), transition / 2)
       timeoutRef.current = setTimeout(
         () => rotate(next, winner, speed + change),
         transition
