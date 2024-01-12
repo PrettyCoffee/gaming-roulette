@@ -48,7 +48,10 @@ const playersAtom = atom<Players>({
       games: gamesB,
     },
   },
-  middleware: [localStorage(), reduxDevtools()],
+  middleware: [
+    localStorage(),
+    reduxDevtools({ disable: import.meta.env.PROD }),
+  ],
 })
 
 export const usePlayers = () => {

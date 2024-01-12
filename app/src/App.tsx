@@ -38,8 +38,8 @@ const FooterContent = styled.footer`
 export const App = () => {
   const [current, setCurrent] = useState(routes[0]?.value)
 
-  const ActiveView =
-    routes.find(({ value }) => value === current)?.component ?? (() => null)
+  const currentRoute = routes.find(({ value }) => value === current)
+  const ActiveView = currentRoute?.component ?? (() => null)
 
   return (
     <Layout className="h-full p-2 pl-4 gap-4 [&>*]:overflow-auto">
@@ -54,6 +54,8 @@ export const App = () => {
         <Navigation items={routes} value={current} onClick={setCurrent} />
       </NavigationContent>
       <MainContent className="p-4 bg-background rounded-lg shadow-lg">
+        <h1 className="sr-only">{currentRoute?.label}</h1>
+
         <ActiveView />
       </MainContent>
       <FooterContent className="p-2">

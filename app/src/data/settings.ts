@@ -11,7 +11,10 @@ export const settingsAtom = atom<Settings>({
     pickerView: "tags",
     volume: 0.5,
   },
-  middleware: [localStorage(), reduxDevtools()],
+  middleware: [
+    localStorage(),
+    reduxDevtools({ disable: import.meta.env.PROD }),
+  ],
 })
 
 export const useSettings = () => useAtom(settingsAtom)
