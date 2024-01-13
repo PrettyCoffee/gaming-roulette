@@ -1,6 +1,7 @@
 import { Clock, RefreshCw, Star } from "lucide-react"
 
 import { Icon } from "~/components/Icon"
+import { LoadingData } from "~/components/LoadingData"
 import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { GameStats, UserStats, useGames } from "~/data/games"
@@ -150,7 +151,12 @@ const GamesTable = ({ games }: { games: GameStats[] }) => {
 export const Overview = () => {
   const { games, refreshGames } = useGames()
 
-  if (!games) return <span>Loading...</span>
+  if (!games)
+    return (
+      <div className="h-full w-full flex items-center justify-center">
+        <LoadingData label="Loading data..." />
+      </div>
+    )
 
   return (
     <div className="h-full flex flex-col gap-2">
