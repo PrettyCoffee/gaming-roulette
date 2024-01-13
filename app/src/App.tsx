@@ -38,13 +38,14 @@ const FooterContent = styled.footer`
 
 export const App = () => {
   const [current, setCurrent] = useState(routes[0]?.value)
-  const { token } = useGithub()
+  const { token, filePath, repoName, repoOwner } = useGithub()
 
   const currentRoute = routes.find(({ value }) => value === current)
   const ActiveView = currentRoute?.component ?? (() => null)
 
+  const hasAllGithubOptions = token && filePath && repoName && repoOwner
   const enabledRoutes = routes.map(route =>
-    route.value === "overview" && token
+    route.value === "overview" && hasAllGithubOptions
       ? { ...route, disabled: false, hint: undefined }
       : route
   )

@@ -27,12 +27,11 @@ export const routes: Route[] = [
     value: "overview",
     component: Overview,
     disabled: true,
-    hint: "Set a github token to access this page",
+    hint: "Github settings missing",
   },
   {
     label: "Settings",
     value: "settings",
     component: Settings,
-    disabled: false,
   },
 ]

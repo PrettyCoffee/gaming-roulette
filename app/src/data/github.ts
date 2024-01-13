@@ -4,6 +4,7 @@ interface GithubData {
   token: string
   repoOwner: string
   repoName: string
+  filePath: string
 }
 
 export const githubAtom = atom<GithubData>({
@@ -12,6 +13,7 @@ export const githubAtom = atom<GithubData>({
     token: "",
     repoOwner: "PrettyCoffee",
     repoName: "gaming-roulette",
+    filePath: "played.md",
   },
   middleware: [
     localStorage(),

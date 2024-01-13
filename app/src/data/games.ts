@@ -11,6 +11,7 @@ import {
 import { WEEK } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
 
+import { githubAtom } from "./github"
 import { fetchRepoFile } from "./service/fetchRepoFile"
 
 export interface UserStats {
@@ -50,6 +51,7 @@ const splitUserStats = (userStats: string) => {
 }
 export const useGames = () => {
   const [games, setGames] = useAtom(gamesAtom)
+  const [{ filePath }] = useAtom(githubAtom)
 
   const refreshGames = useCallback(() => {
     setGames(null)
@@ -58,7 +60,7 @@ export const useGames = () => {
   useEffect(() => {
     if (games != null) return
 
-    void fetchRepoFile("played.md")
+    void fetchRepoFile(filePath)
       .then(text => {
         const games = parseMarkdownTable(text ?? "", [
           "name",
@@ -78,7 +80,7 @@ export const useGames = () => {
           }))
       })
       .then(setGames)
-  }, [games, setGames])
+  }, [filePath, games, setGames])
 
   return { games, refreshGames }
 }

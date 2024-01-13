@@ -40,6 +40,24 @@ const RepoName = () => {
   )
 }
 
+const FilePath = () => {
+  const id = useId()
+  const { filePath, setGithubAttribute } = useGithub()
+
+  return (
+    <>
+      <InputLabel className="mb-2" htmlFor={id}>
+        File path
+      </InputLabel>
+      <Input
+        id={id}
+        value={filePath}
+        onChange={({ target }) => setGithubAttribute("filePath", target.value)}
+      />
+    </>
+  )
+}
+
 const GithubToken = () => {
   const id = useId()
   const [showToken, setShowToken] = useState(false)
@@ -71,6 +89,10 @@ export const GithubSettings = () => (
 
     <div className="col-span-1">
       <RepoName />
+    </div>
+
+    <div className="col-span-1">
+      <FilePath />
     </div>
 
     <div className="col-span-1">
