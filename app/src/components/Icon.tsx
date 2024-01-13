@@ -5,7 +5,7 @@ import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
 
-const icon = cva("shrink-0", {
+const icon = cva("shrink-0 inline-block", {
   variants: {
     size: {
       xs: "h-3 w-3",

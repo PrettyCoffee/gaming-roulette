@@ -150,7 +150,7 @@ const GithubToken = () => {
       <Input
         id={id}
         type={showToken ? "text" : "password"}
-        value={showToken ? token : "xxxxxxxx"}
+        value={showToken || !token ? token : "xxxxxxxx"}
         onChange={({ target }) => setGithubAttribute("token", target.value)}
         onFocus={() => setShowToken(true)}
         onBlur={() => setShowToken(false)}

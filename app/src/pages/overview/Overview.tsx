@@ -1,31 +1,166 @@
-import { useGames } from "~/data/games"
+import { Clock, RefreshCw, Star } from "lucide-react"
 
-export const Overview = () => {
-  const { games } = useGames()
+import { Icon } from "~/components/Icon"
+import { Button } from "~/components/ui/button"
+import { Table } from "~/components/ui/table"
+import { GameStats, UserStats, useGames } from "~/data/games"
+import { usePlayers } from "~/data/players"
+import { cn } from "~/utils/utils"
 
-  console.log(games)
+const averageStat = (
+  games: GameStats[],
+  user: keyof Omit<GameStats, "name" | "date">,
+  stat: keyof UserStats
+) => {
+  const validGames = games.filter(game => typeof game[user][stat] === "number")
+  return (
+    validGames.reduce((acc, game) => acc + (game[user][stat] ?? 0), 0) /
+    validGames.length
+  )
+}
+
+const averageStats = (games: GameStats[]) => ({
+  online: {
+    playtime: averageStat(games, "online", "playtime"),
+    rating: averageStat(games, "online", "rating"),
+  },
+  player1: {
+    playtime: averageStat(games, "player1", "playtime"),
+    rating: averageStat(games, "player1", "rating"),
+  },
+  player2: {
+    playtime: averageStat(games, "player2", "playtime"),
+    rating: averageStat(games, "player2", "rating"),
+  },
+})
+
+const Hours = ({ hours }: { hours?: number }) => (
+  <span className="inline-block whitespace-nowrap">
+    {hours?.toFixed(1) ?? "-"} <span className="text-muted-foreground">h</span>
+  </span>
+)
+
+const Rating = ({ rating }: { rating?: number }) => (
+  <span className={cn("inline-block whitespace-nowrap")}>
+    {rating?.toFixed(1) ?? "-"}{" "}
+    <Icon icon={Star} size="sm" className="text-yellow-200" />
+  </span>
+)
+
+const GamesTable = ({ games }: { games: GameStats[] }) => {
+  const { players } = usePlayers()
+  const average = averageStats(games)
 
   return (
-    <div className="px-2">
-      <div className="grid grid-cols-[repeat(8,auto)] whitespace-nowrap overflow-x-auto min-w-full">
-        <div className="col-span-1 font-bold">Name</div>
-        <div className="col-span-1 font-bold">Date</div>
-        <div className="col-span-2 font-bold">Online</div>
-        <div className="col-span-2 font-bold">Player 1</div>
-        <div className="col-span-2 font-bold">Player 2</div>
+    <Table.Root>
+      <Table.Header>
+        <Table.Row className="border-none">
+          <Table.Head colSpan={2} className="text-center">
+            Game info
+          </Table.Head>
+          <Table.Head colSpan={2} className="text-center">
+            Online
+          </Table.Head>
+          <Table.Head colSpan={2} className="text-center">
+            {players.player1.name}
+          </Table.Head>
+          <Table.Head colSpan={2} className="text-center">
+            {players.player2.name}
+          </Table.Head>
+        </Table.Row>
 
-        {games?.map(game => (
-          <>
-            <div className="col-span-1">{game.name}</div>
-            <div className="col-span-1">{game.date}</div>
-            <div className="col-span-1">{game.online.playtime}</div>
-            <div className="col-span-1">{game.online.rating}</div>
-            <div className="col-span-1">{game.player1.playtime}</div>
-            <div className="col-span-1">{game.player1.rating}</div>
-            <div className="col-span-1">{game.player2.playtime}</div>
-            <div className="col-span-1">{game.player2.rating}</div>
-          </>
+        <Table.Row>
+          <Table.Head>Name</Table.Head>
+          <Table.Head>Date</Table.Head>
+          <Table.Head className="text-center">
+            <Icon icon={Clock} color="current" size="sm" />
+          </Table.Head>
+          <Table.Head className="text-center">
+            <Icon icon={Star} color="current" size="sm" />
+          </Table.Head>
+          <Table.Head className="text-center">
+            <Icon icon={Clock} color="current" size="sm" />
+          </Table.Head>
+          <Table.Head className="text-center">
+            <Icon icon={Star} color="current" size="sm" />
+          </Table.Head>
+          <Table.Head className="text-center">
+            <Icon icon={Clock} color="current" size="sm" />
+          </Table.Head>
+          <Table.Head className="text-center">
+            <Icon icon={Star} color="current" size="sm" />
+          </Table.Head>
+        </Table.Row>
+      </Table.Header>
+
+      <Table.Body>
+        {games.map(game => (
+          <Table.Row key={game.name}>
+            <Table.Cell>{game.name}</Table.Cell>
+            <Table.Cell>{game.date}</Table.Cell>
+            <Table.Cell className="text-end">
+              <Hours hours={game.online.playtime} />
+            </Table.Cell>
+            <Table.Cell className="text-end">
+              <Rating rating={game.online.rating} />
+            </Table.Cell>
+            <Table.Cell className="text-end">
+              <Hours hours={game.player1.playtime} />
+            </Table.Cell>
+            <Table.Cell className="text-end">
+              <Rating rating={game.player1.rating} />
+            </Table.Cell>
+            <Table.Cell className="text-end">
+              <Hours hours={game.player2.playtime} />
+            </Table.Cell>
+            <Table.Cell className="text-end">
+              <Rating rating={game.player2.rating} />
+            </Table.Cell>
+          </Table.Row>
         ))}
+      </Table.Body>
+
+      <Table.Footer>
+        <Table.Row>
+          <Table.Cell colSpan={2}>Average</Table.Cell>
+          <Table.Cell align="right">
+            <Hours hours={average.online.playtime} />
+          </Table.Cell>
+          <Table.Cell align="right">
+            <Rating rating={average.online.rating} />
+          </Table.Cell>
+          <Table.Cell align="right">
+            <Hours hours={average.player1.playtime} />
+          </Table.Cell>
+          <Table.Cell align="right">
+            <Rating rating={average.player1.rating} />
+          </Table.Cell>
+          <Table.Cell align="right">
+            <Hours hours={average.player2.playtime} />
+          </Table.Cell>
+          <Table.Cell align="right">
+            <Rating rating={average.player2.rating} />
+          </Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table.Root>
+  )
+}
+
+export const Overview = () => {
+  const { games, refreshGames } = useGames()
+
+  if (!games) return <span>Loading...</span>
+
+  return (
+    <div className="px-2 h-full flex flex-col">
+      <Button variant="ghost" className="gap-2" onClick={refreshGames}>
+        <Icon icon={RefreshCw} size="sm" />
+        Reload
+      </Button>
+
+      <div className="flex flex-col overflow-auto [&>*]:flex-1 [&>*]:h-full">
+        <GamesTable games={games} />
       </div>
     </div>
   )

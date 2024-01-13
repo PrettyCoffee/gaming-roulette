@@ -13,12 +13,12 @@ import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
 
 import { fetchRepoFile } from "./service/fetchRepoFile"
 
-interface UserStats {
-  playtime: string
-  rating: string
+export interface UserStats {
+  playtime: number | undefined
+  rating: number | undefined
 }
 
-interface GameStats {
+export interface GameStats {
   name: string
   date: string
   online: UserStats
@@ -37,9 +37,12 @@ const gamesAtom = atom<GameStats[] | null>({
 })
 
 const splitUserStats = (userStats: string) => {
-  const [playtime = "", rating = ""] = userStats
+  const [playtime, rating] = userStats
     .split(",")
-    .map(stats => stats.trim())
+    .map(stats => stats.trim().match(/^(\d+\.?\d*)/)?.[1] ?? "")
+    .map(parseFloat)
+    .map(value => (Number.isNaN(value) ? undefined : value))
+
   return {
     playtime,
     rating,
@@ -64,13 +67,15 @@ export const useGames = () => {
           "player1",
           "player2",
         ] as const)
-        return games.map<GameStats>(game => ({
-          name: game.name,
-          date: game.date,
-          online: splitUserStats(game.online),
-          player1: splitUserStats(game.player1),
-          player2: splitUserStats(game.player2),
-        }))
+        return games
+          .filter(game => !/x/i.test(game.name))
+          .map<GameStats>(game => ({
+            name: game.name,
+            date: game.date,
+            online: splitUserStats(game.online),
+            player1: splitUserStats(game.player1),
+            player2: splitUserStats(game.player2),
+          }))
       })
       .then(setGames)
   }, [games, setGames])
