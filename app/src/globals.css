@@ -69,18 +69,31 @@
 }
 
 /* browsers that are not applying the web standard since 2018 */
+:root, .bg-base {
+  --scrollbar-bg: var(--base);
+}
+.bg-background {
+  --scrollbar-bg: var(--background);
+}
+
 *::-webkit-scrollbar {
   width: 0.75rem;
+  height: 0.75rem;
 }
 
 *::-webkit-scrollbar-track {
-  background: hsl(var(--base));
+  background: hsl(var(--scrollbar-bg));
+  border-radius: 50vh;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: hsl(var(--muted-foreground));
   border-radius: 0.75rem;
-  border: 0.25rem solid hsl(var(--base));
+  border: 0.25rem solid hsl(var(--scrollbar-bg));
 }
 
 *::-webkit-scrollbar-thumb:hover {
