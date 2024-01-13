@@ -1,10 +1,14 @@
-import { Dispatch, PropsWithChildren } from "react"
+import { Dispatch } from "react"
 
+import { Route } from "~/pages/routes"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp, DisabledProp } from "./base/BaseProps"
+import { ClassNameProp } from "./base/BaseProps"
+import { TitleTooltip } from "./TitleTooltip"
 
-interface NavButtonProps extends ClassNameProp, DisabledProp {
+interface NavButtonProps
+  extends Pick<Route, "disabled" | "label">,
+    ClassNameProp {
   active: boolean
   onClick: () => void
 }
@@ -12,8 +16,9 @@ interface NavButtonProps extends ClassNameProp, DisabledProp {
 const NavButton = ({
   active,
   className,
+  label,
   ...delegated
-}: PropsWithChildren<NavButtonProps>) => (
+}: NavButtonProps) => (
   <button
     className={cn(
       "px-3 py-1.5 w-full rounded-sm transition-all",
@@ -25,16 +30,13 @@ const NavButton = ({
       className
     )}
     {...delegated}
-  />
+  >
+    {label}
+  </button>
 )
 
-interface NavItem extends DisabledProp {
-  label: string
-  value: string
-}
-
 interface NavigationProps {
-  items: NavItem[]
+  items: Route[]
   value?: string
   onClick: Dispatch<string>
 }
@@ -48,15 +50,20 @@ export const Navigation = ({
     <nav>
       <ul className="flex flex-col items-stretch gap-1">
         {routes.map(route => (
-          <li key={route.value}>
-            <NavButton
-              active={route.value === value}
-              onClick={() => onClick(route.value)}
-              disabled={route.disabled}
-            >
-              {route.label}
-            </NavButton>
-          </li>
+          <TitleTooltip
+            key={route.value}
+            asChild
+            title={route.hint}
+            side="right"
+          >
+            <li key={route.value}>
+              <NavButton
+                active={route.value === value}
+                onClick={() => onClick(route.value)}
+                {...route}
+              />
+            </li>
+          </TitleTooltip>
         ))}
       </ul>
     </nav>

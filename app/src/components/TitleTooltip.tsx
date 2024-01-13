@@ -2,10 +2,13 @@ import * as React from "react"
 
 import { TooltipContentProps } from "@radix-ui/react-tooltip"
 
-import { AsChildProp, TitleProp } from "./base/BaseProps"
+import { AsChildProp, DisabledProp, TitleProp } from "./base/BaseProps"
 import { Tooltip } from "./ui/tooltip"
 
-export interface TitleTooltipProps extends TitleProp, AsChildProp {
+export interface TitleTooltipProps
+  extends TitleProp,
+    AsChildProp,
+    DisabledProp {
   side?: TooltipContentProps["side"]
 }
 
@@ -14,8 +17,9 @@ export const TitleTooltip = ({
   asChild,
   side,
   children,
+  disabled,
 }: React.PropsWithChildren<TitleTooltipProps>) =>
-  !title ? (
+  !title || disabled ? (
     children
   ) : (
     <Tooltip.Root>

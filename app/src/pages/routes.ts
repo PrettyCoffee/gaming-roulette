@@ -3,7 +3,15 @@ import { Overview } from "./overview/Overview"
 import { Settings } from "./settings/Settings"
 import { Spinner } from "./spinner/Spinner"
 
-export const routes = [
+export interface Route {
+  label: string
+  value: string
+  component: React.ComponentType
+  disabled?: boolean
+  hint?: string
+}
+
+export const routes: Route[] = [
   {
     label: "Current Games",
     value: "current-games",
@@ -19,6 +27,7 @@ export const routes = [
     value: "overview",
     component: Overview,
     disabled: true,
+    hint: "Set a github token to access this page",
   },
   {
     label: "Settings",

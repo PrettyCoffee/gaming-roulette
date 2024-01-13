@@ -6,6 +6,7 @@ import { Github } from "lucide-react"
 import { Icon } from "./components/Icon"
 import { Link } from "./components/Link"
 import { Navigation } from "./components/Navigation"
+import { useGithub } from "./data/github"
 import { routes } from "./pages/routes"
 
 const Layout = styled.div`
@@ -37,9 +38,16 @@ const FooterContent = styled.footer`
 
 export const App = () => {
   const [current, setCurrent] = useState(routes[0]?.value)
+  const { token } = useGithub()
 
   const currentRoute = routes.find(({ value }) => value === current)
   const ActiveView = currentRoute?.component ?? (() => null)
+
+  const enabledRoutes = routes.map(route =>
+    route.value === "overview" && token
+      ? { ...route, disabled: false, hint: undefined }
+      : route
+  )
 
   return (
     <Layout className="h-full p-2 pl-4 gap-4 [&>*]:overflow-auto">
@@ -51,7 +59,11 @@ export const App = () => {
         />
       </LogoContent>
       <NavigationContent className="p-2 -m-2 min-w-[theme(width.32)]">
-        <Navigation items={routes} value={current} onClick={setCurrent} />
+        <Navigation
+          items={enabledRoutes}
+          value={current}
+          onClick={setCurrent}
+        />
       </NavigationContent>
       <MainContent className="p-4 bg-background rounded-lg shadow-lg">
         <h1 className="sr-only">{currentRoute?.label}</h1>
