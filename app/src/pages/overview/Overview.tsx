@@ -35,13 +35,13 @@ const averageStats = (games: GameStats[]) => ({
 })
 
 const Hours = ({ hours }: { hours?: number }) => (
-  <span className="inline-block whitespace-nowrap">
+  <span className="inline-flex whitespace-nowrap items-center gap-2">
     {hours?.toFixed(1) ?? "-"} <span className="text-muted-foreground">h</span>
   </span>
 )
 
 const Rating = ({ rating }: { rating?: number }) => (
-  <span className={cn("inline-block whitespace-nowrap")}>
+  <span className={cn("inline-flex whitespace-nowrap items-center gap-2")}>
     {rating?.toFixed(1) ?? "-"}{" "}
     <Icon icon={Star} size="sm" className="text-yellow-200" />
   </span>
@@ -153,14 +153,15 @@ export const Overview = () => {
   if (!games) return <span>Loading...</span>
 
   return (
-    <div className="px-2 h-full flex flex-col">
-      <Button variant="ghost" className="gap-2" onClick={refreshGames}>
-        <Icon icon={RefreshCw} size="sm" />
-        Reload
-      </Button>
-
+    <div className="h-full flex flex-col gap-2">
       <div className="flex flex-col overflow-auto [&>*]:flex-1 [&>*]:h-full">
         <GamesTable games={games} />
+      </div>
+      <div>
+        <Button variant="ghost" className="gap-2" onClick={refreshGames}>
+          <Icon icon={RefreshCw} size="sm" />
+          Reload
+        </Button>
       </div>
     </div>
   )
