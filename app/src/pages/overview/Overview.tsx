@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react"
-
-interface GithubFile {
-  owner: string
-  repo: string
-  branch: string
-  path: string
-}
-
-const fetchGithubFile = ({ owner, repo, branch, path }: GithubFile) =>
-  fetch(
-    `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`
-  ).then(result => result.text())
+import { useGames } from "~/data/games"
 
 export const Overview = () => {
-  const [data, setData] = useState("")
+  const { games } = useGames()
 
-  useEffect(() => {
-    void fetchGithubFile({
-      owner: "PrettyCoffee",
-      repo: "gaming-roulette",
-      branch: "main",
-      path: "played.md",
-    }).then(setData)
-  }, [])
+  console.log(games)
 
-  return <div>{data}</div>
+  return (
+    <div className="px-2">
+      <div className="grid grid-cols-[repeat(8,auto)] whitespace-nowrap overflow-x-auto min-w-full">
+        <div className="col-span-1 font-bold">Name</div>
+        <div className="col-span-1 font-bold">Date</div>
+        <div className="col-span-2 font-bold">Online</div>
+        <div className="col-span-2 font-bold">Player 1</div>
+        <div className="col-span-2 font-bold">Player 2</div>
+
+        {games?.map(game => (
+          <>
+            <div className="col-span-1">{game.name}</div>
+            <div className="col-span-1">{game.date}</div>
+            <div className="col-span-1">{game.online.playtime}</div>
+            <div className="col-span-1">{game.online.rating}</div>
+            <div className="col-span-1">{game.player1.playtime}</div>
+            <div className="col-span-1">{game.player1.rating}</div>
+            <div className="col-span-1">{game.player2.playtime}</div>
+            <div className="col-span-1">{game.player2.rating}</div>
+          </>
+        ))}
+      </div>
+    </div>
+  )
 }

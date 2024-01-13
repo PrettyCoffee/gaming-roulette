@@ -6,7 +6,7 @@ interface GithubData {
   repoName: string
 }
 
-const githubAtom = atom<GithubData>({
+export const githubAtom = atom<GithubData>({
   name: "github",
   defaultValue: {
     token: "",
