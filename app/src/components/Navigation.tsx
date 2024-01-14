@@ -21,10 +21,13 @@ const NavButton = ({
   label,
   compact,
   icon,
-  ...delegated
+  onClick,
+  disabled,
 }: NavButtonProps) => (
   <TitleTooltip asChild title={label} disabled={!compact} side="right">
     <button
+      onClick={onClick}
+      disabled={disabled}
       className={cn(
         "inline-flex items-center h-8 px-2 w-full rounded-sm transition-all",
         compact && "p-0 h-10 w-10 justify-center",
@@ -35,7 +38,6 @@ const NavButton = ({
         active && "bg-background text-foreground shadow-sm",
         className
       )}
-      {...delegated}
     >
       {compact ? <Icon icon={icon} /> : label}
     </button>

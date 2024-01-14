@@ -15,6 +15,15 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "window": {
+        "all": false,
+        "close": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
       }
     },
     "bundle": {
@@ -22,7 +31,11 @@
       "targets": "all",
       "identifier": "com.tauri.gaming-roulette",
       "icon": [
-        "icons/logo.svg"
+        "icons/icon.png",
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/icon.svg",
+        "icons/icon.ico"
       ]
     },
     "security": {
@@ -36,7 +49,9 @@
         "width": 800,
         "height": 400,
         "minHeight": 400,
-        "minWidth": 600
+        "minWidth": 600,
+        "transparent": true,
+        "decorations": false
       }
     ]
   }

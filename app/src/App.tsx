@@ -6,6 +6,7 @@ import { Github } from "lucide-react"
 import { Icon } from "./components/Icon"
 import { Link } from "./components/Link"
 import { Navigation } from "./components/Navigation"
+import { WindowTitlebar } from "./components/WindowTitlebar"
 import { useGithub } from "./data/github"
 import { useSettings } from "./data/settings"
 import { routes } from "./pages/routes"
@@ -14,15 +15,10 @@ import { cn } from "./utils/utils"
 const Layout = styled.div`
   display: grid;
   grid-template-areas:
-    "logo main"
     "navigation main"
     "footer main";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr auto;
-`
-
-const LogoContent = styled.div`
-  grid-area: logo;
 `
 
 const NavigationContent = styled.nav`
@@ -54,47 +50,48 @@ export const App = () => {
   )
 
   return (
-    <Layout className="h-full p-2 pl-4 gap-4">
-      <LogoContent>
+    <div className="max-h-screen h-full overflow-hidden flex flex-col">
+      <WindowTitlebar>
         <img
           src="/logo.svg"
           alt="Gaming Roulette"
           className={cn(
-            "pt-2 mx-auto transition-all",
-            compactNavigation ? "w-6" : "w-12"
+            "transition-all ml-3 w-6 h-6 select-none pointer-events-none"
           )}
         />
-      </LogoContent>
-      <NavigationContent
-        className={cn(
-          "p-2 -m-2 transition-all overflow-hidden",
-          compactNavigation ? "w-14" : "w-32"
-        )}
-      >
-        <Navigation
-          items={enabledRoutes}
-          value={current}
-          onClick={setCurrent}
-          compact={compactNavigation}
-        />
-      </NavigationContent>
-      <MainContent className="p-4 bg-background rounded-lg shadow-lg overflow-auto">
-        <h1 className="sr-only">{currentRoute?.label}</h1>
-        <ActiveView />
-      </MainContent>
-      <FooterContent className="p-2 flex flex-col">
-        <Link
-          href="https://github.com/PrettyCoffee/gaming-roulette"
-          target="_blank"
+        <span className="pl-3 text-muted-foreground text-sm font-bold select-none pointer-events-none">
+          Gaming Roulette
+        </span>
+      </WindowTitlebar>
+      <Layout className="flex-1 h-full overflow-hidden">
+        <NavigationContent
           className={cn(
-            "text-sm inline-block",
-            compactNavigation && " w-full text-center"
+            "transition-all -my-2 p-2",
+            compactNavigation ? "w-13" : "w-40 px-4"
           )}
         >
-          <Icon icon={Github} size="sm" />
-          {!compactNavigation && "Github"}
-        </Link>
-      </FooterContent>
-    </Layout>
+          <Navigation
+            items={enabledRoutes}
+            value={current}
+            onClick={setCurrent}
+            compact={compactNavigation}
+          />
+        </NavigationContent>
+        <MainContent className="m-2 mt-0 ml-0 p-4 bg-background rounded-lg shadow-lg overflow-auto">
+          <h1 className="sr-only">{currentRoute?.label}</h1>
+          <ActiveView />
+        </MainContent>
+        <FooterContent className="flex flex-col pl-2 pb-2">
+          <Link
+            href="https://github.com/PrettyCoffee/gaming-roulette"
+            target="_blank"
+            className={cn("text-sm inline-block pl-3 py-1")}
+          >
+            <Icon icon={Github} size="sm" className="mr-1" />
+            {!compactNavigation && "Github"}
+          </Link>
+        </FooterContent>
+      </Layout>
+    </div>
   )
 }

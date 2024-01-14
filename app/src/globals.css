@@ -40,13 +40,21 @@
 @layer base {
   @import url("/fonts/quicksand.css");
 
+  html {
+    @apply border;
+  }
+
+  html, body {
+    @apply rounded-lg bg-transparent overflow-hidden;
+  }
+
   * {
     @apply border-border;
   }
   html, body, #root {
     @apply h-full m-0;
   }
-  body {
+  #root {
     @apply bg-base text-foreground;
   }
 

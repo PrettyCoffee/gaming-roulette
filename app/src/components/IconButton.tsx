@@ -14,6 +14,7 @@ export interface IconButtonProps
   title: string
   titleSide?: TitleTooltipProps["side"]
   hideTitle?: boolean
+  size?: "md" | "sm"
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -25,6 +26,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       titleSide,
       hideTitle,
       variant = "ghost",
+      size,
       ...delegated
     },
     ref
@@ -37,12 +39,12 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       <Button
         ref={ref}
         variant={variant}
-        size="icon"
+        size={size === "sm" ? "iconSm" : "icon"}
         onClick={onClick}
         {...delegated}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
-        <Icon icon={icon} size="md" color="current" />
+        <Icon icon={icon} size={size} color="current" />
       </Button>
     </TitleTooltip>
   )
