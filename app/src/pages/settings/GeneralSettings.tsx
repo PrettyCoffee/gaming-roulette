@@ -6,6 +6,7 @@ import { InputLabel } from "~/components/InputLabel"
 import { Input } from "~/components/ui/input"
 import { RadioGroup } from "~/components/ui/radio-group"
 import { Slider } from "~/components/ui/slider"
+import { Switch } from "~/components/ui/switch"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { playAudio } from "~/utils/playAudio"
@@ -51,6 +52,30 @@ const SelectPickerView = () => {
         <RadioGroup.Item value="tags">Tags</RadioGroup.Item>
         <RadioGroup.Item value="wheel">Wheel</RadioGroup.Item>
       </RadioGroup.Root>
+    </>
+  )
+}
+
+const NavigationSettings = () => {
+  const [{ compactNavigation }, setSettings] = useSettings()
+
+  return (
+    <>
+      <InputLabel htmlFor="" className="mb-2">
+        Navigation
+      </InputLabel>
+      <label className="flex items-center gap-2">
+        <Switch
+          checked={compactNavigation}
+          onCheckedChange={value =>
+            setSettings(prev => ({
+              ...prev,
+              compactNavigation: value,
+            }))
+          }
+        />{" "}
+        Compact sidebar
+      </label>
     </>
   )
 }
@@ -105,6 +130,10 @@ export const GeneralSettings = () => (
 
     <div className="col-span-1">
       <SelectPickerView />
+    </div>
+
+    <div className="col-span-1">
+      <NavigationSettings />
     </div>
 
     <div className="col-span-1">

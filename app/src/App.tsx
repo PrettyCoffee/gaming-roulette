@@ -7,7 +7,9 @@ import { Icon } from "./components/Icon"
 import { Link } from "./components/Link"
 import { Navigation } from "./components/Navigation"
 import { useGithub } from "./data/github"
+import { useSettings } from "./data/settings"
 import { routes } from "./pages/routes"
+import { cn } from "./utils/utils"
 
 const Layout = styled.div`
   display: grid;
@@ -38,6 +40,7 @@ const FooterContent = styled.footer`
 
 export const App = () => {
   const [current, setCurrent] = useState(routes[0]?.value)
+  const [{ compactNavigation }] = useSettings()
   const { token, filePath, repoName, repoOwner } = useGithub()
 
   const currentRoute = routes.find(({ value }) => value === current)
@@ -51,34 +54,45 @@ export const App = () => {
   )
 
   return (
-    <Layout className="h-full p-2 pl-4 gap-4 [&>*]:overflow-auto">
+    <Layout className="h-full p-2 pl-4 gap-4">
       <LogoContent>
         <img
           src="/logo.svg"
           alt="Gaming Roulette"
-          className="pt-2 w-12 mx-auto"
+          className={cn(
+            "pt-2 mx-auto transition-all",
+            compactNavigation ? "w-6" : "w-12"
+          )}
         />
       </LogoContent>
-      <NavigationContent className="p-2 -m-2 min-w-[theme(width.32)]">
+      <NavigationContent
+        className={cn(
+          "p-2 -m-2 transition-all overflow-hidden",
+          compactNavigation ? "w-14" : "w-32"
+        )}
+      >
         <Navigation
           items={enabledRoutes}
           value={current}
           onClick={setCurrent}
+          compact={compactNavigation}
         />
       </NavigationContent>
-      <MainContent className="p-4 bg-background rounded-lg shadow-lg">
+      <MainContent className="p-4 bg-background rounded-lg shadow-lg overflow-auto">
         <h1 className="sr-only">{currentRoute?.label}</h1>
-
         <ActiveView />
       </MainContent>
-      <FooterContent className="p-2">
+      <FooterContent className="p-2 flex flex-col">
         <Link
           href="https://github.com/PrettyCoffee/gaming-roulette"
           target="_blank"
-          className="text-sm"
+          className={cn(
+            "text-sm inline-block",
+            compactNavigation && " w-full text-center"
+          )}
         >
           <Icon icon={Github} size="sm" />
-          Github
+          {!compactNavigation && "Github"}
         </Link>
       </FooterContent>
     </Layout>
