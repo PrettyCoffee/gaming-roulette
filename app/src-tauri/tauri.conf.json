@@ -34,7 +34,9 @@
         "resizable": true,
         "title": "Gaming Roulette",
         "width": 800,
-        "height": 400
+        "height": 400,
+        "minHeight": 400,
+        "minWidth": 600
       }
     ]
   }
