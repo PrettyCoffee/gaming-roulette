@@ -10,7 +10,7 @@ export const Current = () => {
   const games2 = player2.games
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 -mt-2">
       <div className="flex-1">
         <InputLabel htmlFor="player-1">{player1.name}</InputLabel>
         <Textarea

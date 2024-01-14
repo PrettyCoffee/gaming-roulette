@@ -1,4 +1,4 @@
-import { Clock, RefreshCw, Star } from "lucide-react"
+import { RefreshCw, Star } from "lucide-react"
 
 import { Icon } from "~/components/Icon"
 import { LoadingData } from "~/components/LoadingData"
@@ -6,6 +6,7 @@ import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { GameStats, UserStats, useGames } from "~/data/games"
 import { usePlayers } from "~/data/players"
+import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 const averageStat = (
@@ -56,9 +57,8 @@ const GamesTable = ({ games }: { games: GameStats[] }) => {
     <Table.Root>
       <Table.Header>
         <Table.Row className="border-none">
-          <Table.Head colSpan={2} className="text-center">
-            Game info
-          </Table.Head>
+          <Table.Head>Name</Table.Head>
+          <Table.Head>Date</Table.Head>
           <Table.Head colSpan={2} className="text-center">
             Online
           </Table.Head>
@@ -70,6 +70,7 @@ const GamesTable = ({ games }: { games: GameStats[] }) => {
           </Table.Head>
         </Table.Row>
 
+        {/*
         <Table.Row>
           <Table.Head>Name</Table.Head>
           <Table.Head>Date</Table.Head>
@@ -92,13 +93,14 @@ const GamesTable = ({ games }: { games: GameStats[] }) => {
             <Icon icon={Star} color="current" size="sm" />
           </Table.Head>
         </Table.Row>
+        */}
       </Table.Header>
 
       <Table.Body>
         {games.map(game => (
           <Table.Row key={game.name}>
             <Table.Cell>{game.name}</Table.Cell>
-            <Table.Cell>{game.date}</Table.Cell>
+            <Table.Cell className={noOverflow}>{game.date}</Table.Cell>
             <Table.Cell className="text-end">
               <Hours hours={game.online.playtime} />
             </Table.Cell>
@@ -159,7 +161,7 @@ export const Overview = () => {
     )
 
   return (
-    <div className="h-full flex flex-col gap-2">
+    <div className="h-full flex flex-col gap-2 -mt-2 -mr-2">
       <div className="flex flex-col overflow-auto [&>*]:flex-1 [&>*]:h-full">
         <GamesTable games={games} />
       </div>
