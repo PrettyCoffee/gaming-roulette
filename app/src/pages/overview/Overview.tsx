@@ -36,15 +36,18 @@ const averageStats = (games: GameStats[]) => ({
   },
 })
 
+const formatNumber = (number?: number) =>
+  number?.toFixed(1).replace(/\.0$/, "") ?? "-"
+
 const Hours = ({ hours }: { hours?: number }) => (
   <span className="inline-flex whitespace-nowrap items-center gap-2">
-    {hours?.toFixed(1) ?? "-"} <span className="text-muted-foreground">h</span>
+    {formatNumber(hours)} <span className="text-muted-foreground">h</span>
   </span>
 )
 
 const Rating = ({ rating }: { rating?: number }) => (
   <span className={cn("inline-flex whitespace-nowrap items-center gap-2")}>
-    {rating?.toFixed(1) ?? "-"}{" "}
+    {formatNumber(rating)}
     <Icon icon={Star} size="sm" className="text-yellow-200" />
   </span>
 )
