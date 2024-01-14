@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useRef, useState } from "react"
+
 import { RefreshCw, Star } from "lucide-react"
 
 import { Icon } from "~/components/Icon"
@@ -153,10 +155,47 @@ const GamesTable = ({ games }: { games: GameStats[] }) => {
   )
 }
 
+const useDelayValueChange = <T,>(value: T, delay = 500) => {
+  const [blockedValue, setBlockedValue] = useState(value)
+  const isBlocked = useRef(false)
+  const latestValue = useRef(value)
+  const timeout = useRef<NodeJS.Timeout>()
+
+  const blockChanges = useCallback(() => {
+    isBlocked.current = true
+    if (timeout.current) {
+      clearTimeout(timeout.current)
+    }
+    timeout.current = setTimeout(() => {
+      setBlockedValue(latestValue.current)
+      isBlocked.current = false
+    }, delay)
+  }, [delay])
+
+  useEffect(() => {
+    if (value == null) {
+      setBlockedValue(value)
+      blockChanges()
+      return
+    }
+
+    if (isBlocked.current) {
+      latestValue.current = value
+      return
+    }
+
+    setBlockedValue(value)
+  }, [value, blockChanges])
+
+  return blockedValue
+}
+
 export const Overview = () => {
   const { games, refreshGames } = useGames()
 
-  if (!games)
+  const debouncedGames = useDelayValueChange(games, 2000)
+
+  if (!debouncedGames)
     return (
       <div className="h-full w-full flex items-center justify-center">
         <LoadingData label="Loading data..." />
@@ -166,7 +205,7 @@ export const Overview = () => {
   return (
     <div className="h-full flex flex-col gap-2 -mt-2 -mr-2">
       <div className="flex flex-col overflow-auto [&>*]:flex-1 [&>*]:h-full">
-        <GamesTable games={games} />
+        <GamesTable games={debouncedGames} />
       </div>
       <div>
         <Button variant="ghost" className="gap-2" onClick={refreshGames}>
