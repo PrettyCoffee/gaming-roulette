@@ -3,6 +3,7 @@ import { useState } from "react"
 import styled from "@emotion/styled"
 import { Github } from "lucide-react"
 
+import { ErrorBoundary } from "./components/ErrorBoundary"
 import { Icon } from "./components/Icon"
 import { Link } from "./components/Link"
 import { Navigation } from "./components/Navigation"
@@ -33,6 +34,15 @@ const FooterContent = styled.footer`
   grid-area: footer;
   align-self: end;
 `
+
+const ErrorFallback = () => (
+  <div className="h-full w-full flex flex-col items-center justify-center">
+    <div>💥KABOOM💥</div>
+    <div className="text-sm text-muted-foreground">
+      Something went terribly wrong and everything is burning now.
+    </div>
+  </div>
+)
 
 export const App = () => {
   const [current, setCurrent] = useState(routes[0]?.value)
@@ -79,7 +89,9 @@ export const App = () => {
         </NavigationContent>
         <MainContent className="m-2 mt-0 ml-0 p-4 bg-background rounded-lg shadow-lg overflow-auto">
           <h1 className="sr-only">{currentRoute?.label}</h1>
-          <ActiveView />
+          <ErrorBoundary fallback={<ErrorFallback />}>
+            <ActiveView />
+          </ErrorBoundary>
         </MainContent>
         <FooterContent className="flex flex-col pl-2 pb-2">
           <Link
