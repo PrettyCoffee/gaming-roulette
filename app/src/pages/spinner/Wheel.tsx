@@ -3,6 +3,8 @@ import styled from "@emotion/styled"
 
 import { cn } from "~/utils/utils"
 
+import { SpinnerItem } from "./Spinner"
+
 const Preserve3D = styled.div`
   perspective: 800;
   transform-style: preserve-3d;
@@ -105,7 +107,7 @@ const WheelSegment = styled.div<WheelSegmentProps>(
 )
 
 interface WheelProps {
-  items: string[]
+  items: SpinnerItem[]
   current?: number
   winner?: number
   transitionDuration: number
@@ -115,33 +117,31 @@ export const Wheel = ({
   items,
   winner,
   transitionDuration,
-}: WheelProps) => {
-  return (
-    <Preserve3D className="w-80 flex flex-col items-center h-72 relative">
-      {items.map((item, index) => (
-        <WheelSegment
-          active={current ?? 0}
-          index={index}
-          items={items.length}
-          // eslint-disable-next-line react/no-array-index-key
-          key={item + String(index)}
-          className={cn(
-            "absolute w-96 h-20 text-3xl px-4 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
-            index === winner && "bg-green-500"
-          )}
-          style={{
-            transitionDuration: `${transitionDuration + 10}ms`,
-            transitionTimingFunction: "linear",
-          }}
-        >
-          <span className="whitespace-nowrap text-ellipsis overflow-hidden">
-            {item}
-          </span>
-          {index === winner && (
-            <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
-          )}
-        </WheelSegment>
-      ))}
-    </Preserve3D>
-  )
-}
+}: WheelProps) => (
+  <Preserve3D className="w-80 flex flex-col items-center h-72 relative">
+    {items.map(({ game }, index) => (
+      <WheelSegment
+        // eslint-disable-next-line react/no-array-index-key
+        key={game + String(index)}
+        active={current ?? 0}
+        index={index}
+        items={items.length}
+        className={cn(
+          "absolute w-96 h-20 text-3xl px-4 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
+          index === winner && "bg-green-500"
+        )}
+        style={{
+          transitionDuration: `${transitionDuration + 10}ms`,
+          transitionTimingFunction: "linear",
+        }}
+      >
+        <span className="whitespace-nowrap text-ellipsis overflow-hidden">
+          {game}
+        </span>
+        {index === winner && (
+          <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
+        )}
+      </WheelSegment>
+    ))}
+  </Preserve3D>
+)

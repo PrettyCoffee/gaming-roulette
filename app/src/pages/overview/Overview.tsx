@@ -67,12 +67,11 @@ const GamesTable = ({ games }: { games: GameStats[] }) => {
           <Table.Head colSpan={2} className="text-center">
             Online
           </Table.Head>
-          <Table.Head colSpan={2} className="text-center">
-            {players.player1.name}
-          </Table.Head>
-          <Table.Head colSpan={2} className="text-center">
-            {players.player2.name}
-          </Table.Head>
+          {players.map(player => (
+            <Table.Head key={player.id} colSpan={2} className="text-center">
+              {player.name}
+            </Table.Head>
+          ))}
         </Table.Row>
 
         {/*

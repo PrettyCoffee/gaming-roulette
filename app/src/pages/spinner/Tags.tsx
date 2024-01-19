@@ -4,8 +4,10 @@ import { ClassNameProp } from "~/components/base/BaseProps"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
+import { SpinnerItem } from "./Spinner"
+
 interface PillProps extends ClassNameProp {
-  color: "blue" | "red"
+  color: string
   transitionDuration: number
   winner: boolean
 }
@@ -21,8 +23,7 @@ const Pill = ({
     className={cn(
       "transition-all",
       "relative inline-flex px-2 py-0.5 bg-muted rounded-md max-w-[theme(width.48)] font-medium",
-
-      color === "red" ? "bg-red-200 text-red-950" : "bg-blue-200 text-blue-950",
+      `bg-${color}-200 text-${color}-950`,
       winner && "bg-green-200 text-green-950",
       className
     )}
@@ -41,9 +42,7 @@ const Pill = ({
 )
 
 interface TagsProps {
-  items: string[]
-  items1: string[]
-  items2: string[]
+  items: SpinnerItem[]
   current?: number
   winner?: number
   transitionDuration: number
@@ -51,18 +50,17 @@ interface TagsProps {
 export const Tags = ({
   current,
   items,
-  items1,
   winner,
   transitionDuration,
 }: TagsProps) => {
   return (
     <div className="flex flex-wrap justify-center gap-2">
-      {items.map((value, index) => (
+      {items.map(({ game, color }, index) => (
         <Pill
           // eslint-disable-next-line react/no-array-index-key
           key={index}
           winner={winner === index}
-          color={items1.includes(value) ? "red" : "blue"}
+          color={color}
           className={cn(
             current == null
               ? ""
@@ -72,7 +70,7 @@ export const Tags = ({
           )}
           transitionDuration={transitionDuration}
         >
-          {index + 1}. {value}
+          {index + 1}. {game}
         </Pill>
       ))}
     </div>

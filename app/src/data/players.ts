@@ -1,53 +1,59 @@
 import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react"
 
+const createId = () =>
+  Array.from(crypto.getRandomValues(new Uint8Array(10)))
+    .map(n => n.toString(36))
+    .join("")
+    .toUpperCase()
+
 const gamesA = [
+  "Journey",
+  "Firewatch",
+  "Storyteller",
+  "To the Moon",
+  "VVVVVV",
+  "VVVVVV",
+  "FEZ",
+  "Oxenfree",
+  "Spirit of the North",
+]
+
+const gamesB = [
   "Baba is You",
   "Fausts Alptraum",
   "Pseudoregalia",
   "Lil Gator Game",
-  "The Murder of Sonic the Hedgehog",
   "Later Alligator",
   "Melatonin",
   "Hatoful Boyfriend",
   "Undungeon",
   "Eldest Souls",
+  "Papers, Please",
 ]
 
-const gamesB = [
-  "Journey",
-  "Firewatch",
-  "Limbo",
-  "Everlasting Summer",
-  "VVVVVV",
-  "VVVVVV",
-  "FEZ",
-  "One Step From Edenlea",
-  "Oxenfree",
-  "Blaster Master Zero",
-]
-
-interface Player {
+export interface Player {
+  id: string
   name: string
+  color: string
   games: string[]
 }
 
-interface Players {
-  player1: Player
-  player2: Player
-}
-
-const playersAtom = atom<Players>({
+const playersAtom = atom<Player[]>({
   name: "players",
-  defaultValue: {
-    player1: {
+  defaultValue: [
+    {
+      id: "1",
       name: "Player 1",
       games: gamesA,
+      color: "red",
     },
-    player2: {
+    {
+      id: "2",
       name: "Player 2",
       games: gamesB,
+      color: "blue",
     },
-  },
+  ],
   middleware: [
     localStorage(),
     reduxDevtools({ disable: import.meta.env.PROD }),
@@ -57,17 +63,23 @@ const playersAtom = atom<Players>({
 export const usePlayers = () => {
   const [players, setPlayers] = useAtom(playersAtom)
 
-  const setPlayerAttribute = <Attribute extends keyof Player>(
-    player: keyof Players,
+  const addPlayer = (name: string, color: string) => {
+    const newPlayer = { name, color, id: createId(), games: [] }
+    setPlayers(data => [...data, newPlayer])
+  }
+  const removePlayer = (id: string) =>
+    setPlayers(data => data.filter(player => player.id !== id))
+
+  const setPlayerAttribute = <Attribute extends keyof Omit<Player, "id">>(
+    id: string,
     attribute: Attribute,
     value: Player[Attribute]
-  ) => {
-    setPlayers(data => {
-      const next = { ...data }
-      next[player] = { ...next[player], [attribute]: value }
-      return next
-    })
-  }
+  ) =>
+    setPlayers(data =>
+      data.map(player =>
+        player.id !== id ? player : { ...player, [attribute]: value }
+      )
+    )
 
-  return { players, setPlayers, setPlayerAttribute }
+  return { players, addPlayer, removePlayer, setPlayerAttribute }
 }

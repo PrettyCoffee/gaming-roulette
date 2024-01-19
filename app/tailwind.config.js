@@ -1,12 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { colors } from "./src/utils/colors"
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -16,9 +19,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      "sans": ["Quicksand", "ui-sans-serif", "sans-serif"],
-      "mono": ["Fira Code", "ui-monospace", "monospace"],
-      "body": ["Quicksand", "ui-sans-serif", "sans-serif"],
+      sans: ["Quicksand", "ui-sans-serif", "sans-serif"],
+      mono: ["Fira Code", "ui-monospace", "monospace"],
+      body: ["Quicksand", "ui-sans-serif", "sans-serif"],
     },
     extend: {
       colors: {
@@ -79,4 +82,12 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    ...colors.flatMap(color => [
+      `${color}-200`,
+      `border-${color}-200`,
+      `bg-${color}-200`,
+      `text-${color}-950`,
+    ]),
+  ],
 }

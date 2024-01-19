@@ -1,10 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef } from "react"
 
 import { create as createConfetti } from "canvas-confetti"
 import { Dices } from "lucide-react"
 
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
-import clickSound from "~/assets/click.mp3"
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
@@ -12,76 +10,48 @@ import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { shuffle } from "~/utils/array"
-import { randomIntBetween } from "~/utils/number"
 import { playAudio } from "~/utils/playAudio"
 
 import { Tags } from "./Tags"
+import { useNumberRotation } from "./useNumberRotation"
 import { Wheel } from "./Wheel"
 
-const playClickSound = () => void playAudio(clickSound)
 const playVictory = () => void playAudio(victorySound)
 
-const useNumberRotation = (max: number) => {
-  const [current, setCurrent] = useState<number | null>(null)
-  const [transition, setTransition] = useState<number | null>(null)
-  const [winner, setWinner] = useState<number | null>(null)
+const popConfetti = (canvas: HTMLCanvasElement) => {
+  const confetti = createConfetti(canvas, { resize: true })
+  const settings = {
+    particleCount: 100,
+    spread: 75,
+    colors: ["#ef4444", "#f59e0b", "#22c55e", "#06b6d4", "#3b82f6", "#a855f7"],
+  }
+  void confetti({
+    ...settings,
+    origin: { x: 0, y: 1 },
+    angle: 90 - 30,
+  })
+  void confetti({
+    ...settings,
+    origin: { x: 1, y: 1 },
+    angle: 90 + 30,
+  })
+}
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-  const rotate = useCallback(
-    (prev = current, winner = randomIntBetween(0, max - 1), speed = -100) => {
-      const transition = Math.max(Math.abs(speed), 10)
-      setTransition(transition)
-      setTimeout(() => playClickSound(), transition / 2)
-
-      const next = prev == null ? 0 : (prev + 1) % max
-      setCurrent(next)
-
-      if (speed >= 200 && next === winner) {
-        setTimeout(() => {
-          setWinner(winner)
-        }, speed)
-        return
-      }
-
-      const change = Math.max(Math.abs(speed) / 20, 1)
-
-      timeoutRef.current = setTimeout(
-        () => rotate(next, winner, speed + change),
-        transition
-      )
-    },
-    [max, current]
-  )
-
-  const reset = useCallback(() => {
-    setCurrent(null)
-    setWinner(null)
-    setTransition(null)
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
-    }
-  }, [])
-
-  useEffect(() => reset, [reset])
-
-  return { current, rotate, reset, transition, winner }
+export interface SpinnerItem {
+  game: string
+  color: string
 }
 
 export const Spinner = () => {
   const [settings] = useSettings()
   const { players } = usePlayers()
-  const games1 = players.player1.games
-  const games2 = players.player2.games
 
-  const items = useMemo(() => {
-    const items = [
-      ...games1.filter(Boolean).slice(0, 10),
-      ...games2.filter(Boolean).slice(0, 10),
-    ]
+  const items: SpinnerItem[] = useMemo(() => {
+    const items = players
+      .flatMap(({ games, color }) => games.map(game => ({ game, color })))
+      .filter(Boolean)
     return shuffle(items)
-  }, [games1, games2])
+  }, [players])
 
   const { current, rotate, reset, winner, transition } = useNumberRotation(
     items.length
@@ -91,30 +61,7 @@ export const Spinner = () => {
   useEffect(() => {
     if (!canvas.current || winner == null) return
     playVictory()
-
-    const confetti = createConfetti(canvas.current, { resize: true })
-    const settings = {
-      particleCount: 100,
-      spread: 75,
-      colors: [
-        "#ef4444",
-        "#f59e0b",
-        "#22c55e",
-        "#06b6d4",
-        "#3b82f6",
-        "#a855f7",
-      ],
-    }
-    void confetti({
-      ...settings,
-      origin: { x: 0, y: 1 },
-      angle: 90 - 30,
-    })
-    void confetti({
-      ...settings,
-      origin: { x: 1, y: 1 },
-      angle: 90 + 30,
-    })
+    popConfetti(canvas.current)
   }, [winner])
 
   return (
@@ -129,8 +76,6 @@ export const Spinner = () => {
       ) : (
         <Tags
           items={items}
-          items1={games1}
-          items2={games2}
           current={current ?? undefined}
           winner={winner ?? undefined}
           transitionDuration={transition ?? 0}
