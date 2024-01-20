@@ -1,4 +1,11 @@
-import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react"
+import {
+  atom,
+  localStorage,
+  reduxDevtools,
+  useAtom,
+  migration,
+  createMigrationStep,
+} from "yaasl/react"
 
 const createId = () =>
   Array.from(crypto.getRandomValues(new Uint8Array(10)))
@@ -31,6 +38,38 @@ const gamesB = [
   "Papers, Please",
 ]
 
+interface PlayersV0 {
+  player1: { name: string; games: string[] }
+  player2: { name: string; games: string[] }
+}
+
+const v1Migration = createMigrationStep({
+  previous: null,
+  version: "1",
+  migrate: (old: PlayersV0) => {
+    console.log({ old })
+    return [
+      {
+        id: "1",
+        color: "red",
+        name: old.player1.name,
+        games: old.player1.games,
+      },
+      {
+        id: "2",
+        color: "blue",
+        name: old.player2.name,
+        games: old.player2.games,
+      },
+    ]
+  },
+  validate: (old: unknown): old is PlayersV0 =>
+    old != null &&
+    typeof old === "object" &&
+    "player1" in old &&
+    "player2" in old,
+})
+
 export interface Player {
   id: string
   name: string
@@ -56,6 +95,7 @@ const playersAtom = atom<Player[]>({
   ],
   middleware: [
     localStorage(),
+    migration({ steps: [v1Migration] }),
     reduxDevtools({ disable: import.meta.env.PROD }),
   ],
 })
