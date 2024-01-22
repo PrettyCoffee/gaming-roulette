@@ -16,7 +16,7 @@
 | Koa and the Five Pirates of Mara | 2023-12-11 | 3.5h, 7.3/10 |   Xh, 6/10 | 7.5h, 6.5/10 |
 | The Murder of Sonic the Hedgehog | 2023-12-18 | 2.5h, 8.2/10 | 2.5h, 6/10 |   3h,   3/10 |
 | Castlevania: Aria of Sorrow      | 2023-12-18 | 7.5h, 9.1/10 |   Xh, 9/10 |   7h,   9/10 |
-| Shady Part of Me                 | 2023-01-15 |   5h, 7.8/10 | 6.5h, 7/10 |   Xh,   X/10 |
+| Shady Part of Me                 | 2023-01-08 |   5h, 7.8/10 | 6.5h, 7/10 | 4.8h,   6/10 |
 | X                                | 2023-XX-XX |   Xh,   X/10 |   Xh, X/10 |   Xh,   X/10 |
 
 Online:
