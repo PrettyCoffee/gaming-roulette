@@ -22,6 +22,7 @@ const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
       "w-6 h-6 rounded shadow-sm",
       "inline-flex items-center justify-center",
       "opacity-75 hover:opacity-100 focus-visible:opacity-100",
+      "relative before:block before:absolute before:-inset-0.5",
       `bg-${color}-200`,
       focusRing
     )}
