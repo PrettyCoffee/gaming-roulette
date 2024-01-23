@@ -1,6 +1,7 @@
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
+import { useState } from "react"
 
-import { Trash } from "lucide-react"
+import { Plus, Trash } from "lucide-react"
 
 import { ColorPicker } from "~/components/ColorPicker"
 import { IconButton } from "~/components/IconButton"
@@ -8,6 +9,49 @@ import { InputLabel } from "~/components/InputLabel"
 import { Input } from "~/components/ui/input"
 import { Player, usePlayers } from "~/data/players"
 import { colors } from "~/utils/colors"
+
+const AddPlayer = () => {
+  const { addPlayer } = usePlayers()
+
+  const [name, setName] = useState("")
+  const [color, setColor] = useState("")
+
+  const disabled = name === "" || color === ""
+
+  const handleAdd = () => {
+    addPlayer(name, color)
+    setName("")
+    setColor("")
+  }
+
+  return (
+    <>
+      <InputLabel className="mb-2" htmlFor={"add-player"}>
+        Add Player
+      </InputLabel>
+      <div className="flex gap-2">
+        <Input
+          id={"add-player"}
+          value={name}
+          onChange={({ target }) => setName(target.value)}
+          placeholder="Name"
+        />
+        <ColorPicker
+          value={color}
+          onChange={color => setColor(color)}
+          colors={colors}
+        />
+        <IconButton
+          variant="outline"
+          onClick={handleAdd}
+          icon={Plus}
+          title="Add player"
+          disabled={disabled}
+        />
+      </div>
+    </>
+  )
+}
 
 const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
   const { setPlayerAttribute, removePlayer } = usePlayers()
@@ -49,6 +93,9 @@ export const PlayerSettings = () => {
           <EditPlayer {...player} index={index} />
         </div>
       ))}
+      <div className="col-span-1">
+        <AddPlayer />
+      </div>
     </div>
   )
 }
