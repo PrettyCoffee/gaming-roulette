@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react"
-
 import styled from "@emotion/styled"
-import { appWindow } from "@tauri-apps/api/window"
 import { Github } from "lucide-react"
 
 import { ErrorBoundary } from "./components/ErrorBoundary"
@@ -11,6 +8,8 @@ import { Navigation } from "./components/Navigation"
 import { WindowTitlebar } from "./components/WindowTitlebar"
 import { useGithub } from "./data/github"
 import { useSettings } from "./data/settings"
+import { useHashRouter } from "./hooks/useHashRouter"
+import { useWindowFocus } from "./hooks/useWindowFocus"
 import { routes } from "./pages/routes"
 import { cn } from "./utils/utils"
 
@@ -45,21 +44,9 @@ const ErrorFallback = () => (
   </div>
 )
 
-const useWindowFocus = () => {
-  useEffect(() => {
-    void appWindow.onFocusChanged(({ payload: active }) => {
-      if (active) {
-        document.documentElement.removeAttribute("data-window-inactive")
-      } else {
-        document.documentElement.setAttribute("data-window-inactive", "")
-      }
-    })
-  }, [])
-}
-
 export const App = () => {
   useWindowFocus()
-  const [current, setCurrent] = useState(routes[0]?.value)
+  const [current, setCurrent] = useHashRouter({ fallback: routes[0], routes })
   const [{ compactNavigation }] = useSettings()
   const { token, filePath, repoName, repoOwner } = useGithub()
 
