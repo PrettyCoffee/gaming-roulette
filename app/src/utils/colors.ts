@@ -7,7 +7,7 @@ export const colors = [
   "green",
   "emerald",
   "teal",
-  "cyan",
+  // "cyan", removed for cosmetic reasons (16 vs 17 colors)
   "sky",
   "blue",
   "indigo",
