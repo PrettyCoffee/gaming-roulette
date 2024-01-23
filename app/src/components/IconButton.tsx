@@ -1,6 +1,7 @@
 import { forwardRef } from "react"
 
 import { Button, ButtonProps } from "~/components/ui/button"
+import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
 import { VisuallyHidden } from "./base/VisuallyHidden"
@@ -27,6 +28,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       hideTitle,
       variant = "ghost",
       size,
+      className,
       ...delegated
     },
     ref
@@ -41,6 +43,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         variant={variant}
         size={size === "sm" ? "iconSm" : "icon"}
         onClick={onClick}
+        className={cn("shrink-0", className)}
         {...delegated}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
