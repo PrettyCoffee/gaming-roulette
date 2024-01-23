@@ -9,7 +9,7 @@ interface Settings {
 export const settingsAtom = atom<Settings>({
   name: "settings",
   defaultValue: {
-    pickerView: "tags",
+    pickerView: "wheel",
     volume: 0.5,
     compactNavigation: false,
   },
