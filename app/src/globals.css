@@ -52,10 +52,10 @@
     @apply border-border;
   }
   html, body, #root {
-    @apply h-full m-0;
+    @apply h-full m-0 text-foreground;
   }
   #root {
-    @apply bg-base text-foreground;
+    @apply bg-base;
   }
   
   html[data-window-inactive] #root {

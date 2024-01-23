@@ -34,7 +34,10 @@ export const WindowTitlebar = ({ children }: PropsWithChildren) => {
   const isMaximized = useIsMaximized()
 
   return (
-    <div data-tauri-drag-region className="flex items-center p-2">
+    <div
+      data-tauri-drag-region
+      className="flex items-center p-2 relative z-[999]"
+    >
       {children}
 
       <div className="ml-auto">

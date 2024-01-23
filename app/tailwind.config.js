@@ -84,7 +84,7 @@ module.exports = {
   plugins: [require("tailwindcss-animate")],
   safelist: [
     ...colors.flatMap(color => [
-      `${color}-200`,
+      `text-${color}-200`,
       `border-${color}-200`,
       `bg-${color}-200`,
       `text-${color}-950`,

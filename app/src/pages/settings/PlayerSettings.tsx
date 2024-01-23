@@ -3,6 +3,7 @@ import { Dispatch, useState } from "react"
 import { Plus, Trash } from "lucide-react"
 
 import { ColorPicker } from "~/components/ColorPicker"
+import { Confirmation } from "~/components/Confirmation"
 import { IconButton, IconButtonProps } from "~/components/IconButton"
 import { InputLabel } from "~/components/InputLabel"
 import { Input } from "~/components/ui/input"
@@ -88,20 +89,38 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
   const setColor = (color: string) => setPlayerAttribute(id, "color", color)
   const remove = () => removePlayer(id)
 
+  const [deleting, setDeleting] = useState(false)
+
   return (
-    <PlayerInput
-      id={id}
-      label={`Player #${index + 1}`}
-      name={name}
-      color={color}
-      onNameChange={setName}
-      onColorChange={setColor}
-      action={{
-        icon: Trash,
-        onClick: remove,
-        title: "Remove player",
-      }}
-    />
+    <>
+      <PlayerInput
+        id={id}
+        label={`Player #${index + 1}`}
+        name={name}
+        color={color}
+        onNameChange={setName}
+        onColorChange={setColor}
+        action={{
+          icon: Trash,
+          onClick: () => setDeleting(true),
+          title: "Remove player",
+        }}
+      />
+      <Confirmation
+        className=""
+        open={deleting}
+        title="Remove player"
+        description={
+          <>
+            {"Do you really want to remove "}
+            <b className={`text-${color}-200 opacity-75`}>{name}</b>
+            {" from the player list?"}
+          </>
+        }
+        onCancel={() => setDeleting(false)}
+        onConfirm={remove}
+      />
+    </>
   )
 }
 
