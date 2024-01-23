@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import styled from "@emotion/styled"
+import { appWindow } from "@tauri-apps/api/window"
 import { Github } from "lucide-react"
 
 import { ErrorBoundary } from "./components/ErrorBoundary"
@@ -44,7 +45,20 @@ const ErrorFallback = () => (
   </div>
 )
 
+const useWindowFocus = () => {
+  useEffect(() => {
+    void appWindow.onFocusChanged(({ payload: active }) => {
+      if (active) {
+        document.documentElement.removeAttribute("data-window-inactive")
+      } else {
+        document.documentElement.setAttribute("data-window-inactive", "")
+      }
+    })
+  }, [])
+}
+
 export const App = () => {
+  useWindowFocus()
   const [current, setCurrent] = useState(routes[0]?.value)
   const [{ compactNavigation }] = useSettings()
   const { token, filePath, repoName, repoOwner } = useGithub()

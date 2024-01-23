@@ -57,6 +57,10 @@
   #root {
     @apply bg-base text-foreground;
   }
+  
+  html[data-window-inactive] #root {
+    @apply bg-background;
+  }
 
   *:focus-visible {
     outline-color: hsl(var(--ring));
