@@ -56,7 +56,9 @@ export const ColorPicker = ({
         <div
           className={cn(
             "w-full h-full rounded opacity-75 [*:hover>&]:opacity-100 [*:focus-visible>&]:opacity-100",
-            `bg-${value}-200`
+            !colors.includes(value)
+              ? "bg-muted-foreground/25"
+              : `bg-${value}-200`
           )}
         />
         <VisuallyHidden>{value}</VisuallyHidden>
