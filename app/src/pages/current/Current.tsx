@@ -9,7 +9,7 @@ import { cn } from "~/utils/utils"
 const Counter = ({ current, limit }: { limit: number; current: number }) => (
   <span
     className={cn(
-      "text-sm font-bold text-muted-foreground",
+      "text-sm font-bold text-muted-foreground text-nowrap ml-2",
       current > limit && "text-red-400"
     )}
   >
@@ -35,7 +35,7 @@ const PlayerGames = ({
 
   const setGames = (games: string) => {
     setValue(games)
-    onChange(games.split("\n"))
+    onChange(games.split("\n").filter(Boolean))
   }
 
   return (
