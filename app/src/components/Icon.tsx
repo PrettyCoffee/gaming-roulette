@@ -18,7 +18,7 @@ const icon = cva("shrink-0 inline-block", {
       current: "text-current",
       accent: "text-accent",
       muted: "text-muted-foreground",
-      error: "text-error",
+      error: "text-red-400",
     },
   },
   defaultVariants: {
