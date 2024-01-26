@@ -84,7 +84,7 @@ const PlayerGames = ({
   }, [gamesPerPerson, ref])
 
   return (
-    <div key={id} className="flex-1">
+    <div key={id} className="col-span-1">
       <div className="flex justify-between px-3">
         <InputLabel htmlFor={id}>{name}</InputLabel>
         <Counter current={amountOfGames} limit={gamesPerPerson} />
@@ -109,7 +109,13 @@ export const Current = () => {
   const { players, setPlayerAttribute } = usePlayers()
 
   return (
-    <div className="flex flex-wrap gap-2 -mt-2">
+    <div
+      className={cn(
+        "grid grid-cols-2 gap-2 -mt-2",
+        players.length > 2 && "md:grid-cols-3",
+        players.length > 3 && "lg:grid-cols-4"
+      )}
+    >
       {players.map(player => (
         <PlayerGames
           key={player.id}
