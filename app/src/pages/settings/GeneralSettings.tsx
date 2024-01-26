@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useId, useRef } from "react"
+import { ChangeEvent, useEffect, useId, useRef, useState } from "react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click.mp3"
@@ -12,9 +12,12 @@ import { playAudio } from "~/utils/playAudio"
 
 const GamesPerPersonInput = () => {
   const [{ gamesPerPerson }, setSettings] = useSettings()
+  const [value, setValue] = useState(String(gamesPerPerson))
 
   const setGamesPerPerson = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(target.value.replace(/\D/g, "")) || 1
+    const numbers = target.value.replace(/\D/g, "")
+    setValue(numbers)
+    const value = parseInt(numbers) || 1
     const gamesPerPerson = Math.max(1, value)
     setSettings(prev => ({ ...prev, gamesPerPerson }))
   }
@@ -26,7 +29,7 @@ const GamesPerPersonInput = () => {
       </InputLabel>
       <Input
         id={"games-per-person"}
-        value={gamesPerPerson}
+        value={value}
         onChange={setGamesPerPerson}
         placeholder="10"
       />
