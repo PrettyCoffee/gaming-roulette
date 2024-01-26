@@ -16,20 +16,22 @@ interface ColorButtonProps {
   onClick: Dispatch<string>
 }
 const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
-  <button
-    onClick={() => onClick(color)}
-    className={cn(
-      "w-6 h-6 rounded shadow-sm",
-      "inline-flex items-center justify-center",
-      "opacity-75 hover:opacity-100 focus-visible:opacity-100",
-      "relative before:block before:absolute before:-inset-0.5",
-      `bg-${color}-200`,
-      focusRing
-    )}
-  >
-    <VisuallyHidden>{color}</VisuallyHidden>
-    {selected && <Icon color="accent" size="sm" icon={Check} />}
-  </button>
+  <Popover.Close asChild>
+    <button
+      onClick={() => onClick(color)}
+      className={cn(
+        "w-6 h-6 rounded shadow-sm",
+        "inline-flex items-center justify-center",
+        "opacity-75 hover:opacity-100 focus-visible:opacity-100",
+        "relative before:block before:absolute before:-inset-0.5",
+        `bg-${color}-200`,
+        focusRing
+      )}
+    >
+      <VisuallyHidden>{color}</VisuallyHidden>
+      {selected && <Icon color="accent" size="sm" icon={Check} />}
+    </button>
+  </Popover.Close>
 )
 
 interface ColorPickerProps extends ClassNameProp {
