@@ -1,13 +1,38 @@
-import { useEffect, useId, useRef } from "react"
+import { ChangeEvent, useEffect, useId, useRef } from "react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click.mp3"
 import { InputLabel } from "~/components/InputLabel"
+import { Input } from "~/components/ui/input"
 import { RadioGroup } from "~/components/ui/radio-group"
 import { Slider } from "~/components/ui/slider"
 import { Switch } from "~/components/ui/switch"
 import { useSettings } from "~/data/settings"
 import { playAudio } from "~/utils/playAudio"
+
+const GamesPerPersonInput = () => {
+  const [{ gamesPerPerson }, setSettings] = useSettings()
+
+  const setGamesPerPerson = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(target.value.replace(/\D/g, "")) || 1
+    const gamesPerPerson = Math.max(1, value)
+    setSettings(prev => ({ ...prev, gamesPerPerson }))
+  }
+
+  return (
+    <>
+      <InputLabel className="mb-2" htmlFor={"games-per-person"}>
+        Games per person
+      </InputLabel>
+      <Input
+        id={"games-per-person"}
+        value={gamesPerPerson}
+        onChange={setGamesPerPerson}
+        placeholder="10"
+      />
+    </>
+  )
+}
 
 const SelectPickerView = () => {
   const [{ pickerView }, setSettings] = useSettings()
@@ -97,6 +122,11 @@ const AudioSlider = () => {
 
 export const GeneralSettings = () => (
   <div className="grid grid-cols-2 gap-2 p-2 pt-0">
+    <div className="col-span-1">
+      <GamesPerPersonInput />
+    </div>
+    <div className="col-span-1"></div>
+
     <div className="col-span-1">
       <SelectPickerView />
     </div>
