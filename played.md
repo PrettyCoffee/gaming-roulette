@@ -18,6 +18,7 @@
 | Castlevania: Aria of Sorrow      | 2023-12-18 | 7.5h, 9.1/10 |    5h, 9/10 |   7h,   9/10 |
 | Shady Part of Me                 | 2023-01-08 |   5h, 7.8/10 |  6.5h, 7/10 | 4.8h,   6/10 |
 | Hatoful Boyfriend                | 2023-01-22 | 1.5h, 6.8/10 | 0.75h, 3/10 |   Xh,   X/10 |
+| FEZ                              | 2023-01-29 |   Xh,   X/10 |  4.5h, 7/10 |   Xh,   X/10 |
 | X                                | 2023-XX-XX |   Xh,   X/10 |    Xh, X/10 |   Xh,   X/10 |
 
 Online:
