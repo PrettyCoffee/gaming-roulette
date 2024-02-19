@@ -1,4 +1,5 @@
-import { atom, reduxDevtools, useAtom, localStorage } from "yaasl/react"
+import { reduxDevtools } from "@yaasl/devtools"
+import { atom, useAtom, localStorage } from "@yaasl/react"
 
 interface GithubData {
   token: string

@@ -1,11 +1,11 @@
+import { reduxDevtools } from "@yaasl/devtools"
 import {
   atom,
   localStorage,
-  reduxDevtools,
   useAtom,
   migration,
   createMigrationStep,
-} from "yaasl/react"
+} from "@yaasl/react"
 
 const createId = () =>
   Array.from(crypto.getRandomValues(new Uint8Array(10)))

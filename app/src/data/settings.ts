@@ -1,4 +1,5 @@
-import { atom, localStorage, reduxDevtools, useAtom } from "yaasl/react"
+import { reduxDevtools } from "@yaasl/devtools"
+import { atom, localStorage, useAtom } from "@yaasl/react"
 
 interface Settings {
   pickerView: "tags" | "wheel"

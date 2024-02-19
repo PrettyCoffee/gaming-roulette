@@ -1,12 +1,7 @@
 import { useCallback, useEffect } from "react"
 
-import {
-  atom,
-  expiration,
-  localStorage,
-  reduxDevtools,
-  useAtom,
-} from "yaasl/react"
+import { reduxDevtools } from "@yaasl/devtools"
+import { atom, expiration, localStorage, useAtom } from "@yaasl/react"
 
 import { WEEK } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
