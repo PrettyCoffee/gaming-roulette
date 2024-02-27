@@ -1,6 +1,7 @@
 import React from "react"
 
 import { TooltipProvider } from "@radix-ui/react-tooltip"
+import { LazyMotion, domAnimation } from "framer-motion"
 import { createRoot } from "react-dom/client"
 
 import { App } from "./App"
@@ -13,8 +14,10 @@ if (!root) throw new Error("Root element not found")
 
 createRoot(root).render(
   <React.StrictMode>
-    <TooltipProvider>
-      <App />
-    </TooltipProvider>
+    <LazyMotion strict features={domAnimation}>
+      <TooltipProvider>
+        <App />
+      </TooltipProvider>
+    </LazyMotion>
   </React.StrictMode>
 )
