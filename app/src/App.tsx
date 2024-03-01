@@ -1,10 +1,11 @@
-import { PropsWithChildren, useEffect, useRef, useState } from "react"
+import { PropsWithChildren } from "react"
 
 import { AnimatePresence, m } from "framer-motion"
 
 import sleepingGif from "~/assets/sleepy-sleeping.gif"
 
 import { WindowTitlebar } from "./components/WindowTitlebar"
+import { useMouseIdle } from "./hooks/useMouseIdle"
 import { useWindowFocus } from "./hooks/useWindowFocus"
 import { Pages } from "./pages/Pages"
 import { cn } from "./utils/utils"
@@ -36,33 +37,6 @@ const Fader = ({ children, show }: PropsWithChildren<{ show: boolean }>) => (
     )}
   </AnimatePresence>
 )
-
-const useMouseIdle = (timeout = 3000) => {
-  const [isIdle, setIsIdle] = useState(false)
-  const cleanup = useRef<() => void>(() => null)
-
-  useEffect(() => {
-    cleanup.current()
-
-    let timer: number
-    const handleMouseMove = () => {
-      setIsIdle(false)
-      clearTimeout(timer)
-      timer = window.setTimeout(() => setIsIdle(true), timeout)
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-
-    cleanup.current = () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      clearTimeout(timer)
-    }
-
-    return () => cleanup.current()
-  }, [timeout])
-
-  return isIdle
-}
 
 export const App = () => {
   const isFocused = useWindowFocus()
