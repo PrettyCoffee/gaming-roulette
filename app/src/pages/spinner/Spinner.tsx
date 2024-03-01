@@ -64,6 +64,16 @@ export const Spinner = () => {
     popConfetti(canvas.current)
   }, [winner])
 
+  if (items.length === 0)
+    return (
+      <div className="h-full flex-col gap-2 flex items-center justify-center">
+        <div className="font-bold text-2xl text-muted-foreground">No games</div>
+        <div className="text-sm text-muted-foreground">
+          You must add some games first before you can spin the wheel.
+        </div>
+      </div>
+    )
+
   return (
     <div className="relative h-full flex-1 flex flex-col items-center justify-center gap-2">
       {settings.pickerView === "wheel" ? (
