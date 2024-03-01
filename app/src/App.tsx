@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react"
+import { PropsWithChildren, useEffect, useRef, useState } from "react"
 
 import { AnimatePresence, m } from "framer-motion"
 
@@ -37,8 +37,36 @@ const Fader = ({ children, show }: PropsWithChildren<{ show: boolean }>) => (
   </AnimatePresence>
 )
 
+const useMouseIdle = (timeout = 3000) => {
+  const [isIdle, setIsIdle] = useState(false)
+  const cleanup = useRef<() => void>(() => null)
+
+  useEffect(() => {
+    cleanup.current()
+
+    let timer: number
+    const handleMouseMove = () => {
+      setIsIdle(false)
+      clearTimeout(timer)
+      timer = window.setTimeout(() => setIsIdle(true), timeout)
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+
+    cleanup.current = () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      clearTimeout(timer)
+    }
+
+    return () => cleanup.current()
+  }, [timeout])
+
+  return isIdle
+}
+
 export const App = () => {
   const isFocused = useWindowFocus()
+  const isIdle = useMouseIdle()
 
   return (
     <div className="max-h-screen h-full overflow-hidden flex flex-col">
@@ -55,11 +83,11 @@ export const App = () => {
         </span>
       </WindowTitlebar>
       <Pages />
-      <Fader show={!isFocused}>
+      <Fader show={!isFocused || isIdle}>
         <img
           src={sleepingGif}
           alt=""
-          className="h-10 opacity-50 object-contain"
+          className="h-12 opacity-50 object-contain"
         />
       </Fader>
     </div>
