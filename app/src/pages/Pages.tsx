@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 import styled from "@emotion/styled"
 import { Github } from "lucide-react"
 
@@ -6,10 +8,12 @@ import { Icon } from "~/components/Icon"
 import { Link } from "~/components/Link"
 import { Navigation } from "~/components/Navigation"
 import { useGithub } from "~/data/github"
+import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { useHashRouter } from "~/hooks/useHashRouter"
 import { cn } from "~/utils/utils"
 
+import { Init } from "./init/Init"
 import { routes } from "./routes"
 
 const Layout = styled.div`
@@ -47,6 +51,19 @@ export const Pages = () => {
   const [current, setCurrent] = useHashRouter({ fallback: routes[0], routes })
   const [{ compactNavigation }] = useSettings()
   const { token, filePath, repoName, repoOwner } = useGithub()
+
+  const { players } = usePlayers()
+  const [showInit, setShowInit] = useState(players.length < 1)
+
+  useEffect(() => {
+    if (!showInit && players.length < 1) {
+      setShowInit(true)
+    }
+  }, [showInit, players.length])
+
+  if (showInit) {
+    return <Init onFinish={() => setShowInit(false)} />
+  }
 
   const currentRoute = routes.find(({ value }) => value === current)
   const ActiveView = currentRoute?.component ?? (() => null)

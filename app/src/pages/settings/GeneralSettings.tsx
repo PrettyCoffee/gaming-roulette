@@ -10,7 +10,7 @@ import { Switch } from "~/components/ui/switch"
 import { useSettings } from "~/data/settings"
 import { playAudio } from "~/utils/playAudio"
 
-const GamesPerPersonInput = () => {
+export const GamesPerPersonInput = () => {
   const [{ gamesPerPerson }, setSettings] = useSettings()
   const [value, setValue] = useState(String(gamesPerPerson))
 
