@@ -194,23 +194,25 @@ export const Init = ({ onFinish }: InitProps) => {
   }
 
   return (
-    <div className="relative h-full overflow-hidden bg-background m-2 mt-0 rounded-md">
-      <VisuallyHidden>
-        <h1>Gaming Roulette Setup</h1>
-      </VisuallyHidden>
+    <div className="h-full p-2 pt-0 ">
+      <div className="relative overflow-hidden bg-background rounded-md h-full">
+        <VisuallyHidden>
+          <h1>Gaming Roulette Setup</h1>
+        </VisuallyHidden>
 
-      <Navigation
-        current={step}
-        steps={availableStep}
-        goBack={goBack}
-        goNext={goNext}
-      />
+        <Navigation
+          current={step}
+          steps={availableStep}
+          goBack={goBack}
+          goNext={goNext}
+        />
 
-      {initSteps.map((Step, index) => (
-        <Section key={Step.name} state={getState(index)}>
-          <Step onContinue={goNext} />
-        </Section>
-      ))}
+        {initSteps.map((Step, index) => (
+          <Section key={Step.name} state={getState(index)}>
+            <Step onContinue={goNext} />
+          </Section>
+        ))}
+      </div>
     </div>
   )
 }

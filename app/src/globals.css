@@ -40,12 +40,8 @@
 @layer base {
   @import url("/fonts/quicksand.css");
 
-  html {
-    @apply border;
-  }
-
   html, body {
-    @apply rounded-lg bg-transparent overflow-hidden;
+    @apply bg-transparent overflow-hidden;
   }
 
   * {
@@ -54,14 +50,7 @@
   html, body, #root {
     @apply h-full m-0 text-foreground;
   }
-  #root {
-    @apply bg-base;
-  }
   
-  html[data-window-inactive] #root {
-    @apply bg-background;
-  }
-
   *:focus-visible {
     outline-color: hsl(var(--ring));
     outline-style: solid;
