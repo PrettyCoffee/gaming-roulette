@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click.mp3"
+import { resetIdle } from "~/hooks/useIdle"
 import { randomIntBetween } from "~/utils/number"
 import { playAudio } from "~/utils/playAudio"
 
@@ -16,6 +17,7 @@ export const useNumberRotation = (max: number) => {
 
   const rotate = useCallback(
     (prev = current, winner = randomIntBetween(0, max - 1), speed = -100) => {
+      resetIdle()
       const transition = Math.max(Math.abs(speed), 10)
       setTransition(transition)
       setTimeout(() => playClickSound(), transition / 2)

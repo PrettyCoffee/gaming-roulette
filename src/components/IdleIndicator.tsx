@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react"
 import { AnimatePresence, m } from "framer-motion"
 
 import sleepingGif from "~/assets/sleepy-sleeping.gif"
-import { useMouseIdle } from "~/hooks/useMouseIdle"
+import { useIdle } from "~/hooks/useIdle"
 import { useWindowFocus } from "~/hooks/useWindowFocus"
 
 const inital = {
@@ -36,7 +36,7 @@ const Fader = ({ children, show }: PropsWithChildren<{ show: boolean }>) => (
 
 export const IdleIndicator = () => {
   const isFocused = useWindowFocus()
-  const isIdle = useMouseIdle()
+  const isIdle = useIdle()
 
   return (
     <Fader show={!isFocused || isIdle}>
