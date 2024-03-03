@@ -10,6 +10,8 @@ import { Switch } from "~/components/ui/switch"
 import { useSettings } from "~/data/settings"
 import { playAudio } from "~/utils/playAudio"
 
+import { Grid } from "./Grid"
+
 export const GamesPerPersonInput = () => {
   const [{ gamesPerPerson }, setSettings] = useSettings()
   const [value, setValue] = useState(String(gamesPerPerson))
@@ -124,22 +126,21 @@ const AudioSlider = () => {
 }
 
 export const GeneralSettings = () => (
-  <div className="grid grid-cols-2 gap-2 p-2 pt-0">
-    <div className="col-span-1">
+  <Grid.Root>
+    <Grid.Item>
       <GamesPerPersonInput />
-    </div>
-    <div className="col-span-1"></div>
+    </Grid.Item>
 
-    <div className="col-span-1">
+    <Grid.Item newLine>
       <SelectPickerView />
-    </div>
+    </Grid.Item>
 
-    <div className="col-span-1">
+    <Grid.Item>
       <NavigationSettings />
-    </div>
+    </Grid.Item>
 
-    <div className="col-span-1">
+    <Grid.Item>
       <AudioSlider />
-    </div>
-  </div>
+    </Grid.Item>
+  </Grid.Root>
 )

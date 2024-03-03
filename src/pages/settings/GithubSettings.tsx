@@ -4,6 +4,8 @@ import { InputLabel } from "~/components/InputLabel"
 import { Input } from "~/components/ui/input"
 import { useGithub } from "~/data/github"
 
+import { Grid } from "./Grid"
+
 const RepoOwner = () => {
   const id = useId()
   const { repoOwner, setGithubAttribute } = useGithub()
@@ -82,21 +84,21 @@ const GithubToken = () => {
 }
 
 export const GithubSettings = () => (
-  <div className="grid grid-cols-2 gap-2 p-2 pt-0">
-    <div className="col-span-1">
+  <Grid.Root>
+    <Grid.Item>
       <RepoOwner />
-    </div>
+    </Grid.Item>
 
-    <div className="col-span-1">
+    <Grid.Item>
       <RepoName />
-    </div>
+    </Grid.Item>
 
-    <div className="col-span-1">
+    <Grid.Item>
       <FilePath />
-    </div>
+    </Grid.Item>
 
-    <div className="col-span-1">
+    <Grid.Item>
       <GithubToken />
-    </div>
-  </div>
+    </Grid.Item>
+  </Grid.Root>
 )

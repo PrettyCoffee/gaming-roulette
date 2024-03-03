@@ -10,6 +10,8 @@ import { Input } from "~/components/ui/input"
 import { Player, usePlayers } from "~/data/players"
 import { colors } from "~/utils/colors"
 
+import { Grid } from "./Grid"
+
 interface PlayerInputProps {
   id: string
   label: string
@@ -127,15 +129,15 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
 export const PlayerSettings = () => {
   const { players } = usePlayers()
   return (
-    <div className="grid grid-cols-2 gap-2 p-2 pt-0">
+    <Grid.Root>
       {players.map((player, index) => (
-        <div key={player.id} className="col-span-1">
+        <Grid.Item key={player.id}>
           <EditPlayer {...player} index={index} />
-        </div>
+        </Grid.Item>
       ))}
-      <div className="col-span-1">
+      <Grid.Item>
         <AddPlayer />
-      </div>
-    </div>
+      </Grid.Item>
+    </Grid.Root>
   )
 }
