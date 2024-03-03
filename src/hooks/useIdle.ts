@@ -1,18 +1,22 @@
 import { atom, useAtomValue } from "@yaasl/react"
 
+import { debounce } from "~/utils/debounce"
+
 const idleAtom = atom({
   name: "idle",
   defaultValue: false,
 })
 
-let timer: number
-export const resetIdle = () => {
+const debouncedIdle = debounce(() => idleAtom.set(true))
+
+export const resetIdle = (ms = 3000) => {
   idleAtom.set(false)
-  clearTimeout(timer)
-  timer = window.setTimeout(() => idleAtom.set(true), 3000)
+  debouncedIdle.setTimer(ms)
 }
-window.addEventListener("keydown", resetIdle)
-window.addEventListener("mousemove", resetIdle)
+
+const runListener = () => resetIdle()
+window.addEventListener("keydown", runListener)
+window.addEventListener("mousemove", runListener)
 
 export const useIdle = () => {
   return useAtomValue(idleAtom)

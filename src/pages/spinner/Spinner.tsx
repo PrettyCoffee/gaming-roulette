@@ -9,6 +9,7 @@ import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
+import { resetIdle } from "~/hooks/useIdle"
 import { shuffle } from "~/utils/array"
 import { playAudio } from "~/utils/playAudio"
 
@@ -25,16 +26,18 @@ const popConfetti = (canvas: HTMLCanvasElement) => {
     spread: 75,
     colors: ["#ef4444", "#f59e0b", "#22c55e", "#06b6d4", "#3b82f6", "#a855f7"],
   }
-  void confetti({
+  resetIdle(6000)
+  const a = confetti({
     ...settings,
     origin: { x: 0, y: 1 },
     angle: 90 - 30,
   })
-  void confetti({
+  const b = confetti({
     ...settings,
     origin: { x: 1, y: 1 },
     angle: 90 + 30,
   })
+  void Promise.all([a, b]).then(() => resetIdle())
 }
 
 export interface SpinnerItem {

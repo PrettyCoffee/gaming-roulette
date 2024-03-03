@@ -4,7 +4,6 @@ import { AnimatePresence, m } from "framer-motion"
 
 import sleepingGif from "~/assets/sleepy-sleeping.gif"
 import { useIdle } from "~/hooks/useIdle"
-import { useWindowFocus } from "~/hooks/useWindowFocus"
 
 const inital = {
   opacity: 0,
@@ -35,11 +34,10 @@ const Fader = ({ children, show }: PropsWithChildren<{ show: boolean }>) => (
 )
 
 export const IdleIndicator = () => {
-  const isFocused = useWindowFocus()
   const isIdle = useIdle()
 
   return (
-    <Fader show={!isFocused || isIdle}>
+    <Fader show={isIdle}>
       <img
         src={sleepingGif}
         alt=""
