@@ -1,9 +1,8 @@
-import { ChangeEvent, useEffect, useId, useRef, useState } from "react"
+import { useEffect, useId, useRef } from "react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click.mp3"
 import { InputLabel } from "~/components/InputLabel"
-import { Input } from "~/components/ui/input"
 import { RadioGroup } from "~/components/ui/radio-group"
 import { Slider } from "~/components/ui/slider"
 import { Switch } from "~/components/ui/switch"
@@ -11,33 +10,6 @@ import { useSettings } from "~/data/settings"
 import { playAudio } from "~/utils/playAudio"
 
 import { Grid } from "./Grid"
-
-export const GamesPerPersonInput = () => {
-  const [{ gamesPerPerson }, setSettings] = useSettings()
-  const [value, setValue] = useState(String(gamesPerPerson))
-
-  const setGamesPerPerson = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const numbers = target.value.replace(/\D/g, "")
-    setValue(numbers)
-    const value = parseInt(numbers) || 1
-    const gamesPerPerson = Math.max(1, value)
-    setSettings(prev => ({ ...prev, gamesPerPerson }))
-  }
-
-  return (
-    <>
-      <InputLabel className="mb-2" htmlFor={"games-per-person"}>
-        Games per person
-      </InputLabel>
-      <Input
-        id={"games-per-person"}
-        value={value}
-        onChange={setGamesPerPerson}
-        placeholder="10"
-      />
-    </>
-  )
-}
 
 const SelectPickerView = () => {
   const [{ pickerView }, setSettings] = useSettings()
@@ -128,10 +100,6 @@ const AudioSlider = () => {
 export const GeneralSettings = () => (
   <Grid.Root>
     <Grid.Item>
-      <GamesPerPersonInput />
-    </Grid.Item>
-
-    <Grid.Item newLine>
       <SelectPickerView />
     </Grid.Item>
 

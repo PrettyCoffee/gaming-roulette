@@ -9,8 +9,8 @@ import { IconButton } from "~/components/IconButton"
 import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 
-import { GamesPerPersonInput } from "../settings/GeneralSettings"
 import { PlayerSettings } from "../settings/PlayerSettings"
+import { GamesPerPersonInput } from "../settings/RulesetSettings"
 
 const GradientText = styled.b`
   background-clip: text;

@@ -3,7 +3,7 @@ import { Dispatch, useMemo, useState } from "react"
 import { InputLabel } from "~/components/InputLabel"
 import { Textarea } from "~/components/ui/textarea"
 import { Player, usePlayers } from "~/data/players"
-import { useSettings } from "~/data/settings"
+import { useRuleset } from "~/data/ruleset"
 import { getFontSize } from "~/utils/getFontSize"
 import { cn } from "~/utils/utils"
 
@@ -64,7 +64,7 @@ const PlayerGames = ({
   onChange,
 }: PlayerGamesProps) => {
   const [ref, setRef] = useState<HTMLTextAreaElement | null>(null)
-  const [{ gamesPerPerson }] = useSettings()
+  const [{ gamesPerPerson }] = useRuleset()
   const [value, setValue] = useState(games.join("\n"))
 
   const amountOfGames = games.filter(Boolean).length

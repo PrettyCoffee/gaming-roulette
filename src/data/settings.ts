@@ -5,7 +5,6 @@ interface Settings {
   pickerView: "tags" | "wheel"
   volume: number
   compactNavigation: boolean
-  gamesPerPerson: number
 }
 
 export const settingsAtom = atom<Settings>({
@@ -14,7 +13,6 @@ export const settingsAtom = atom<Settings>({
     pickerView: "wheel",
     volume: 0.5,
     compactNavigation: false,
-    gamesPerPerson: 10,
   },
   middleware: [
     localStorage(),
