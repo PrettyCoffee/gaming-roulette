@@ -5,6 +5,8 @@ import {
   useAtom,
   migration,
   createMigrationStep,
+  derive,
+  useDeriveValue,
 } from "@yaasl/react"
 
 const createId = () =>
@@ -123,3 +125,31 @@ export const usePlayers = () => {
 
   return { players, addPlayer, removePlayer, setPlayerAttribute }
 }
+
+const arrayHasDuplicate = (items: string[]) =>
+  items.some((item, index) => items.indexOf(item) !== index)
+
+const arraysOverlap = (...arrays: string[][]) => {
+  return arrays.some((array, index) => {
+    const others = arrays.slice(index + 1).flat()
+    return array.some(item => others.includes(item))
+  })
+}
+
+export const playerGameStats = derive(({ get }) => {
+  const players = get(playersAtom)
+  const allGames = players.map(({ games }) => games)
+
+  return Object.fromEntries(
+    players.map(player => [
+      player.id,
+      {
+        hasDuplicates: arrayHasDuplicate(player.games),
+        hasCrossDuplicates: arraysOverlap(...allGames),
+        games: player.games.length,
+      },
+    ])
+  )
+})
+
+export const usePlayerGameStats = () => useDeriveValue(playerGameStats)

@@ -1,8 +1,12 @@
 import { Dispatch, useMemo, useState } from "react"
 
+import { AlertTriangle } from "lucide-react"
+
+import { Icon } from "~/components/Icon"
 import { InputLabel } from "~/components/InputLabel"
 import { Textarea } from "~/components/ui/textarea"
-import { Player, usePlayers } from "~/data/players"
+import { Tooltip } from "~/components/ui/tooltip"
+import { Player, usePlayerGameStats, usePlayers } from "~/data/players"
 import { useRuleset } from "~/data/ruleset"
 import { getFontSize } from "~/utils/getFontSize"
 import { cn } from "~/utils/utils"
@@ -56,6 +60,28 @@ const getYBorder = (element: HTMLElement) => {
   return parseFloat(borderTopWidth) + parseFloat(borderBottomWidth)
 }
 
+const ErrorHint = ({ errors }: { errors: string[] }) => (
+  <Tooltip.Root>
+    <Tooltip.Trigger asChild>
+      <div>
+        <Icon icon={AlertTriangle} color="error" size="sm" />
+      </div>
+    </Tooltip.Trigger>
+    <Tooltip.Content
+      className="border-red-500"
+      side="bottom"
+      align="end"
+      alignOffset={-8}
+    >
+      <ul>
+        {errors.map(error => (
+          <li key={error}>{error}</li>
+        ))}
+      </ul>
+    </Tooltip.Content>
+  </Tooltip.Root>
+)
+
 const PlayerGames = ({
   id,
   color,
@@ -64,10 +90,25 @@ const PlayerGames = ({
   onChange,
 }: PlayerGamesProps) => {
   const [ref, setRef] = useState<HTMLTextAreaElement | null>(null)
-  const [{ gamesPerPerson }] = useRuleset()
+  const [rules] = useRuleset()
+  const stats = usePlayerGameStats()[id]
   const [value, setValue] = useState(games.join("\n"))
 
-  const amountOfGames = games.filter(Boolean).length
+  const amountOfGames = games.length
+
+  const errors = useMemo(() => {
+    const errors: string[] = []
+    if (rules.gamesPerPerson < amountOfGames) {
+      errors.push("Too many games")
+    }
+    if (!rules.allowDuplicates && stats?.hasDuplicates) {
+      errors.push("Duplicates are not allowed")
+    }
+    if (!rules.allowCrossDuplicates && stats?.hasCrossDuplicates) {
+      errors.push("Cross duplicates are not allowed")
+    }
+    return errors
+  }, [amountOfGames, rules, stats])
 
   const setGames = (games: string) => {
     setValue(games)
@@ -79,15 +120,18 @@ const PlayerGames = ({
     const lineHeight = getLineHeight(ref)
     const padding = getYPadding(ref)
     const border = getYBorder(ref)
-    const height = Math.min(gamesPerPerson, 10) * lineHeight + padding + border
+    const height =
+      Math.min(rules.gamesPerPerson, 10) * lineHeight + padding + border
     return `${height}px`
-  }, [gamesPerPerson, ref])
+  }, [rules.gamesPerPerson, ref])
 
   return (
     <div key={id} className="col-span-1">
-      <div className="flex justify-between px-3">
+      <div className="flex px-3 items-center gap-2">
         <InputLabel htmlFor={id}>{name}</InputLabel>
-        <Counter current={amountOfGames} limit={gamesPerPerson} />
+        <div className="flex-1" />
+        <Counter current={amountOfGames} limit={rules.gamesPerPerson} />
+        {errors.length > 0 && <ErrorHint errors={errors} />}
       </div>
       <Textarea
         ref={setRef}
@@ -98,7 +142,7 @@ const PlayerGames = ({
         className={cn(
           "whitespace-pre resize-none",
           `border-${color}-200`,
-          amountOfGames > gamesPerPerson && `border-red-500`
+          errors.length > 0 && `border-red-500`
         )}
       />
     </div>

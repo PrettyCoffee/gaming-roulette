@@ -1,14 +1,18 @@
 import { reduxDevtools } from "@yaasl/devtools"
 import { atom, localStorage, useAtom } from "@yaasl/react"
 
-interface Ruleset {
+export interface Ruleset {
   gamesPerPerson: number
+  allowDuplicates: boolean
+  allowCrossDuplicates: boolean
 }
 
 export const rulesetAtom = atom<Ruleset>({
   name: "ruleset",
   defaultValue: {
     gamesPerPerson: 10,
+    allowDuplicates: true,
+    allowCrossDuplicates: true,
   },
   middleware: [
     localStorage(),
