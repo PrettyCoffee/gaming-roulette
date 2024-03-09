@@ -4,6 +4,8 @@ import { cva, VariantProps } from "class-variance-authority"
 
 import { cn } from "~/utils/utils"
 
+import { BaseButton } from "./base/BaseButton"
+
 const pill = cva(
   cn(
     "isolate relative h-10 w-10 rounded-full font-semibold flex items-center justify-center outline-offset-2 [&>*]:z-10",
@@ -37,9 +39,9 @@ const Pill = ({
   onClick,
   ...styles
 }: PropsWithChildren<PillProps>) => (
-  <button onClick={onClick} className={pill(styles)}>
+  <BaseButton onClick={onClick} className={pill(styles)}>
     <span>{children}</span>
-  </button>
+  </BaseButton>
 )
 
 interface StepProps extends VariantProps<typeof pill> {

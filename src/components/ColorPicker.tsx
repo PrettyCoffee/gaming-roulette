@@ -5,6 +5,7 @@ import { Check } from "lucide-react"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
+import { BaseButton } from "./base/BaseButton"
 import { ClassNameProp } from "./base/BaseProps"
 import { VisuallyHidden } from "./base/VisuallyHidden"
 import { Icon } from "./Icon"
@@ -17,7 +18,7 @@ interface ColorButtonProps {
 }
 const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
   <Popover.Close asChild>
-    <button
+    <BaseButton
       onClick={() => onClick(color)}
       className={cn(
         "w-6 h-6 rounded shadow-sm",
@@ -30,7 +31,7 @@ const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
     >
       <VisuallyHidden>{color}</VisuallyHidden>
       {selected && <Icon color="accent" size="sm" icon={Check} />}
-    </button>
+    </BaseButton>
   </Popover.Close>
 )
 
@@ -49,7 +50,7 @@ export const ColorPicker = ({
 }: ColorPickerProps) => (
   <Popover.Root>
     <Popover.Trigger asChild>
-      <button
+      <BaseButton
         id={id}
         className={cn(
           "w-10 h-10 shrink-0 rounded-md p-1.5 border border-input hover:bg-accent",
@@ -65,7 +66,7 @@ export const ColorPicker = ({
           )}
         />
         <VisuallyHidden>{value}</VisuallyHidden>
-      </button>
+      </BaseButton>
     </Popover.Trigger>
     <Popover.Content asChild>
       <div className="w-max grid grid-cols-4 justify-center gap-1">

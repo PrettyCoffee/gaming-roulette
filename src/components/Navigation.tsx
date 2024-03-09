@@ -3,6 +3,7 @@ import { Dispatch } from "react"
 import { Route } from "~/pages/routes"
 import { cn } from "~/utils/utils"
 
+import { BaseButton } from "./base/BaseButton"
 import { ClassNameProp } from "./base/BaseProps"
 import { Icon } from "./Icon"
 import { TitleTooltip } from "./TitleTooltip"
@@ -25,8 +26,9 @@ const NavButton = ({
   disabled,
 }: NavButtonProps) => (
   <TitleTooltip asChild title={label} disabled={!compact} side="right">
-    <button
-      onClick={onClick}
+    <BaseButton
+      onMouseDown={onClick}
+      muteAudio={active}
       disabled={disabled}
       className={cn(
         "inline-flex items-center h-8 px-2 w-full rounded-sm transition-all",
@@ -35,12 +37,12 @@ const NavButton = ({
         "disabled:pointer-events-none disabled:opacity-50",
         "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         !active && "hover:bg-background/50",
-        active && "bg-background text-foreground shadow-sm",
+        active && "bg-background text-foreground shadow-sm cursor-default",
         className
       )}
     >
       {compact ? <Icon icon={icon} /> : label}
-    </button>
+    </BaseButton>
   </TitleTooltip>
 )
 
