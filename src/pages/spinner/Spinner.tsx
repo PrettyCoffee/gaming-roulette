@@ -11,6 +11,7 @@ import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { resetIdle } from "~/hooks/useIdle"
 import { shuffle } from "~/utils/array"
+import { color200 } from "~/utils/colors"
 import { playAudio } from "~/utils/playAudio"
 
 import { ClassicWheel } from "./ClassicWheel"
@@ -21,12 +22,13 @@ import { Wheel } from "./Wheel"
 
 const playVictory = () => void playAudio(victorySound)
 
-const popConfetti = (canvas: HTMLCanvasElement) => {
+const popConfetti = (canvas: HTMLCanvasElement, color?: string) => {
   const confetti = createConfetti(canvas, { resize: true })
+  const playerColor = color200[color ?? ""]
   const settings = {
     particleCount: 100,
     spread: 75,
-    colors: ["#ef4444", "#f59e0b", "#22c55e", "#06b6d4", "#3b82f6", "#a855f7"],
+    colors: playerColor ? [playerColor] : Object.values(color200),
   }
   resetIdle(6000)
   const a = confetti({
@@ -73,8 +75,8 @@ export const Spinner = () => {
   useEffect(() => {
     if (!canvas.current || winner == null) return
     playVictory()
-    popConfetti(canvas.current)
-  }, [winner])
+    popConfetti(canvas.current, items[winner]?.color)
+  }, [items, winner])
 
   if (items.length === 0)
     return (

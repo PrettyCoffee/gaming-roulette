@@ -17,3 +17,23 @@ export const colors = [
   "pink",
   "rose",
 ]
+
+export const color200: Record<string, string> = {
+  red: "#fecaca",
+  orange: "#fed7aa",
+  amber: "#fde68a",
+  yellow: "#fef08a",
+  lime: "#d9f99d",
+  green: "#bbf7d0",
+  emerald: "#a7f3d0",
+  teal: "#99f6e4",
+  cyan: "#a5f3fc",
+  sky: "#bae6fd",
+  blue: "#bfdbfe",
+  indigo: "#c7d2fe",
+  violet: "#ddd6fe",
+  purple: "#e9d5ff",
+  fuchsia: "#f5d0fe",
+  pink: "#fbcfe8",
+  rose: "#fecdd3",
+}
