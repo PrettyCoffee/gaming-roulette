@@ -1,4 +1,4 @@
-import { settingsAtom } from "~/data/settings"
+import { audioSettingsAtom } from "~/data/audioSettings"
 
 interface Options {
   volume?: number
@@ -8,14 +8,11 @@ interface Options {
 
 export const playAudio = (
   url: string,
-  {
-    volume = settingsAtom.get().volume,
-    playbackRate = 1,
-    preservesPitch = true,
-  }: Options = {}
+  { volume = 1, playbackRate = 1, preservesPitch = true }: Options = {}
 ) => {
+  if (audioSettingsAtom.get().muted) return
   const audio = new Audio(url)
-  audio.volume = volume
+  audio.volume = volume * audioSettingsAtom.get().master
   audio.playbackRate = playbackRate
   audio.preservesPitch = preservesPitch
   return audio.play()

@@ -6,6 +6,7 @@ import { Slot } from "@radix-ui/react-slot"
 import click from "~/assets/btn-click.mp3"
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import hover from "~/assets/btn-hover.mp3"
+import { audioSettingsAtom } from "~/data/audioSettings"
 import { playAudio } from "~/utils/playAudio"
 
 import { AsChildProp } from "./BaseProps"
@@ -32,13 +33,18 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
         ref={ref}
         onMouseDown={e => {
           if (shouldPlay(e as ButtonMouseEvent)) {
-            void playAudio(click)
+            void playAudio(click, {
+              volume: audioSettingsAtom.get().buttonVolume,
+            })
           }
           onMouseDown?.(e as ButtonMouseEvent)
         }}
         onMouseEnter={e => {
           if (shouldPlay(e as ButtonMouseEvent)) {
-            void playAudio(hover, { playbackRate: 1.5 })
+            void playAudio(hover, {
+              volume: audioSettingsAtom.get().buttonVolume,
+              playbackRate: 1.5,
+            })
           }
           onMouseEnter?.(e as ButtonMouseEvent)
         }}

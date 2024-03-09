@@ -7,6 +7,7 @@ import { Dices } from "lucide-react"
 import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
+import { audioSettingsAtom } from "~/data/audioSettings"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { resetIdle } from "~/hooks/useIdle"
@@ -20,7 +21,10 @@ import { Tags } from "./Tags"
 import { useNumberRotation } from "./useNumberRotation"
 import { Wheel } from "./Wheel"
 
-const playVictory = () => void playAudio(victorySound)
+const playVictory = () =>
+  void playAudio(victorySound, {
+    volume: audioSettingsAtom.get().victoryVolume,
+  })
 
 const popConfetti = (canvas: HTMLCanvasElement, color?: string) => {
   const confetti = createConfetti(canvas, { resize: true })

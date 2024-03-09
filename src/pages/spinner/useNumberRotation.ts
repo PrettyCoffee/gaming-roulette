@@ -2,11 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click-enhanced.mp3"
+import { audioSettingsAtom } from "~/data/audioSettings"
 import { resetIdle } from "~/hooks/useIdle"
 import { randomIntBetween } from "~/utils/number"
 import { playAudio } from "~/utils/playAudio"
 
-const playClickSound = () => void playAudio(clickSound)
+const playClickSound = () =>
+  void playAudio(clickSound, { volume: audioSettingsAtom.get().spinnerVolume })
 
 export const useNumberRotation = (max: number) => {
   const [current, setCurrent] = useState<number | null>(null)
