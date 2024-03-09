@@ -1,5 +1,3 @@
-import { randomIntBetween } from "./number"
-
 type RangeOptions =
   | number
   | {
@@ -20,13 +18,13 @@ export const createRange = (options: RangeOptions) => {
 }
 
 const shuffleArray = <T>(array: T[]): T[] => {
-  const copy = [...array]
-  return array
-    .map(() => {
-      const index = randomIntBetween(0, copy.length - 1)
-      return copy.splice(index, 1)[0]
-    })
-    .filter(Boolean) as T[]
+  const shuffled = [...array]
+  for (let pos1 = shuffled.length - 1; pos1 > 0; pos1--) {
+    const pos2 = Math.floor(Math.random() * (pos1 + 1))
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    ;[shuffled[pos1], shuffled[pos2]] = [shuffled[pos2]!, shuffled[pos1]!]
+  }
+  return shuffled
 }
 
 export const shuffle = <T>(...arrays: T[][]) => shuffleArray(arrays.flat())
