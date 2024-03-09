@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 
 import { cn } from "~/utils/utils"
 
-import { SpinnerItem } from "./Spinner"
+import { SpinnerStateProps } from "./Spinner"
 
 const Preserve3D = styled.div`
   perspective: 800;
@@ -106,18 +106,12 @@ const WheelSegment = styled.div<WheelSegmentProps>(
   `
 )
 
-interface WheelProps {
-  items: SpinnerItem[]
-  current?: number
-  winner?: number
-  transitionDuration: number
-}
 export const Wheel = ({
   current,
   items,
   winner,
   transitionDuration,
-}: WheelProps) => (
+}: SpinnerStateProps) => (
   <Preserve3D className="w-80 flex flex-col items-center h-72 relative">
     {items.map(({ game, color }, index) => (
       <WheelSegment

@@ -4,7 +4,7 @@ import { ClassNameProp } from "~/components/base/BaseProps"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { SpinnerItem } from "./Spinner"
+import { SpinnerStateProps } from "./Spinner"
 
 interface PillProps extends ClassNameProp {
   color: string
@@ -41,38 +41,26 @@ const Pill = ({
   </span>
 )
 
-interface TagsProps {
-  items: SpinnerItem[]
-  current?: number
-  winner?: number
-  transitionDuration: number
-}
 export const Tags = ({
   current,
   items,
   winner,
   transitionDuration,
-}: TagsProps) => {
-  return (
-    <div className="flex flex-wrap justify-center gap-2">
-      {items.map(({ game, color }, index) => (
-        <Pill
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
-          winner={winner === index}
-          color={color}
-          className={cn(
-            current == null
-              ? ""
-              : current === index
-              ? "scale-105"
-              : "opacity-10"
-          )}
-          transitionDuration={transitionDuration}
-        >
-          {index + 1}. {game}
-        </Pill>
-      ))}
-    </div>
-  )
-}
+}: SpinnerStateProps) => (
+  <div className="flex flex-wrap justify-center gap-2">
+    {items.map(({ game, color }, index) => (
+      <Pill
+        // eslint-disable-next-line react/no-array-index-key
+        key={index}
+        winner={winner === index}
+        color={color}
+        className={cn(
+          current == null ? "" : current === index ? "scale-105" : "opacity-10"
+        )}
+        transitionDuration={transitionDuration}
+      >
+        {index + 1}. {game}
+      </Pill>
+    ))}
+  </div>
+)

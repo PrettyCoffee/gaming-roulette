@@ -16,6 +16,7 @@ import { playAudio } from "~/utils/playAudio"
 import { Tags } from "./Tags"
 import { useNumberRotation } from "./useNumberRotation"
 import { Wheel } from "./Wheel"
+import { WheelOfFortune } from "./WheelOfFortune"
 
 const playVictory = () => void playAudio(victorySound)
 
@@ -43,6 +44,13 @@ const popConfetti = (canvas: HTMLCanvasElement) => {
 export interface SpinnerItem {
   game: string
   color: string
+}
+
+export interface SpinnerStateProps {
+  items: SpinnerItem[]
+  current?: number
+  winner?: number
+  transitionDuration: number
 }
 
 export const Spinner = () => {
@@ -77,22 +85,21 @@ export const Spinner = () => {
       </div>
     )
 
+  const props: SpinnerStateProps = {
+    items,
+    current: current ?? undefined,
+    winner: winner ?? undefined,
+    transitionDuration: transition ?? 0,
+  }
+
   return (
     <div className="relative h-full flex-1 flex flex-col items-center justify-center gap-2">
       {settings.pickerView === "wheel" ? (
-        <Wheel
-          items={items}
-          current={current ?? undefined}
-          winner={winner ?? undefined}
-          transitionDuration={transition ?? 0}
-        />
+        <Wheel {...props} />
+      ) : settings.pickerView === "classic-wheel" ? (
+        <WheelOfFortune {...props} />
       ) : (
-        <Tags
-          items={items}
-          current={current ?? undefined}
-          winner={winner ?? undefined}
-          transitionDuration={transition ?? 0}
-        />
+        <Tags {...props} />
       )}
       <canvas
         className="absolute -inset-4 h-[calc(100%+theme(height.4)*2)] w-[calc(100%+theme(width.4)*2)]  pointer-events-none"

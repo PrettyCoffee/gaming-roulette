@@ -29,6 +29,7 @@ const SelectPickerView = () => {
         }
       >
         <RadioGroup.Item value="wheel">Wheel</RadioGroup.Item>
+        <RadioGroup.Item value="classic-wheel">Classic wheel</RadioGroup.Item>
         <RadioGroup.Item value="tags">Tags</RadioGroup.Item>
       </RadioGroup.Root>
     </>
