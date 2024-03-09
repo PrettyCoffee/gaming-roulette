@@ -24,13 +24,14 @@ const SelectPickerView = () => {
         onValueChange={value =>
           setSettings(prev => ({
             ...prev,
-            pickerView: value as "tags" | "wheel",
+            pickerView: value as "wheel",
           }))
         }
       >
         <RadioGroup.Item value="wheel">Wheel</RadioGroup.Item>
         <RadioGroup.Item value="classic-wheel">Classic wheel</RadioGroup.Item>
         <RadioGroup.Item value="tags">Tags</RadioGroup.Item>
+        <RadioGroup.Item value="half-wheel">Half wheel</RadioGroup.Item>
       </RadioGroup.Root>
     </>
   )

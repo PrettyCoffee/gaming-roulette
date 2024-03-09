@@ -2,7 +2,7 @@ import { reduxDevtools } from "@yaasl/devtools"
 import { atom, localStorage, useAtom } from "@yaasl/react"
 
 interface Settings {
-  pickerView: "tags" | "wheel" | "classic-wheel"
+  pickerView: "tags" | "wheel" | "classic-wheel" | "half-wheel"
   volume: number
   compactNavigation: boolean
 }

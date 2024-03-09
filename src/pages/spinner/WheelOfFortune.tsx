@@ -1,38 +1,6 @@
-import { useEffect, useRef, useState } from "react"
-
-import { css } from "@emotion/react"
-import styled from "@emotion/styled"
-
-import { useSize } from "~/hooks/useSize"
 import { cn } from "~/utils/utils"
 
-import { SpinnerItem, SpinnerStateProps } from "./Spinner"
-
-const Caret = styled.div<{ radius: number }>(
-  ({ radius }) => css`
-    position: absolute;
-    --caret-size: ${radius / 15}px;
-    transform: translateX(calc(${radius}px + var(--caret-size)));
-    width: var(--caret-size);
-    height: var(--caret-size);
-
-    background: currentColor;
-    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
-  `
-)
-
-const Winner = ({ color = "", game = "" }: Partial<SpinnerItem>) => (
-  <div
-    className={cn(
-      "absolute text-xl z-10 px-4 py-2 bg-base/90 rounded-md",
-      `border-2 border-${color}-200`
-    )}
-  >
-    {game}
-    <span className="absolute -top-8 -right-12 text-5xl">🎉</span>
-    <span className="absolute -top-8 -left-12 text-5xl scale-x-[-1]">🎉</span>
-  </div>
-)
+import { SpinnerItem } from "./Spinner"
 
 const WheelSegment = ({
   index,
@@ -76,62 +44,51 @@ const WheelSegment = ({
     </div>
   )
 }
+
+interface WheelOfFortuneProps {
+  diameter: number
+  rotation: number
+  items: SpinnerItem[]
+  transitionDuration: number
+  fontSize: number
+}
+
 export const WheelOfFortune = ({
-  current = 0,
+  diameter,
+  rotation,
   items,
   transitionDuration,
-  winner,
-}: SpinnerStateProps) => {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const size = useSize(ref)
-  const [rounds, setRounds] = useState(-1)
-
-  useEffect(() => {
-    if (current === 0) {
-      setRounds(prev => prev + 1)
-    }
-  }, [current, items.length])
-
-  const rotation = Math.floor((360 / items.length) * current + rounds * 360)
-
-  const diameter = Math.min(size.width, size.height)
+  fontSize,
+}: WheelOfFortuneProps) => {
   const radius = diameter / 2
 
   return (
     <div
-      ref={ref}
-      className="relative h-full w-full flex items-center justify-center"
+      className="h-full w-full flex justify-center items-center rounded-full overflow-hidden select-none"
+      style={{
+        height: diameter,
+        width: diameter,
+        fontSize,
+      }}
     >
-      <Caret radius={radius} className="text-foreground" />
-      {winner != null && <Winner {...items[winner]} />}
       <div
-        className="h-full w-full flex justify-center items-center rounded-full overflow-hidden select-none"
+        className="relative w-0 h-0"
         style={{
-          height: diameter,
-          width: diameter,
-          fontSize: diameter / 20,
-          opacity: winner ? "0.5" : undefined,
+          transitionTimingFunction: "linear",
+          transitionDuration: `${transitionDuration * 1.2}ms`,
+          transform: `rotate(${rotation}deg)`,
         }}
       >
-        <div
-          className="relative w-0 h-0"
-          style={{
-            transitionTimingFunction: "linear",
-            transitionDuration: `${transitionDuration * 1.2}ms`,
-            transform: `rotate(${rotation}deg)`,
-          }}
-        >
-          {items.map((item, index) => (
-            <WheelSegment
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              index={index}
-              items={items.length}
-              radius={radius}
-              {...item}
-            />
-          ))}
-        </div>
+        {items.map((item, index) => (
+          <WheelSegment
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            index={index}
+            items={items.length}
+            radius={radius}
+            {...item}
+          />
+        ))}
       </div>
     </div>
   )

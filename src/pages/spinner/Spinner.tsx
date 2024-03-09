@@ -13,10 +13,11 @@ import { resetIdle } from "~/hooks/useIdle"
 import { shuffle } from "~/utils/array"
 import { playAudio } from "~/utils/playAudio"
 
+import { ClassicWheel } from "./ClassicWheel"
+import { HalfWheel } from "./HalfWheel"
 import { Tags } from "./Tags"
 import { useNumberRotation } from "./useNumberRotation"
 import { Wheel } from "./Wheel"
-import { WheelOfFortune } from "./WheelOfFortune"
 
 const playVictory = () => void playAudio(victorySound)
 
@@ -97,7 +98,9 @@ export const Spinner = () => {
       {settings.pickerView === "wheel" ? (
         <Wheel {...props} />
       ) : settings.pickerView === "classic-wheel" ? (
-        <WheelOfFortune {...props} />
+        <ClassicWheel {...props} />
+      ) : settings.pickerView === "half-wheel" ? (
+        <HalfWheel {...props} />
       ) : (
         <Tags {...props} />
       )}
