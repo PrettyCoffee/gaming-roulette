@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 
 import { appWindow } from "@tauri-apps/api/window"
-import { Copy, Minus, Square, X } from "lucide-react"
+import { Copy, Minus, Square, Volume2, VolumeX, X } from "lucide-react"
 
+import { useAudioSettings } from "~/data/audioSettings"
 import { isTauriEnv } from "~/utils/isTauriEnv"
 import { cn } from "~/utils/utils"
 
@@ -35,9 +36,18 @@ const useIsMaximized = () => {
 
 const WindowActions = () => {
   const isMaximized = useIsMaximized()
+  const [{ muted }, setAudioSettings] = useAudioSettings()
 
   return (
     <div className="ml-auto">
+      <IconButton
+        icon={muted ? VolumeX : Volume2}
+        title="Mute audio"
+        size="sm"
+        onClick={() =>
+          setAudioSettings(prev => ({ ...prev, muted: !prev.muted }))
+        }
+      />
       <IconButton
         icon={Minus}
         title="Minimize"

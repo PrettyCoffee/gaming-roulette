@@ -11,7 +11,7 @@ import { TitleTooltip, TitleTooltipProps } from "./TitleTooltip"
 export interface IconButtonProps
   extends ClassNameProp,
     IconProp,
-    Pick<ButtonProps, "onClick" | "variant" | "disabled"> {
+    Pick<ButtonProps, "onClick" | "variant" | "disabled" | "muteAudio"> {
   title: string
   titleSide?: TitleTooltipProps["side"]
   hideTitle?: boolean
