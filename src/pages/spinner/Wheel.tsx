@@ -121,7 +121,7 @@ export const Wheel = ({
         index={index}
         items={items.length}
         className={cn(
-          "absolute w-96 h-20 text-3xl px-4 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
+          "absolute w-[25rem] h-20 text-3xl px-8 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
           index === winner && "bg-green-500"
         )}
         style={{
@@ -134,7 +134,7 @@ export const Wheel = ({
         </span>
         <span
           className={cn(
-            "absolute left-1.5 top-1.5 bottom-1.5 w-2 rounded-full",
+            "absolute left-1.5 top-1.5 bottom-1.5 w-1 rounded-full opacity-75",
             `bg-${color}-200`
           )}
         />
