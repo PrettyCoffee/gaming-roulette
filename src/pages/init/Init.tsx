@@ -10,7 +10,30 @@ import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 
 import { PlayerSettings } from "../settings/PlayerSettings"
-import { GamesPerPersonInput } from "../settings/RulesetSettings"
+import { RulesetSettings } from "../settings/RulesetSettings"
+
+const Title = ({ children }: PropsWithChildren) => (
+  <h2 className="text-3xl">{children}</h2>
+)
+
+const Description = ({ children }: PropsWithChildren) => (
+  <p className="max-w-prose">{children}</p>
+)
+
+interface ActionProps {
+  label: string
+  onClick: () => void
+  disabled?: boolean
+}
+const NextAction = ({ label, onClick, disabled }: ActionProps) => (
+  <Button onClick={onClick} variant="outline" disabled={disabled}>
+    {label}
+  </Button>
+)
+
+const Section = ({ children }: PropsWithChildren) => (
+  <div className="flex flex-col gap-2 items-start">{children}</div>
+)
 
 const GradientText = styled.b`
   background-clip: text;
@@ -22,9 +45,9 @@ interface StepProps {
 }
 
 const Intro = ({ onContinue }: StepProps) => (
-  <>
-    <h2 className="text-3xl mb-2">Welcome! 👋</h2>
-    <div>
+  <Section>
+    <Title>Welcome! 👋</Title>
+    <Description>
       This is{" "}
       <GradientText className="font-bold bg-gradient-to-r from-red-300 to-blue-300">
         Gaming Roulette
@@ -38,55 +61,59 @@ const Intro = ({ onContinue }: StepProps) => (
       <br />
       <br />
       Now, let&apos;s start with setting the app up. ✨
-    </div>
-    <br />
-    <Button onClick={onContinue} variant="outline">
-      Let&apos;s go!
-    </Button>
-  </>
+    </Description>
+    <NextAction label="Let's go!" onClick={onContinue} />
+  </Section>
 )
 
 const Users = ({ onContinue }: StepProps) => {
   const { players } = usePlayers()
   return (
-    <>
-      <h2 className="text-3xl mb-2">Time to add the players!</h2>
-      <div>Playing alone? Or in a group? Add as many players as you want!</div>
-      <div className="-mx-2 mt-4 mb-2">
+    <Section>
+      <Title>Time to add the players!</Title>
+      <Description>
+        Playing alone? Or in a group? Add as many players as you want!
+      </Description>
+      <div className="-mx-2 mt-2">
         <PlayerSettings />
       </div>
-      <Button
+      <NextAction
+        label="That's all!"
         onClick={onContinue}
-        variant="outline"
         disabled={players.length < 1}
-      >
-        That&apos;s all!
-      </Button>
-    </>
+      />
+    </Section>
   )
 }
 
-const GamesPerPerson = ({ onContinue }: StepProps) => (
-  <div>
-    <h2 className="text-3xl mb-2">Last but not least:</h2>
-    <div>
-      How many games should be spinning? 5? 10? 42? Any number is viable!
+const Ruleset = ({ onContinue }: StepProps) => (
+  <Section>
+    <Title>What are your rules?</Title>
+    <Description>
+      How many games should be spinning? 5? 10? 42? Any number is viable! Are
+      duplicates allowed? Are there any additional rules? Take your time and
+      define a ruleset.
+    </Description>
+    <div className="-ml-2 mt-2">
+      <RulesetSettings />
     </div>
-    <div className="max-w-40 mt-4 mb-2">
-      <GamesPerPersonInput />
-    </div>
-    <div className="mt-4 mb-2">
+    <NextAction label="Finish up!" onClick={onContinue} />
+  </Section>
+)
+
+const Finish = ({ onContinue }: StepProps) => (
+  <Section>
+    <Title>That&apos;s it!</Title>
+    <Description>
       Now that that&apos;s settled, I wish you good luck and lot&apos;s of fun
       with spinning the {""}
       <GradientText className="font-bold bg-gradient-to-r from-red-300 to-blue-300 line-through">
         Gaming Roulette
       </GradientText>
       ! 🍀
-    </div>
-    <Button onClick={onContinue} variant="outline">
-      Let&apos;s start spinning!
-    </Button>
-  </div>
+    </Description>
+    <NextAction label="Let's start spinning!" onClick={onContinue} />
+  </Section>
 )
 
 const hidden = {
@@ -113,7 +140,7 @@ const up = {
   },
 }
 
-const Section = ({
+const Slide = ({
   children,
   state,
 }: PropsWithChildren<{ state: "up" | "down" | "show" }>) => (
@@ -154,7 +181,7 @@ const Navigation = ({ current, goBack, goNext, steps }: NavigationProps) => (
   </div>
 )
 
-const initSteps = [Intro, Users, GamesPerPerson]
+const initSteps = [Intro, Users, Ruleset, Finish]
 
 interface InitProps {
   onFinish: () => void
@@ -208,9 +235,9 @@ export const Init = ({ onFinish }: InitProps) => {
         />
 
         {initSteps.map((Step, index) => (
-          <Section key={Step.name} state={getState(index)}>
+          <Slide key={Step.name} state={getState(index)}>
             <Step onContinue={goNext} />
-          </Section>
+          </Slide>
         ))}
       </div>
     </div>
