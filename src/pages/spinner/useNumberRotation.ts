@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
 // eslint-disable-next-line @pretty-cozy/no-unspecific-imports
-import clickSound from "~/assets/click.mp3"
+import clickSound from "~/assets/click-enhanced.mp3"
 import { resetIdle } from "~/hooks/useIdle"
 import { randomIntBetween } from "~/utils/number"
 import { playAudio } from "~/utils/playAudio"
