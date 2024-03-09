@@ -119,7 +119,7 @@ export const Wheel = ({
   transitionDuration,
 }: WheelProps) => (
   <Preserve3D className="w-80 flex flex-col items-center h-72 relative">
-    {items.map(({ game }, index) => (
+    {items.map(({ game, color }, index) => (
       <WheelSegment
         // eslint-disable-next-line react/no-array-index-key
         key={game + String(index)}
@@ -138,6 +138,12 @@ export const Wheel = ({
         <span className="whitespace-nowrap text-ellipsis overflow-hidden">
           {game}
         </span>
+        <span
+          className={cn(
+            "absolute left-1.5 top-1.5 bottom-1.5 w-2 rounded-full",
+            `bg-${color}-200`
+          )}
+        />
         {index === winner && (
           <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
         )}
