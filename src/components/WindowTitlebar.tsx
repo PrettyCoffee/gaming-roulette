@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 import { appWindow } from "@tauri-apps/api/window"
-import { Copy, Minus, Square, Volume2, VolumeX, X } from "lucide-react"
+import { Minus, Volume2, VolumeX, X } from "lucide-react"
 
 import { useAudioSettings } from "~/data/audioSettings"
 import { isTauriEnv } from "~/utils/isTauriEnv"
@@ -35,8 +35,27 @@ const useIsMaximized = () => {
 }
 
 const WindowActions = () => {
-  const isMaximized = useIsMaximized()
   const [{ muted }, setAudioSettings] = useAudioSettings()
+
+  /* Window is currently not resizable
+
+  const isMaximized = useIsMaximized()
+  isMaximized ? (
+    <IconButton
+      icon={Copy}
+      title="Shrink"
+      size="sm"
+      onClick={() => void appWindow.unmaximize()}
+    />
+  ) : (
+    <IconButton
+      icon={Square}
+      title="Maximize"
+      size="sm"
+      onClick={() => void appWindow.maximize()}
+    />
+  )
+  */
 
   return (
     <div className="ml-auto">
@@ -54,21 +73,6 @@ const WindowActions = () => {
         size="sm"
         onClick={() => void appWindow.minimize()}
       />
-      {isMaximized ? (
-        <IconButton
-          icon={Copy}
-          title="Shrink"
-          size="sm"
-          onClick={() => void appWindow.unmaximize()}
-        />
-      ) : (
-        <IconButton
-          icon={Square}
-          title="Maximize"
-          size="sm"
-          onClick={() => void appWindow.maximize()}
-        />
-      )}
       <IconButton
         icon={X}
         title="Close"
