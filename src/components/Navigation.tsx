@@ -36,8 +36,10 @@ const NavButton = ({
         "whitespace-nowrap text-left text-sm font-medium",
         "disabled:pointer-events-none disabled:opacity-50",
         "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        !active && "hover:bg-background/50",
+        !active && "hover:bg-background",
         active && "bg-background text-foreground shadow-sm cursor-default",
+        active &&
+          "relative before:absolute before:h-0.5 before:w-4 before:bottom-1.5 before:bg-blue-200/50 before:rounded-full",
         className
       )}
     >
