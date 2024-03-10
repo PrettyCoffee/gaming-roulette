@@ -7,28 +7,28 @@
     --base: 240 10% 4%;
     --background: 240 6% 10%;
     --foreground: 0 0% 98%;
- 
+
     --card: 240 10% 4%;
     --card-foreground: 0 0% 98%;
- 
+
     --popover: 240 10% 4%;
     --popover-foreground: 0 0% 98%;
- 
+
     --primary: 0 0% 98%;
     --primary-foreground: 240 6% 10%;
- 
+
     --secondary: 240 4% 16%;
     --secondary-foreground: 0 0% 98%;
- 
+
     --muted: 240 4% 16%;
     --muted-foreground: 240 5% 65%;
- 
+
     --accent: 240 4% 16%;
     --accent-foreground: 0 0% 98%;
- 
+
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
- 
+
     --border: 240 4% 16%;
     --input: 240 4% 16%;
     --ring: 240 5% 84%;
@@ -36,21 +36,25 @@
     --radius: 0.5rem;
   }
 }
- 
+
 @layer base {
   @import url("/fonts/quicksand.css");
 
-  html, body {
+  html,
+  body {
     @apply bg-transparent overflow-hidden;
   }
 
   * {
     @apply border-border;
   }
-  html, body, #root {
+
+  html,
+  body,
+  #root {
     @apply h-full m-0 text-foreground;
   }
-  
+
   *:focus-visible {
     outline-color: hsl(var(--ring));
     outline-style: solid;
@@ -61,44 +65,12 @@
 /* ===== Scrollbar CSS ===== */
 /* web standard */
 * {
-  scrollbar-width: auto;
-  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--background));
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
 }
 
 *:focus-visible {
-  scrollbar-color: hsl(var(--accent)) hsl(var(--background));
-}
-
-/* browsers that are not applying the web standard since 2018 */
-:root, .bg-base {
-  --scrollbar-bg: var(--base);
-}
-.bg-background {
-  --scrollbar-bg: var(--background);
-}
-
-*::-webkit-scrollbar {
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
-*::-webkit-scrollbar-track {
-  background: hsl(var(--scrollbar-bg));
-  border-radius: 50vh;
-}
-
-*::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--muted-foreground));
-  border-radius: 0.75rem;
-  border: 0.25rem solid hsl(var(--scrollbar-bg));
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  border-width: 0.2rem;
+  scrollbar-color: hsl(var(--accent)) transparent;
 }
 
 /**
