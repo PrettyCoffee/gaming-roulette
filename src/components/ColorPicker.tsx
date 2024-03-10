@@ -38,7 +38,7 @@ const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
 interface ColorPickerProps extends ClassNameProp {
   value: string
   onChange: Dispatch<string>
-  colors: string[]
+  colors: string[] | readonly string[]
   id?: string
 }
 

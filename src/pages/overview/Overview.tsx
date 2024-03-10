@@ -13,14 +13,15 @@ import { cn } from "~/utils/utils"
 
 const averageStat = (
   games: GameStats[],
-  user: keyof Omit<GameStats, "name" | "date">,
+  user: keyof Omit<GameStats, "name" | "date" | "color">,
   stat: keyof UserStats
 ) => {
   const validGames = games.filter(game => typeof game[user][stat] === "number")
-  return (
-    validGames.reduce((acc, game) => acc + (game[user][stat] ?? 0), 0) /
-    validGames.length
-  )
+  const sum = validGames.reduce((acc, game) => {
+    const userValue = game[user][stat] ?? 0
+    return acc + userValue
+  }, 0)
+  return sum / validGames.length
 }
 
 const averageStats = (games: GameStats[]) => ({

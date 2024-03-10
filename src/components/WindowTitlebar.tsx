@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-
 import { appWindow } from "@tauri-apps/api/window"
 import { Minus, Volume2, VolumeX, X } from "lucide-react"
 
@@ -9,6 +7,7 @@ import { cn } from "~/utils/utils"
 
 import { IconButton } from "./IconButton"
 
+/* Window is currently not resizable
 const useIsMaximized = () => {
   const [isMaximized, setIsMaximized] = useState(false)
 
@@ -34,28 +33,28 @@ const useIsMaximized = () => {
   return isMaximized
 }
 
+
+const isMaximized = useIsMaximized()
+
+isMaximized ? (
+  <IconButton
+    icon={Copy}
+    title="Shrink"
+    size="sm"
+    onClick={() => void appWindow.unmaximize()}
+  />
+) : (
+  <IconButton
+    icon={Square}
+    title="Maximize"
+    size="sm"
+    onClick={() => void appWindow.maximize()}
+  />
+)
+*/
+
 const WindowActions = () => {
   const [{ muted }, setAudioSettings] = useAudioSettings()
-
-  /* Window is currently not resizable
-
-  const isMaximized = useIsMaximized()
-  isMaximized ? (
-    <IconButton
-      icon={Copy}
-      title="Shrink"
-      size="sm"
-      onClick={() => void appWindow.unmaximize()}
-    />
-  ) : (
-    <IconButton
-      icon={Square}
-      title="Maximize"
-      size="sm"
-      onClick={() => void appWindow.maximize()}
-    />
-  )
-  */
 
   return (
     <div className="ml-auto">
