@@ -4,9 +4,11 @@ import {
   Settings as SettingsIcon,
   Gamepad,
   GanttChartSquare,
+  Home as HomeIcon,
 } from "lucide-react"
 
 import { Current } from "./current/Current"
+import { Home } from "./home/Home"
 import { Overview } from "./overview/Overview"
 import { Settings } from "./settings/Settings"
 import { Spinner } from "./spinner/Spinner"
@@ -21,6 +23,12 @@ export interface Route {
 }
 
 export const routes: Route[] = [
+  {
+    label: "Start",
+    value: "start",
+    icon: HomeIcon,
+    component: Home,
+  },
   {
     label: "Current Games",
     value: "current-games",

@@ -16,6 +16,7 @@ export interface UserStats {
 
 export interface GameStats {
   name: string
+  color?: string
   date: string
   online: UserStats
   player1: UserStats
