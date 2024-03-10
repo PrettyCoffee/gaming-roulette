@@ -15,7 +15,7 @@ const createId = () =>
     .join("")
     .toUpperCase()
 
-const gamesA = [
+export const gamesA = [
   "Journey",
   "Firewatch",
   "Storyteller",
@@ -27,7 +27,7 @@ const gamesA = [
   "Spirit of the North",
 ]
 
-const gamesB = [
+export const gamesB = [
   "Baba is You",
   "Fausts Alptraum",
   "Pseudoregalia",

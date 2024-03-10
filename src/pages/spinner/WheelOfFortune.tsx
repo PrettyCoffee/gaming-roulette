@@ -50,7 +50,6 @@ interface WheelOfFortuneProps {
   rotation: number
   items: SpinnerItem[]
   transitionDuration: number
-  fontSize: number
 }
 
 export const WheelOfFortune = ({
@@ -58,9 +57,9 @@ export const WheelOfFortune = ({
   rotation,
   items,
   transitionDuration,
-  fontSize,
 }: WheelOfFortuneProps) => {
   const radius = diameter / 2
+  const fontSize = diameter / 20
 
   return (
     <div

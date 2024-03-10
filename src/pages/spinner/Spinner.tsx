@@ -106,7 +106,9 @@ export const Spinner = () => {
       ) : settings.pickerView === "classic-wheel" ? (
         <ClassicWheel {...props} />
       ) : settings.pickerView === "half-wheel" ? (
-        <HalfWheel {...props} />
+        <div className="h-56 w-full">
+          <HalfWheel {...props} />
+        </div>
       ) : (
         <Tags {...props} />
       )}

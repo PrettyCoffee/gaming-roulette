@@ -67,7 +67,6 @@ export const ClassicWheel = ({
         items={items}
         rotation={rotation}
         transitionDuration={transitionDuration}
-        fontSize={diameter / 20}
       />
     </div>
   )

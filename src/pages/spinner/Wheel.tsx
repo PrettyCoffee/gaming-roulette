@@ -1,6 +1,9 @@
+import { useRef } from "react"
+
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 
+import { useSize } from "~/hooks/useSize"
 import { cn } from "~/utils/utils"
 
 import { SpinnerStateProps } from "./Spinner"
@@ -88,8 +91,8 @@ const getStyles = (items: number, index: number, active: number) => {
 
   return css`
     opacity: ${opacityByPosition[position] ?? 0};
-    transform: perspective(1000px) translateY(${y}rem) translateZ(${z}rem)
-      rotateX(${rotate}deg);
+    transform: perspective(1000px) translateY(${y * 0.9}em)
+      translateZ(${z * 0.9}em) rotateX(${rotate}deg);
   `
 }
 
@@ -101,7 +104,6 @@ interface WheelSegmentProps {
 
 const WheelSegment = styled.div<WheelSegmentProps>(
   ({ active, index, items }) => css`
-    transition: 250ms;
     ${getStyles(items, index, active)}
   `
 )
@@ -111,37 +113,46 @@ export const Wheel = ({
   items,
   winner,
   transitionDuration,
-}: SpinnerStateProps) => (
-  <Preserve3D className="w-80 flex flex-col items-center h-72 relative">
-    {items.map(({ game, color }, index) => (
-      <WheelSegment
-        // eslint-disable-next-line react/no-array-index-key
-        key={game + String(index)}
-        active={current ?? 0}
-        index={index}
-        items={items.length}
-        className={cn(
-          "absolute w-[25rem] h-20 text-3xl px-8 whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
-          index === winner && "bg-green-500"
-        )}
-        style={{
-          transitionDuration: `${transitionDuration + 10}ms`,
-          transitionTimingFunction: "linear",
-        }}
-      >
-        <span className="whitespace-nowrap text-ellipsis overflow-hidden">
-          {game}
-        </span>
-        <span
+}: SpinnerStateProps) => {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const { height, width } = useSize(ref)
+  const size = Math.min(height, width)
+  return (
+    <Preserve3D
+      ref={ref}
+      className="w-full h-full flex flex-col items-center relative"
+    >
+      {items.map(({ game, color }, index) => (
+        <WheelSegment
+          // eslint-disable-next-line react/no-array-index-key
+          key={game + String(index)}
+          active={current ?? 0}
+          index={index}
+          items={items.length}
           className={cn(
-            "absolute left-1.5 top-1.5 bottom-1.5 w-1 rounded-full opacity-75",
-            `bg-${color}-200`
+            "absolute w-[24em] h-[4.5em] px-[2em] whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
+            index === winner && "bg-green-500"
           )}
-        />
-        {index === winner && (
-          <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
-        )}
-      </WheelSegment>
-    ))}
-  </Preserve3D>
-)
+          style={{
+            fontSize: size / 15,
+            transitionDuration: `${transitionDuration + 10}ms`,
+            transitionTimingFunction: "linear",
+          }}
+        >
+          <span className="text-[1.75em] whitespace-nowrap text-ellipsis overflow-hidden">
+            {game}
+          </span>
+          <span
+            className={cn(
+              "absolute left-[0.3em] top-[0.3em] bottom-[0.3em] w-[0.2em] rounded-full opacity-75",
+              `bg-${color}-200`
+            )}
+          />
+          {index === winner && (
+            <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
+          )}
+        </WheelSegment>
+      ))}
+    </Preserve3D>
+  )
+}
