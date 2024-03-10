@@ -66,18 +66,22 @@ const WindowActions = () => {
           setAudioSettings(prev => ({ ...prev, muted: !prev.muted }))
         }
       />
-      <IconButton
-        icon={Minus}
-        title="Minimize"
-        size="sm"
-        onClick={() => void appWindow.minimize()}
-      />
-      <IconButton
-        icon={X}
-        title="Close"
-        size="sm"
-        onClick={() => void appWindow.close()}
-      />
+      {isTauriEnv() && (
+        <>
+          <IconButton
+            icon={Minus}
+            title="Minimize"
+            size="sm"
+            onClick={() => void appWindow.minimize()}
+          />
+          <IconButton
+            icon={X}
+            title="Close"
+            size="sm"
+            onClick={() => void appWindow.close()}
+          />
+        </>
+      )}
     </div>
   )
 }
@@ -99,7 +103,7 @@ export const WindowTitlebar = () => {
         Gaming Roulette
       </span>
 
-      {isTauriEnv() && <WindowActions />}
+      <WindowActions />
     </div>
   )
 }
