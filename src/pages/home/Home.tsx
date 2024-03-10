@@ -1,17 +1,20 @@
 import { Fragment, PropsWithChildren } from "react"
 
+import { ClassNameProp } from "~/components/base/BaseProps"
 import { Text } from "~/components/base/Text"
 import { useGames } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { Ruleset, useRuleset } from "~/data/ruleset"
 import { DAY } from "~/utils/date"
+import { cn } from "~/utils/utils"
 
 const isString = (value: unknown): value is string => typeof value === "string"
 const Surface = ({
   title,
   children,
-}: PropsWithChildren<{ title?: string }>) => (
-  <div className="p-1">
+  className,
+}: PropsWithChildren<{ title?: string } & ClassNameProp>) => (
+  <div className={cn("p-1", className)}>
     <div className="py-2 px-3 rounded-md bg-base/75 shadow-md flex flex-col overflow-hidden h-full">
       {title && (
         <Text asChild size="xs" color="muted" bold>
@@ -128,7 +131,7 @@ const Games = () => {
   const currentGame = games[games.length - 1]
   const latestGames = games.slice(games.length - 6, games.length - 1).reverse()
   return (
-    <div>
+    <div className="flex flex-col">
       <Surface title="Current game">
         <Text
           size="xl"
@@ -141,7 +144,7 @@ const Games = () => {
           {currentGame?.name ?? "-"}
         </Text>
       </Surface>
-      <Surface title="Latest games">
+      <Surface title="Latest games" className="flex-1">
         <ul className="max-w-48">
           {latestGames.map(({ name }) => (
             <Text key={name} asChild size="md" noOverflow noWrap>
@@ -182,7 +185,7 @@ export const Home = () => {
     <div className="flex flex-col gap-2 h-full">
       <Greeting />
       <QuoteOfTheDay />
-      <div className="flex -mx-1 flex-1 overflow-hidden">
+      <div className="flex -mx-1 flex-1 max-h-60 pb-2">
         <Games />
         <Rules />
         <GameStats />
