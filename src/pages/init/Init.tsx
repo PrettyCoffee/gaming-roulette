@@ -1,9 +1,9 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 
-import styled from "@emotion/styled"
 import { m } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
 
+import { Text } from "~/components/base/Text"
 import { VisuallyHidden } from "~/components/base/VisuallyHidden"
 import { IconButton } from "~/components/IconButton"
 import { Button } from "~/components/ui/button"
@@ -13,11 +13,15 @@ import { PlayerSettings } from "../settings/PlayerSettings"
 import { RulesetSettings } from "../settings/RulesetSettings"
 
 const Title = ({ children }: PropsWithChildren) => (
-  <h2 className="text-3xl">{children}</h2>
+  <Text asChild size="3xl">
+    <h2>{children}</h2>
+  </Text>
 )
 
 const Description = ({ children }: PropsWithChildren) => (
-  <p className="max-w-prose">{children}</p>
+  <Text asChild className="max-w-prose">
+    <p>{children}</p>
+  </Text>
 )
 
 interface ActionProps {
@@ -35,11 +39,6 @@ const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col gap-2 items-start">{children}</div>
 )
 
-const GradientText = styled.b`
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-`
-
 interface StepProps {
   onContinue: () => void
 }
@@ -49,14 +48,14 @@ const Intro = ({ onContinue }: StepProps) => (
     <Title>Welcome! 👋</Title>
     <Description>
       This is{" "}
-      <GradientText className="font-bold bg-gradient-to-r from-red-300 to-blue-300">
+      <Text gradient={{ from: "red", to: "blue" }} bold>
         Gaming Roulette
-      </GradientText>
+      </Text>
       , a tool to help you decide what game to play next. <br />
       Choose your games, click the button, and let the magic of{" "}
-      <GradientText className="font-bold bg-gradient-to-r from-green-300 to-yellow-300">
+      <Text gradient={{ from: "green", to: "yellow" }} bold>
         gam(bl)ing addiction
-      </GradientText>{" "}
+      </Text>{" "}
       happen!
       <br />
       <br />
@@ -107,9 +106,9 @@ const Finish = ({ onContinue }: StepProps) => (
     <Description>
       Now that that&apos;s settled, I wish you good luck and lot&apos;s of fun
       with spinning the {""}
-      <GradientText className="font-bold bg-gradient-to-r from-red-300 to-blue-300 line-through">
+      <Text gradient={{ from: "red", to: "blue" }} bold>
         Gaming Roulette
-      </GradientText>
+      </Text>
       ! 🍀
     </Description>
     <NextAction label="Let's start spinning!" onClick={onContinue} />
@@ -145,7 +144,7 @@ const Slide = ({
   state,
 }: PropsWithChildren<{ state: "up" | "down" | "show" }>) => (
   <m.div
-    className="absolute inset-0 p-4 pr-8 overflow-y-auto text-md z-10"
+    className="absolute inset-0 p-4 pr-8 overflow-y-auto z-10"
     variants={{ down, show, up }}
     animate={state}
     initial={hidden}

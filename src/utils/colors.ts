@@ -16,7 +16,7 @@ export const colors = [
   "fuchsia",
   "pink",
   "rose",
-]
+] as const
 
 export const color200: Record<string, string> = {
   red: "#fecaca",

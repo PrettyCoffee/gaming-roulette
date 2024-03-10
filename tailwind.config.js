@@ -88,6 +88,8 @@ module.exports = {
       `border-${color}-200`,
       `bg-${color}-200`,
       `text-${color}-950`,
+      `from-${color}-300`,
+      `to-${color}-300`,
     ]),
   ],
 }
