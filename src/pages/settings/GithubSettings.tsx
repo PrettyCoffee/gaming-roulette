@@ -60,6 +60,24 @@ const FilePath = () => {
   )
 }
 
+const BranchName = () => {
+  const id = useId()
+  const { branch, setGithubAttribute } = useGithub()
+
+  return (
+    <>
+      <InputLabel className="mb-2" htmlFor={id}>
+        Branch name
+      </InputLabel>
+      <Input
+        id={id}
+        value={branch}
+        onChange={({ target }) => setGithubAttribute("branch", target.value)}
+      />
+    </>
+  )
+}
+
 const GithubToken = () => {
   const id = useId()
   const [showToken, setShowToken] = useState(false)
@@ -91,6 +109,10 @@ export const GithubSettings = () => (
 
     <Grid.Item>
       <RepoName />
+    </Grid.Item>
+
+    <Grid.Item>
+      <BranchName />
     </Grid.Item>
 
     <Grid.Item>
