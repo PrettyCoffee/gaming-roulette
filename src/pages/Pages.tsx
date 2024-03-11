@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import styled from "@emotion/styled"
+import { css } from "goober"
 import { Github } from "lucide-react"
 
 import { ErrorBoundary } from "~/components/ErrorBoundary"
@@ -16,7 +16,7 @@ import { cn } from "~/utils/utils"
 import { Init } from "./init/Init"
 import { routes } from "./routes"
 
-const Layout = styled.div`
+const layout = css`
   display: grid;
   grid-template-areas:
     "navigation main"
@@ -25,15 +25,15 @@ const Layout = styled.div`
   grid-template-rows: auto 1fr auto;
 `
 
-const NavigationContent = styled.nav`
+const navigation = css`
   grid-area: navigation;
 `
 
-const MainContent = styled.main`
+const main = css`
   grid-area: main;
 `
 
-const FooterContent = styled.footer`
+const footer = css`
   grid-area: footer;
   align-self: end;
 `
@@ -76,11 +76,12 @@ export const Pages = () => {
   )
 
   return (
-    <Layout className="flex-1 h-full overflow-hidden">
-      <NavigationContent
+    <div className={cn("flex-1 h-full overflow-hidden", layout)}>
+      <nav
         className={cn(
           "transition-all -my-2 p-2",
-          compactNavigation ? "w-13" : "w-40 px-4"
+          compactNavigation ? "w-13" : "w-40 px-4",
+          navigation
         )}
       >
         <Navigation
@@ -89,14 +90,19 @@ export const Pages = () => {
           onClick={setCurrent}
           compact={compactNavigation}
         />
-      </NavigationContent>
-      <MainContent className="m-2 mt-0 ml-0 p-4 bg-background rounded-lg shadow-lg overflow-auto">
+      </nav>
+      <main
+        className={cn(
+          "m-2 mt-0 ml-0 p-4 bg-background rounded-lg shadow-lg overflow-auto",
+          main
+        )}
+      >
         <h1 className="sr-only">{currentRoute?.label}</h1>
         <ErrorBoundary fallback={<ErrorFallback />}>
           <ActiveView />
         </ErrorBoundary>
-      </MainContent>
-      <FooterContent className="flex flex-col pl-2 pb-2">
+      </main>
+      <footer className={cn("flex flex-col pl-2 pb-2", footer)}>
         <Link
           href="https://github.com/PrettyCoffee/gaming-roulette"
           target="_blank"
@@ -105,7 +111,7 @@ export const Pages = () => {
           <Icon icon={Github} size="sm" className="mr-1" />
           {!compactNavigation && "Github"}
         </Link>
-      </FooterContent>
-    </Layout>
+      </footer>
+    </div>
   )
 }

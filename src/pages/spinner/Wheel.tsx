@@ -1,14 +1,13 @@
 import { useRef } from "react"
 
-import { css } from "@emotion/react"
-import styled from "@emotion/styled"
+import { css } from "goober"
 
 import { useSize } from "~/hooks/useSize"
 import { cn } from "~/utils/utils"
 
 import { SpinnerStateProps } from "./Spinner"
 
-const Preserve3D = styled.div`
+const preserve3d = css`
   perspective: 800;
   transform-style: preserve-3d;
   /*
@@ -82,12 +81,17 @@ const opacityByPosition: Record<number, number> = {
   "-3": 0,
 }
 
-const getStyles = (items: number, index: number, active: number) => {
+interface SegmentProps {
+  items: number
+  index: number
+  active: number
+}
+const segment = ({ active, index, items }: SegmentProps) => {
   const position = getItemPosition(items, index, active)
   const rotate = rotation[position] ?? 0
   const y = (offsetY[position] ?? 0) - 2.5
   const z = offsetZ[position] ?? 0
-  if (position === 4) return "display: none;"
+  if (position === 4) return "hidden"
 
   return css`
     opacity: ${opacityByPosition[position] ?? 0};
@@ -96,17 +100,7 @@ const getStyles = (items: number, index: number, active: number) => {
   `
 }
 
-interface WheelSegmentProps {
-  items: number
-  index: number
-  active: number
-}
-
-const WheelSegment = styled.div<WheelSegmentProps>(
-  ({ active, index, items }) => css`
-    ${getStyles(items, index, active)}
-  `
-)
+console.log(preserve3d)
 
 export const Wheel = ({
   current,
@@ -118,20 +112,21 @@ export const Wheel = ({
   const { height, width } = useSize(ref)
   const size = Math.min(height, width)
   return (
-    <Preserve3D
+    <div
       ref={ref}
-      className="w-full h-full flex flex-col items-center relative"
+      className={cn(
+        "w-full h-full flex flex-col items-center relative",
+        preserve3d
+      )}
     >
       {items.map(({ game, color }, index) => (
-        <WheelSegment
+        <div
           // eslint-disable-next-line react/no-array-index-key
           key={game + String(index)}
-          active={current ?? 0}
-          index={index}
-          items={items.length}
           className={cn(
             "absolute w-[24em] h-[4.5em] px-[2em] whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
-            index === winner && "bg-green-500"
+            index === winner && "bg-green-500",
+            segment({ active: current ?? 0, index, items: items.length })
           )}
           style={{
             fontSize: size / 15,
@@ -151,8 +146,8 @@ export const Wheel = ({
           {index === winner && (
             <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
           )}
-        </WheelSegment>
+        </div>
       ))}
-    </Preserve3D>
+    </div>
   )
 }
