@@ -39,7 +39,7 @@ const footer = css`
 `
 
 const ErrorFallback = () => (
-  <div className="h-full w-full flex flex-col items-center justify-center">
+  <div className="flex size-full flex-col items-center justify-center">
     <div>💥KABOOM💥</div>
     <div className="text-sm text-muted-foreground">
       Something went terribly wrong and everything is burning now.
@@ -76,7 +76,7 @@ export const Pages = () => {
   )
 
   return (
-    <div className={cn("flex-1 h-full overflow-hidden", layout)}>
+    <div className={cn("h-full flex-1 overflow-hidden", layout)}>
       <nav className={cn("-my-2 p-2", navigation)}>
         <Navigation
           items={enabledRoutes}
@@ -87,7 +87,7 @@ export const Pages = () => {
       </nav>
       <main
         className={cn(
-          "m-2 mt-0 ml-0 p-4 bg-background rounded-lg shadow-lg overflow-auto",
+          "m-2 ml-0 mt-0 overflow-auto rounded-lg bg-background p-4 shadow-lg",
           main
         )}
       >
@@ -96,11 +96,11 @@ export const Pages = () => {
           <ActiveView />
         </ErrorBoundary>
       </main>
-      <footer className={cn("flex flex-col pl-2 pb-2", footer)}>
+      <footer className={cn("flex flex-col pb-2 pl-2", footer)}>
         <Link
           href="https://github.com/PrettyCoffee/gaming-roulette"
           target="_blank"
-          className={"text-sm inline-block pl-3 py-1"}
+          className={"inline-block py-1 pl-3 text-sm"}
         >
           <Icon icon={Github} size="sm" className="mr-1" />
           {!compactNavigation && "Github"}

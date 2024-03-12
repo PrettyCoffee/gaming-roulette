@@ -14,7 +14,7 @@ const WheelSegment = ({
 
   return (
     <div
-      className="absolute flex items-center justify-end pr-[1em] w-32 bg-black"
+      className="absolute flex w-32 items-center justify-end bg-black pr-[1em]"
       style={{
         width: radius,
         height: segmentSize,
@@ -25,7 +25,7 @@ const WheelSegment = ({
     >
       <span
         className={cn(
-          "inline-block max-w-[75%] whitespace-nowrap text-foreground font-bold overflow-hidden text-ellipsis",
+          "inline-block max-w-[75%] truncate font-bold text-foreground",
           game.length > 15
             ? "text-[0.5em]"
             : game.length > 10
@@ -37,7 +37,7 @@ const WheelSegment = ({
       </span>
       <span
         className={cn(
-          "absolute right-[0.25em] top-[0.25em] bottom-[0.25em] w-[0.25em] rounded-full",
+          "absolute inset-y-[0.25em] right-[0.25em] w-[0.25em] rounded-full",
           `bg-${color}-200`
         )}
       />
@@ -63,7 +63,7 @@ export const WheelOfFortune = ({
 
   return (
     <div
-      className="h-full w-full flex justify-center items-center rounded-full overflow-hidden select-none"
+      className="flex size-full select-none items-center justify-center overflow-hidden rounded-full"
       style={{
         height: diameter,
         width: diameter,
@@ -71,7 +71,7 @@ export const WheelOfFortune = ({
       }}
     >
       <div
-        className="relative w-0 h-0"
+        className="relative size-0"
         style={{
           transitionTimingFunction: "linear",
           transitionDuration: `${transitionDuration * 1.2}ms`,

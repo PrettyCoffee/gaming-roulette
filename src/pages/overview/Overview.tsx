@@ -43,13 +43,13 @@ const formatNumber = (number?: number) =>
   number?.toFixed(1).replace(/\.0$/, "") ?? "-"
 
 const Hours = ({ hours }: { hours?: number }) => (
-  <span className="inline-flex whitespace-nowrap items-center gap-2">
+  <span className="inline-flex items-center gap-2 whitespace-nowrap">
     {formatNumber(hours)} <span className="text-muted-foreground">h</span>
   </span>
 )
 
 const Rating = ({ rating }: { rating?: number }) => (
-  <span className={cn("inline-flex whitespace-nowrap items-center gap-2")}>
+  <span className={cn("inline-flex items-center gap-2 whitespace-nowrap")}>
     {formatNumber(rating)}
     <Icon icon={Star} size="sm" className="text-yellow-200" />
   </span>
@@ -197,14 +197,14 @@ export const Overview = () => {
 
   if (!debouncedGames)
     return (
-      <div className="h-full w-full flex items-center justify-center">
+      <div className="flex size-full items-center justify-center">
         <LoadingData label="Loading data..." />
       </div>
     )
 
   return (
-    <div className="h-full flex flex-col gap-2 -mt-2 -mr-2">
-      <div className="flex flex-col overflow-auto [&>*]:flex-1 [&>*]:h-full">
+    <div className="-mr-2 -mt-2 flex h-full flex-col gap-2">
+      <div className="flex flex-col overflow-auto [&>*]:h-full [&>*]:flex-1">
         <GamesTable games={debouncedGames} />
       </div>
       <div>

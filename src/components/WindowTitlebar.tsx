@@ -90,16 +90,16 @@ export const WindowTitlebar = () => {
   return (
     <div
       data-tauri-drag-region
-      className="flex items-center h-12 p-2 relative z-[999]"
+      className="relative z-[999] flex h-12 items-center p-2"
     >
       <img
         src="/logo.svg"
         alt="Gaming Roulette"
         className={cn(
-          "transition-all ml-3 w-6 h-6 select-none pointer-events-none"
+          "pointer-events-none ml-3 size-6 select-none transition-all"
         )}
       />
-      <span className="pl-3 text-muted-foreground text-sm font-bold select-none pointer-events-none">
+      <span className="pointer-events-none select-none pl-3 text-sm font-bold text-muted-foreground">
         Gaming Roulette
       </span>
 

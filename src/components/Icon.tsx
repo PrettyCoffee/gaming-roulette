@@ -5,13 +5,13 @@ import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
 
-const icon = cva("shrink-0 inline-block", {
+const icon = cva("inline-block shrink-0", {
   variants: {
     size: {
-      xs: "h-3 w-3",
-      sm: "h-4 w-4",
-      md: "h-5 w-5",
-      lg: "h-8 w-8",
+      xs: "size-3",
+      sm: "size-4",
+      md: "size-5",
+      lg: "size-8",
     },
     color: {
       default: "text-foreground",

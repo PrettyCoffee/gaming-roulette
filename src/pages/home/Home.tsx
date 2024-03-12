@@ -15,13 +15,13 @@ const Surface = ({
   className,
 }: PropsWithChildren<{ title?: string } & ClassNameProp>) => (
   <div className={cn("p-1", className)}>
-    <div className="py-2 px-3 rounded-md bg-base/75 shadow-md flex flex-col overflow-hidden h-full">
+    <div className="flex h-full flex-col overflow-hidden rounded-md bg-base/75 px-3 py-2 shadow-md">
       {title && (
         <Text asChild size="xs" color="muted" bold>
           <h3>{title}</h3>
         </Text>
       )}
-      <div className="overflow-y-auto pr-2 -mr-2">{children}</div>
+      <div className="-mr-2 overflow-y-auto pr-2">{children}</div>
     </div>
   </div>
 )
@@ -182,10 +182,10 @@ const GameStats = () => {
 
 export const Home = () => {
   return (
-    <div className="flex flex-col gap-2 h-full">
+    <div className="flex h-full flex-col gap-2">
       <Greeting />
       <QuoteOfTheDay />
-      <div className="flex -mx-1 flex-1 max-h-60 pb-2">
+      <div className="-mx-1 flex max-h-60 flex-1 pb-2">
         <Games />
         <Rules />
         <GameStats />

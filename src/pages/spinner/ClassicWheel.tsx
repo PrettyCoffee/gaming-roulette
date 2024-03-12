@@ -12,13 +12,13 @@ import { WheelOfFortune } from "./WheelOfFortune"
 const Winner = ({ color = "", game = "" }: Partial<SpinnerItem>) => (
   <div
     className={cn(
-      "absolute text-xl z-10 px-4 py-2 bg-base/90 rounded-md",
-      `border-2 border-${color}-200`
+      "absolute z-10 rounded-md bg-base/90 px-4 py-2 text-xl",
+      `border- border-2${color}-200`
     )}
   >
     {game}
-    <span className="absolute -top-8 -right-12 text-5xl">🎉</span>
-    <span className="absolute -top-8 -left-12 text-5xl scale-x-[-1]">🎉</span>
+    <span className="absolute -right-12 -top-8 text-5xl">🎉</span>
+    <span className="absolute -left-12 -top-8 -scale-x-100 text-5xl">🎉</span>
   </div>
 )
 
@@ -46,10 +46,10 @@ export const ClassicWheel = ({
   return (
     <div
       ref={ref}
-      className="relative h-full w-full flex items-center justify-center"
+      className="relative flex size-full items-center justify-center"
     >
       <div
-        className="absolute h-max flex items-center"
+        className="absolute flex h-max items-center"
         style={{
           transform: `translateX(calc(${radius}px + 0.5em))`,
           fontSize: diameter / 20,
@@ -58,7 +58,7 @@ export const ClassicWheel = ({
         <Icon
           icon={ChevronLeft}
           strokeWidth={"auto"}
-          className="h-[1.2em] w-[1.2em]"
+          className="size-[1.2em]"
         />
       </div>
       {winner != null && <Winner {...items[winner]} />}

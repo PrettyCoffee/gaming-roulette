@@ -47,7 +47,7 @@ const RulesetToggle = ({ name, label }: RulesetToggleProps) => {
     setRuleset(prev => ({ ...prev, [name]: value }))
 
   return (
-    <label className="flex items-center gap-2 max-w-max">
+    <label className="flex max-w-max items-center gap-2">
       <Switch checked={!!value} onCheckedChange={handleChange} />
       {label}
     </label>

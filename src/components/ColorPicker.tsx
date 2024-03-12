@@ -21,10 +21,10 @@ const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
     <BaseButton
       onClick={() => onClick(color)}
       className={cn(
-        "w-6 h-6 rounded shadow-sm",
+        "size-6 rounded shadow-sm",
         "inline-flex items-center justify-center",
         "opacity-75 hover:opacity-100 focus-visible:opacity-100",
-        "relative before:block before:absolute before:-inset-0.5",
+        "relative before:absolute before:-inset-0.5 before:block",
         `bg-${color}-200`,
         focusRing
       )}
@@ -53,13 +53,13 @@ export const ColorPicker = ({
       <BaseButton
         id={id}
         className={cn(
-          "w-10 h-10 shrink-0 rounded-md p-1.5 border border-input hover:bg-accent",
+          "size-10 shrink-0 rounded-md border border-input p-1.5 hover:bg-accent",
           focusRing
         )}
       >
         <div
           className={cn(
-            "w-full h-full rounded opacity-75 [*:hover>&]:opacity-100 [*:focus-visible>&]:opacity-100",
+            "size-full rounded opacity-75 [*:focus-visible>&]:opacity-100 [*:hover>&]:opacity-100",
             !colors.includes(value)
               ? "bg-muted-foreground/25"
               : `bg-${value}-200`
@@ -69,7 +69,7 @@ export const ColorPicker = ({
       </BaseButton>
     </Popover.Trigger>
     <Popover.Content asChild>
-      <div className="w-max grid grid-cols-4 justify-center gap-1">
+      <div className="grid w-max grid-cols-4 justify-center gap-1">
         {colors.map(color => (
           <ColorButton
             key={color}

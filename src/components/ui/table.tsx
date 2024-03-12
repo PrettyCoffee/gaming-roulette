@@ -24,7 +24,7 @@ const Header = React.forwardRef<
     ref={ref}
     className={cn(
       "sticky top-0 [&_tr]:border-b",
-      "after:block after:bg-muted after:w-full after:h-[1px] after:absolute after:left-0 after:right-0 after:bottom-0",
+      "after:absolute after:inset-x-0 after:bottom-0 after:block after:h-px after:w-full after:bg-muted",
       className
     )}
     {...props}
@@ -81,8 +81,8 @@ const Head = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-12 px-4 bg-background text-muted-foreground text-left align-middle font-medium [&:has([role=checkbox])]:pr-0",
-      "relative after:block after:my-auto after:w-[1px] after:h-4 after:bg-border after:absolute after:right-0 after:top-0 after:bottom-0",
+      "h-12 bg-background px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "relative after:absolute after:inset-y-0 after:right-0 after:my-auto after:block after:h-4 after:w-px after:bg-border",
       "[&:last-of-type:after]:hidden",
       className
     )}

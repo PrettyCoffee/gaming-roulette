@@ -36,7 +36,7 @@ const NextAction = ({ label, onClick, disabled }: ActionProps) => (
 )
 
 const Section = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col gap-2 items-start">{children}</div>
+  <div className="flex flex-col items-start gap-2">{children}</div>
 )
 
 interface StepProps {
@@ -144,7 +144,7 @@ const Slide = ({
   state,
 }: PropsWithChildren<{ state: "up" | "down" | "show" }>) => (
   <m.div
-    className="absolute inset-0 p-4 pr-8 overflow-y-auto z-10"
+    className="absolute inset-0 z-10 overflow-y-auto p-4 pr-8"
     variants={{ down, show, up }}
     animate={state}
     initial={hidden}
@@ -160,7 +160,7 @@ interface NavigationProps {
   goNext: () => void
 }
 const Navigation = ({ current, goBack, goNext, steps }: NavigationProps) => (
-  <div className="absolute top-2 right-2 z-20 flex flex-col">
+  <div className="absolute right-2 top-2 z-20 flex flex-col">
     <IconButton
       size="sm"
       icon={ArrowUp}
@@ -221,7 +221,7 @@ export const Init = ({ onFinish }: InitProps) => {
 
   return (
     <div className="h-full p-2 pt-0 ">
-      <div className="relative overflow-hidden bg-background rounded-md h-full">
+      <div className="relative h-full overflow-hidden rounded-md bg-background">
         <VisuallyHidden>
           <h1>Gaming Roulette Setup</h1>
         </VisuallyHidden>

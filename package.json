@@ -45,6 +45,7 @@
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
+    "eslint-plugin-tailwindcss": "^3.15.1",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.2",
@@ -55,8 +56,51 @@
       "@pretty-cozy/eslint-config/base-ts",
       "@pretty-cozy/eslint-config/react"
     ],
+    "plugins": [
+      "tailwindcss"
+    ],
     "rules": {
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "tailwindcss/classnames-order": [
+        "error",
+        {
+          "callees": [
+            "classnames",
+            "cn",
+            "cva"
+          ]
+        }
+      ],
+      "tailwindcss/no-contradicting-classname": [
+        "error",
+        {
+          "callees": [
+            "classnames",
+            "cn",
+            "cva"
+          ]
+        }
+      ],
+      "tailwindcss/no-unnecessary-arbitrary-value": [
+        "error",
+        {
+          "callees": [
+            "classnames",
+            "cn",
+            "cva"
+          ]
+        }
+      ],
+      "tailwindcss/enforces-shorthand": [
+        "error",
+        {
+          "callees": [
+            "classnames",
+            "cn",
+            "cva"
+          ]
+        }
+      ]
     }
   }
 }

@@ -84,8 +84,8 @@ export const Spinner = () => {
 
   if (items.length === 0)
     return (
-      <div className="h-full flex-col gap-2 flex items-center justify-center">
-        <div className="font-bold text-2xl text-muted-foreground">No games</div>
+      <div className="flex h-full flex-col items-center justify-center gap-2">
+        <div className="text-2xl font-bold text-muted-foreground">No games</div>
         <div className="text-sm text-muted-foreground">
           You must add some games first before you can spin the wheel.
         </div>
@@ -100,7 +100,7 @@ export const Spinner = () => {
   }
 
   return (
-    <div className="relative h-full flex-1 flex flex-col items-center justify-center gap-2">
+    <div className="relative flex h-full flex-1 flex-col items-center justify-center gap-2">
       {settings.pickerView === "wheel" ? (
         <Wheel {...props} />
       ) : settings.pickerView === "classic-wheel" ? (
@@ -113,7 +113,7 @@ export const Spinner = () => {
         <Tags {...props} />
       )}
       <canvas
-        className="absolute -inset-4 h-[calc(100%+theme(height.4)*2)] w-[calc(100%+theme(width.4)*2)]  pointer-events-none"
+        className="pointer-events-none absolute -inset-4 h-[calc(100%+theme(height.4)*2)]  w-[calc(100%+theme(width.4)*2)]"
         ref={canvas}
       />
       <Button

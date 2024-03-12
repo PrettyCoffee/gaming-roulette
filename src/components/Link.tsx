@@ -17,9 +17,9 @@ export const Link = ({
 }: PropsWithChildren<LinkProps>) => (
   <a
     className={cn(
-      "inline-flex gap-1 items-center",
-      "font-medium text-primary hover:underline underline-offset-4",
-      "rounded-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "inline-flex items-center gap-1",
+      "font-medium text-primary underline-offset-4 hover:underline",
+      "rounded-sm ring-offset-background focus-visible:outline-none",
       "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       className
     )}

@@ -40,7 +40,7 @@ const ViewButton = ({
     aria-checked={checked}
     onClick={onClick}
     className={cn(
-      "h-24 flex-1 p-2 rounded-md hover:bg-base/50",
+      "h-24 flex-1 rounded-md p-2 hover:bg-base/50",
       checked && "outline outline-1 outline-primary"
     )}
   >

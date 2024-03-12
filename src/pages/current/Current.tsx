@@ -13,7 +13,7 @@ import { cn } from "~/utils/utils"
 const Counter = ({ current, limit }: { limit: number; current: number }) => (
   <span
     className={cn(
-      "text-sm font-bold text-muted-foreground text-nowrap ml-2",
+      "ml-2 text-nowrap text-sm font-bold text-muted-foreground",
       current > limit && "text-red-400"
     )}
   >
@@ -82,7 +82,7 @@ const PlayerGames = ({
 
   return (
     <div key={id} className="col-span-1">
-      <div className="flex px-3 items-center gap-2">
+      <div className="flex items-center gap-2 px-3">
         <InputLabel htmlFor={id}>{name}</InputLabel>
         <div className="flex-1" />
         <Counter current={amountOfGames} limit={rules.gamesPerPerson} />
@@ -94,7 +94,7 @@ const PlayerGames = ({
         onChange={({ target }) => setGames(target.value)}
         lines={Math.min(rules.gamesPerPerson, 10)}
         className={cn(
-          "whitespace-pre resize-none",
+          "resize-none whitespace-pre",
           `border-${color}-200`,
           errors.length > 0 && `border-red-500`
         )}
@@ -109,7 +109,7 @@ export const Current = () => {
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-2 -mt-2",
+        "-mt-2 grid grid-cols-2 gap-2",
         players.length > 2 && "md:grid-cols-3",
         players.length > 3 && "lg:grid-cols-4"
       )}

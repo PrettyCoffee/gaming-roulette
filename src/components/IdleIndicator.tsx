@@ -41,7 +41,7 @@ export const IdleIndicator = () => {
       <img
         src={sleepingGif}
         alt=""
-        className="h-12 opacity-50 object-contain"
+        className="h-12 object-contain opacity-50"
       />
     </Fader>
   )

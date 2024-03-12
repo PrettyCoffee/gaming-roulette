@@ -8,18 +8,18 @@ import { BaseButton } from "./base/BaseButton"
 
 const pill = cva(
   cn(
-    "isolate relative h-10 w-10 rounded-full font-semibold flex items-center justify-center outline-offset-2 [&>*]:z-10",
-    "before:absolute before:-z-10 before:rounded-full before:h-2 before:w-12 before:top-1/2 before:-translate-y-1/2 before:-left-full before:pointer-events-none",
-    "after:absolute after:-z-10 after:rounded-full after:h-2 after:w-12 after:top-1/2 after:-translate-y-1/2 after:-right-full after:pointer-events-none"
+    "relative isolate flex size-10 items-center justify-center rounded-full font-semibold outline-offset-2 [&>*]:z-10",
+    "before:pointer-events-none before:absolute before:-left-full before:top-1/2 before:-z-10 before:h-2 before:w-12 before:-translate-y-1/2 before:rounded-full",
+    "after:pointer-events-none after:absolute after:-right-full after:top-1/2 after:-z-10 after:h-2 after:w-12 after:-translate-y-1/2 after:rounded-full"
   ),
   {
     variants: {
       state: {
-        default: "text-foreground bg-muted before:bg-muted after:bg-muted",
+        default: "bg-muted text-foreground before:bg-muted after:bg-muted",
         active:
-          "text-background outline-color-blue-200 bg-blue-200 before:bg-blue-200 after:bg-blue-200",
+          "outline-color-blue-200 bg-blue-200 text-background before:bg-blue-200 after:bg-blue-200",
         success:
-          "text-background outline-color-green-200 bg-green-200 before:bg-green-200 after:bg-green-200",
+          "outline-color-green-200 bg-green-200 text-background before:bg-green-200 after:bg-green-200",
       },
       position: {
         first: "before:hidden",
@@ -62,7 +62,7 @@ const Step = ({
   <div
     className={cn(
       "relative flex-1",
-      "flex flex-col gap-1 items-center first-of-type:items-start last-of-type:items-end",
+      "flex flex-col items-center gap-1 first-of-type:items-start last-of-type:items-end",
       state === "success" && "after:bg-green-200",
       state === "active" && "after:bg-blue-200",
       state === "default" && "after:bg-muted"

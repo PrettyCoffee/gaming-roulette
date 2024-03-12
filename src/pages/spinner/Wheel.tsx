@@ -115,7 +115,7 @@ export const Wheel = ({
     <div
       ref={ref}
       className={cn(
-        "w-full h-full flex flex-col items-center relative",
+        "relative flex size-full flex-col items-center",
         preserve3d
       )}
     >
@@ -124,7 +124,7 @@ export const Wheel = ({
           // eslint-disable-next-line react/no-array-index-key
           key={game + String(index)}
           className={cn(
-            "absolute w-[24em] h-[4.5em] px-[2em] whitespace-nowrap text-ellipsis rounded-md flex items-center justify-center top-1/2 bg-muted",
+            "absolute top-1/2 flex h-[4.5em] w-[24em] items-center justify-center text-ellipsis whitespace-nowrap rounded-md bg-muted px-[2em]",
             index === winner && "bg-green-500",
             segment({ active: current ?? 0, index, items: items.length })
           )}
@@ -134,17 +134,15 @@ export const Wheel = ({
             transitionTimingFunction: "linear",
           }}
         >
-          <span className="text-[1.75em] whitespace-nowrap text-ellipsis overflow-hidden">
-            {game}
-          </span>
+          <span className="truncate text-[1.75em]">{game}</span>
           <span
             className={cn(
-              "absolute left-[0.3em] top-[0.3em] bottom-[0.3em] w-[0.2em] rounded-full opacity-75",
+              "absolute inset-y-[0.3em] left-[0.3em] w-[0.2em] rounded-full opacity-75",
               `bg-${color}-200`
             )}
           />
           {index === winner && (
-            <span className="absolute -top-8 -right-16 text-7xl">🎉</span>
+            <span className="absolute -right-16 -top-8 text-7xl">🎉</span>
           )}
         </div>
       ))}

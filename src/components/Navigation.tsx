@@ -13,8 +13,8 @@ import { TitleTooltip } from "./TitleTooltip"
 
 const navButton = cva(
   cn(
-    "relative inline-flex items-center rounded-sm text-foreground text-sm font-medium",
-    "before:absolute before:h-0.5 before:bottom-1.5 before:bg-blue-200/50 before:rounded-full before:transition-all",
+    "relative inline-flex items-center rounded-sm text-sm font-medium text-foreground",
+    "before:absolute before:bottom-1.5 before:h-0.5 before:rounded-full before:bg-blue-200/50 before:transition-all",
     "disabled:pointer-events-none disabled:opacity-50",
     focusRing,
     noOverflow
@@ -22,12 +22,12 @@ const navButton = cva(
   {
     variants: {
       compact: {
-        true: "p-0 h-10 w-10 justify-center",
-        false: "px-2 h-8 w-32 justify-start",
+        true: "size-10 justify-center p-0",
+        false: "h-8 w-32 justify-start px-2",
       },
       active: {
-        true: "bg-background shadow-sm cursor-default before:w-4",
-        false: "hover:bg-background before:w-0 hover:before:w-2",
+        true: "cursor-default bg-background shadow-sm before:w-4",
+        false: "before:w-0 hover:bg-background hover:before:w-2",
       },
     },
     defaultVariants: {

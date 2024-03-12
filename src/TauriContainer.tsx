@@ -9,7 +9,7 @@ export const TauriContainer = ({ children }: PropsWithChildren) => {
   return (
     <div
       className={cn(
-        "max-h-screen h-full overflow-hidden flex flex-col rounded-lg bg-base border",
+        "flex h-full max-h-screen flex-col overflow-hidden rounded-lg border bg-base",
         "transition-[filter] duration-300",
         !isFocused && "bg-base brightness-75 grayscale-[0.25]"
       )}

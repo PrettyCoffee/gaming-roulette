@@ -17,7 +17,7 @@ export const InputLabel = ({
   <label
     htmlFor={htmlFor}
     className={cn(
-      "inline-block text-sm font-semibold mb-1 text-muted-foreground",
+      "mb-1 inline-block text-sm font-semibold text-muted-foreground",
       noOverflow,
       className
     )}

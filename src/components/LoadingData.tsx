@@ -41,7 +41,7 @@ const square = css`
 `
 
 const squareColor = cva(
-  ["absolute top-0 left-0 rounded opacity-50 h-8 w-8 text-[2rem]", square],
+  ["absolute left-0 top-0 size-8 rounded text-[2rem] opacity-50", square],
   {
     variants: {
       color: {
@@ -55,8 +55,8 @@ const squareColor = cva(
 )
 
 export const LoadingData = ({ label }: { label: string }) => (
-  <div className="flex flex-col gap-4 items-center">
-    <div className="relative h-[4.5rem] w-[4.5rem]">
+  <div className="flex flex-col items-center gap-4">
+    <div className="relative size-[4.5rem]">
       <div className={squareColor({ color: "red" })} />
       <div className={squareColor({ color: "blue" })} />
       <div className={squareColor({ color: "green" })} />

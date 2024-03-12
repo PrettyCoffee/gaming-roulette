@@ -23,7 +23,7 @@ const Pill = ({
   <span
     className={cn(
       "transition-all",
-      "relative inline-flex px-[0.5em] py-[0.15em] bg-muted rounded-[0.4em] max-w-[12em] font-medium",
+      "relative inline-flex max-w-[12em] rounded-[0.4em] bg-muted px-[0.5em] py-[0.15em] font-medium",
       `bg-${color}-200 text-${color}-950`,
       winner && "bg-green-200 text-green-950",
       className
@@ -39,7 +39,7 @@ const Pill = ({
       </span>
     )}
     {winner && (
-      <span className="absolute -bottom-[0.6em] -right-[0.45em] text-[2em] scale-x-[-1]">
+      <span className="absolute -bottom-[0.6em] -right-[0.45em] -scale-x-100 text-[2em]">
         🎉
       </span>
     )}
@@ -58,10 +58,10 @@ export const Tags = ({
   return (
     <div
       ref={ref}
-      className="h-full w-full flex items-center"
+      className="flex size-full items-center"
       style={{ fontSize: size / 17 }}
     >
-      <div className="flex flex-wrap justify-center items-center gap-[0.5em]">
+      <div className="flex flex-wrap items-center justify-center gap-[0.5em]">
         {items.map(({ game, color }, index) => (
           <Pill
             // eslint-disable-next-line react/no-array-index-key
