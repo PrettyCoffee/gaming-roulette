@@ -50,57 +50,5 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.2",
     "vite": "^5.1.6"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@pretty-cozy/eslint-config/base-ts",
-      "@pretty-cozy/eslint-config/react"
-    ],
-    "plugins": [
-      "tailwindcss"
-    ],
-    "rules": {
-      "react/prop-types": "off",
-      "tailwindcss/classnames-order": [
-        "error",
-        {
-          "callees": [
-            "classnames",
-            "cn",
-            "cva"
-          ]
-        }
-      ],
-      "tailwindcss/no-contradicting-classname": [
-        "error",
-        {
-          "callees": [
-            "classnames",
-            "cn",
-            "cva"
-          ]
-        }
-      ],
-      "tailwindcss/no-unnecessary-arbitrary-value": [
-        "error",
-        {
-          "callees": [
-            "classnames",
-            "cn",
-            "cva"
-          ]
-        }
-      ],
-      "tailwindcss/enforces-shorthand": [
-        "error",
-        {
-          "callees": [
-            "classnames",
-            "cn",
-            "cva"
-          ]
-        }
-      ]
-    }
   }
 }
