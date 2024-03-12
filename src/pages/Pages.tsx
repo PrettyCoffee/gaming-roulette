@@ -22,7 +22,7 @@ const layout = css`
     "navigation main"
     "footer main";
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
 `
 
 const navigation = css`
@@ -77,13 +77,7 @@ export const Pages = () => {
 
   return (
     <div className={cn("flex-1 h-full overflow-hidden", layout)}>
-      <nav
-        className={cn(
-          "transition-all -my-2 p-2",
-          compactNavigation ? "w-13" : "w-40 px-4",
-          navigation
-        )}
-      >
+      <nav className={cn("-my-2 p-2", navigation)}>
         <Navigation
           items={enabledRoutes}
           value={current}
@@ -106,7 +100,7 @@ export const Pages = () => {
         <Link
           href="https://github.com/PrettyCoffee/gaming-roulette"
           target="_blank"
-          className={cn("text-sm inline-block pl-3 py-1")}
+          className={"text-sm inline-block pl-3 py-1"}
         >
           <Icon icon={Github} size="sm" className="mr-1" />
           {!compactNavigation && "Github"}

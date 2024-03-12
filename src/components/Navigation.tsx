@@ -1,12 +1,41 @@
 import { Dispatch } from "react"
 
+import { cva } from "class-variance-authority"
+
 import { Route } from "~/pages/routes"
+import { focusRing, noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 import { BaseButton } from "./base/BaseButton"
 import { ClassNameProp } from "./base/BaseProps"
 import { Icon } from "./Icon"
 import { TitleTooltip } from "./TitleTooltip"
+
+const navButton = cva(
+  cn(
+    "relative inline-flex items-center rounded-sm text-foreground text-sm font-medium",
+    "before:absolute before:h-0.5 before:bottom-1.5 before:bg-blue-200/50 before:rounded-full before:transition-all",
+    "disabled:pointer-events-none disabled:opacity-50",
+    focusRing,
+    noOverflow
+  ),
+  {
+    variants: {
+      compact: {
+        true: "p-0 h-10 w-10 justify-center",
+        false: "px-2 h-8 w-32 justify-start",
+      },
+      active: {
+        true: "bg-background shadow-sm cursor-default before:w-4",
+        false: "hover:bg-background before:w-0 hover:before:w-2",
+      },
+    },
+    defaultVariants: {
+      compact: false,
+      active: false,
+    },
+  }
+)
 
 interface NavButtonProps
   extends Pick<Route, "disabled" | "label" | "icon">,
@@ -30,18 +59,7 @@ const NavButton = ({
       onMouseDown={onClick}
       muteAudio={active}
       disabled={disabled}
-      className={cn(
-        "inline-flex items-center h-8 px-2 w-full rounded-sm transition-all",
-        compact && "p-0 h-10 w-10 justify-center",
-        "whitespace-nowrap text-left text-sm font-medium",
-        "disabled:pointer-events-none disabled:opacity-50",
-        "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        !active && "hover:bg-background",
-        active && "bg-background text-foreground shadow-sm cursor-default",
-        active &&
-          "relative before:absolute before:h-0.5 before:w-4 before:bottom-1.5 before:bg-blue-200/50 before:rounded-full",
-        className
-      )}
+      className={cn(navButton({ active, compact }), className)}
     >
       {compact ? <Icon icon={icon} /> : label}
     </BaseButton>
