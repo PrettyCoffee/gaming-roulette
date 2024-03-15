@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef } from "react"
 
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click-enhanced.mp3"
 import { InputLabel } from "~/components/InputLabel"
 import { Slider } from "~/components/ui/slider"

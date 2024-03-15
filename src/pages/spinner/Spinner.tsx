@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef } from "react"
 import { create as createConfetti } from "canvas-confetti"
 import { Dices } from "lucide-react"
 
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"

@@ -37,7 +37,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@pretty-cozy/eslint-config": "^0.2.0",
+    "@pretty-cozy/eslint-config": "^0.3.0",
     "@tauri-apps/cli": "^1.5.11",
     "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^20.11.26",
@@ -45,10 +45,16 @@
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
-    "eslint-plugin-tailwindcss": "^3.15.1",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.2",
     "vite": "^5.1.6"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@pretty-cozy/eslint-config/base-ts",
+      "@pretty-cozy/eslint-config/react",
+      "@pretty-cozy/eslint-config/tailwind"
+    ]
   }
 }

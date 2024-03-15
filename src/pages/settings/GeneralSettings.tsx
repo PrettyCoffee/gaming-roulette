@@ -1,4 +1,3 @@
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import { PropsWithChildren } from "react"
 
 import { BaseButton } from "~/components/base/BaseButton"

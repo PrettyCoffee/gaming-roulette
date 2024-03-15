@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import clickSound from "~/assets/click-enhanced.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
 import { resetIdle } from "~/hooks/useIdle"

@@ -2,9 +2,7 @@ import { forwardRef, MouseEvent, FocusEvent } from "react"
 
 import { Slot } from "@radix-ui/react-slot"
 
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import click from "~/assets/btn-click.mp3"
-// eslint-disable-next-line @pretty-cozy/no-unspecific-imports
 import hover from "~/assets/btn-hover.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
 import { playAudio } from "~/utils/playAudio"
