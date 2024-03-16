@@ -117,10 +117,10 @@ export const Wheel = ({
         preserve3d
       )}
     >
-      {items.map(({ game, color }, index) => (
+      {items.map(({ name, player }, index) => (
         <div
           // eslint-disable-next-line react/no-array-index-key
-          key={game + String(index)}
+          key={name + String(index)}
           className={cn(
             "absolute top-1/2 flex h-[4.5em] w-[24em] items-center justify-center text-ellipsis whitespace-nowrap rounded-md bg-muted px-[2em]",
             index === winner && "bg-green-500",
@@ -132,11 +132,11 @@ export const Wheel = ({
             transitionTimingFunction: "linear",
           }}
         >
-          <span className="truncate text-[1.75em]">{game}</span>
+          <span className="truncate text-[1.75em]">{name}</span>
           <span
             className={cn(
               "absolute inset-y-[0.3em] left-[0.3em] w-[0.2em] rounded-full opacity-75",
-              `bg-${color}-200`
+              `bg-${player.color}-200`
             )}
           />
           {index === winner && (

@@ -9,14 +9,14 @@ import { cn } from "~/utils/utils"
 import { SpinnerItem, SpinnerStateProps } from "./Spinner"
 import { WheelOfFortune } from "./WheelOfFortune"
 
-const Winner = ({ color = "", game = "" }: Partial<SpinnerItem>) => (
+const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (
   <div
     className={cn(
       "absolute bottom-12 z-10 bg-base/75 px-4 py-2 text-xl backdrop-blur-sm",
-      `border- rounded-md border-2${color}-200`
+      `border- rounded-md border-2${player?.color ?? ""}-200`
     )}
   >
-    {game}
+    {name}
     <span className="absolute -right-12 -top-8 text-5xl">🎉</span>
     <span className="absolute -left-12 -top-8 -scale-x-100 text-5xl">🎉</span>
   </div>

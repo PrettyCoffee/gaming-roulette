@@ -4,8 +4,8 @@ import { SpinnerItem } from "./Spinner"
 
 const WheelSegment = ({
   index,
-  color,
-  game,
+  player,
+  name,
   items,
   radius,
 }: SpinnerItem & { index: number; items: number; radius: number }) => {
@@ -26,19 +26,19 @@ const WheelSegment = ({
       <span
         className={cn(
           "inline-block max-w-[75%] truncate font-bold text-foreground",
-          game.length > 15
+          name.length > 15
             ? "text-[0.5em]"
-            : game.length > 10
+            : name.length > 10
             ? "text-[0.625em]"
             : "text-[0.75em]"
         )}
       >
-        {game}
+        {name}
       </span>
       <span
         className={cn(
           "absolute inset-y-[0.25em] right-[0.25em] w-[0.25em] rounded-full",
-          `bg-${color}-200`
+          `bg-${player.color}-200`
         )}
       />
     </div>

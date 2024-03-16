@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react"
 import { BaseButton } from "~/components/base/BaseButton"
 import { InputLabel } from "~/components/InputLabel"
 import { Switch } from "~/components/ui/switch"
-import { gamesA, gamesB } from "~/data/players"
+import { gamesA, gamesB, Player } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { shuffle } from "~/utils/array"
 import { cn } from "~/utils/utils"
@@ -15,10 +15,18 @@ import { Tags } from "../spinner/Tags"
 import { Wheel } from "../spinner/Wheel"
 
 const demoGames = shuffle([
-  ...gamesA.slice(0, 5).map(game => ({ game, color: "red" })),
-  ...gamesA.slice(5).map(game => ({ game, color: "blue" })),
-  ...gamesB.slice(0, 5).map(game => ({ game, color: "green" })),
-  ...gamesB.slice(5).map(game => ({ game, color: "yellow" })),
+  ...gamesA
+    .slice(0, 5)
+    .map(name => ({ name, player: { color: "red" } as Player })),
+  ...gamesA
+    .slice(5)
+    .map(name => ({ name, player: { color: "blue" } as Player })),
+  ...gamesB
+    .slice(0, 5)
+    .map(name => ({ name, player: { color: "green" } as Player })),
+  ...gamesB
+    .slice(5)
+    .map(name => ({ name, player: { color: "yellow" } as Player })),
 ])
 const demoProps = {
   items: demoGames,

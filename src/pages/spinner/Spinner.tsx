@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 import { create as createConfetti } from "canvas-confetti"
 import { Dices } from "lucide-react"
@@ -7,7 +7,8 @@ import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
 import { audioSettingsAtom } from "~/data/audioSettings"
-import { usePlayers } from "~/data/players"
+import { useGames } from "~/data/games"
+import { Player, usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { resetIdle } from "~/hooks/useIdle"
 import { shuffle } from "~/utils/array"
@@ -47,9 +48,21 @@ const popConfetti = (canvas: HTMLCanvasElement, color?: string) => {
   void Promise.all([a, b]).then(() => resetIdle())
 }
 
+const getSpinnerGames = (players: Player[]) =>
+  players
+    .flatMap(player => player.games.map(game => ({ player, name: game })))
+    .filter(Boolean)
+
+const useSpinnerGames = () => {
+  const { players } = usePlayers()
+  // Only compute on the first render, to prevent changes on the game list
+  const { current } = useRef(shuffle(getSpinnerGames(players)))
+  return current
+}
+
 export interface SpinnerItem {
-  game: string
-  color: string
+  name: string
+  player: Player
 }
 
 export interface SpinnerStateProps {
@@ -61,24 +74,37 @@ export interface SpinnerStateProps {
 
 export const Spinner = () => {
   const [settings] = useSettings()
-  const { players } = usePlayers()
+  const { setPlayerAttribute } = usePlayers()
+  const { addGame } = useGames()
 
-  const items: SpinnerItem[] = useMemo(() => {
-    const items = players
-      .flatMap(({ games, color }) => games.map(game => ({ game, color })))
-      .filter(Boolean)
-    return shuffle(items)
-  }, [players])
+  const items = useSpinnerGames()
 
   const { current, rotate, reset, winner, transition } = useNumberRotation(
     items.length
   )
 
+  useEffect(() => {
+    const game = winner != null && items[winner]
+    if (!game) return
+
+    addGame({
+      playerId: game.player.id,
+      name: game.name,
+      date: new Date().toISOString().slice(0, 10),
+    })
+
+    setPlayerAttribute(
+      game.player.id,
+      "games",
+      game.player.games.filter(g => g !== game.name)
+    )
+  }, [addGame, items, setPlayerAttribute, winner])
+
   const canvas = useRef<HTMLCanvasElement | null>(null)
   useEffect(() => {
     if (!canvas.current || winner == null) return
     playVictory()
-    popConfetti(canvas.current, items[winner]?.color)
+    popConfetti(canvas.current, items[winner]?.player.color)
   }, [items, winner])
 
   if (items.length === 0)

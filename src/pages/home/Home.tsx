@@ -2,7 +2,7 @@ import { Fragment, PropsWithChildren } from "react"
 
 import { ClassNameProp } from "~/components/base/BaseProps"
 import { Text } from "~/components/base/Text"
-import { useGames } from "~/data/gamesExternal"
+import { useGames } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { Ruleset, useRuleset } from "~/data/ruleset"
 import { DAY } from "~/utils/date"
@@ -127,7 +127,7 @@ const Rules = () => {
 }
 
 const Games = () => {
-  const games = useGames().games ?? []
+  const { games } = useGames()
   const currentGame = games[games.length - 1]
   const latestGames = games.slice(games.length - 6, games.length - 1).reverse()
   return (
@@ -135,7 +135,6 @@ const Games = () => {
       <Surface title="Current game">
         <Text
           size="xl"
-          color={(currentGame?.color ?? "default") as "default"}
           bold
           noOverflow
           noWrap
@@ -164,7 +163,7 @@ const weeksSince = (date?: string) => {
 }
 
 const GameStats = () => {
-  const games = useGames().games ?? []
+  const { games } = useGames()
   const totalGames = games.length
   const startDate = games[0]?.date ?? ""
   const averageTime = !games[0]

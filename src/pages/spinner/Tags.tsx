@@ -62,12 +62,12 @@ export const Tags = ({
       style={{ fontSize: size / 17 }}
     >
       <div className="flex flex-wrap items-center justify-center gap-[0.5em]">
-        {items.map(({ game, color }, index) => (
+        {items.map(({ name, player }, index) => (
           <Pill
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             winner={winner === index}
-            color={color}
+            color={player.color}
             className={cn(
               current == null
                 ? ""
@@ -77,7 +77,7 @@ export const Tags = ({
             )}
             transitionDuration={transitionDuration}
           >
-            {index + 1}. {game}
+            {index + 1}. {name}
           </Pill>
         ))}
       </div>
