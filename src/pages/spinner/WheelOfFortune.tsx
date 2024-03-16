@@ -63,7 +63,7 @@ export const WheelOfFortune = ({
 
   return (
     <div
-      className="flex size-full select-none items-center justify-center overflow-hidden rounded-full"
+      className="flex size-full select-none items-center justify-center rounded-full"
       style={{
         height: diameter,
         width: diameter,
