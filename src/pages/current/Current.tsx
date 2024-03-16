@@ -77,7 +77,12 @@ const PlayerGames = ({
 
   const setGames = (games: string) => {
     setValue(games)
-    onChange(games.split("\n").filter(Boolean))
+    onChange(
+      games
+        .split("\n")
+        .filter(Boolean)
+        .map(game => game.slice(0, 50).trim())
+    )
   }
 
   return (
