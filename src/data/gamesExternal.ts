@@ -25,7 +25,7 @@ export interface GameStats {
 
 const gamesAtom = atom<GameStats[] | null>({
   defaultValue: null,
-  name: "games",
+  name: "games-external",
   middleware: [
     localStorage(),
     reduxDevtools({ disable: import.meta.env.PROD }),

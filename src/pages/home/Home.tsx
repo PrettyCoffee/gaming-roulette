@@ -2,7 +2,7 @@ import { Fragment, PropsWithChildren } from "react"
 
 import { ClassNameProp } from "~/components/base/BaseProps"
 import { Text } from "~/components/base/Text"
-import { useGames } from "~/data/games"
+import { useGames } from "~/data/gamesExternal"
 import { usePlayers } from "~/data/players"
 import { Ruleset, useRuleset } from "~/data/ruleset"
 import { DAY } from "~/utils/date"
