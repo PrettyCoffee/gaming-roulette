@@ -100,8 +100,6 @@ const segment = ({ active, index, items }: SegmentProps) => {
   `
 }
 
-console.log(preserve3d)
-
 export const Wheel = ({
   current,
   items,

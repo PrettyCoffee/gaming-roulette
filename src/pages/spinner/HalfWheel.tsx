@@ -43,7 +43,6 @@ export const HalfWheel = ({
 
   const diameter = Math.min(size.width, size.height * 2)
   const radius = diameter / 2
-  console.log(size)
   return (
     <div ref={ref} className="relative flex size-full items-end justify-center">
       <div
