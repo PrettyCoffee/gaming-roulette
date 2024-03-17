@@ -5,6 +5,7 @@ import { Dices } from "lucide-react"
 
 import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
+import { NoData } from "~/components/NoData"
 import { Button } from "~/components/ui/button"
 import { audioSettingsAtom } from "~/data/audioSettings"
 import { useGames } from "~/data/games"
@@ -110,10 +111,9 @@ export const Spinner = () => {
   if (items.length === 0)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2">
-        <div className="text-2xl font-bold text-muted-foreground">No games</div>
-        <div className="text-sm text-muted-foreground">
-          You must add some games first before you can spin the wheel.
-        </div>
+        <NoData
+          label={"You must add some games first before you can spin the wheel."}
+        />
       </div>
     )
 
