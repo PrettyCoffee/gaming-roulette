@@ -3,9 +3,9 @@ import { Dispatch, useState } from "react"
 import { Plus, Trash } from "lucide-react"
 
 import { ColorPicker } from "~/components/ColorPicker"
-import { Confirmation } from "~/components/Confirmation"
 import { IconButton, IconButtonProps } from "~/components/IconButton"
 import { InputLabel } from "~/components/InputLabel"
+import { Modal } from "~/components/Modal"
 import { Input } from "~/components/ui/input"
 import { Player, usePlayers } from "~/data/players"
 import { colors } from "~/utils/colors"
@@ -108,7 +108,7 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
           title: "Remove player",
         }}
       />
-      <Confirmation
+      <Modal
         className=""
         open={deleting}
         title="Remove player"
