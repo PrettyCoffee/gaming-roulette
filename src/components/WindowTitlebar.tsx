@@ -93,7 +93,7 @@ export const WindowTitlebar = () => {
       className="relative z-[999] flex h-12 items-center p-2"
     >
       <img
-        src="/logo.svg"
+        src="./logo.svg"
         alt="Gaming Roulette"
         className={cn(
           "pointer-events-none ml-3 size-6 select-none transition-all"
