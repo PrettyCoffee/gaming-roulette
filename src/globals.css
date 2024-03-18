@@ -42,7 +42,7 @@
 
   html,
   body {
-    @apply bg-transparent overflow-hidden;
+    @apply bg-transparent;
   }
 
   * {
@@ -53,6 +53,10 @@
   body,
   #root {
     @apply h-full m-0 text-foreground;
+  }
+
+  body {
+    @apply min-w-[800px] mx-auto;
   }
 
   *:focus-visible {
