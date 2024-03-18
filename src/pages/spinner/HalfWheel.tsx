@@ -12,8 +12,8 @@ import { WheelOfFortune } from "./WheelOfFortune"
 const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (
   <div
     className={cn(
-      "absolute bottom-12 z-10 bg-base/75 px-4 py-2 text-xl backdrop-blur-sm",
-      `border- rounded-md border-2${player?.color ?? ""}-200`
+      "absolute bottom-12 z-10 rounded-md bg-base/75 px-4 py-2 text-xl backdrop-blur-sm",
+      `border-${player?.color ?? ""}-200 border-2`
     )}
   >
     {name}

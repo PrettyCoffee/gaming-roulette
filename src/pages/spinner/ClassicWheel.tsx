@@ -13,7 +13,7 @@ const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (
   <div
     className={cn(
       "absolute z-10 rounded-md bg-base/90 px-4 py-2 text-xl",
-      `border- border-2${player?.color ?? ""}-200`
+      `border-${player?.color ?? ""}-200 border-2`
     )}
   >
     {name}
