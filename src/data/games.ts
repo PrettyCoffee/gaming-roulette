@@ -55,6 +55,15 @@ export const useGames = () => {
     [setGames]
   )
 
+  const editGame = useCallback(
+    (id: string, data: Partial<RawGame>) => {
+      setGames(prev =>
+        prev.map(game => (game.id === id ? { ...game, ...data } : game))
+      )
+    },
+    [setGames]
+  )
+
   const removeGame = useCallback(
     (id: string) => {
       setGames(prev => prev.filter(game => game.id !== id))
@@ -62,5 +71,5 @@ export const useGames = () => {
     [setGames]
   )
 
-  return { games, addGame, removeGame }
+  return { games, addGame, editGame, removeGame }
 }

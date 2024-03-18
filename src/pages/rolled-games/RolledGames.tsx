@@ -1,4 +1,6 @@
-import { Trash } from "lucide-react"
+import { useState } from "react"
+
+import { PenBox, Trash } from "lucide-react"
 
 import { IconButton } from "~/components/IconButton"
 import { NoData } from "~/components/NoData"
@@ -7,6 +9,8 @@ import { Game, useGames } from "~/data/games"
 import { Player } from "~/data/players"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
+
+import { GameModal } from "./GameModal"
 
 const Swatch = ({ color }: { color: string }) => (
   <span
@@ -60,8 +64,13 @@ const Footer = () => {
   )
 }
 
-const GamesTable = () => {
-  const { games, removeGame } = useGames()
+interface GamesTableProps {
+  games: Game[]
+  onDelete: (game: Game) => void
+  onEdit: (game: Game) => void
+}
+
+const GamesTable = ({ games, onDelete, onEdit }: GamesTableProps) => {
   return (
     <Table.Root>
       <Table.Header>
@@ -83,11 +92,16 @@ const GamesTable = () => {
             >
               {game.player?.name}
             </Table.Cell>
-            <Table.Cell className="w-12 min-w-12 px-2 opacity-0 [tr:focus-within_&]:opacity-100 [tr:hover_&]:opacity-100">
+            <Table.Cell className="w-24 min-w-24 px-2 opacity-0 [tr:focus-within_&]:opacity-100 [tr:hover_&]:opacity-100">
+              <IconButton
+                icon={PenBox}
+                title="Edit"
+                onClick={() => onEdit(game)}
+              />
               <IconButton
                 icon={Trash}
                 title="Delete"
-                onClick={() => removeGame(game.id)}
+                onClick={() => onDelete(game)}
               />
             </Table.Cell>
           </Table.Row>
@@ -100,7 +114,8 @@ const GamesTable = () => {
 }
 
 export const RolledGames = () => {
-  const { games } = useGames()
+  const { games, removeGame, editGame } = useGames()
+  const [editing, setEditing] = useState<Game | undefined>()
 
   if (games.length === 0)
     return (
@@ -118,10 +133,34 @@ export const RolledGames = () => {
     )
 
   return (
-    <div className="-mr-2 -mt-2 flex h-full flex-col gap-2">
-      <div className="flex flex-col overflow-auto [&>*]:h-full [&>*]:flex-1">
-        <GamesTable />
+    <>
+      {editing && (
+        <GameModal
+          initialValue={editing}
+          onCancel={() => setEditing(undefined)}
+          title="Edit game"
+          description={`Edit "${editing.name}" to your liking and click on "Confirm" to save your changes.`}
+          onConfirm={({ id, date, name, player }) => {
+            setEditing(undefined)
+            if (id)
+              editGame(id, {
+                date,
+                name: name?.slice(0, 50),
+                playerId: player?.id,
+              })
+          }}
+        />
+      )}
+
+      <div className="-mr-2 -mt-2 flex h-full flex-col gap-2">
+        <div className="flex flex-col overflow-auto [&>*]:h-full [&>*]:flex-1">
+          <GamesTable
+            games={games}
+            onEdit={setEditing}
+            onDelete={({ id }) => removeGame(id)}
+          />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
