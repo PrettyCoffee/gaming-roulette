@@ -3,20 +3,30 @@ import { Dispatch, useState } from "react"
 import { Input, InputProps } from "~/components/ui/input"
 import { cn } from "~/utils/utils"
 
+const dateValidRegex = /^\d{1,4}-\d{1,2}-\d{1,2}$/
+
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max)
+
 const getIsoDate = () => new Date().toISOString().split("T")[0] ?? ""
 
-const dateValidRegex = /^\d{1,4}-\d{1,2}-\d{1,2}$/
-const formatSegment = (value: number, length: number) =>
-  String(Number.isNaN(value) ? "" : value).padStart(length, "0")
+interface SegmentOptions {
+  min: number
+  max: number
+  length: number
+}
+const formatSegment = (value: number, { length, max, min }: SegmentOptions) =>
+  String(clamp(value || 1, min, max)).padStart(length, "0")
 
 const fixDate = (value: string) => {
   const [year = 0, month = 0, day = 0] = value
     .split("-")
     .map(value => parseInt(value))
+
   return [
-    formatSegment(year, 4),
-    formatSegment(month, 2),
-    formatSegment(day, 2),
+    formatSegment(year, { length: 4, min: 1, max: 2999 }),
+    formatSegment(month, { length: 2, min: 1, max: 12 }),
+    formatSegment(day, { length: 2, min: 1, max: 31 }),
   ].join("-")
 }
 
@@ -42,6 +52,7 @@ export const DateInput = ({ onChange, value, ...props }: DateInputProps) => {
         setInternal(target.value)
         onChange?.(fixDate(target.value))
       }}
+      onBlur={() => setInternal(prev => fixDate(prev ?? ""))}
     />
   )
 }
