@@ -1,14 +1,13 @@
 import { Dispatch, useState } from "react"
 
 import { Input, InputProps } from "~/components/ui/input"
+import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
 
 const dateValidRegex = /^\d{1,4}-\d{1,2}-\d{1,2}$/
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
-
-const getIsoDate = () => new Date().toISOString().split("T")[0] ?? ""
 
 interface SegmentOptions {
   min: number
@@ -47,7 +46,7 @@ export const DateInput = ({ onChange, value, ...props }: DateInputProps) => {
         props.className
       )}
       value={internal}
-      placeholder={getIsoDate()}
+      placeholder={today()}
       onChange={({ target }) => {
         setInternal(target.value)
         onChange?.(fixDate(target.value))

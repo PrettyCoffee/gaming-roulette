@@ -14,6 +14,7 @@ import { useSettings } from "~/data/settings"
 import { resetIdle } from "~/hooks/useIdle"
 import { shuffle } from "~/utils/array"
 import { color200 } from "~/utils/colors"
+import { today } from "~/utils/date"
 import { playAudio } from "~/utils/playAudio"
 
 import { ClassicWheel } from "./ClassicWheel"
@@ -91,7 +92,7 @@ export const Spinner = () => {
     addGame({
       playerId: game.player.id,
       name: game.name,
-      date: new Date().toISOString().slice(0, 10),
+      date: today(),
     })
 
     setPlayerAttribute(

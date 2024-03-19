@@ -8,6 +8,7 @@ import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { Game, useGames } from "~/data/games"
 import { Player } from "~/data/players"
+import { today } from "~/utils/date"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
@@ -122,7 +123,7 @@ const AddGame = ({ label }: { label: string }) => {
     <>
       {adding && (
         <GameModal
-          initialValue={{ date: new Date().toISOString().split("T")[0] }}
+          initialValue={{ date: today() }}
           onCancel={() => setAdding(false)}
           title="Add game"
           description={`Fill in th information about your game and click on "Save" to add it.`}

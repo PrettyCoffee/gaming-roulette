@@ -7,6 +7,7 @@ import { Select } from "~/components/Select"
 import { Input } from "~/components/ui/input"
 import { Game } from "~/data/games"
 import { usePlayers } from "~/data/players"
+import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
 
 const Swatch = ({ color }: { color: string }) => (
@@ -17,8 +18,6 @@ const Swatch = ({ color }: { color: string }) => (
     )}
   />
 )
-
-const getIsoDate = () => new Date().toISOString().split("T")[0] ?? ""
 
 interface GameModalProps {
   initialValue?: Partial<Game>
@@ -75,7 +74,7 @@ export const GameModal = ({
           <InputLabel htmlFor={dateId}>Added</InputLabel>
           <DateInput
             id={dateId}
-            value={game.date ?? getIsoDate()}
+            value={game.date ?? today()}
             onChange={value => set("date", value)}
           />
         </div>
