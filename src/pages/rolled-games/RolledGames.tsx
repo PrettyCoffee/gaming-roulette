@@ -4,6 +4,7 @@ import { PenBox, Trash } from "lucide-react"
 
 import { IconButton } from "~/components/IconButton"
 import { NoData } from "~/components/NoData"
+import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { Game, useGames } from "~/data/games"
 import { Player } from "~/data/players"
@@ -113,13 +114,39 @@ const GamesTable = ({ games, onDelete, onEdit }: GamesTableProps) => {
   )
 }
 
+const AddGame = ({ label }: { label: string }) => {
+  const { addGame } = useGames()
+  const [adding, setAdding] = useState(false)
+
+  return (
+    <>
+      {adding && (
+        <GameModal
+          initialValue={{ date: new Date().toISOString().split("T")[0] }}
+          onCancel={() => setAdding(false)}
+          title="Add game"
+          description={`Fill in th information about your game and click on "Save" to add it.`}
+          onConfirm={({ date, name, player }) => {
+            setAdding(false)
+            if (name && date)
+              addGame({ date, name, playerId: player?.id ?? "" })
+          }}
+        />
+      )}
+      <Button variant="ghost" onClick={() => setAdding(true)}>
+        {label}
+      </Button>
+    </>
+  )
+}
+
 export const RolledGames = () => {
   const { games, removeGame, editGame } = useGames()
   const [editing, setEditing] = useState<Game | undefined>()
 
   if (games.length === 0)
     return (
-      <div className="flex size-full items-center justify-center">
+      <div className="flex size-full flex-col items-center justify-center gap-4">
         <NoData
           label={
             <>
@@ -129,6 +156,7 @@ export const RolledGames = () => {
             </>
           }
         />
+        <AddGame label="Or add one manually" />
       </div>
     )
 
@@ -139,7 +167,7 @@ export const RolledGames = () => {
           initialValue={editing}
           onCancel={() => setEditing(undefined)}
           title="Edit game"
-          description={`Edit "${editing.name}" to your liking and click on "Confirm" to save your changes.`}
+          description={`Edit "${editing.name}" to your liking and click on "Save" to confirm.`}
           onConfirm={({ id, date, name, player }) => {
             setEditing(undefined)
             if (id)
@@ -159,6 +187,9 @@ export const RolledGames = () => {
             onEdit={setEditing}
             onDelete={({ id }) => removeGame(id)}
           />
+        </div>
+        <div>
+          <AddGame label="Add game" />
         </div>
       </div>
     </>

@@ -5,7 +5,7 @@ import { cn } from "~/utils/utils"
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, autoComplete, ...props }, ref) => {
+  ({ className, type, autoComplete, value = "", ...props }, ref) => {
     return (
       <input
         type={type}
@@ -15,6 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         ref={ref}
         autoComplete={autoComplete ?? "off"}
+        value={value}
         {...props}
       />
     )
