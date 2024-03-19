@@ -47,7 +47,7 @@ const PlayerInput = ({
         colors={colors}
         onChange={color => onColorChange(color)}
       />
-      <IconButton variant="outline" {...action} />
+      <IconButton variant="ghost" {...action} />
     </div>
   </>
 )
@@ -119,7 +119,7 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
           </>
         }
         cancel={{ label: "Cancel", onClick: () => setDeleting(false) }}
-        confirm={{ label: "Remove", onClick: remove }}
+        confirm={{ label: "Remove", onClick: remove, variant: "destructive" }}
       />
     </>
   )

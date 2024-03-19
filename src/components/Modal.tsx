@@ -1,13 +1,14 @@
 import { PropsWithChildren } from "react"
 
 import { ClassNameProp } from "./base/BaseProps"
-import { Button } from "./ui/button"
+import { Button, ButtonProps } from "./ui/button"
 import { Dialog } from "./ui/dialog"
 
 interface ModalAction {
   label: string
   onClick: () => void
   disabled?: boolean
+  variant?: ButtonProps["variant"]
 }
 
 interface ModalProps extends ClassNameProp {
@@ -34,10 +35,10 @@ export const Modal = ({
       </Dialog.Header>
       {children && <div>{children}</div>}
       <Dialog.Footer>
-        <Button {...cancel} variant="ghost">
+        <Button variant="ghost" {...cancel}>
           {cancel.label}
         </Button>
-        <Button {...confirm} variant="outline">
+        <Button variant="key" {...confirm}>
           {confirm.label}
         </Button>
       </Dialog.Footer>

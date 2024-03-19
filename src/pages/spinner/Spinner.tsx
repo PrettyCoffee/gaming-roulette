@@ -142,12 +142,11 @@ export const Spinner = () => {
         ref={canvas}
       />
       <Button
-        variant={"outline"}
+        variant="flat"
         onClick={() => {
           reset()
           rotate()
         }}
-        className="w-1/2 gap-2"
       >
         <Icon icon={Dices} />
         Spin

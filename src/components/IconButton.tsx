@@ -1,5 +1,7 @@
 import { forwardRef } from "react"
 
+import { cva, VariantProps } from "class-variance-authority"
+
 import { Button, ButtonProps } from "~/components/ui/button"
 import { cn } from "~/utils/utils"
 
@@ -8,14 +10,26 @@ import { VisuallyHidden } from "./base/VisuallyHidden"
 import { Icon, IconProp } from "./Icon"
 import { TitleTooltip, TitleTooltipProps } from "./TitleTooltip"
 
+const iconButton = cva("shrink-0", {
+  variants: {
+    size: {
+      md: "size-10",
+      sm: "size-8",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+})
+
 export interface IconButtonProps
   extends ClassNameProp,
     IconProp,
+    VariantProps<typeof iconButton>,
     Pick<ButtonProps, "onClick" | "variant" | "disabled" | "muteAudio"> {
   title: string
   titleSide?: TitleTooltipProps["side"]
   hideTitle?: boolean
-  size?: "md" | "sm"
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -26,8 +40,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       onClick,
       titleSide,
       hideTitle,
-      variant = "ghost",
-      size,
+      variant = "flat",
+      size = "md",
       className,
       ...delegated
     },
@@ -41,9 +55,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       <Button
         ref={ref}
         variant={variant}
-        size={size === "sm" ? "iconSm" : "icon"}
         onClick={onClick}
-        className={cn("shrink-0", className)}
+        className={cn(iconButton({ size }), className)}
         {...delegated}
       >
         <VisuallyHidden>{title}</VisuallyHidden>

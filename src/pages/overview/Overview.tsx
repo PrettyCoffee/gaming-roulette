@@ -208,7 +208,7 @@ export const Overview = () => {
         <GamesTable games={debouncedGames} />
       </div>
       <div>
-        <Button variant="ghost" className="gap-2" onClick={refreshGames}>
+        <Button variant="flat" onClick={refreshGames}>
           <Icon icon={RefreshCw} size="sm" />
           Reload
         </Button>

@@ -30,7 +30,7 @@ interface ActionProps {
   disabled?: boolean
 }
 const NextAction = ({ label, onClick, disabled }: ActionProps) => (
-  <Button onClick={onClick} variant="outline" disabled={disabled}>
+  <Button onClick={onClick} variant="key" disabled={disabled}>
     {label}
   </Button>
 )

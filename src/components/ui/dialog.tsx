@@ -49,7 +49,7 @@ const Content = React.forwardRef<
         asChild
         className="absolute right-1 top-1 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
       >
-        <IconButton icon={X} title="Close" size="md" />
+        <IconButton icon={X} title="Close" size="sm" />
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </Portal>
