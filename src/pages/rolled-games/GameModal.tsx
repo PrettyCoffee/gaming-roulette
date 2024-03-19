@@ -21,7 +21,7 @@ const Swatch = ({ color }: { color: string }) => (
 const getIsoDate = () => new Date().toISOString().split("T")[0] ?? ""
 
 interface GameModalProps {
-  initialValue?: Game
+  initialValue?: Partial<Game>
   onConfirm: Dispatch<Partial<Game>>
   onCancel: () => void
   title: string
@@ -29,7 +29,7 @@ interface GameModalProps {
 }
 
 export const GameModal = ({
-  initialValue,
+  initialValue = {},
   onConfirm,
   onCancel,
   ...rest
@@ -38,16 +38,26 @@ export const GameModal = ({
   const nameId = `${id}-name`
   const dateId = `${id}-date`
   const playerId = `${id}-player`
-  const [game, setGame] = useState({ ...initialValue })
+  const [game, setGame] = useState(initialValue)
   const { players } = usePlayers()
 
   const set = <Key extends keyof Game>(key: Key, value: Game[Key]) =>
     setGame(prev => ({ ...prev, [key]: value }))
 
+  const saveDisabled =
+    !game.name ||
+    (game.name === initialValue.name &&
+      game.date === initialValue.date &&
+      game.player?.id === initialValue.player?.id)
+
   return (
     <Modal
       open
-      confirm={{ label: "Confirm", onClick: () => onConfirm(game) }}
+      confirm={{
+        label: "Save",
+        onClick: () => onConfirm(game),
+        disabled: saveDisabled,
+      }}
       cancel={{ label: "Cancel", onClick: onCancel }}
       {...rest}
     >
