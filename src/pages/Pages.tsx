@@ -96,13 +96,16 @@ export const Pages = () => {
           <ActiveView />
         </ErrorBoundary>
       </main>
-      <footer className={cn("flex flex-col pb-2 pl-2", footer)}>
+      <footer className={cn("flex flex-col px-2 pb-2", footer)}>
         <Link
           href="https://github.com/PrettyCoffee/gaming-roulette"
           target="_blank"
-          className={"inline-block py-1 pl-3 text-sm"}
+          className={cn(
+            "px-2 py-1 text-sm",
+            compactNavigation && "w-full justify-center"
+          )}
         >
-          <Icon icon={Github} size="sm" className="mr-1" />
+          <Icon icon={Github} size="sm" />
           {!compactNavigation && "Github"}
         </Link>
       </footer>

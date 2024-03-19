@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react"
 
 import { isTauriEnv } from "~/utils/isTauriEnv"
+import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
@@ -18,10 +19,8 @@ export const Link = ({
 }: PropsWithChildren<LinkProps>) => (
   <a
     className={cn(
-      "inline-flex items-center gap-1",
-      "font-medium text-primary underline-offset-4 hover:underline",
-      "rounded-sm ring-offset-background focus-visible:outline-none",
-      "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "inline-flex w-max items-center gap-1 rounded-sm font-medium text-primary underline-offset-4 hover:underline",
+      focusRing,
       className
     )}
     {...delegated}
