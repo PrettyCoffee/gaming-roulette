@@ -56,7 +56,7 @@
   }
 
   body {
-    @apply min-w-[800px] mx-auto;
+    @apply min-w-[800px] min-h-[400px] mx-auto;
   }
 
   *:focus-visible {
