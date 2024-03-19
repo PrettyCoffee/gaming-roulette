@@ -98,7 +98,7 @@ const Cell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "px-4 py-2 align-middle [&:has([role=checkbox])]:pr-0",
+      "truncate px-4 py-2 align-middle [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}

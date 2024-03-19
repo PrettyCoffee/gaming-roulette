@@ -9,7 +9,6 @@ import { Table } from "~/components/ui/table"
 import { Game, useGames } from "~/data/games"
 import { Player } from "~/data/players"
 import { today } from "~/utils/date"
-import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 import { GameModal } from "./GameModal"
@@ -87,13 +86,15 @@ const GamesTable = ({ games, onDelete, onEdit }: GamesTableProps) => {
       <Table.Body>
         {games.map(game => (
           <Table.Row key={game.id}>
-            <Table.Cell className={noOverflow}>{game.name}</Table.Cell>
-            <Table.Cell className={noOverflow}>{game.date}</Table.Cell>
-            <Table.Cell
-              className={cn(`text-${game.player?.color ?? ""}-200`, noOverflow)}
-            >
-              {game.player?.name}
-            </Table.Cell>
+            <Table.Cell>{game.name}</Table.Cell>
+            <Table.Cell>{game.date}</Table.Cell>
+            {game.player ? (
+              <Table.Cell className={`text-${game.player.color}-200`}>
+                {game.player.name}
+              </Table.Cell>
+            ) : (
+              <Table.Cell className="text-muted-foreground">Unknown</Table.Cell>
+            )}
             <Table.Cell className="w-24 min-w-24 px-2 opacity-0 [tr:focus-within_&]:opacity-100 [tr:hover_&]:opacity-100">
               <IconButton
                 icon={PenBox}
