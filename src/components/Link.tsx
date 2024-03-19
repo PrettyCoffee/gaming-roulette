@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react"
 
+import { isTauriEnv } from "~/utils/isTauriEnv"
 import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
@@ -26,5 +27,15 @@ export const Link = ({
     {...delegated}
   >
     {children}
+    {isTauriEnv() && (
+      <div
+        className={cn(
+          "[:not(:hover)>&]:hidden",
+          "fixed bottom-1 right-1 z-[99999] rounded-md border border-muted-foreground/15 bg-accent/75 px-2 py-1 shadow-md backdrop-blur-md"
+        )}
+      >
+        {delegated.href}
+      </div>
+    )}
   </a>
 )
