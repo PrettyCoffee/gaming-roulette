@@ -31,6 +31,7 @@ interface GameModalProps {
 export const GameModal = ({
   initialValue,
   onConfirm,
+  onCancel,
   ...rest
 }: GameModalProps) => {
   const id = useId()
@@ -44,7 +45,12 @@ export const GameModal = ({
     setGame(prev => ({ ...prev, [key]: value }))
 
   return (
-    <Modal open onConfirm={() => onConfirm(game)} {...rest}>
+    <Modal
+      open
+      confirm={{ label: "Confirm", onClick: () => onConfirm(game) }}
+      cancel={{ label: "Cancel", onClick: onCancel }}
+      {...rest}
+    >
       <div className="mt-4 flex gap-4">
         <div className="flex-1">
           <InputLabel htmlFor={nameId}>Name</InputLabel>

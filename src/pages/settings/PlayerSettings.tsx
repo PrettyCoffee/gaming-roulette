@@ -109,7 +109,6 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
         }}
       />
       <Modal
-        className=""
         open={deleting}
         title="Remove player"
         description={
@@ -119,8 +118,8 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
             {" from the player list?"}
           </>
         }
-        onCancel={() => setDeleting(false)}
-        onConfirm={remove}
+        cancel={{ label: "Cancel", onClick: () => setDeleting(false) }}
+        confirm={{ label: "Remove", onClick: remove }}
       />
     </>
   )

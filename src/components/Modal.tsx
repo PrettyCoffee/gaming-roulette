@@ -4,23 +4,29 @@ import { ClassNameProp } from "./base/BaseProps"
 import { Button } from "./ui/button"
 import { Dialog } from "./ui/dialog"
 
+interface ModalAction {
+  label: string
+  onClick: () => void
+  disabled?: boolean
+}
+
 interface ModalProps extends ClassNameProp {
   open: boolean
   title: string
   description: string | JSX.Element
-  onConfirm: () => void
-  onCancel: () => void
+  confirm: ModalAction
+  cancel: ModalAction
 }
 export const Modal = ({
   className,
   open,
   title,
   description,
-  onCancel,
-  onConfirm,
+  cancel,
+  confirm,
   children,
 }: PropsWithChildren<ModalProps>) => (
-  <Dialog.Root open={open} onOpenChange={open => !open && onCancel()}>
+  <Dialog.Root open={open} onOpenChange={open => !open && cancel.onClick()}>
     <Dialog.Content className={className}>
       <Dialog.Header>
         <Dialog.Title>{title}</Dialog.Title>
@@ -28,11 +34,11 @@ export const Modal = ({
       </Dialog.Header>
       {children && <div>{children}</div>}
       <Dialog.Footer>
-        <Button onClick={onCancel} variant="ghost">
-          Cancel
+        <Button {...cancel} variant="ghost">
+          {cancel.label}
         </Button>
-        <Button onClick={onConfirm} variant="outline">
-          Confirm
+        <Button {...confirm} variant="outline">
+          {confirm.label}
         </Button>
       </Dialog.Footer>
     </Dialog.Content>
