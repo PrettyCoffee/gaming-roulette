@@ -24,7 +24,7 @@ const AudioSlider = ({
     if (value === latestValue.current) return
     latestValue.current = value
 
-    void playAudio(clickSound, {
+    playAudio(clickSound, {
       volume: name === "master" ? 1 : value,
       playbackRate: 2,
       preservesPitch: false,

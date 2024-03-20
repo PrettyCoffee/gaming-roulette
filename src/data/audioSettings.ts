@@ -14,8 +14,8 @@ export const audioSettingsAtom = atom<AudioOptions>({
   defaultValue: {
     muted: false,
     master: 0.5,
-    buttonVolume: 1,
-    spinnerVolume: 1,
+    buttonVolume: 0.5,
+    spinnerVolume: 0.5,
     victoryVolume: 1,
   },
   middleware: [

@@ -24,7 +24,7 @@ import { useNumberRotation } from "./useNumberRotation"
 import { Wheel } from "./Wheel"
 
 const playVictory = () =>
-  void playAudio(victorySound, {
+  playAudio(victorySound, {
     volume: audioSettingsAtom.get().victoryVolume,
   })
 

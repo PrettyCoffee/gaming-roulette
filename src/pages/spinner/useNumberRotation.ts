@@ -7,7 +7,7 @@ import { randomIntBetween } from "~/utils/number"
 import { playAudio } from "~/utils/playAudio"
 
 const playClickSound = () =>
-  void playAudio(clickSound, { volume: audioSettingsAtom.get().spinnerVolume })
+  playAudio(clickSound, { volume: audioSettingsAtom.get().spinnerVolume })
 
 export const useNumberRotation = (max: number) => {
   const [current, setCurrent] = useState<number | null>(null)
