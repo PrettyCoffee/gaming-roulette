@@ -2,6 +2,7 @@ import { Dispatch } from "react"
 
 import { Check } from "lucide-react"
 
+import { bgColor, ColorValue } from "~/utils/colors"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
@@ -12,9 +13,9 @@ import { Icon } from "./Icon"
 import { Popover } from "./ui/popover"
 
 interface ColorButtonProps {
-  color: string
+  color: ColorValue
   selected: boolean
-  onClick: Dispatch<string>
+  onClick: Dispatch<ColorValue>
 }
 const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
   <Popover.Close asChild>
@@ -25,7 +26,7 @@ const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
         "inline-flex items-center justify-center",
         "opacity-75 hover:opacity-100 focus-visible:opacity-100",
         "relative before:absolute before:-inset-0.5 before:block",
-        `bg-${color}-200`,
+        bgColor({ color }),
         focusRing
       )}
     >
@@ -36,9 +37,9 @@ const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
 )
 
 interface ColorPickerProps extends ClassNameProp {
-  value: string
-  onChange: Dispatch<string>
-  colors: string[] | readonly string[]
+  value: ColorValue
+  onChange: Dispatch<ColorValue>
+  colors: ColorValue[] | readonly ColorValue[]
   id?: string
 }
 
@@ -62,7 +63,7 @@ export const ColorPicker = ({
             "size-full rounded opacity-75 [*:focus-visible>&]:opacity-100 [*:hover>&]:opacity-100",
             !colors.includes(value)
               ? "bg-muted-foreground/25"
-              : `bg-${value}-200`
+              : bgColor({ color: value })
           )}
         />
         <VisuallyHidden>{value}</VisuallyHidden>

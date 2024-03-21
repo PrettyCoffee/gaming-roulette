@@ -2,13 +2,14 @@ import { PropsWithChildren, useRef } from "react"
 
 import { ClassNameProp } from "~/components/base/BaseProps"
 import { useSize } from "~/hooks/useSize"
+import { ColorValue, bgColor, textColorDark } from "~/utils/colors"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 import { SpinnerStateProps } from "./Spinner"
 
 interface PillProps extends ClassNameProp {
-  color: string
+  color: ColorValue
   transitionDuration: number
   winner: boolean
 }
@@ -24,8 +25,9 @@ const Pill = ({
     className={cn(
       "transition-all",
       "relative inline-flex max-w-[12em] rounded-[0.4em] bg-muted px-[0.5em] py-[0.15em] font-medium",
-      `bg-${color}-200 text-${color}-950`,
-      winner && "bg-green-200 text-green-950",
+      winner
+        ? [bgColor({ color: "green" }), textColorDark({ color: "green" })]
+        : [bgColor({ color }), textColorDark({ color })],
       className
     )}
     style={{

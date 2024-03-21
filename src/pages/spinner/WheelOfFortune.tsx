@@ -1,3 +1,4 @@
+import { bgColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
 
 import { SpinnerItem } from "./Spinner"
@@ -38,7 +39,7 @@ const WheelSegment = ({
       <span
         className={cn(
           "absolute inset-y-[0.25em] right-[0.25em] w-[0.25em] rounded-full",
-          `bg-${player.color}-200`
+          bgColor({ color: player.color })
         )}
       />
     </div>

@@ -7,14 +7,15 @@ import { Select } from "~/components/Select"
 import { Input } from "~/components/ui/input"
 import { Game } from "~/data/games"
 import { usePlayers } from "~/data/players"
+import { ColorValue, bgColor } from "~/utils/colors"
 import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
 
-const Swatch = ({ color }: { color: string }) => (
+const Swatch = ({ color }: { color: ColorValue }) => (
   <span
     className={cn(
       "mr-1 inline-block size-4 rounded-sm border border-base/50",
-      `bg-${color}-200`
+      bgColor({ color })
     )}
   />
 )

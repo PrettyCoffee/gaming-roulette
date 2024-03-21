@@ -1,6 +1,8 @@
 import { cva } from "class-variance-authority"
 import { keyframes, css } from "goober"
 
+import { bgColor } from "~/utils/colors"
+
 const rotate = keyframes`
   0% {
     top: 0;
@@ -45,10 +47,9 @@ const squareColor = cva(
   {
     variants: {
       color: {
-        red: "bg-red-200",
-        blue: "bg-blue-200",
-        green: "bg-green-200",
-        yellow: "bg-yellow-200",
+        red: bgColor({ color: "red" }),
+        blue: bgColor({ color: "blue" }),
+        green: bgColor({ color: "green" }),
       },
     },
   }

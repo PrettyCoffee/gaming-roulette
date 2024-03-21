@@ -9,6 +9,7 @@ import {
   useDeriveValue,
 } from "@yaasl/react"
 
+import { ColorValue } from "~/utils/colors"
 import { createId } from "~/utils/createId"
 
 export const gamesA = [
@@ -39,7 +40,7 @@ export const gamesB = [
 export interface Player {
   id: string
   name: string
-  color: string
+  color: ColorValue
   games: string[]
 }
 
@@ -56,7 +57,7 @@ export const usePlayers = () => {
   const [players, setPlayers] = useAtom(playersAtom)
 
   const addPlayer = useCallback(
-    (name: string, color: string) => {
+    (name: string, color: ColorValue) => {
       const newPlayer = { name, color, id: createId(), games: [] }
       setPlayers(data => [...data, newPlayer])
     },

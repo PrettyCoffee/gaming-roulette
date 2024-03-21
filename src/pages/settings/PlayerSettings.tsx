@@ -8,7 +8,8 @@ import { InputLabel } from "~/components/InputLabel"
 import { Modal } from "~/components/Modal"
 import { Input } from "~/components/ui/input"
 import { Player, usePlayers } from "~/data/players"
-import { colors } from "~/utils/colors"
+import { ColorValue, colors, textColor } from "~/utils/colors"
+import { cn } from "~/utils/utils"
 
 import { Grid } from "./Grid"
 
@@ -16,9 +17,9 @@ interface PlayerInputProps {
   id: string
   label: string
   name: string
-  color: string
+  color: ColorValue
   onNameChange: Dispatch<string>
-  onColorChange: Dispatch<string>
+  onColorChange: Dispatch<ColorValue>
   action: Omit<IconButtonProps, "outline">
 }
 
@@ -56,14 +57,14 @@ const AddPlayer = () => {
   const { addPlayer } = usePlayers()
 
   const [name, setName] = useState("")
-  const [color, setColor] = useState("")
+  const [color, setColor] = useState<ColorValue>("red")
 
-  const disabled = name === "" || color === ""
+  const disabled = name === ""
 
   const handleAdd = () => {
     addPlayer(name, color)
     setName("")
-    setColor("")
+    setColor("red")
   }
 
   return (
@@ -88,7 +89,7 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
   const { setPlayerAttribute, removePlayer } = usePlayers()
 
   const setName = (name: string) => setPlayerAttribute(id, "name", name)
-  const setColor = (color: string) => setPlayerAttribute(id, "color", color)
+  const setColor = (color: ColorValue) => setPlayerAttribute(id, "color", color)
   const remove = () => removePlayer(id)
 
   const [deleting, setDeleting] = useState(false)
@@ -114,7 +115,7 @@ const EditPlayer = ({ id, name, color, index }: Player & { index: number }) => {
         description={
           <>
             {"Do you really want to remove "}
-            <b className={`text-${color}-200 opacity-75`}>{name}</b>
+            <b className={cn("opacity-75", textColor({ color }))}>{name}</b>
             {" from the player list?"}
           </>
         }

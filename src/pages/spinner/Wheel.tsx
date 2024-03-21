@@ -3,6 +3,7 @@ import { useRef } from "react"
 import { css } from "goober"
 
 import { useSize } from "~/hooks/useSize"
+import { bgColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
 
 import { SpinnerStateProps } from "./Spinner"
@@ -136,7 +137,7 @@ export const Wheel = ({
           <span
             className={cn(
               "absolute inset-y-[0.3em] left-[0.3em] w-[0.2em] rounded-full opacity-75",
-              `bg-${player.color}-200`
+              bgColor({ color: player.color })
             )}
           />
           {index === winner && (

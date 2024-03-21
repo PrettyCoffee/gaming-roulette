@@ -8,16 +8,17 @@ import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { Game, useGames } from "~/data/games"
 import { Player } from "~/data/players"
+import { ColorValue, bgColor, textColor } from "~/utils/colors"
 import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
 
 import { GameModal } from "./GameModal"
 
-const Swatch = ({ color }: { color: string }) => (
+const Swatch = ({ color }: { color: ColorValue }) => (
   <span
     className={cn(
       "mr-1 inline-block size-4 rounded-sm border border-base/50",
-      `bg-${color}-200`
+      bgColor({ color })
     )}
   />
 )
@@ -89,7 +90,7 @@ const GamesTable = ({ games, onDelete, onEdit }: GamesTableProps) => {
             <Table.Cell>{game.name}</Table.Cell>
             <Table.Cell>{game.date}</Table.Cell>
             {game.player ? (
-              <Table.Cell className={`text-${game.player.color}-200`}>
+              <Table.Cell className={textColor({ color: game.player.color })}>
                 {game.player.name}
               </Table.Cell>
             ) : (

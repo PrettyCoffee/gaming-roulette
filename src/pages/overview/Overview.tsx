@@ -8,6 +8,7 @@ import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { GameStats, UserStats, useGames } from "~/data/gamesExternal"
 import { usePlayers } from "~/data/players"
+import { textColor } from "~/utils/colors"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
@@ -51,7 +52,7 @@ const Hours = ({ hours }: { hours?: number }) => (
 const Rating = ({ rating }: { rating?: number }) => (
   <span className={cn("inline-flex items-center gap-2 whitespace-nowrap")}>
     {formatNumber(rating)}
-    <Icon icon={Star} size="sm" className="text-yellow-200" />
+    <Icon icon={Star} size="sm" className={textColor({ color: "yellow" })} />
   </span>
 )
 

@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { colors } from "./src/utils/colors"
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -82,14 +81,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-  safelist: [
-    ...colors.flatMap(color => [
-      `text-${color}-200`,
-      `border-${color}-200`,
-      `bg-${color}-200`,
-      `text-${color}-950`,
-      `from-${color}-300`,
-      `to-${color}-300`,
-    ]),
-  ],
 }

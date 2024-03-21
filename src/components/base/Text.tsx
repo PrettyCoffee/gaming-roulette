@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
 
-import { colors } from "~/utils/colors"
+import { colorGradient, ColorGradient, colors } from "~/utils/colors"
 import { cn } from "~/utils/utils"
 
 import { AsChildProp, ClassNameProp } from "./BaseProps"
@@ -14,23 +14,6 @@ const text = cva("text-foreground", {
       default: "text-foreground",
       muted: "text-muted-foreground",
       inherit: "text-inherit",
-      red: "text-red-300",
-      orange: "text-orange-300",
-      amber: "text-amber-300",
-      yellow: "text-yellow-300",
-      lime: "text-lime-300",
-      green: "text-green-300",
-      emerald: "text-emerald-300",
-      teal: "text-teal-300",
-      cyan: "text-cyan-300",
-      sky: "text-sky-300",
-      blue: "text-blue-300",
-      indigo: "text-indigo-300",
-      violet: "text-violet-300",
-      purple: "text-purple-300",
-      fuchsia: "text-fuchsia-300",
-      pink: "text-pink-300",
-      rose: "text-rose-300",
     },
     size: {
       xs: "text-xs",
@@ -59,32 +42,21 @@ const text = cva("text-foreground", {
   },
 })
 
-const getGradientEnd = (color: string) => {
+const getGradientEnd = (color: ColorGradient["from"]) => {
   const index = colors.findIndex(c => c === color)
   return colors[(index + 2) % colors.length] ?? color
 }
-const getGradient = ({
-  from,
-  to: toProp,
-}: { from?: string; to?: string } = {}) => {
-  if (!from) return {}
+const getGradient = ({ from, to: toProp }: TextProps["gradient"] = {}) => {
+  if (!from) return ""
   const to = toProp ?? getGradientEnd(from)
-  return {
-    className: `bg-clip-text bg-gradient-to-r from-${from}-300 to-${to}-300`,
-    style: {
-      WebkitTextFillColor: "transparent",
-    },
-  }
+  return colorGradient({ text: true, from, to })
 }
 
 interface TextProps
   extends AsChildProp,
     ClassNameProp,
     VariantProps<typeof text> {
-  gradient?: {
-    from: (typeof colors)[number]
-    to?: (typeof colors)[number]
-  }
+  gradient?: Partial<Pick<ColorGradient, "from" | "to">>
 }
 
 export const Text = ({
@@ -95,12 +67,8 @@ export const Text = ({
   ...styles
 }: PropsWithChildren<TextProps>) => {
   const Comp = asChild ? Slot : "span"
-  const gradientStyles = getGradient(gradient)
   return (
-    <Comp
-      className={cn(text(styles), gradientStyles.className, className)}
-      style={gradientStyles.style}
-    >
+    <Comp className={cn(text(styles), getGradient(gradient), className)}>
       {children}
     </Comp>
   )

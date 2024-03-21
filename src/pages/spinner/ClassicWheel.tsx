@@ -4,6 +4,7 @@ import { ChevronLeft } from "lucide-react"
 
 import { Icon } from "~/components/Icon"
 import { useSize } from "~/hooks/useSize"
+import { borderColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
 
 import { SpinnerItem, SpinnerStateProps } from "./Spinner"
@@ -12,8 +13,8 @@ import { WheelOfFortune } from "./WheelOfFortune"
 const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (
   <div
     className={cn(
-      "absolute z-10 rounded-md bg-base/90 px-4 py-2 text-xl",
-      `border-${player?.color ?? ""}-200 border-2`
+      "absolute z-10 rounded-md border-2 bg-base/90 px-4 py-2 text-xl",
+      player && borderColor({ color: player.color })
     )}
   >
     {name}

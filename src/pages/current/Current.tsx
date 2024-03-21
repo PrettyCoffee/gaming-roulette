@@ -8,6 +8,7 @@ import { Textarea } from "~/components/ui/textarea"
 import { Tooltip } from "~/components/ui/tooltip"
 import { Player, usePlayerGameStats, usePlayers } from "~/data/players"
 import { useRuleset } from "~/data/ruleset"
+import { borderColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
 
 const Counter = ({ current, limit }: { limit: number; current: number }) => (
@@ -100,7 +101,7 @@ const PlayerGames = ({
         lines={Math.min(rules.gamesPerPerson, 10)}
         className={cn(
           "resize-none whitespace-pre",
-          `border-${color}-200`,
+          borderColor({ color }),
           errors.length > 0 && `border-red-500`
         )}
       />
