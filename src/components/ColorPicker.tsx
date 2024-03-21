@@ -2,7 +2,7 @@ import { Dispatch } from "react"
 
 import { Check } from "lucide-react"
 
-import { bgColor, ColorValue } from "~/utils/colors"
+import { ColorValue } from "~/utils/colors"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
@@ -10,6 +10,7 @@ import { BaseButton } from "./base/BaseButton"
 import { ClassNameProp } from "./base/BaseProps"
 import { VisuallyHidden } from "./base/VisuallyHidden"
 import { Icon } from "./Icon"
+import { Swatch } from "./Swatch"
 import { Popover } from "./ui/popover"
 
 interface ColorButtonProps {
@@ -19,20 +20,18 @@ interface ColorButtonProps {
 }
 const ColorButton = ({ color, selected, onClick }: ColorButtonProps) => (
   <Popover.Close asChild>
-    <BaseButton
-      onClick={() => onClick(color)}
-      className={cn(
-        "size-6 rounded shadow-sm",
-        "inline-flex items-center justify-center",
-        "opacity-75 hover:opacity-100 focus-visible:opacity-100",
-        "relative before:absolute before:-inset-0.5 before:block",
-        bgColor({ color }),
-        focusRing
-      )}
-    >
-      <VisuallyHidden>{color}</VisuallyHidden>
-      {selected && <Icon color="accent" size="sm" icon={Check} />}
-    </BaseButton>
+    <Swatch color={color} size="md" asChild>
+      <BaseButton
+        onClick={() => onClick(color)}
+        className={cn(
+          "relative opacity-75 before:absolute before:-inset-0.5 before:block hover:opacity-100 focus-visible:opacity-100",
+          focusRing
+        )}
+      >
+        <VisuallyHidden>{color}</VisuallyHidden>
+        {selected && <Icon color="accent" size="sm" icon={Check} />}
+      </BaseButton>
+    </Swatch>
   </Popover.Close>
 )
 
@@ -58,13 +57,10 @@ export const ColorPicker = ({
           focusRing
         )}
       >
-        <div
-          className={cn(
-            "size-full rounded opacity-75 [*:focus-visible>&]:opacity-100 [*:hover>&]:opacity-100",
-            !colors.includes(value)
-              ? "bg-muted-foreground/25"
-              : bgColor({ color: value })
-          )}
+        <Swatch
+          color={value}
+          size="full"
+          className="opacity-75 [*:focus-visible>&]:opacity-100 [*:hover>&]:opacity-100"
         />
         <VisuallyHidden>{value}</VisuallyHidden>
       </BaseButton>

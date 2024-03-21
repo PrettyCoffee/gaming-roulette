@@ -4,21 +4,11 @@ import { DateInput } from "~/components/DateInput"
 import { InputLabel } from "~/components/InputLabel"
 import { Modal } from "~/components/Modal"
 import { Select } from "~/components/Select"
+import { Swatch } from "~/components/Swatch"
 import { Input } from "~/components/ui/input"
 import { Game } from "~/data/games"
 import { usePlayers } from "~/data/players"
-import { ColorValue, bgColor } from "~/utils/colors"
 import { today } from "~/utils/date"
-import { cn } from "~/utils/utils"
-
-const Swatch = ({ color }: { color: ColorValue }) => (
-  <span
-    className={cn(
-      "mr-1 inline-block size-4 rounded-sm border border-base/50",
-      bgColor({ color })
-    )}
-  />
-)
 
 interface GameModalProps {
   initialValue?: Partial<Game>
@@ -94,8 +84,8 @@ export const GameModal = ({
             options={players.map(({ id, name, color }) => ({
               value: id,
               label: (
-                <div className="flex items-center">
-                  <Swatch color={color} />
+                <div className="flex items-center gap-1">
+                  <Swatch color={color} size={"sm"} />
                   <span className="truncate">{name}</span>
                 </div>
               ),

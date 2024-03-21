@@ -1,7 +1,8 @@
-import { cva } from "class-variance-authority"
 import { keyframes, css } from "goober"
 
-import { bgColor } from "~/utils/colors"
+import { cn } from "~/utils/utils"
+
+import { Swatch } from "./Swatch"
 
 const rotate = keyframes`
   0% {
@@ -26,7 +27,7 @@ const rotate = keyframes`
   }
 `
 
-const square = css`
+const squareAnimation = css`
   --offset: calc(100% - 1em);
 
   &:nth-of-type(1) {
@@ -42,25 +43,14 @@ const square = css`
   animation: ${rotate} 3s infinite ease-in-out;
 `
 
-const squareColor = cva(
-  ["absolute left-0 top-0 size-8 rounded text-[2rem] opacity-50", square],
-  {
-    variants: {
-      color: {
-        red: bgColor({ color: "red" }),
-        blue: bgColor({ color: "blue" }),
-        green: bgColor({ color: "green" }),
-      },
-    },
-  }
-)
+const square = cn("absolute text-[2rem] opacity-50", squareAnimation)
 
 export const LoadingData = ({ label }: { label: string }) => (
   <div className="flex flex-col items-center gap-4">
     <div className="relative size-[4.5rem]">
-      <div className={squareColor({ color: "red" })} />
-      <div className={squareColor({ color: "blue" })} />
-      <div className={squareColor({ color: "green" })} />
+      <Swatch color="red" size="lg" className={square} />
+      <Swatch color="blue" size="lg" className={square} />
+      <Swatch color="green" size="lg" className={square} />
     </div>
     <span className="text-md font-bold text-muted-foreground">{label}</span>
   </div>

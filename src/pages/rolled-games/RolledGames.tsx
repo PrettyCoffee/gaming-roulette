@@ -4,24 +4,15 @@ import { PenBox, Trash } from "lucide-react"
 
 import { IconButton } from "~/components/IconButton"
 import { NoData } from "~/components/NoData"
+import { Swatch } from "~/components/Swatch"
 import { Button } from "~/components/ui/button"
 import { Table } from "~/components/ui/table"
 import { Game, useGames } from "~/data/games"
 import { Player } from "~/data/players"
-import { ColorValue, bgColor, textColor } from "~/utils/colors"
+import { textColor } from "~/utils/colors"
 import { today } from "~/utils/date"
-import { cn } from "~/utils/utils"
 
 import { GameModal } from "./GameModal"
-
-const Swatch = ({ color }: { color: ColorValue }) => (
-  <span
-    className={cn(
-      "mr-1 inline-block size-4 rounded-sm border border-base/50",
-      bgColor({ color })
-    )}
-  />
-)
 
 const getgamesByPlayers = (games: Game[]) =>
   games.reduce<Record<string, { count: number; player: Player }>>(
@@ -52,8 +43,8 @@ const Footer = () => {
           <div className="flex items-center gap-4">
             Count:
             {Object.values(gamesByPlayers).map(({ count, player }) => (
-              <div key={player.id} className="inline-flex items-center">
-                <Swatch color={player.color} />
+              <div key={player.id} className="inline-flex items-center gap-1">
+                <Swatch color={player.color} size="sm" />
                 {count}
               </div>
             ))}
