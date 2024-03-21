@@ -6,10 +6,11 @@ import {
   derive,
   localStorage,
   useDeriveValue,
-  useSetAtom,
+  useSetDerive,
 } from "@yaasl/react"
 
 import { createId } from "~/utils/createId"
+import { timeBetween, timeSince, today } from "~/utils/date"
 
 import { Player, playersAtom } from "./players"
 
@@ -24,7 +25,7 @@ export interface Game extends Omit<RawGame, "playerId"> {
   player?: Player
 }
 
-export const gamesAtom = atom<RawGame[]>({
+const gamesAtom = atom<RawGame[]>({
   defaultValue: [],
   name: "games",
   middleware: [
@@ -33,8 +34,17 @@ export const gamesAtom = atom<RawGame[]>({
   ],
 })
 
+const sortedGames = derive<RawGame[]>(
+  ({ get }) => get(gamesAtom).sort((a, b) => a.date.localeCompare(b.date)),
+  ({ set, value }) =>
+    set(
+      gamesAtom,
+      value.sort((a, b) => a.date.localeCompare(b.date))
+    )
+)
+
 const extendedGames = derive<Game[]>(({ get }) => {
-  const games = get(gamesAtom)
+  const games = get(sortedGames)
   const players = get(playersAtom)
 
   return games.map(({ playerId, ...game }) => {
@@ -45,7 +55,7 @@ const extendedGames = derive<Game[]>(({ get }) => {
 
 export const useGames = () => {
   const games = useDeriveValue(extendedGames)
-  const setGames = useSetAtom(gamesAtom)
+  const setGames = useSetDerive(sortedGames)
 
   const addGame = useCallback(
     (data: Omit<RawGame, "id">) => {
@@ -73,3 +83,19 @@ export const useGames = () => {
 
   return { games, addGame, editGame, removeGame }
 }
+
+const gameStatsAtom = derive(({ get }) => {
+  const games = get(sortedGames)
+  const averageTime =
+    games.length < 2
+      ? 0
+      : timeBetween(games[0]?.date, games.at(-1)?.date) / games.length - 1
+
+  return {
+    averageTime: averageTime,
+    totalGames: games.length,
+    playingSince: timeSince(games[0]?.date ?? today()),
+  }
+})
+
+export const useGameStats = () => useDeriveValue(gameStatsAtom)

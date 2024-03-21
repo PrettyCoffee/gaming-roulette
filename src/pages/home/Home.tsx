@@ -2,10 +2,10 @@ import { Fragment, PropsWithChildren } from "react"
 
 import { ClassNameProp } from "~/components/base/BaseProps"
 import { Text } from "~/components/base/Text"
-import { useGames } from "~/data/games"
+import { useGameStats, useGames } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { Ruleset, useRuleset } from "~/data/ruleset"
-import { DAY } from "~/utils/date"
+import { DAY, readableTime } from "~/utils/date"
 import { cn } from "~/utils/utils"
 
 const isString = (value: unknown): value is string => typeof value === "string"
@@ -156,25 +156,14 @@ const Games = () => {
   )
 }
 
-const weeksSince = (date?: string) => {
-  if (!date) return 0
-  const diff = Date.now() - new Date(date).getTime()
-  return Math.floor(diff / (1000 * 60 * 60 * 24 * 7))
-}
-
 const GameStats = () => {
-  const { games } = useGames()
-  const totalGames = games.length
-  const startDate = games[0]?.date ?? ""
-  const averageTime = !games[0]
-    ? 0
-    : (weeksSince(games[0]?.date) / games.length).toFixed(2)
+  const { averageTime, playingSince, totalGames } = useGameStats()
 
   return (
     <div>
       <Kpi title="Total played" value={totalGames.toString()} />
-      <Kpi title="Gambling since" value={startDate} />
-      <Kpi title="Weeks per game" value={averageTime.toString() + " weeks"} />
+      <Kpi title="Gambling since" value={readableTime(playingSince)} />
+      <Kpi title="Average playtime" value={readableTime(averageTime)} />
     </div>
   )
 }
