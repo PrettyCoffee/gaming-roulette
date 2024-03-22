@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 
 import { ChevronDown } from "lucide-react"
 
+import { CopyClick } from "~/components/CopyClick"
 import { Icon } from "~/components/Icon"
 import { useSize } from "~/hooks/useSize"
 import { borderColor } from "~/utils/colors"
@@ -18,8 +19,11 @@ const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (
     )}
   >
     {name}
-    <span className="absolute -right-12 -top-8 text-5xl">🎉</span>
-    <span className="absolute -left-12 -top-8 -scale-x-100 text-5xl">🎉</span>
+    <CopyClick text={name} size="md" />
+    <span className="absolute -right-12 bottom-0 select-none text-5xl">🎉</span>
+    <span className="absolute -left-12 bottom-0 -scale-x-100 select-none text-5xl">
+      🎉
+    </span>
   </div>
 )
 

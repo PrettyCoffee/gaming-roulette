@@ -2,6 +2,7 @@ import { useRef } from "react"
 
 import { css } from "goober"
 
+import { CopyClick } from "~/components/CopyClick"
 import { useSize } from "~/hooks/useSize"
 import { bgColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
@@ -141,7 +142,15 @@ export const Wheel = ({
             )}
           />
           {index === winner && (
-            <span className="absolute -right-16 -top-8 text-7xl">🎉</span>
+            <>
+              <CopyClick text={name} size="lg" />
+              <span className="absolute -right-16 bottom-2 select-none text-7xl">
+                🎉
+              </span>
+              <span className="absolute -left-16 bottom-2 -scale-x-100 select-none text-7xl">
+                🎉
+              </span>
+            </>
           )}
         </div>
       ))}

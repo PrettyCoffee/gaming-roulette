@@ -1,6 +1,7 @@
-import { PropsWithChildren, useRef } from "react"
+import { useRef } from "react"
 
 import { ClassNameProp } from "~/components/base/BaseProps"
+import { CopyClick } from "~/components/CopyClick"
 import { useSize } from "~/hooks/useSize"
 import { ColorValue, bgColor, textColorDark } from "~/utils/colors"
 import { noOverflow } from "~/utils/styles"
@@ -12,19 +13,21 @@ interface PillProps extends ClassNameProp {
   color: ColorValue
   transitionDuration: number
   winner: boolean
+  text: string
+  number: number
 }
 
 const Pill = ({
   color,
-  children,
   className,
   transitionDuration,
   winner,
-}: PropsWithChildren<PillProps>) => (
+  number,
+  text,
+}: PillProps) => (
   <span
     className={cn(
-      "transition-all",
-      "relative inline-flex max-w-[12em] rounded-[0.4em] bg-muted px-[0.5em] py-[0.15em] font-medium",
+      "relative inline-flex max-w-[12em] select-none rounded-[0.4em] bg-muted px-[0.5em] py-[0.15em] font-medium transition-all",
       winner
         ? [bgColor({ color: "green" }), textColorDark({ color: "green" })]
         : [bgColor({ color }), textColorDark({ color })],
@@ -34,16 +37,17 @@ const Pill = ({
       transitionDuration: `${transitionDuration}ms`,
     }}
   >
-    <span className={cn(noOverflow, "flex-1")}>{children}</span>
+    <span className={cn(noOverflow, "flex-1")}>
+      {number}. {text}
+    </span>
     {winner && (
-      <span className="absolute -bottom-[0.6em] -left-[0.45em] text-[2em]">
-        🎉
-      </span>
-    )}
-    {winner && (
-      <span className="absolute -bottom-[0.6em] -right-[0.45em] -scale-x-100 text-[2em]">
-        🎉
-      </span>
+      <>
+        <CopyClick text={text} size="md" />
+        <span className="absolute -bottom-2 -right-7 text-[2em]">🎉</span>
+        <span className="absolute -bottom-2 -left-7 -scale-x-100 text-[2em]">
+          🎉
+        </span>
+      </>
     )}
   </span>
 )
@@ -70,6 +74,9 @@ export const Tags = ({
             key={index}
             winner={winner === index}
             color={player.color}
+            transitionDuration={transitionDuration}
+            number={index + 1}
+            text={name}
             className={cn(
               current == null
                 ? ""
@@ -77,10 +84,7 @@ export const Tags = ({
                 ? "scale-105"
                 : "opacity-10"
             )}
-            transitionDuration={transitionDuration}
-          >
-            {index + 1}. {name}
-          </Pill>
+          />
         ))}
       </div>
     </div>

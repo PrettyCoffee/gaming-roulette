@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 
 import { ChevronLeft } from "lucide-react"
 
+import { CopyClick } from "~/components/CopyClick"
 import { Icon } from "~/components/Icon"
 import { useSize } from "~/hooks/useSize"
 import { borderColor } from "~/utils/colors"
@@ -13,13 +14,16 @@ import { WheelOfFortune } from "./WheelOfFortune"
 const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (
   <div
     className={cn(
-      "absolute z-10 rounded-md border-2 bg-base/90 px-4 py-2 text-xl",
+      "absolute z-10 rounded-md border-2 bg-base/75 px-4 py-2 text-xl backdrop-blur-sm",
       player && borderColor({ color: player.color })
     )}
   >
     {name}
-    <span className="absolute -right-12 -top-8 text-5xl">🎉</span>
-    <span className="absolute -left-12 -top-8 -scale-x-100 text-5xl">🎉</span>
+    <CopyClick text={name} size="md" />
+    <span className="absolute -right-12 bottom-0 select-none text-5xl">🎉</span>
+    <span className="absolute -left-12 bottom-0 -scale-x-100 select-none text-5xl">
+      🎉
+    </span>
   </div>
 )
 
