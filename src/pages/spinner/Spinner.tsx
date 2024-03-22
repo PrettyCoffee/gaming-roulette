@@ -58,7 +58,7 @@ const getSpinnerGames = (players: Player[]) =>
 const useSpinnerGames = () => {
   const { players } = usePlayers()
   // Only compute on the first render, to prevent changes on the game list
-  const { current } = useRef(shuffle(getSpinnerGames(players)))
+  const { current } = useRef(shuffle(getSpinnerGames(players)).slice(0, 30))
   return current
 }
 
