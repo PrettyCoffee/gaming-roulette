@@ -15,7 +15,7 @@ const Surface = ({
   className,
 }: PropsWithChildren<{ title?: string } & ClassNameProp>) => (
   <div className={cn("p-1", className)}>
-    <div className="flex h-full flex-col overflow-hidden rounded-md bg-base/75 px-3 py-2 shadow-medium">
+    <div className="flex h-full flex-col overflow-hidden rounded-md bg-zinc-700/25 px-3 py-2 shadow-medium">
       {title && (
         <Text asChild size="xs" color="muted" bold>
           <h3>{title}</h3>
