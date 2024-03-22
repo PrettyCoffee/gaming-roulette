@@ -76,7 +76,7 @@ export interface SpinnerStateProps {
 
 export const Spinner = () => {
   const [settings] = useSettings()
-  const { setPlayerAttribute } = usePlayers()
+  const { setPlayers } = usePlayers()
   const { addGame } = useGames()
 
   const items = useSpinnerGames()
@@ -95,12 +95,13 @@ export const Spinner = () => {
       date: today(),
     })
 
-    setPlayerAttribute(
-      game.player.id,
-      "games",
-      game.player.games.filter(g => g !== game.name)
+    setPlayers(players =>
+      players.map(player => ({
+        ...player,
+        games: player.games.filter(g => g !== game.name),
+      }))
     )
-  }, [addGame, items, setPlayerAttribute, winner])
+  }, [addGame, items, setPlayers, winner])
 
   const canvas = useRef<HTMLCanvasElement | null>(null)
   useEffect(() => {

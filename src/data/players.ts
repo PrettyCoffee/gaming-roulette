@@ -83,7 +83,7 @@ export const usePlayers = () => {
     [setPlayers]
   )
 
-  return { players, addPlayer, removePlayer, setPlayerAttribute }
+  return { players, addPlayer, removePlayer, setPlayers, setPlayerAttribute }
 }
 
 const arrayHasDuplicate = (items: string[]) =>
