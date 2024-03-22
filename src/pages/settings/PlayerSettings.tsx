@@ -21,6 +21,8 @@ interface PlayerInputProps {
   onNameChange: Dispatch<string>
   onColorChange: Dispatch<ColorValue>
   action: Omit<IconButtonProps, "outline">
+  onKeyDown?: (key: string) => void
+  onBlur?: (key: string) => void
 }
 
 const PlayerInput = ({
@@ -31,6 +33,8 @@ const PlayerInput = ({
   onNameChange,
   onColorChange,
   action,
+  onKeyDown,
+  onBlur,
 }: PlayerInputProps) => (
   <>
     <InputLabel className="mb-2" htmlFor={id}>
@@ -42,6 +46,8 @@ const PlayerInput = ({
         value={name}
         onChange={({ target }) => onNameChange(target.value)}
         placeholder="Name"
+        onKeyDown={({ key }) => onKeyDown?.(key)}
+        onBlur={() => onBlur?.(name)}
       />
       <ColorPicker
         value={color}
@@ -75,6 +81,8 @@ const AddPlayer = () => {
       color={color}
       onNameChange={setName}
       onColorChange={setColor}
+      onBlur={() => name && handleAdd()}
+      onKeyDown={key => key === "Enter" && handleAdd()}
       action={{
         icon: Plus,
         onClick: handleAdd,
