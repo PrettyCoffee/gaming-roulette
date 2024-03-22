@@ -144,6 +144,7 @@ export const Spinner = () => {
       />
       <Button
         variant="flat"
+        className="w-1/2"
         onClick={() => {
           reset()
           rotate()
