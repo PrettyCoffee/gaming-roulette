@@ -15,7 +15,7 @@ const Surface = ({
   className,
 }: PropsWithChildren<{ title?: string } & ClassNameProp>) => (
   <div className={cn("p-1", className)}>
-    <div className="flex h-full flex-col overflow-hidden rounded-md bg-base/75 px-3 py-2 shadow-md">
+    <div className="flex h-full flex-col overflow-hidden rounded-md bg-base/75 px-3 py-2 shadow-medium">
       {title && (
         <Text asChild size="xs" color="muted" bold>
           <h3>{title}</h3>
@@ -145,8 +145,8 @@ const Games = () => {
       </Surface>
       <Surface title="Latest games" className="flex-1">
         <ul className="max-w-48">
-          {latestGames.map(({ name }) => (
-            <Text key={name} asChild size="md" noOverflow noWrap>
+          {latestGames.map(({ name, id }) => (
+            <Text key={id} asChild size="md" noOverflow noWrap>
               <li className="max-w-60">{name}</li>
             </Text>
           ))}

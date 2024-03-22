@@ -4,6 +4,28 @@
 
 @layer base {
   :root {
+    --shadow-color: 240deg 10% 0%;
+    --shadow-elevation-low:
+      0.2px 0.2px 0.3px hsl(var(--shadow-color) / 0.34),
+      0.3px 0.3px 0.5px -1.2px hsl(var(--shadow-color) / 0.34),
+      0.6px 0.6px 1px -2.5px hsl(var(--shadow-color) / 0.34);
+
+    --shadow-elevation-medium:
+      0.2px 0.2px 0.3px hsl(var(--shadow-color) / 0.36),
+      0.5px 0.5px 0.8px -0.8px hsl(var(--shadow-color) / 0.36),
+      1.3px 1.3px 2.1px -1.7px hsl(var(--shadow-color) / 0.36),
+      3.1px 3.2px 5px -2.5px hsl(var(--shadow-color) / 0.36);
+
+    --shadow-elevation-high:
+      0.2px 0.2px 0.3px hsl(var(--shadow-color) / 0.34),
+      0.9px 0.9px 1.4px -0.4px hsl(var(--shadow-color) / 0.34),
+      1.7px 1.7px 2.7px -0.7px hsl(var(--shadow-color) / 0.34),
+      2.8px 2.9px 4.5px -1.1px hsl(var(--shadow-color) / 0.34),
+      4.4px 4.6px 7.2px -1.4px hsl(var(--shadow-color) / 0.34),
+      6.9px 7.1px 11.1px -1.8px hsl(var(--shadow-color) / 0.34),
+      10.5px 10.9px 17px -2.1px hsl(var(--shadow-color) / 0.34),
+      15.5px 16px 25.1px -2.5px hsl(var(--shadow-color) / 0.34);
+
     --base: 240 10% 4%;
     --background: 240 6% 10%;
     --foreground: 0 0% 98%;
