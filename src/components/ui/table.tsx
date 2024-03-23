@@ -23,7 +23,7 @@ const Header = React.forwardRef<
   <thead
     ref={ref}
     className={cn(
-      "sticky top-0 [&_tr]:border-b",
+      "sticky top-0 z-10 bg-background [&_tr]:border-b",
       "after:absolute after:inset-x-0 after:bottom-0 after:block after:h-px after:w-full after:bg-muted",
       className
     )}
@@ -51,7 +51,7 @@ const Footer = React.forwardRef<
   <tfoot
     ref={ref}
     className={cn(
-      "border-t bg-zinc-700/25 font-medium [&>tr]:last:border-b-0",
+      "border-t bg-alt font-medium [&>tr]:last:border-b-0",
       className
     )}
     {...props}
@@ -66,7 +66,7 @@ const Row = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b transition-colors hover:bg-zinc-700/25 data-[state=selected]:bg-muted",
+      "border-b focus-within:bg-alt hover:bg-alt data-[state=selected]:bg-muted",
       className
     )}
     {...props}
