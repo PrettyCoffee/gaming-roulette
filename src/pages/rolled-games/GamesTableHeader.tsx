@@ -1,15 +1,52 @@
-import { flexRender, Header, Table } from "@tanstack/react-table"
+import { Fragment, PropsWithChildren } from "react"
 
+import { flexRender, Header, SortDirection, Table } from "@tanstack/react-table"
+import { ChevronDown, ChevronUp } from "lucide-react"
+
+import { Icon } from "~/components/Icon"
+import { Button } from "~/components/ui/button"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
 
-const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => (
-  <NativeTable.Head key={header.id}>
-    {header.isPlaceholder
-      ? null
-      : flexRender(header.column.columnDef.header, header.getContext())}
-  </NativeTable.Head>
+interface SortableHeadProps {
+  sortState: SortDirection | false
+  onClick: () => void
+}
+const SortableHead = ({
+  onClick,
+  sortState,
+  children,
+}: PropsWithChildren<SortableHeadProps>) => (
+  <Button
+    variant="flat"
+    onClick={onClick}
+    className="-ml-2 w-[calc(100%+theme(width.4))] justify-start px-2"
+  >
+    {children}
+    {sortState === "asc" && <Icon icon={ChevronUp} className="ml-auto" />}
+    {sortState === "desc" && <Icon icon={ChevronDown} className="ml-auto" />}
+  </Button>
 )
+
+const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
+  const sortState = header.column.getIsSorted()
+  const content = flexRender(
+    header.column.columnDef.header,
+    header.getContext()
+  )
+  const Comp = header.column.getCanSort() ? SortableHead : Fragment
+
+  return (
+    <NativeTable.Head
+      key={header.id}
+      style={{ width: `${header.getSize()}rem` }}
+    >
+      <Comp sortState={sortState} onClick={() => header.column.toggleSorting()}>
+        {content}
+      </Comp>
+    </NativeTable.Head>
+  )
+}
 
 export const GamesTableHeader = ({ table }: { table: Table<Game> }) => {
   return (

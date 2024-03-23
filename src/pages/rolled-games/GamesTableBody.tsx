@@ -28,7 +28,10 @@ const TableActions = ({ row, onEdit, onDelete }: TableActionsProps) => (
 )
 
 const DataCell = ({ cell }: { cell: Cell<Game, unknown> }) => (
-  <NativeTable.Cell key={cell.id}>
+  <NativeTable.Cell
+    key={cell.id}
+    style={{ width: `${cell.column.getSize()}rem` }}
+  >
     {flexRender(cell.column.columnDef.cell, cell.getContext())}
   </NativeTable.Cell>
 )

@@ -4,6 +4,7 @@ import {
   createColumnHelper,
   getCoreRowModel,
   useReactTable,
+  getSortedRowModel,
 } from "@tanstack/react-table"
 
 import { Table as NativeTable } from "~/components/ui/table"
@@ -14,17 +15,28 @@ import { GamesTableBody } from "./GamesTableBody"
 import { GamesTableFooter } from "./GamesTableFooter"
 import { GamesTableHeader } from "./GamesTableHeader"
 
+const alphaSorting = (a = "", b = "") =>
+  a.toLocaleLowerCase() > b.toLocaleLowerCase() ? 1 : -1
+
 const columnHelper = createColumnHelper<Game>()
 
 const columns = [
   columnHelper.accessor("name", {
     header: "Name",
+    size: 15,
+    sortingFn: "text",
   }),
   columnHelper.accessor("date", {
     header: "Date",
+    size: 6,
+    minSize: 6,
+    sortDescFirst: true,
   }),
   columnHelper.accessor("player", {
     header: "Player",
+    size: 10,
+    sortingFn: (a, b) =>
+      alphaSorting(a.original.player?.name, b.original.player?.name),
     cell: ({ getValue }) => {
       const player = getValue()
       return !player ? (
@@ -48,7 +60,16 @@ export const GamesTable = ({ data, onEdit, onDelete }: GamesTableProps) => {
   const table = useReactTable<Game>({
     data,
     columns,
+    defaultColumn: {
+      size: 10,
+      minSize: 5,
+      sortDescFirst: false,
+    },
+    initialState: {
+      sorting: [{ id: "date", desc: true }],
+    },
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   })
 
   return (
