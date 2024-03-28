@@ -88,7 +88,7 @@ export const textColor = cva("", {
   },
 })
 
-export const borderColor = cva("", {
+export const borderColor = cva("border", {
   variants: {
     color: {
       red: "border-red-200",
