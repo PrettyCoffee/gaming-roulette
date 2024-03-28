@@ -90,7 +90,7 @@ export const WindowTitlebar = () => {
   return (
     <div
       data-tauri-drag-region
-      className="relative z-[999] flex h-12 items-center p-2"
+      className="relative z-20 flex h-12 items-center p-2"
     >
       <img
         src="./logo.svg"

@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react"
 
+import { cn } from "~/utils/utils"
+
 import { ClassNameProp } from "./base/BaseProps"
 import { Button, ButtonProps } from "./ui/button"
 import { Dialog } from "./ui/dialog"
@@ -28,12 +30,12 @@ export const Modal = ({
   children,
 }: PropsWithChildren<ModalProps>) => (
   <Dialog.Root open={open} onOpenChange={open => !open && cancel.onClick()}>
-    <Dialog.Content className={className}>
+    <Dialog.Content className={cn("grid-rows-[auto_1fr_auto]", className)}>
       <Dialog.Header>
         <Dialog.Title>{title}</Dialog.Title>
         <Dialog.Description>{description}</Dialog.Description>
       </Dialog.Header>
-      {children && <div>{children}</div>}
+      {children && <div className="-m-2 overflow-auto p-2">{children}</div>}
       <Dialog.Footer>
         <Button variant="ghost" {...cancel}>
           {cancel.label}
