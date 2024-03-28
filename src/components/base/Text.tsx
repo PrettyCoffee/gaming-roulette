@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react"
+import { forwardRef, PropsWithChildren } from "react"
 
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
@@ -59,17 +59,17 @@ interface TextProps
   gradient?: Partial<Pick<ColorGradient, "from" | "to">>
 }
 
-export const Text = ({
-  asChild,
-  children,
-  className,
-  gradient,
-  ...styles
-}: PropsWithChildren<TextProps>) => {
-  const Comp = asChild ? Slot : "span"
-  return (
-    <Comp className={cn(text(styles), getGradient(gradient), className)}>
-      {children}
-    </Comp>
-  )
-}
+export const Text = forwardRef<HTMLSpanElement, PropsWithChildren<TextProps>>(
+  ({ asChild, children, className, gradient, ...styles }, ref) => {
+    const Comp = asChild ? Slot : "span"
+    return (
+      <Comp
+        ref={ref}
+        className={cn(text(styles), getGradient(gradient), className)}
+      >
+        {children}
+      </Comp>
+    )
+  }
+)
+Text.displayName = "Text"
