@@ -1,9 +1,13 @@
+import { Fragment } from "react/jsx-runtime"
+
 import { Swatch } from "~/components/Swatch"
 import { Table } from "~/components/ui/table"
-import { Game } from "~/data/games"
+import { Game, useGamePlayerStats } from "~/data/games"
 import { Player } from "~/data/players"
 
-const getgamesByPlayers = (games: Game[]) =>
+const round = (value: number) => Math.round(value * 10) / 10
+
+const getGamesByPlayers = (games: Game[]) =>
   games.reduce<Record<string, { count: number; player: Player }>>(
     (result, game) => {
       const { player } = game
@@ -21,12 +25,13 @@ const getgamesByPlayers = (games: Game[]) =>
   )
 
 export const GamesTableFooter = ({ games }: { games: Game[] }) => {
-  const gamesByPlayers = getgamesByPlayers(games)
+  const playerStats = useGamePlayerStats()
+  const gamesByPlayers = getGamesByPlayers(games)
 
   return (
     <Table.Footer>
       <Table.Row>
-        <Table.Cell colSpan={99}>
+        <Table.Cell colSpan={3}>
           <div className="flex items-center gap-4">
             Count:
             {Object.values(gamesByPlayers).map(({ count, player }) => (
@@ -35,10 +40,15 @@ export const GamesTableFooter = ({ games }: { games: Game[] }) => {
                 {count}
               </div>
             ))}
-            <div className="flex-1" />
-            Total: {games.length}
           </div>
         </Table.Cell>
+        {playerStats.map(({ id, averageRating, averageTime }) => (
+          <Fragment key={id}>
+            <Table.Cell>{round(averageTime)} h</Table.Cell>
+            <Table.Cell>{round(averageRating)} / 10</Table.Cell>
+          </Fragment>
+        ))}
+        <Table.Cell />
       </Table.Row>
     </Table.Footer>
   )

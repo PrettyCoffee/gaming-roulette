@@ -108,3 +108,29 @@ const gameStatsAtom = derive(({ get }) => {
 })
 
 export const useGameStats = () => useDeriveValue(gameStatsAtom)
+
+const gamePlayerStatsAtom = derive(({ get }) => {
+  const games = get(extendedGames)
+  const players = get(playersAtom)
+
+  return players.map(({ id }) => {
+    const timedGames = games
+      .map(({ stats }) => stats?.[id]?.playtime)
+      .filter(Boolean) as number[]
+    const ratedGames = games
+      .map(({ stats }) => stats?.[id]?.rating)
+      .filter(Boolean) as number[]
+
+    return {
+      id,
+      averageTime:
+        timedGames.reduce((total, playtime) => total + playtime, 0) /
+        Math.max(timedGames.length, 1),
+      averageRating:
+        ratedGames.reduce((total, rating) => total + rating, 0) /
+        Math.max(ratedGames.length, 1),
+    }
+  })
+})
+
+export const useGamePlayerStats = () => useDeriveValue(gamePlayerStatsAtom)
