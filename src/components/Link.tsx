@@ -10,6 +10,7 @@ interface LinkProps extends ClassNameProp {
   href: string
   target?: "_blank" | "_self"
   onClick?: () => void
+  onMouseDown?: () => void
 }
 
 export const Link = ({

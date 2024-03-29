@@ -1,5 +1,5 @@
 import { reduxDevtools } from "@yaasl/devtools"
-import { atom, useAtom, localStorage } from "@yaasl/react"
+import { atom, useAtom, localStorage, useAtomValue } from "@yaasl/react"
 
 interface GithubData {
   token: string
@@ -37,3 +37,33 @@ export const useGithub = () => {
     setGithubAttribute,
   }
 }
+
+const showGithubOptions = atom({
+  name: "showGithubOptions",
+  defaultValue: false,
+  middleware: [reduxDevtools({ disable: import.meta.env.PROD })],
+})
+
+const holding = { current: false }
+let timeout: NodeJS.Timeout | undefined = undefined
+
+const onMouseMove = () => {
+  window.removeEventListener("mousemove", onMouseMove)
+  clearTimeout(timeout)
+  holding.current = false
+}
+
+export const onGithubMouseDown = () => {
+  clearTimeout(timeout)
+
+  holding.current = true
+  window.addEventListener("mousemove", onMouseMove)
+
+  timeout = setTimeout(() => {
+    console.log("timeout", holding)
+    if (!holding.current) return
+    showGithubOptions.set(prev => !prev)
+  }, 3000)
+}
+
+export const useShowGithubOptions = () => useAtomValue(showGithubOptions)

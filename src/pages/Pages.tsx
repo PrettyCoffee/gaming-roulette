@@ -7,6 +7,7 @@ import { ErrorBoundary } from "~/components/ErrorBoundary"
 import { Icon } from "~/components/Icon"
 import { Link } from "~/components/Link"
 import { Navigation } from "~/components/Navigation"
+import { onGithubMouseDown } from "~/data/github"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { useHashRouter } from "~/hooks/useHashRouter"
@@ -89,6 +90,7 @@ export const Pages = () => {
       </main>
       <footer className={cn("flex flex-col px-2 pb-2", footer)}>
         <Link
+          onMouseDown={onGithubMouseDown}
           href="https://github.com/PrettyCoffee/gaming-roulette"
           target="_blank"
           className={cn(
