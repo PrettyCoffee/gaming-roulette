@@ -74,7 +74,7 @@ export const RolledGames = () => {
         />
       )}
 
-      <div className="-mr-2 -mt-2 flex h-full flex-col gap-2">
+      <div className="-m-2 flex h-[calc(100%+theme(height.4))] flex-col gap-2">
         <div className="flex flex-col overflow-auto [&>*]:h-full [&>*]:flex-1">
           <GamesTable
             data={games}
