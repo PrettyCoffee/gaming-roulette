@@ -66,7 +66,7 @@ const Row = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b focus-within:bg-alt hover:bg-alt data-[state=selected]:bg-muted",
+      "border-b data-[state=selected]:bg-muted [tbody>&:focus-within]:bg-alt [tbody>&:hover]:bg-alt",
       className
     )}
     {...props}

@@ -82,9 +82,6 @@ export const RolledGames = () => {
             onDelete={({ id }) => removeGame(id)}
           />
         </div>
-        <div>
-          <AddGame label="Add game" />
-        </div>
       </div>
     </>
   )

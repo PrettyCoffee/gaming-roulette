@@ -9,6 +9,8 @@ import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
 import { cn } from "~/utils/utils"
 
+import { TableHeaderActions } from "./TableActions"
+
 interface SortableHeadProps {
   sortState: SortDirection | false
   onClick: () => void
@@ -54,15 +56,17 @@ const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
 export const GamesTableHeader = ({ table }: { table: Table<Game> }) => {
   return (
     <NativeTable.Header>
-      {table.getHeaderGroups().map(headerGroup => (
-        <NativeTable.Row key={headerGroup.id}>
-          {headerGroup.headers.map(header => (
+      {table.getHeaderGroups().map(({ id, headers }) => (
+        <NativeTable.Row key={id}>
+          {headers.map(header => (
             <HeaderCell key={header.id} header={header} />
           ))}
 
-          <NativeTable.Head className="h-0">
-            {/* Empty Actions Header */}
-          </NativeTable.Head>
+          {headers.every(({ subHeaders }) => subHeaders.length === 0) ? (
+            <TableHeaderActions />
+          ) : (
+            <NativeTable.Head className="h-0" />
+          )}
         </NativeTable.Row>
       ))}
     </NativeTable.Header>
