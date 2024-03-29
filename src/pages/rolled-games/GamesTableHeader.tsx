@@ -12,24 +12,29 @@ import { cn } from "~/utils/utils"
 import { TableHeaderActions } from "./TableActions"
 
 interface SortableHeadProps {
+  sortable: boolean
   sortState: SortDirection | false
   onClick: () => void
 }
 const SortableHead = ({
+  sortable,
   onClick,
   sortState,
   children,
-}: PropsWithChildren<SortableHeadProps>) => (
-  <Button
-    variant="flat"
-    onClick={onClick}
-    className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-start px-2"
-  >
-    {children}
-    {sortState === "asc" && <Icon icon={ChevronUp} className="ml-auto" />}
-    {sortState === "desc" && <Icon icon={ChevronDown} className="ml-auto" />}
-  </Button>
-)
+}: PropsWithChildren<SortableHeadProps>) => {
+  if (!sortable) return <>{children}</>
+  return (
+    <Button
+      variant="flat"
+      onClick={onClick}
+      className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-start px-2"
+    >
+      {children}
+      {sortState === "asc" && <Icon icon={ChevronUp} className="ml-auto" />}
+      {sortState === "desc" && <Icon icon={ChevronDown} className="ml-auto" />}
+    </Button>
+  )
+}
 
 const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
   const sortState = header.column.getIsSorted()
@@ -37,7 +42,6 @@ const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
     header.column.columnDef.header,
     header.getContext()
   )
-  const Comp = header.column.getCanSort() ? SortableHead : Fragment
 
   return (
     <NativeTable.Head
@@ -46,9 +50,13 @@ const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
       colSpan={header.colSpan}
       className={cn(header.column.getCanSort() ? "h-10" : "h-8")}
     >
-      <Comp sortState={sortState} onClick={() => header.column.toggleSorting()}>
+      <SortableHead
+        sortable={header.column.getCanSort()}
+        sortState={sortState}
+        onClick={() => header.column.toggleSorting()}
+      >
         {content}
-      </Comp>
+      </SortableHead>
     </NativeTable.Head>
   )
 }
