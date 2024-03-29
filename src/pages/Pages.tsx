@@ -7,7 +7,6 @@ import { ErrorBoundary } from "~/components/ErrorBoundary"
 import { Icon } from "~/components/Icon"
 import { Link } from "~/components/Link"
 import { Navigation } from "~/components/Navigation"
-import { useGithub } from "~/data/github"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { useHashRouter } from "~/hooks/useHashRouter"
@@ -50,7 +49,6 @@ const ErrorFallback = () => (
 export const Pages = () => {
   const [current, setCurrent] = useHashRouter({ fallback: routes[0], routes })
   const [{ compactNavigation }] = useSettings()
-  const { token, filePath, repoName, repoOwner } = useGithub()
 
   const { players } = usePlayers()
   const [showInit, setShowInit] = useState(players.length < 1)
@@ -68,18 +66,11 @@ export const Pages = () => {
   const currentRoute = routes.find(({ value }) => value === current)
   const ActiveView = currentRoute?.component ?? (() => null)
 
-  const hasAllGithubOptions = token && filePath && repoName && repoOwner
-  const enabledRoutes = routes.map(route =>
-    route.value === "overview" && hasAllGithubOptions
-      ? { ...route, disabled: false, hint: undefined }
-      : route
-  )
-
   return (
     <div className={cn("h-full flex-1 overflow-hidden", layout)}>
       <nav className={cn("-my-2 p-2", navigation)}>
         <Navigation
-          items={enabledRoutes}
+          items={routes}
           value={current}
           onClick={setCurrent}
           compact={compactNavigation}

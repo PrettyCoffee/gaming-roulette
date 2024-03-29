@@ -34,7 +34,7 @@ export interface Game extends Omit<RawGame, "playerId"> {
   player?: Player
 }
 
-const gamesAtom = atom<RawGame[]>({
+export const gamesAtom = atom<RawGame[]>({
   defaultValue: [],
   name: "games",
   middleware: [

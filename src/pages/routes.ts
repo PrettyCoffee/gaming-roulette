@@ -10,7 +10,6 @@ import {
 import { Current } from "./current/Current"
 import { Home } from "./home/Home"
 import { Overview } from "./overview/Overview"
-import { RolledGames } from "./rolled-games/RolledGames"
 import { Settings } from "./settings/Settings"
 import { Spinner } from "./spinner/Spinner"
 
@@ -46,14 +45,6 @@ export const routes: Route[] = [
     label: "Overview",
     value: "overview",
     component: Overview,
-    icon: GanttChartSquare,
-    disabled: true,
-    hint: "Github settings missing",
-  },
-  {
-    label: "Rolled games",
-    value: "rolled-games",
-    component: RolledGames,
     icon: GanttChartSquare,
   },
   {

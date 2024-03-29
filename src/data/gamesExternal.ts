@@ -3,10 +3,13 @@ import { useCallback, useEffect } from "react"
 import { reduxDevtools } from "@yaasl/devtools"
 import { atom, expiration, localStorage, useAtom } from "@yaasl/react"
 
+import { createId } from "~/utils/createId"
 import { WEEK } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
 
+import { gamesAtom } from "./games"
 import { githubAtom } from "./github"
+import { playersAtom } from "./players"
 import { fetchRepoFile } from "./service/fetchRepoFile"
 
 export interface UserStats {
@@ -23,7 +26,7 @@ export interface GameStats {
   player2: UserStats
 }
 
-const gamesAtom = atom<GameStats[] | null>({
+export const externalGamesAtom = atom<GameStats[] | null>({
   defaultValue: null,
   name: "games-external",
   middleware: [
@@ -46,7 +49,7 @@ const splitUserStats = (userStats: string) => {
   }
 }
 export const useGames = () => {
-  const [games, setGames] = useAtom(gamesAtom)
+  const [games, setGames] = useAtom(externalGamesAtom)
   const [{ filePath }] = useAtom(githubAtom)
 
   const refreshGames = useCallback(() => {
@@ -80,3 +83,27 @@ export const useGames = () => {
 
   return { games, refreshGames }
 }
+
+externalGamesAtom.subscribe(value => {
+  const players = playersAtom.get()
+  const j = players.find(player => player.name.startsWith("J")) ?? players[0]!
+  const f = players.find(player => player.name.startsWith("F")) ?? players[1]!
+  gamesAtom.set(
+    (value ?? []).map(({ date, name, player1, player2 }) => ({
+      id: createId(),
+      name,
+      date,
+      playerId: "",
+      stats: {
+        [f.id]: {
+          playtime: player1.playtime,
+          rating: player1.rating,
+        },
+        [j.id]: {
+          playtime: player2.playtime,
+          rating: player2.rating,
+        },
+      },
+    }))
+  )
+})

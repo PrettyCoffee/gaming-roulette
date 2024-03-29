@@ -5,6 +5,7 @@ import { Input } from "~/components/ui/input"
 import { useGithub } from "~/data/github"
 
 import { Grid } from "./Grid"
+import { SyncGithub } from "./SyncGithub"
 
 const RepoOwner = () => {
   const id = useId()
@@ -121,6 +122,11 @@ export const GithubSettings = () => (
 
     <Grid.Item>
       <GithubToken />
+    </Grid.Item>
+
+    <Grid.Item>
+      <div className="pt-8" />
+      <SyncGithub />
     </Grid.Item>
   </Grid.Root>
 )
