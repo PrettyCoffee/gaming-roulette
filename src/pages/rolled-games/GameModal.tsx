@@ -1,14 +1,75 @@
 import { Dispatch, useId, useState } from "react"
 
+import { Text } from "~/components/base/Text"
 import { DateInput } from "~/components/DateInput"
 import { InputLabel } from "~/components/InputLabel"
 import { Modal } from "~/components/Modal"
+import { NumberInput } from "~/components/NumberInput"
 import { Select } from "~/components/Select"
 import { Swatch } from "~/components/Swatch"
 import { Input } from "~/components/ui/input"
-import { Game } from "~/data/games"
+import { Game, PlayerStats } from "~/data/games"
 import { usePlayers } from "~/data/players"
+import { borderColor, ColorValue, textColor } from "~/utils/colors"
 import { today } from "~/utils/date"
+import { cn } from "~/utils/utils"
+
+interface StatsInputProps {
+  stats: Partial<PlayerStats>
+  onChange: Dispatch<PlayerStats>
+  color: ColorValue
+  player: string
+}
+const StatsInput = ({ stats, onChange, color, player }: StatsInputProps) => {
+  const id = useId()
+  const { playtime, rating } = stats
+
+  return (
+    <div
+      className={cn(
+        "relative flex gap-4 rounded p-3 pb-2",
+        borderColor({ color })
+      )}
+    >
+      <Text
+        color="muted"
+        size="xs"
+        className={cn(
+          "absolute left-2 top-0 -translate-y-1/2 bg-background px-1",
+          textColor({ color })
+        )}
+      >
+        {player}
+      </Text>
+      <div>
+        <InputLabel htmlFor={id} className="mb-0">
+          Time
+        </InputLabel>
+        <NumberInput
+          placeholder="-"
+          value={playtime}
+          onChange={value => onChange({ rating, playtime: value })}
+          unit="h"
+          min={0}
+          max={999}
+        />
+      </div>
+      <div>
+        <InputLabel htmlFor={id} className="mb-0">
+          Rating
+        </InputLabel>
+        <NumberInput
+          placeholder="-"
+          value={rating}
+          onChange={value => onChange({ playtime, rating: value })}
+          unit="/ 10"
+          min={0}
+          max={10}
+        />
+      </div>
+    </div>
+  )
+}
 
 interface GameModalProps {
   initialValue?: Partial<Game>
@@ -35,13 +96,11 @@ export const GameModal = ({
     setGame(prev => ({ ...prev, [key]: value }))
 
   const saveDisabled =
-    !game.name ||
-    (game.name === initialValue.name &&
-      game.date === initialValue.date &&
-      game.player?.id === initialValue.player?.id)
+    !game.name || JSON.stringify(game) === JSON.stringify(initialValue)
 
   return (
     <Modal
+      className={cn(players.length > 2 && "max-w-xl")}
       open
       confirm={{
         label: "Save",
@@ -92,6 +151,24 @@ export const GameModal = ({
             }))}
           />
         </div>
+      </div>
+      <div className="flex flex-wrap gap-4 pt-4">
+        {players.map(({ id, color, name }) => (
+          <StatsInput
+            key={id}
+            stats={game.stats?.[id] ?? {}}
+            color={color}
+            player={name}
+            onChange={stats => {
+              const newStats = { ...game.stats, [id]: stats }
+              if (!stats.playtime || !stats.rating) {
+                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+                delete newStats[id]
+              }
+              set("stats", { ...game.stats, [id]: stats })
+            }}
+          />
+        ))}
       </div>
     </Modal>
   )

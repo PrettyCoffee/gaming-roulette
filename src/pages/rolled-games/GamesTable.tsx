@@ -1,4 +1,4 @@
-import { Dispatch } from "react"
+import { Dispatch, useMemo } from "react"
 
 import {
   createColumnHelper,
@@ -7,8 +7,10 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table"
 
+import { Text } from "~/components/base/Text"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
+import { usePlayers } from "~/data/players"
 import { textColor } from "~/utils/colors"
 
 import { GamesTableBody } from "./GamesTableBody"
@@ -20,7 +22,7 @@ const alphaSorting = (a = "", b = "") =>
 
 const columnHelper = createColumnHelper<Game>()
 
-const columns = [
+const gameColumns = [
   columnHelper.accessor("name", {
     header: "Name",
     size: 15,
@@ -50,6 +52,46 @@ const columns = [
   }),
 ]
 
+const playerColumns = (id: string) => [
+  columnHelper.accessor("stats", {
+    id: `player-stats-${id}-time`,
+    header: "Time",
+    cell: ({ getValue }) => {
+      const stats = getValue()?.[id]
+      return <Text>{stats?.playtime ?? "-"}h</Text>
+    },
+  }),
+  columnHelper.accessor("stats", {
+    id: `player-stats-${id}-rating`,
+    header: "Rating",
+    cell: ({ getValue }) => {
+      const stats = getValue()?.[id]
+      return <Text>{stats?.rating ?? "-"} / 10</Text>
+    },
+  }),
+]
+
+const useColumns = () => {
+  const { players } = usePlayers()
+
+  return useMemo(
+    () => [
+      columnHelper.group({
+        header: "Game",
+        columns: gameColumns,
+      }),
+      ...players.map(({ id, name, color }) =>
+        columnHelper.group({
+          id: `player-stats-${id}`,
+          header: () => <span className={textColor({ color })}>{name}</span>,
+          columns: playerColumns(id),
+        })
+      ),
+    ],
+    [players]
+  )
+}
+
 interface GamesTableProps {
   data: Game[]
   onEdit: Dispatch<Game>
@@ -57,6 +99,8 @@ interface GamesTableProps {
 }
 
 export const GamesTable = ({ data, onEdit, onDelete }: GamesTableProps) => {
+  const columns = useColumns()
+
   const table = useReactTable<Game>({
     data,
     columns,

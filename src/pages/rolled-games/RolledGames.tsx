@@ -62,13 +62,13 @@ export const RolledGames = () => {
           onCancel={() => setEditing(undefined)}
           title="Edit game"
           description={`Edit "${editing.name}" to your liking and click on "Save" to confirm.`}
-          onConfirm={({ id, date, name, player }) => {
+          onConfirm={({ id, name, player, ...rest }) => {
             setEditing(undefined)
             if (id)
               editGame(id, {
-                date,
                 name: name?.slice(0, 50),
                 playerId: player?.id,
+                ...rest,
               })
           }}
         />

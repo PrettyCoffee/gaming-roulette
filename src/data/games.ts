@@ -14,11 +14,20 @@ import { timeBetween, timeSince, today } from "~/utils/date"
 
 import { Player, playersAtom } from "./players"
 
+export interface PlayerStats {
+  rating?: number
+  playtime?: number
+}
+
 export interface RawGame {
   id: string
   name: string
   playerId: string
   date: string
+  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+  stats?: {
+    [playerId: string]: PlayerStats
+  }
 }
 
 export interface Game extends Omit<RawGame, "playerId"> {

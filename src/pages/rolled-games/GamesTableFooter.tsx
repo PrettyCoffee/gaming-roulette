@@ -26,7 +26,7 @@ export const GamesTableFooter = ({ games }: { games: Game[] }) => {
   return (
     <Table.Footer>
       <Table.Row>
-        <Table.Cell colSpan={4}>
+        <Table.Cell colSpan={99}>
           <div className="flex items-center gap-4">
             Count:
             {Object.values(gamesByPlayers).map(({ count, player }) => (

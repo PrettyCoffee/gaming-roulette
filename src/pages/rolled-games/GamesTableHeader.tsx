@@ -7,6 +7,7 @@ import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
+import { cn } from "~/utils/utils"
 
 interface SortableHeadProps {
   sortState: SortDirection | false
@@ -20,7 +21,7 @@ const SortableHead = ({
   <Button
     variant="flat"
     onClick={onClick}
-    className="-ml-2 w-[calc(100%+theme(width.4))] justify-start px-2"
+    className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-start px-2"
   >
     {children}
     {sortState === "asc" && <Icon icon={ChevronUp} className="ml-auto" />}
@@ -40,6 +41,8 @@ const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
     <NativeTable.Head
       key={header.id}
       style={{ width: `${header.getSize()}rem` }}
+      colSpan={header.colSpan}
+      className={cn(header.column.getCanSort() ? "h-10" : "h-8")}
     >
       <Comp sortState={sortState} onClick={() => header.column.toggleSorting()}>
         {content}
@@ -56,8 +59,10 @@ export const GamesTableHeader = ({ table }: { table: Table<Game> }) => {
           {headerGroup.headers.map(header => (
             <HeaderCell key={header.id} header={header} />
           ))}
-          {/* Empty Actions Header */}
-          <NativeTable.Head />
+
+          <NativeTable.Head className="h-0">
+            {/* Empty Actions Header */}
+          </NativeTable.Head>
         </NativeTable.Row>
       ))}
     </NativeTable.Header>

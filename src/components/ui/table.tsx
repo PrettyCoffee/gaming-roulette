@@ -23,7 +23,7 @@ const Header = React.forwardRef<
   <thead
     ref={ref}
     className={cn(
-      "sticky top-0 z-10 bg-background [&_tr]:border-b",
+      "sticky top-0 z-10 bg-background [&_tr]:border-0",
       "after:absolute after:inset-x-0 after:bottom-0 after:block after:h-px after:w-full after:bg-muted",
       className
     )}
