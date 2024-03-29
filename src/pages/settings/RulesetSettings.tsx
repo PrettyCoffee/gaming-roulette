@@ -1,7 +1,7 @@
-import { ChangeEvent, useId, useState } from "react"
+import { useId, useState } from "react"
 
 import { InputLabel } from "~/components/InputLabel"
-import { Input } from "~/components/ui/input"
+import { NumberInput } from "~/components/NumberInput"
 import { Switch } from "~/components/ui/switch"
 import { Textarea } from "~/components/ui/textarea"
 import { Ruleset, useRuleset } from "~/data/ruleset"
@@ -10,26 +10,25 @@ import { Grid } from "./Grid"
 
 export const GamesPerPersonInput = () => {
   const [{ gamesPerPerson }, setRuleset] = useRuleset()
-  const [value, setValue] = useState(String(gamesPerPerson))
-
-  const setGamesPerPerson = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const numbers = target.value.replace(/\D/g, "")
-    setValue(numbers)
-    const value = parseInt(numbers) || 1
-    const gamesPerPerson = Math.max(1, value)
-    setRuleset(prev => ({ ...prev, gamesPerPerson }))
-  }
 
   return (
     <>
       <InputLabel className="mb-2" htmlFor={"games-per-person"}>
         Games per person
       </InputLabel>
-      <Input
+      <NumberInput
         id={"games-per-person"}
-        value={value}
-        onChange={setGamesPerPerson}
+        value={gamesPerPerson}
+        onChange={value =>
+          setRuleset(prev => ({
+            ...prev,
+            gamesPerPerson: Math.floor(value ?? 1),
+          }))
+        }
         placeholder="10"
+        unit="games"
+        min={1}
+        max={99}
       />
     </>
   )
