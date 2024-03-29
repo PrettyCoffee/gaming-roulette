@@ -22,7 +22,7 @@ export const TitleTooltip = ({
   !title || disabled ? (
     children
   ) : (
-    <Tooltip.Root>
+    <Tooltip.Root disableHoverableContent>
       <Tooltip.Trigger asChild={asChild}>{children}</Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content side={side}>{title}</Tooltip.Content>
