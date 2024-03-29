@@ -56,14 +56,24 @@ const playerColumns = (id: string) => [
   columnHelper.accessor("stats", {
     id: `player-stats-${id}-time`,
     header: "Time",
+    sortingFn: ({ original: a }, { original: b }) => {
+      const playtimeA = a.stats?.[id]?.playtime ?? 0
+      const playtimeB = b.stats?.[id]?.playtime ?? 0
+      return playtimeA - playtimeB
+    },
     cell: ({ getValue }) => {
       const stats = getValue()?.[id]
-      return <Text>{stats?.playtime ?? "-"}h</Text>
+      return <Text>{stats?.playtime ?? "-"} h</Text>
     },
   }),
   columnHelper.accessor("stats", {
     id: `player-stats-${id}-rating`,
     header: "Rating",
+    sortingFn: ({ original: a }, { original: b }) => {
+      const ratingA = a.stats?.[id]?.rating ?? 0
+      const ratingB = b.stats?.[id]?.rating ?? 0
+      return ratingA - ratingB
+    },
     cell: ({ getValue }) => {
       const stats = getValue()?.[id]
       return <Text>{stats?.rating ?? "-"} / 10</Text>
