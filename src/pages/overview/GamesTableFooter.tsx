@@ -1,3 +1,4 @@
+import { Table as TableInstance } from "@tanstack/react-table"
 import { Fragment } from "react/jsx-runtime"
 
 import { Swatch } from "~/components/Swatch"
@@ -31,9 +32,19 @@ const getGamesByPlayers = (games: Game[]) =>
     }
   }, {})
 
-export const GamesTableFooter = ({ games }: { games: Game[] }) => {
+export const GamesTableFooter = ({
+  games,
+  table,
+}: {
+  games: Game[]
+  table: TableInstance<Game>
+}) => {
   const playerStats = useGamePlayerStats()
   const gamesByPlayers = getGamesByPlayers(games)
+
+  if (table.isFiltering()) {
+    return null
+  }
 
   return (
     <Table.Footer>

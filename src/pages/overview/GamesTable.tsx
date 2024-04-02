@@ -13,6 +13,7 @@ import { Game } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { textColor } from "~/utils/colors"
 
+import { FilterFeature } from "./FilterFeature"
 import { GamesTableBody } from "./GamesTableBody"
 import { GamesTableFooter } from "./GamesTableFooter"
 import { GamesTableHeader } from "./GamesTableHeader"
@@ -112,6 +113,7 @@ export const GamesTable = ({ data, onEdit, onDelete }: GamesTableProps) => {
   const columns = useColumns()
 
   const table = useReactTable<Game>({
+    _features: [FilterFeature<Game>(["name", "date", "player.name"])],
     data,
     columns,
     defaultColumn: {
@@ -130,7 +132,7 @@ export const GamesTable = ({ data, onEdit, onDelete }: GamesTableProps) => {
     <NativeTable.Root>
       <GamesTableHeader table={table} />
       <GamesTableBody table={table} onEdit={onEdit} onDelete={onDelete} />
-      <GamesTableFooter games={data} />
+      <GamesTableFooter table={table} games={data} />
     </NativeTable.Root>
   )
 }

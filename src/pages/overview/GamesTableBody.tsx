@@ -60,7 +60,10 @@ export const GamesTableBody = ({
   return (
     <NativeTable.Body>
       {table.getRowModel().rows.map(row => (
-        <NativeTable.Row key={row.id}>
+        <NativeTable.Row
+          key={row.id}
+          className={cn(row.isHidden() && "hidden")}
+        >
           {row.getVisibleCells().map(cell => (
             <DataCell key={cell.id} cell={cell} />
           ))}

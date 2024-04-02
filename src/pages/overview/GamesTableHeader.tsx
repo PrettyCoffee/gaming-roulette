@@ -71,7 +71,7 @@ export const GamesTableHeader = ({ table }: { table: Table<Game> }) => {
           ))}
 
           {headers.every(({ subHeaders }) => subHeaders.length === 0) ? (
-            <TableHeaderActions />
+            <TableHeaderActions table={table} />
           ) : (
             <NativeTable.Head className="h-0" />
           )}
