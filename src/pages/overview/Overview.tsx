@@ -2,12 +2,11 @@ import { useState } from "react"
 
 import { Modal } from "~/components/Modal"
 import { NoData } from "~/components/NoData"
-import { Button } from "~/components/ui/button"
 import { Game, useGames } from "~/data/games"
 import { textColor } from "~/utils/colors"
-import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
 
+import { AddGame } from "./AddGame"
 import { GameModal } from "./GameModal"
 import { GamesTable } from "./GamesTable"
 
@@ -33,32 +32,6 @@ const DeleteGame = ({ game, onConfirm, onCancel }: DeleteGameProps) => (
     cancel={{ label: "Cancel", onClick: onCancel }}
   />
 )
-
-const AddGame = ({ label }: { label: string }) => {
-  const { addGame } = useGames()
-  const [adding, setAdding] = useState(false)
-
-  return (
-    <>
-      {adding && (
-        <GameModal
-          initialValue={{ date: today() }}
-          onCancel={() => setAdding(false)}
-          title="Add game"
-          description={`Fill in th information about your game and click on "Save" to add it.`}
-          onConfirm={({ date, name, player }) => {
-            setAdding(false)
-            if (name && date)
-              addGame({ date, name, playerId: player?.id ?? "" })
-          }}
-        />
-      )}
-      <Button variant="ghost" onClick={() => setAdding(true)}>
-        {label}
-      </Button>
-    </>
-  )
-}
 
 export const Overview = () => {
   const { games, removeGame, editGame } = useGames()
