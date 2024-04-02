@@ -27,11 +27,11 @@ const SortableHead = ({
     <Button
       variant="flat"
       onClick={onClick}
-      className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-start px-2"
+      className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-between gap-0 px-2"
     >
       {children}
-      {sortState === "asc" && <Icon icon={ChevronUp} className="ml-auto" />}
-      {sortState === "desc" && <Icon icon={ChevronDown} className="ml-auto" />}
+      {sortState === "asc" && <Icon icon={ChevronUp} />}
+      {sortState === "desc" && <Icon icon={ChevronDown} />}
     </Button>
   )
 }
