@@ -1,28 +1,37 @@
 import { Fragment } from "react/jsx-runtime"
 
 import { Swatch } from "~/components/Swatch"
+import { TitleTooltip } from "~/components/TitleTooltip"
 import { Table } from "~/components/ui/table"
 import { Game, useGamePlayerStats } from "~/data/games"
-import { Player } from "~/data/players"
+import { ColorValue } from "~/utils/colors"
 
 const round = (value: number) => Math.round(value * 10) / 10
 
 const getGamesByPlayers = (games: Game[]) =>
-  games.reduce<Record<string, { count: number; player: Player }>>(
-    (result, game) => {
-      const { player } = game
-      if (!player) return result
+  games.reduce<
+    Record<
+      string,
+      { count: number; id: string; name: string; color: ColorValue }
+    >
+  >((result, game) => {
+    const { player } = game
+    const { id, color, name } = player ?? {
+      id: "unknown",
+      name: "Unknown",
+      color: "neutral",
+    }
 
-      return {
-        ...result,
-        [player.id]: {
-          player,
-          count: (result[player.id]?.count ?? 0) + 1,
-        },
-      }
-    },
-    {}
-  )
+    return {
+      ...result,
+      [id]: {
+        id,
+        color,
+        name,
+        count: (result[id]?.count ?? 0) + 1,
+      },
+    }
+  }, {})
 
 export const GamesTableFooter = ({ games }: { games: Game[] }) => {
   const playerStats = useGamePlayerStats()
@@ -34,11 +43,13 @@ export const GamesTableFooter = ({ games }: { games: Game[] }) => {
         <Table.Cell colSpan={3}>
           <div className="flex items-center gap-4">
             Count:
-            {Object.values(gamesByPlayers).map(({ count, player }) => (
-              <div key={player.id} className="inline-flex items-center gap-1">
-                <Swatch color={player.color} size="sm" />
-                {count}
-              </div>
+            {Object.values(gamesByPlayers).map(({ count, id, name, color }) => (
+              <TitleTooltip key={id} title={name} asChild>
+                <div key={id} className="inline-flex items-center gap-1">
+                  <Swatch color={color} size="sm" />
+                  {count}
+                </div>
+              </TitleTooltip>
             ))}
           </div>
         </Table.Cell>

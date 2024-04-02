@@ -59,6 +59,7 @@ export const bgColor = cva("", {
       fuchsia: "bg-fuchsia-200",
       pink: "bg-pink-200",
       rose: "bg-rose-200",
+      neutral: "bg-zinc-200",
     },
   },
 })
@@ -84,6 +85,7 @@ export const textColor = cva("", {
       fuchsia: "text-fuchsia-200",
       pink: "text-pink-200",
       rose: "text-rose-200",
+      neutral: "text-zinc-200",
     },
   },
 })
@@ -107,6 +109,7 @@ export const borderColor = cva("border", {
       fuchsia: "border-fuchsia-200",
       pink: "border-pink-200",
       rose: "border-rose-200",
+      neutral: "border-zinc-200",
     },
   },
 })
@@ -130,6 +133,7 @@ export const textColorDark = cva("", {
       fuchsia: "text-fuchsia-950",
       pink: "text-pink-950",
       rose: "text-rose-950",
+      neutral: "text-zinc-950",
     },
   },
 })
