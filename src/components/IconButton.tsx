@@ -7,7 +7,7 @@ import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
 import { VisuallyHidden } from "./base/VisuallyHidden"
-import { Icon, IconProp } from "./Icon"
+import { Icon, IconProps } from "./Icon"
 import { TitleTooltip, TitleTooltipProps } from "./TitleTooltip"
 
 const iconButton = cva("shrink-0", {
@@ -24,7 +24,7 @@ const iconButton = cva("shrink-0", {
 
 export interface IconButtonProps
   extends ClassNameProp,
-    IconProp,
+    Pick<IconProps, "icon" | "filled">,
     VariantProps<typeof iconButton>,
     Pick<ButtonProps, "onClick" | "variant" | "disabled" | "muteAudio"> {
   title: string
@@ -36,6 +36,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
       icon,
+      filled,
       title,
       onClick,
       titleSide,
@@ -60,7 +61,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         {...delegated}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
-        <Icon icon={icon} size={size} color="current" />
+        <Icon icon={icon} size={size} color="current" filled={filled} />
       </Button>
     </TitleTooltip>
   )

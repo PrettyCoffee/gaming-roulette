@@ -20,6 +20,10 @@ const icon = cva("inline-block shrink-0", {
       muted: "text-muted-foreground",
       error: "text-red-400",
     },
+    filled: {
+      true: "fill-current",
+      false: "",
+    },
   },
   defaultVariants: {
     color: "default",
