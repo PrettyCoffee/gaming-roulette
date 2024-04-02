@@ -6,6 +6,8 @@ import { Table } from "~/components/ui/table"
 import { Game, useGamePlayerStats } from "~/data/games"
 import { ColorValue } from "~/utils/colors"
 
+import { unknownPlayer } from "./GameModal"
+
 const round = (value: number) => Math.round(value * 10) / 10
 
 const getGamesByPlayers = (games: Game[]) =>
@@ -16,11 +18,7 @@ const getGamesByPlayers = (games: Game[]) =>
     >
   >((result, game) => {
     const { player } = game
-    const { id, color, name } = player ?? {
-      id: "unknown",
-      name: "Unknown",
-      color: "neutral",
-    }
+    const { id, color, name } = player ?? unknownPlayer
 
     return {
       ...result,

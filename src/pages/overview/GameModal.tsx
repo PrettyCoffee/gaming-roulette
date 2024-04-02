@@ -9,10 +9,17 @@ import { Select } from "~/components/Select"
 import { Swatch } from "~/components/Swatch"
 import { Input } from "~/components/ui/input"
 import { Game, PlayerStats } from "~/data/games"
-import { usePlayers } from "~/data/players"
+import { Player, usePlayers } from "~/data/players"
 import { borderColor, ColorValue, textColor } from "~/utils/colors"
 import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
+
+export const unknownPlayer: Player = {
+  id: "unknown",
+  name: "Unknown",
+  color: "neutral",
+  games: [],
+}
 
 interface StatsInputProps {
   stats: Partial<PlayerStats>
@@ -92,6 +99,8 @@ export const GameModal = ({
   const [game, setGame] = useState(initialValue)
   const { players } = usePlayers()
 
+  const playerOptions = [unknownPlayer, ...players]
+
   const set = <Key extends keyof Game>(key: Key, value: Game[Key]) =>
     setGame(prev => ({ ...prev, [key]: value }))
 
@@ -137,10 +146,10 @@ export const GameModal = ({
             onChange={value =>
               set(
                 "player",
-                players.find(({ id }) => id === value)
+                playerOptions.find(({ id }) => id === value)
               )
             }
-            options={players.map(({ id, name, color }) => ({
+            options={playerOptions.map(({ id, name, color }) => ({
               value: id,
               label: (
                 <div className="flex items-center gap-1">
