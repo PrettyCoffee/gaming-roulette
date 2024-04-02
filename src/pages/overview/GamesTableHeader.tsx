@@ -1,4 +1,4 @@
-import { Fragment, PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 
 import { flexRender, Header, SortDirection, Table } from "@tanstack/react-table"
 import { ChevronDown, ChevronUp } from "lucide-react"
