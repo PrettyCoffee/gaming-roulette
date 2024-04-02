@@ -24,8 +24,16 @@ export const githubAtom = atom<GithubData>({
   ],
 })
 
+const isIncomplete = (github: GithubData) =>
+  !github.branch ||
+  !github.filePath ||
+  !github.repoName ||
+  !github.repoOwner ||
+  !github.token
+
 export const useGithub = () => {
   const [github, setGithub] = useAtom(githubAtom)
+  const incomplete = isIncomplete(github)
 
   const setGithubAttribute = <Attribute extends keyof GithubData>(
     key: Attribute,
@@ -34,6 +42,7 @@ export const useGithub = () => {
 
   return {
     ...github,
+    incomplete,
     setGithubAttribute,
   }
 }
@@ -60,7 +69,6 @@ export const onGithubMouseDown = () => {
   window.addEventListener("mousemove", onMouseMove)
 
   timeout = setTimeout(() => {
-    console.log("timeout", holding)
     if (!holding.current) return
     showGithubOptions.set(prev => !prev)
   }, 3000)

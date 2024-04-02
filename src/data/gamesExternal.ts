@@ -8,7 +8,7 @@ import { WEEK } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
 
 import { gamesAtom } from "./games"
-import { githubAtom } from "./github"
+import { useGithub } from "./github"
 import { playersAtom } from "./players"
 import { fetchRepoFile } from "./service/fetchRepoFile"
 
@@ -50,14 +50,14 @@ const splitUserStats = (userStats: string) => {
 }
 export const useGames = () => {
   const [games, setGames] = useAtom(externalGamesAtom)
-  const [{ filePath }] = useAtom(githubAtom)
+  const { filePath, incomplete } = useGithub()
 
   const refreshGames = useCallback(() => {
     setGames(null)
   }, [setGames])
 
   useEffect(() => {
-    if (games != null) return
+    if (incomplete || games != null) return
 
     void fetchRepoFile(filePath)
       .then(text => {
@@ -79,7 +79,7 @@ export const useGames = () => {
           }))
       })
       .then(setGames)
-  }, [filePath, games, setGames])
+  }, [incomplete, filePath, games, setGames])
 
   return { games, refreshGames }
 }

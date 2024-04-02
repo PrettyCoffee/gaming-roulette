@@ -6,10 +6,12 @@ import { Icon } from "~/components/Icon"
 import { LoadingData } from "~/components/LoadingData"
 import { Button } from "~/components/ui/button"
 import { useGames } from "~/data/gamesExternal"
+import { useGithub } from "~/data/github"
 
 export const SyncGithub = () => {
   const [loading, setLoading] = useState(false)
   const { games, refreshGames } = useGames()
+  const { incomplete } = useGithub()
 
   const onRefresh = () => {
     refreshGames()
@@ -26,7 +28,7 @@ export const SyncGithub = () => {
     )
 
   return (
-    <Button variant="flat" onClick={onRefresh}>
+    <Button variant="flat" onClick={onRefresh} disabled={incomplete}>
       <Icon icon={RefreshCw} size="sm" />
       Sync data
     </Button>
