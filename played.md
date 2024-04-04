@@ -24,6 +24,7 @@
 | Journey                          | 2024-03-04 |   2h, 9.2/10 |  1.5h, 6/10 | 1.5h,   5/10 |
 | Spirit of the North              | 2024-03-18 |   5h, 5.8/10 |  7.6h, 6/10 |   4h,   5/10 |
 | Melatonin                        | 2024-03-25 |   2h, 7.7/10 |  2.3h, 7/10 |   Xh,   X/10 |
+| To the Moon                      | 2024-04-04 |   Xh,   X/10 |    Xh, X/10 |   Xh,   X/10 |
 | X                                | 2024-XX-XX |   Xh,   X/10 |    Xh, X/10 |   Xh,   X/10 |
 
 Online:
