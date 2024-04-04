@@ -5,6 +5,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getSortedRowModel,
+  RowData,
 } from "@tanstack/react-table"
 
 import { Text } from "~/components/base/Text"
@@ -17,6 +18,13 @@ import { FilterFeature } from "./FilterFeature"
 import { GamesTableBody } from "./GamesTableBody"
 import { GamesTableFooter } from "./GamesTableFooter"
 import { GamesTableHeader } from "./GamesTableHeader"
+
+declare module "@tanstack/react-table" {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    align?: "start" | "end" | "center"
+  }
+}
 
 const alphaSorting = (a = "", b = "") =>
   a.toLocaleLowerCase() > b.toLocaleLowerCase() ? 1 : -1
@@ -57,6 +65,7 @@ const playerColumns = (id: string) => [
     id: `player-stats-${id}-time`,
     header: "Time",
     size: 5,
+    meta: { align: "end" },
     sortingFn: ({ original: a }, { original: b }) => {
       const playtimeA = a.stats?.[id]?.playtime ?? 0
       const playtimeB = b.stats?.[id]?.playtime ?? 0
@@ -71,6 +80,7 @@ const playerColumns = (id: string) => [
     id: `player-stats-${id}-rating`,
     header: "Rating",
     size: 5,
+    meta: { align: "end" },
     sortingFn: ({ original: a }, { original: b }) => {
       const ratingA = a.stats?.[id]?.rating ?? 0
       const ratingB = b.stats?.[id]?.rating ?? 0

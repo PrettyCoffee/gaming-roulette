@@ -23,6 +23,7 @@ const SortableHead = ({ header, children }: PropsWithChildren<HeaderProp>) => {
       variant="flat"
       onClick={() => header.column.toggleSorting()}
       className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-between gap-0 px-2"
+      style={{ justifyContent: header.column.columnDef.meta?.align }}
     >
       <span className="truncate">{children}</span>
       {sortState === "asc" && <Icon icon={ChevronUp} />}
@@ -35,8 +36,10 @@ const HeaderCell = ({ header }: HeaderProp) => {
   return (
     <NativeTable.Head
       key={header.id}
-      style={{ width: `${header.getSize()}rem` }}
-      colSpan={header.colSpan}
+      style={{
+        width: `${header.getSize()}rem`,
+        textAlign: header.column.columnDef.meta?.align,
+      }}
     >
       <SortableHead header={header}>
         {flexRender(header.column.columnDef.header, header.getContext())}

@@ -51,8 +51,8 @@ export const GamesTableFooter = ({
     .slice(0, 3)
     .reduce((acc, { getSize }) => acc + getSize(), 0)
 
-  const timeSize = columns[4]?.getSize() ?? 0
-  const ratingSize = columns[5]?.getSize() ?? 0
+  const timeColumn = columns[4]
+  const ratingColumn = columns[5]
 
   return (
     <Table.Footer>
@@ -72,10 +72,20 @@ export const GamesTableFooter = ({
         </Table.Cell>
         {playerStats.map(({ id, averageRating, averageTime }) => (
           <Fragment key={id}>
-            <Table.Cell style={{ width: `${timeSize}rem` }}>
+            <Table.Cell
+              style={{
+                width: `${timeColumn?.getSize() ?? 0}rem`,
+                textAlign: timeColumn?.columnDef.meta?.align,
+              }}
+            >
               {round(averageTime)} h
             </Table.Cell>
-            <Table.Cell style={{ width: `${ratingSize}rem` }}>
+            <Table.Cell
+              style={{
+                width: `${ratingColumn?.getSize() ?? 0}rem`,
+                textAlign: ratingColumn?.columnDef.meta?.align,
+              }}
+            >
               {round(averageRating)} / 10
             </Table.Cell>
           </Fragment>
