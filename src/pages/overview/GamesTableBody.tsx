@@ -1,4 +1,4 @@
-import { Dispatch } from "react"
+import { Dispatch, useRef } from "react"
 
 import { Cell, flexRender, Row, Table } from "@tanstack/react-table"
 import { PenBox, Trash } from "lucide-react"
@@ -6,6 +6,7 @@ import { PenBox, Trash } from "lucide-react"
 import { IconButton } from "~/components/IconButton"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
+import { useTransition } from "~/hooks/useTransition"
 import { cn } from "~/utils/utils"
 
 interface TableActionsProps {
@@ -49,6 +50,49 @@ const DataCell = ({ cell }: { cell: Cell<Game, unknown> }) => (
   </NativeTable.Cell>
 )
 
+interface GamesTableRowProps {
+  row: Row<Game>
+  onEdit: (game: Game) => void
+  onDelete: (game: Game) => void
+}
+
+const DataRow = ({ row, onDelete, onEdit }: GamesTableRowProps) => {
+  const ref = useRef<HTMLTableRowElement>(null)
+  const { state, className } = useTransition({
+    ref,
+    hide: row.isHidden(),
+    styles: {
+      toHide: "h-0 border-none opacity-0",
+      toShow: "h-12 border-b opacity-100",
+      whileHide: "hidden",
+    },
+  })
+
+  if (state === "hide") return null
+
+  return (
+    <NativeTable.Row
+      key={row.id}
+      ref={ref}
+      className={cn(
+        "overflow-hidden transition-[height,opacity] duration-300 motion-reduce:duration-0",
+        className
+      )}
+    >
+      {row.getVisibleCells().map(cell => (
+        <DataCell key={cell.id} cell={cell} />
+      ))}
+
+      <TableActions
+        key={row.id}
+        row={row}
+        onEdit={onEdit}
+        onDelete={onDelete}
+      />
+    </NativeTable.Row>
+  )
+}
+
 interface GamesTableBodyProps {
   table: Table<Game>
   onEdit: (game: Game) => void
@@ -63,21 +107,7 @@ export const GamesTableBody = ({
   return (
     <NativeTable.Body>
       {table.getRowModel().rows.map(row => (
-        <NativeTable.Row
-          key={row.id}
-          className={cn(row.isHidden() && "hidden")}
-        >
-          {row.getVisibleCells().map(cell => (
-            <DataCell key={cell.id} cell={cell} />
-          ))}
-
-          <TableActions
-            key={row.id}
-            row={row}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        </NativeTable.Row>
+        <DataRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
       ))}
     </NativeTable.Body>
   )
