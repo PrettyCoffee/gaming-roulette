@@ -46,10 +46,18 @@ export const GamesTableFooter = ({
     return null
   }
 
+  const columns = table.getAllLeafColumns()
+  const countSize = columns
+    .slice(0, 3)
+    .reduce((acc, { getSize }) => acc + getSize(), 0)
+
+  const timeSize = columns[4]?.getSize() ?? 0
+  const ratingSize = columns[5]?.getSize() ?? 0
+
   return (
     <Table.Footer>
       <Table.Row>
-        <Table.Cell colSpan={3}>
+        <Table.Cell style={{ width: `${countSize}rem` }}>
           <div className="flex items-center gap-4">
             Count:
             {Object.values(gamesByPlayers).map(({ count, id, name, color }) => (
@@ -64,8 +72,12 @@ export const GamesTableFooter = ({
         </Table.Cell>
         {playerStats.map(({ id, averageRating, averageTime }) => (
           <Fragment key={id}>
-            <Table.Cell>{round(averageTime)} h</Table.Cell>
-            <Table.Cell>{round(averageRating)} / 10</Table.Cell>
+            <Table.Cell style={{ width: `${timeSize}rem` }}>
+              {round(averageTime)} h
+            </Table.Cell>
+            <Table.Cell style={{ width: `${ratingSize}rem` }}>
+              {round(averageRating)} / 10
+            </Table.Cell>
           </Fragment>
         ))}
         <Table.Cell />

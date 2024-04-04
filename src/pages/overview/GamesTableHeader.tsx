@@ -7,7 +7,6 @@ import { Icon } from "~/components/Icon"
 import { Button } from "~/components/ui/button"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
-import { cn } from "~/utils/utils"
 
 import { TableHeaderActions } from "./TableActions"
 
@@ -48,7 +47,6 @@ const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
       key={header.id}
       style={{ width: `${header.getSize()}rem` }}
       colSpan={header.colSpan}
-      className={cn(header.column.getCanSort() ? "h-10" : "h-8")}
     >
       <SortableHead
         sortable={header.column.getCanSort()}

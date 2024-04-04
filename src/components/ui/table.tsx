@@ -10,6 +10,7 @@ const Root = React.forwardRef<
     <table
       ref={ref}
       className={cn("w-full caption-bottom text-sm", className)}
+      style={{ borderCollapse: "separate", borderSpacing: "0" }}
       {...props}
     />
   </div>
@@ -22,11 +23,7 @@ const Header = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn(
-      "sticky top-0 z-10 bg-background [&_tr]:border-0",
-      "after:absolute after:inset-x-0 after:bottom-0 after:block after:h-px after:w-full after:bg-muted",
-      className
-    )}
+    className={cn("sticky top-0 z-10 bg-background", className)}
     {...props}
   />
 ))
@@ -66,7 +63,8 @@ const Row = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b data-[state=selected]:bg-muted [tbody>&:focus-within]:bg-alt [tbody>&:hover]:bg-alt",
+      "flex h-12 items-center border-b border-border data-[state=selected]:bg-muted [tbody>&:focus-within]:bg-alt [tbody>&:hover]:bg-alt",
+      "[tfoot_&]:h-8 [thead_&:not(:last-of-type)]:h-8 [thead_&:not(:last-of-type)]:border-0",
       className
     )}
     {...props}
@@ -81,7 +79,7 @@ const Head = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-12 bg-background px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "bg-background px-4 text-left font-medium text-muted-foreground",
       "relative after:absolute after:inset-y-0 after:right-0 after:my-auto after:block after:h-4 after:w-px after:bg-border",
       "[&:last-of-type:after]:hidden",
       className
@@ -98,7 +96,7 @@ const Cell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "truncate px-4 py-2 align-middle [&:has([role=checkbox])]:pr-0",
+      "h-max truncate px-4 [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}

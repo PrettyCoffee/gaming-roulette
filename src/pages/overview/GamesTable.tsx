@@ -31,8 +31,7 @@ const gameColumns = [
   }),
   columnHelper.accessor("date", {
     header: "Date",
-    size: 6,
-    minSize: 6,
+    size: 7,
     sortDescFirst: true,
   }),
   columnHelper.accessor("player", {
@@ -57,6 +56,7 @@ const playerColumns = (id: string) => [
   columnHelper.accessor("stats", {
     id: `player-stats-${id}-time`,
     header: "Time",
+    size: 5,
     sortingFn: ({ original: a }, { original: b }) => {
       const playtimeA = a.stats?.[id]?.playtime ?? 0
       const playtimeB = b.stats?.[id]?.playtime ?? 0
@@ -70,6 +70,7 @@ const playerColumns = (id: string) => [
   columnHelper.accessor("stats", {
     id: `player-stats-${id}-rating`,
     header: "Rating",
+    size: 5,
     sortingFn: ({ original: a }, { original: b }) => {
       const ratingA = a.stats?.[id]?.rating ?? 0
       const ratingB = b.stats?.[id]?.rating ?? 0
