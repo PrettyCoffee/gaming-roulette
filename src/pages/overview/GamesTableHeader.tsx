@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react"
 
-import { flexRender, Header, SortDirection, Table } from "@tanstack/react-table"
+import { flexRender, Header, Table } from "@tanstack/react-table"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 import { Icon } from "~/components/Icon"
@@ -10,50 +10,36 @@ import { Game } from "~/data/games"
 
 import { TableHeaderActions } from "./TableActions"
 
-interface SortableHeadProps {
-  sortable: boolean
-  sortState: SortDirection | false
-  onClick: () => void
+interface HeaderProp {
+  header: Header<Game, unknown>
 }
-const SortableHead = ({
-  sortable,
-  onClick,
-  sortState,
-  children,
-}: PropsWithChildren<SortableHeadProps>) => {
-  if (!sortable) return <>{children}</>
+
+const SortableHead = ({ header, children }: PropsWithChildren<HeaderProp>) => {
+  if (!header.column.getCanSort()) return <>{children}</>
+
+  const sortState = header.column.getIsSorted()
   return (
     <Button
       variant="flat"
-      onClick={onClick}
+      onClick={() => header.column.toggleSorting()}
       className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-between gap-0 px-2"
     >
-      {children}
+      <span className="truncate">{children}</span>
       {sortState === "asc" && <Icon icon={ChevronUp} />}
       {sortState === "desc" && <Icon icon={ChevronDown} />}
     </Button>
   )
 }
 
-const HeaderCell = ({ header }: { header: Header<Game, unknown> }) => {
-  const sortState = header.column.getIsSorted()
-  const content = flexRender(
-    header.column.columnDef.header,
-    header.getContext()
-  )
-
+const HeaderCell = ({ header }: HeaderProp) => {
   return (
     <NativeTable.Head
       key={header.id}
       style={{ width: `${header.getSize()}rem` }}
       colSpan={header.colSpan}
     >
-      <SortableHead
-        sortable={header.column.getCanSort()}
-        sortState={sortState}
-        onClick={() => header.column.toggleSorting()}
-      >
-        {content}
+      <SortableHead header={header}>
+        {flexRender(header.column.columnDef.header, header.getContext())}
       </SortableHead>
     </NativeTable.Head>
   )
