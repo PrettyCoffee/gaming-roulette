@@ -75,7 +75,7 @@ const DataRow = ({ row, onDelete, onEdit }: GamesTableRowProps) => {
       key={row.id}
       ref={ref}
       className={cn(
-        "overflow-hidden transition-[height,opacity] duration-300 motion-reduce:duration-0",
+        "transition-[height,opacity] duration-300 motion-reduce:duration-0",
         className
       )}
     >
