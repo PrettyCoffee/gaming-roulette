@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { m } from "framer-motion"
 import { css, keyframes } from "goober"
@@ -52,11 +52,13 @@ const circle = css`
 
 export const Loading = () => {
   const [defer, setDefer] = useState(true)
-  if (defer) {
+
+  useEffect(() => {
+    if (!defer) return
     setTimeout(() => setDefer(false), 200)
-    return null
-  }
-  return (
+  }, [defer])
+
+  return defer ? null : (
     <div className="flex size-full items-center justify-center">
       <svg
         viewBox="0 0 24 24"
