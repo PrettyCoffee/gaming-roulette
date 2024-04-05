@@ -29,6 +29,10 @@ const playButtonSound = ({ e, sound, muteAudio }: PlayButtonSoundProps) => {
 
   const url = sound === "click" ? click : hover
   const playbackRate = sound === "hover" ? 1.5 : undefined
+  if (sound === "hover") {
+    // Disable hover sounds for now
+    return
+  }
   playAudio(url, {
     volume: audioSettingsAtom.get().buttonVolume,
     playbackRate,
