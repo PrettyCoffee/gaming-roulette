@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 
 import { css } from "goober"
 import { Github } from "lucide-react"
@@ -6,6 +6,7 @@ import { Github } from "lucide-react"
 import { ErrorBoundary } from "~/components/ErrorBoundary"
 import { Icon } from "~/components/Icon"
 import { Link } from "~/components/Link"
+import { Loading } from "~/components/Loading"
 import { Navigation } from "~/components/Navigation"
 import { onGithubMouseDown } from "~/data/github"
 import { usePlayers } from "~/data/players"
@@ -85,7 +86,9 @@ export const Pages = () => {
       >
         <h1 className="sr-only">{currentRoute?.label}</h1>
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <ActiveView />
+          <Suspense fallback={<Loading />}>
+            <ActiveView />
+          </Suspense>
         </ErrorBoundary>
       </main>
       <footer className={cn("flex flex-col px-2 pb-2", footer)}>

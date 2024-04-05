@@ -1,3 +1,5 @@
+import { lazy } from "react"
+
 import {
   Dices,
   LucideIcon,
@@ -6,12 +8,6 @@ import {
   GanttChartSquare,
   Home as HomeIcon,
 } from "lucide-react"
-
-import { Current } from "./current/Current"
-import { Home } from "./home/Home"
-import { Overview } from "./overview/Overview"
-import { Settings } from "./settings/Settings"
-import { Spinner } from "./spinner/Spinner"
 
 export interface Route {
   label: string
@@ -27,30 +23,30 @@ export const routes: Route[] = [
     label: "Start",
     value: "start",
     icon: HomeIcon,
-    component: Home,
+    component: lazy(() => import("./home/Home")),
   },
   {
     label: "Current Games",
     value: "current-games",
     icon: Gamepad,
-    component: Current,
+    component: lazy(() => import("./current/Current")),
   },
   {
     label: "Game Picker",
     value: "game-picker",
     icon: Dices,
-    component: Spinner,
+    component: lazy(() => import("./spinner/Spinner")),
   },
   {
     label: "Overview",
     value: "overview",
-    component: Overview,
     icon: GanttChartSquare,
+    component: lazy(() => import("./overview/Overview")),
   },
   {
     label: "Settings",
     value: "settings",
     icon: SettingsIcon,
-    component: Settings,
+    component: lazy(() => import("./settings/Settings")),
   },
 ]

@@ -33,7 +33,7 @@ const DeleteGame = ({ game, onConfirm, onCancel }: DeleteGameProps) => (
   />
 )
 
-export const Overview = () => {
+const Overview = () => {
   const { games, removeGame, editGame } = useGames()
   const [editing, setEditing] = useState<Game | undefined>()
   const [deleting, setDeleting] = useState<Game | undefined>()
@@ -93,3 +93,5 @@ export const Overview = () => {
     </>
   )
 }
+
+export default Overview

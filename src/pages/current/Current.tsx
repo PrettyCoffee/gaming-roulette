@@ -109,7 +109,7 @@ const PlayerGames = ({
   )
 }
 
-export const Current = () => {
+const Current = () => {
   const { players, setPlayerAttribute } = usePlayers()
 
   return (
@@ -130,3 +130,5 @@ export const Current = () => {
     </div>
   )
 }
+
+export default Current

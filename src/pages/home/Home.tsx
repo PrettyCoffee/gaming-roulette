@@ -168,7 +168,7 @@ const GameStats = () => {
   )
 }
 
-export const Home = () => {
+const Home = () => {
   return (
     <div className="flex h-full flex-col gap-2">
       <Greeting />
@@ -181,3 +181,5 @@ export const Home = () => {
     </div>
   )
 }
+
+export default Home

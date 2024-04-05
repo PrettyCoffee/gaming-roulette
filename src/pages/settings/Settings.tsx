@@ -7,7 +7,7 @@ import { GithubSettings } from "./GithubSettings"
 import { PlayerSettings } from "./PlayerSettings"
 import { RulesetSettings } from "./RulesetSettings"
 
-export const Settings = () => {
+const Settings = () => {
   const showGithubOptions = useShowGithubOptions()
   return (
     <Tabs.Root defaultValue="general">
@@ -44,3 +44,5 @@ export const Settings = () => {
     </Tabs.Root>
   )
 }
+
+export default Settings

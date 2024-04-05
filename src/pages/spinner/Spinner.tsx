@@ -74,7 +74,7 @@ export interface SpinnerStateProps {
   transitionDuration: number
 }
 
-export const Spinner = () => {
+const Spinner = () => {
   const [settings] = useSettings()
   const { setPlayers } = usePlayers()
   const { addGame } = useGames()
@@ -157,3 +157,5 @@ export const Spinner = () => {
     </div>
   )
 }
+
+export default Spinner

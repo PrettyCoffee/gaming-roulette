@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { startTransition, useCallback, useEffect, useState } from "react"
 
 import { Route } from "~/pages/routes"
 
@@ -14,8 +14,10 @@ export const useHashRouter = ({ fallback, routes }: HashRouterProps) => {
       const route =
         routes.find(({ value: routeValue }) => routeValue === value) ?? fallback
       if (!route) return
-      setCurrent(route.value)
-      window.location.hash = route.value
+      startTransition(() => {
+        setCurrent(route.value)
+        window.location.hash = route.value
+      })
     },
     [fallback, routes]
   )
