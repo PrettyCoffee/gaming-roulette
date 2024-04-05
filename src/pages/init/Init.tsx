@@ -60,6 +60,9 @@ const Intro = ({ onContinue }: StepProps) => (
       <br />
       <br />
       Now, let&apos;s start with setting the app up. ✨
+      <br />
+      <br />
+      Note: You can adjust all settings later on in the settings menu.
     </Description>
     <NextAction label="Let's go!" onClick={onContinue} />
   </Section>
@@ -93,7 +96,7 @@ const Ruleset = ({ onContinue }: StepProps) => (
       duplicates allowed? Are there any additional rules? Take your time and
       define a ruleset.
     </Description>
-    <div className="-ml-2 mt-2">
+    <div className="-ml-2 mt-2 w-full">
       <RulesetSettings />
     </div>
     <NextAction label="Finish up!" onClick={onContinue} />
@@ -110,6 +113,14 @@ const Finish = ({ onContinue }: StepProps) => (
         Gaming Roulette
       </Text>
       ! 🍀
+      <br />
+      <br />
+      By the way, there are some more{" "}
+      <Text gradient={{ from: "green", to: "orange" }} bold>
+        awesome
+      </Text>{" "}
+      settings you can adjust in the settings menu! Check them out if you want
+      to.
     </Description>
     <NextAction label="Let's start spinning!" onClick={onContinue} />
   </Section>
