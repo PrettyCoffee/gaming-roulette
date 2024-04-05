@@ -52,12 +52,12 @@ export const NumberInput = ({
   return (
     <div className="relative w-max">
       <Input
-        ref={el => {
-          if (!el) return
+        ref={el =>
+          el &&
           setDigitsWidth(
             Math.max(meassureText(placeholder, el), meassureText(internal, el))
           )
-        }}
+        }
         {...delegated}
         placeholder={placeholder}
         value={internal}
@@ -74,7 +74,7 @@ export const NumberInput = ({
         }}
       />
       <Text
-        ref={el => el && setUnitWidth(el.offsetWidth)}
+        ref={el => el && setUnitWidth(meassureText(unit ?? "", el))}
         className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
         color="muted"
         size="sm"
