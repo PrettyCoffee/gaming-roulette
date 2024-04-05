@@ -1,58 +1,45 @@
-const amountOfColumns = (line: string) => line.replace(/[^|]*/gi, "").length - 1
+const splitRow = (row: string) =>
+  row
+    .replace(/^\|/, "") // remove leading separator
+    .replace(/\|$/, "") // remove trailing separator
+    .split("|")
+    .map(cell => cell.trim())
 
-const extractTableLines = (lines: string[], columns: string[]) =>
-  lines.reduce(
+interface TableRowsResult {
+  rows: string[][]
+  foundEnd: boolean
+}
+const extractTableRows = (lines: string[]) =>
+  lines.reduce<TableRowsResult>(
     (result, line) => {
-      if (!line.startsWith("|") || line.replace(/[|-\s]/gi, "") === "") {
-        return result
+      const { foundEnd, rows } = result
+      if (foundEnd) return result
+      if (!line.startsWith("|")) {
+        return rows.length > 0 ? { ...result, foundEnd: true } : result
       }
-
-      if (!result.header) {
-        return {
-          ...result,
-          header: line,
-        }
-      }
-
-      if (columns.length !== amountOfColumns(line)) {
-        return result
-      }
-
-      return {
-        ...result,
-        rows: result.body.push(line),
-      }
+      return { ...result, rows: [...rows, splitRow(line)] }
     },
-    { header: null as string | null, body: [] as string[] }
+    { rows: [], foundEnd: false }
+  ).rows
+
+const formatTable = (rows: string[][]) => {
+  const separatorIndex = rows.findIndex(row =>
+    row.every(cell => cell.replace(/[\s-]*/gi, "") === "")
   )
+  const header = rows.slice(0, separatorIndex).at(-1) ?? []
+  const body = rows.slice(separatorIndex + 1)
 
-const parseTableLines = <ColumnName extends string>(
-  columns: ColumnName[],
-  lines: string[]
-): Record<ColumnName, string>[] => {
-  return lines.map(line => {
-    const values = line
-      .split("|")
-      .map(value => value.trim())
-      .filter(Boolean)
-
-    const result = {} as Record<ColumnName, string>
-    columns.forEach((column, index) => {
-      const value = values[index]
-      if (value == null) return
-      result[column] = value
-    })
-    return result
-  })
+  return body.map(row =>
+    row.reduce<Record<string, string>>((result, cell, index) => {
+      const headerCell = (header[index] ?? "").toLowerCase()
+      result[headerCell] = cell
+      return result
+    }, {})
+  )
 }
 
-export const parseMarkdownTable = <ColumnName extends string>(
-  markdown: string,
-  columns: ColumnName[]
-): Record<ColumnName, string>[] => {
+export const parseMarkdownTable = (markdown: string) => {
   const lines = markdown.split("\n").map(line => line.trim())
-
-  const { body } = extractTableLines(lines, columns)
-
-  return parseTableLines(columns, body)
+  const rows = extractTableRows(lines)
+  return formatTable(rows)
 }

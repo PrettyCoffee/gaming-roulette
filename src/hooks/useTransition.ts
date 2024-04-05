@@ -78,7 +78,6 @@ export const useTransition = ({ ref, hide, styles }: TransitionProps) => {
     ref: ref.current,
     event: "transitionend",
     handler: () => {
-      console.log("transitionend")
       setTransition("idle")
     },
   })

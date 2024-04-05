@@ -5,12 +5,12 @@ import { RefreshCw } from "lucide-react"
 import { Icon } from "~/components/Icon"
 import { LoadingData } from "~/components/LoadingData"
 import { Button } from "~/components/ui/button"
-import { useGames } from "~/data/gamesExternal"
+import { useExternalGames } from "~/data/externalGames"
 import { useGithub } from "~/data/github"
 
 export const SyncGithub = () => {
   const [loading, setLoading] = useState(false)
-  const { games, refreshGames } = useGames()
+  const { status, refreshGames } = useExternalGames()
   const { incomplete } = useGithub()
 
   const onRefresh = () => {
@@ -20,7 +20,7 @@ export const SyncGithub = () => {
     setTimeout(() => setLoading(false), 2000)
   }
 
-  if (loading || !games)
+  if (loading || status !== "idle")
     return (
       <div className="fixed inset-0 z-50 flex size-full items-center justify-center bg-base/50">
         <LoadingData label="Loading data..." />

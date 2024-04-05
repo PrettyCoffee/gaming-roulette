@@ -34,3 +34,6 @@ export const readableTime = (time: number) => {
   if (years < 2) return "1 Year"
   return `${years} Years`
 }
+
+export const dateIsValid = (date: string) =>
+  !Number.isNaN(new Date(date).valueOf())
