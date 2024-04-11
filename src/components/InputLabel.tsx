@@ -6,7 +6,7 @@ import { cn } from "~/utils/utils"
 import { ClassNameProp } from "./base/BaseProps"
 
 interface InputLabelProps extends ClassNameProp {
-  htmlFor: string
+  htmlFor?: string
 }
 
 export const InputLabel = ({
