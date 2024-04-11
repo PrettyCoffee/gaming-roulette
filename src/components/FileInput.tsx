@@ -1,0 +1,36 @@
+import { Dispatch } from "react"
+
+import { Upload } from "lucide-react"
+
+import { cn } from "~/utils/utils"
+
+import { ClassNameProp } from "./base/BaseProps"
+import { Icon } from "./Icon"
+import { Button, ButtonProps } from "./ui/button"
+
+interface FileInputProps extends ClassNameProp, Pick<ButtonProps, "variant"> {
+  label: string
+  onChange: Dispatch<File>
+}
+
+export const FileInput = ({
+  label,
+  onChange,
+  variant,
+  className,
+}: FileInputProps) => (
+  <Button asChild variant={variant}>
+    <label className={cn("cursor-pointer select-none", className)}>
+      <input
+        type="file"
+        className="sr-only"
+        onChange={({ target }) => {
+          const file = target.files?.item(0)
+          if (file) onChange(file)
+        }}
+      />
+      <Icon icon={Upload} />
+      {label}
+    </label>
+  </Button>
+)
