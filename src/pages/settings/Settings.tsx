@@ -2,6 +2,7 @@ import { Tabs } from "~/components/ui/tabs"
 import { useShowGithubOptions } from "~/data/github"
 
 import { AudioSettings } from "./AudioSettings"
+import { DataSettings } from "./DataSettings"
 import { GeneralSettings } from "./GeneralSettings"
 import { GithubSettings } from "./GithubSettings"
 import { PlayerSettings } from "./PlayerSettings"
@@ -16,6 +17,7 @@ const Settings = () => {
         <Tabs.Trigger value="audio">Audio</Tabs.Trigger>
         <Tabs.Trigger value="players">Players</Tabs.Trigger>
         <Tabs.Trigger value="ruleset">Ruleset</Tabs.Trigger>
+        <Tabs.Trigger value="data">Data</Tabs.Trigger>
 
         {showGithubOptions && (
           <Tabs.Trigger value="github">Github</Tabs.Trigger>
@@ -36,6 +38,10 @@ const Settings = () => {
 
       <Tabs.Content value="ruleset">
         <RulesetSettings />
+      </Tabs.Content>
+
+      <Tabs.Content value="data">
+        <DataSettings />
       </Tabs.Content>
 
       <Tabs.Content value="github">
