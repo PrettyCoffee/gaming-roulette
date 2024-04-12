@@ -70,6 +70,7 @@ export const useGames = () => {
     (data: Omit<RawGame, "id">) => {
       const game = { id: createId(), ...data }
       setGames(prev => [...prev, game])
+      return game.id
     },
     [setGames]
   )

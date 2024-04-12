@@ -6,6 +6,7 @@ import { Dices } from "lucide-react"
 import victorySound from "~/assets/victory.mp3"
 import { Icon } from "~/components/Icon"
 import { NoData } from "~/components/NoData"
+import { toast } from "~/components/Toaster"
 import { Button } from "~/components/ui/button"
 import { audioSettingsAtom } from "~/data/audioSettings"
 import { useGames } from "~/data/games"
@@ -76,8 +77,8 @@ export interface SpinnerStateProps {
 
 const Spinner = () => {
   const [settings] = useSettings()
-  const { setPlayers } = usePlayers()
-  const { addGame } = useGames()
+  const { setPlayers, setPlayerAttribute } = usePlayers()
+  const { addGame, removeGame } = useGames()
 
   const items = useSpinnerGames()
 
@@ -89,7 +90,7 @@ const Spinner = () => {
     const game = winner != null && items[winner]
     if (!game) return
 
-    addGame({
+    const id = addGame({
       playerId: game.player.id,
       name: game.name,
       date: today(),
@@ -101,7 +102,17 @@ const Spinner = () => {
         games: player.games.filter(g => g !== game.name),
       }))
     )
-  }, [addGame, items, setPlayers, winner])
+
+    toast({
+      kind: "success",
+      message: "Added to games",
+      undo: () => {
+        removeGame(id)
+        setPlayerAttribute(game.player.id, "games", game.player.games)
+        toast({ kind: "info", message: "Reverted action" })
+      },
+    })
+  }, [addGame, items, removeGame, setPlayerAttribute, setPlayers, winner])
 
   const canvas = useRef<HTMLCanvasElement | null>(null)
   useEffect(() => {

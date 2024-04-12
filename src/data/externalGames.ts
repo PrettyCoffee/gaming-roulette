@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react"
 import { reduxDevtools } from "@yaasl/devtools"
 import { atom, derive } from "@yaasl/react"
 
+import { toast } from "~/components/Toaster"
 import { createId } from "~/utils/createId"
 import { dateIsValid } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
@@ -83,6 +84,8 @@ export const useExternalGames = () => {
         const games = parsedGameData.get()
         gamesAtom.set(state => mergeGames(state, games))
       })
+      .then(() => toast({ kind: "success", message: "Games synced" }))
+      .catch(() => toast({ kind: "error", message: "Games could not sync" }))
       .finally(() => setStatus("idle"))
   }, [filePath, incomplete, status])
 

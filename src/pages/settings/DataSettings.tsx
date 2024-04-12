@@ -6,6 +6,7 @@ import { FileInput } from "~/components/FileInput"
 import { Icon } from "~/components/Icon"
 import { InputLabel } from "~/components/InputLabel"
 import { Modal } from "~/components/Modal"
+import { toast } from "~/components/Toaster"
 import { Button } from "~/components/ui/button"
 import { Checkbox } from "~/components/ui/checkbox"
 import { AudioOptions, audioSettingsAtom } from "~/data/audioSettings"
@@ -96,7 +97,10 @@ const ImportData = ({
     variant="ghost"
     label={label}
     onChange={file =>
-      void fileToJson(file).then(data => importData(selected, data))
+      void fileToJson(file)
+        .then(data => importData(selected, data))
+        .then(() => toast({ kind: "success", message: "Import successfull" }))
+        .catch(() => toast({ kind: "error", message: "Import failed" }))
     }
   />
 )
