@@ -5,7 +5,7 @@ import { LazyMotion, domAnimation } from "framer-motion"
 import { createRoot } from "react-dom/client"
 
 import { App } from "./App"
-
+import { Toaster } from "./components/Toaster"
 import "./globals.css"
 
 const root = document.getElementById("root")
@@ -17,6 +17,7 @@ createRoot(root).render(
     <LazyMotion strict features={domAnimation}>
       <TooltipProvider>
         <App />
+        <Toaster />
       </TooltipProvider>
     </LazyMotion>
   </React.StrictMode>
