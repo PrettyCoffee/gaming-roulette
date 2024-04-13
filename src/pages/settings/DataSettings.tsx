@@ -74,31 +74,38 @@ const exportData = (selected: string[]) => {
   download(data, `gaming-roulette_backup_${today()}.json`)
 }
 
-const importData = (selected: string[], data: unknown) => {
-  const dataObj = data
-  if (typeof dataObj !== "object" || !dataObj) return
+const importData = (selected: string[], data: object) => {
   selected.forEach(item => {
     const field = dataFields.find(field => field.value === item)
-    const value = (dataObj as Record<string, unknown>)[item]
+    const value = (data as Record<string, unknown>)[item]
     if (field && value) {
       field.setValue(value)
     }
   })
 }
 
-const ImportData = ({
+export const ImportData = ({
   label,
-  selected,
+  selected = dataFields.map(({ value }) => value),
+  onChange,
 }: {
   label: string
-  selected: string[]
+  selected?: string[]
+  onChange?: (data: Record<string, unknown>) => void
 }) => (
   <FileInput
     variant="ghost"
     label={label}
+    accept=".json"
     onChange={file =>
       void fileToJson(file)
-        .then(data => importData(selected, data))
+        .then(data => {
+          if (typeof data !== "object" || !data) {
+            throw new Error("Invalid data")
+          }
+          importData(selected, data)
+          onChange?.(data as Record<string, unknown>)
+        })
         .then(() => toast({ kind: "success", message: "Import successfull" }))
         .catch(() => toast({ kind: "error", message: "Import failed" }))
     }

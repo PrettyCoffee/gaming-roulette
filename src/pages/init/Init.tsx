@@ -9,6 +9,7 @@ import { IconButton } from "~/components/IconButton"
 import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 
+import { ImportData } from "../settings/DataSettings"
 import { PlayerSettings } from "../settings/PlayerSettings"
 import { RulesetSettings } from "../settings/RulesetSettings"
 
@@ -41,9 +42,10 @@ const Section = ({ children }: PropsWithChildren) => (
 
 interface StepProps {
   onContinue: () => void
+  onFinish: () => void
 }
 
-const Intro = ({ onContinue }: StepProps) => (
+const Intro = ({ onContinue, onFinish }: StepProps) => (
   <Section>
     <Title>Welcome! 👋</Title>
     <Description>
@@ -64,7 +66,10 @@ const Intro = ({ onContinue }: StepProps) => (
       <br />
       Note: You can adjust all settings later on in the settings menu.
     </Description>
-    <NextAction label="Let's go!" onClick={onContinue} />
+    <div className="flex items-center gap-2">
+      <NextAction label="Let's go!" onClick={onContinue} />
+      <ImportData label="Import data instead" onChange={onFinish} />
+    </div>
   </Section>
 )
 
@@ -246,7 +251,7 @@ export const Init = ({ onFinish }: InitProps) => {
 
         {initSteps.map((Step, index) => (
           <Slide key={Step.name} state={getState(index)}>
-            <Step onContinue={goNext} />
+            <Step onContinue={goNext} onFinish={onFinish} />
           </Slide>
         ))}
       </div>
