@@ -94,7 +94,14 @@ export const HandicapSlider = () => {
 
   return (
     <>
-      <InputLabel className="mb-2" htmlFor={"handicap"}>
+      <InputLabel
+        className="mb-2"
+        htmlFor={"handicap"}
+        hint={
+          "Defines the severity of the handicap a player will receive after winning a game. " +
+          "A value of 0 will turn the handicap off. "
+        }
+      >
         Handicap severity
       </InputLabel>
       <Slider
@@ -149,7 +156,15 @@ const AdditionalSettings = () => {
 
   return (
     <>
-      <InputLabel htmlFor={id}>Additional rules</InputLabel>
+      <InputLabel
+        htmlFor={id}
+        hint={
+          "Add any rules here that you want to apply in your gaming roulette. " +
+          "These rules won't be enforced."
+        }
+      >
+        Additional rules
+      </InputLabel>
       <Textarea
         id={id}
         value={value}

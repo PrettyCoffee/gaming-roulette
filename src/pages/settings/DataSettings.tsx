@@ -116,7 +116,14 @@ const ManageData = () => {
   const [selected, setSelected] = useState(dataFields.map(({ value }) => value))
   return (
     <>
-      <InputLabel className="mb-0">Import or export data</InputLabel>
+      <InputLabel
+        hint={
+          "Use or create backups of your gaming roulette data. " +
+          "Below you can specify which data you want to be affected by the export / import. "
+        }
+      >
+        Import or export data
+      </InputLabel>
       <div className="flex gap-2">
         {dataFields.map(({ value, label }) => (
           <Checkbox
@@ -134,11 +141,11 @@ const ManageData = () => {
         ))}
       </div>
       <div className="mt-2 flex items-center gap-2">
-        <ImportData label="Import settings" selected={selected} />
+        <ImportData label="Import data" selected={selected} />
         <span>- or -</span>
         <Button variant="ghost" onClick={() => exportData(selected)}>
           <Icon icon={Download} />
-          Export settings
+          Export data
         </Button>
       </div>
     </>
@@ -149,7 +156,7 @@ const DeleteData = () => {
   const [deleting, setDeleting] = useState(false)
   return (
     <>
-      <InputLabel className="mb-0">Delete data</InputLabel>
+      <InputLabel>Delete data</InputLabel>
       <div>
         <Button variant="destructive" onClick={() => setDeleting(true)}>
           Reset all data
