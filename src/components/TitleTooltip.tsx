@@ -25,7 +25,9 @@ export const TitleTooltip = ({
     <Tooltip.Root disableHoverableContent>
       <Tooltip.Trigger asChild={asChild}>{children}</Tooltip.Trigger>
       <Tooltip.Portal>
-        <Tooltip.Content side={side}>{title}</Tooltip.Content>
+        <Tooltip.Content side={side} className="max-w-64">
+          {title}
+        </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>
   )

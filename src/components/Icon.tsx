@@ -1,3 +1,5 @@
+import { forwardRef } from "react"
+
 import { VariantProps, cva } from "class-variance-authority"
 import { LucideIcon, LucideProps } from "lucide-react"
 
@@ -40,15 +42,18 @@ export type IconProps = IconProp &
   VariantProps<typeof icon> &
   Pick<LucideProps, "strokeWidth">
 
-export const Icon = ({
-  icon: Icon,
-  className,
-  strokeWidth,
-  ...styles
-}: IconProps) => (
-  <Icon
-    className={cn(icon(styles), className)}
-    absoluteStrokeWidth={strokeWidth == null}
-    strokeWidth={strokeWidth ?? styles.size === "xs" ? 3 : undefined}
-  />
+export const Icon = forwardRef<SVGSVGElement, IconProps>(
+  (
+    { icon: Icon, className, strokeWidth, color, filled, size, ...delegated },
+    ref
+  ) => (
+    <Icon
+      ref={ref}
+      className={cn(icon({ color, filled, size }), className)}
+      absoluteStrokeWidth={strokeWidth == null}
+      strokeWidth={strokeWidth ?? size === "xs" ? 3 : undefined}
+      {...delegated}
+    />
+  )
 )
+Icon.displayName = "Icon"
