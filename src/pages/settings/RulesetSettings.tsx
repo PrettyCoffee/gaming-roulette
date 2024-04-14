@@ -2,9 +2,12 @@ import { useId, useState } from "react"
 
 import { InputLabel } from "~/components/InputLabel"
 import { NumberInput } from "~/components/NumberInput"
+import { Slider } from "~/components/ui/slider"
 import { Switch } from "~/components/ui/switch"
 import { Textarea } from "~/components/ui/textarea"
+import { calcHandicap } from "~/data/games"
 import { Ruleset, useRuleset } from "~/data/ruleset"
+import { createRange } from "~/utils/array"
 
 import { Grid } from "./Grid"
 
@@ -30,6 +33,86 @@ export const GamesPerPersonInput = () => {
         min={1}
         max={99}
       />
+    </>
+  )
+}
+
+const normalize = (value: number, min: number, max: number) => {
+  return (value - min) / (max - min)
+}
+
+const HandicapGraph = () => {
+  const [{ handicap, gamesPerPerson: items }] = useRuleset()
+
+  const xAxis = 300
+  const yAxis = 100
+  const points = createRange(items + 1).map(
+    i =>
+      [
+        normalize(i, 0, items) * (xAxis - 4) + 2,
+        yAxis - (calcHandicap(i, items, handicap) * (yAxis - 4) + 2),
+      ] as const
+  )
+
+  return (
+    <div className="relative mx-auto h-24 w-max pb-4 pl-4">
+      <svg viewBox={`0 0 ${xAxis} ${yAxis}`} className="size-full">
+        {points.map(([x, y]) => (
+          <circle
+            key={x}
+            cx={x}
+            cy={y}
+            r={1}
+            className="fill-current stroke-white"
+          />
+        ))}
+        <polyline
+          points={points.map(([x, y]) => `${x},${y}`).join(" ")}
+          className="fill-none stroke-white"
+        />
+        <polyline
+          points={`0,0 0,${yAxis} ${xAxis},${yAxis}`}
+          className="fill-none stroke-muted-foreground"
+        />
+      </svg>
+      <div className="absolute bottom-[calc(50%+theme(height.2))] left-2 flex size-0 items-center justify-center">
+        <caption className="-rotate-90 whitespace-nowrap text-xs text-muted-foreground">
+          Handicap
+        </caption>
+      </div>
+      <div className="absolute bottom-2 left-[calc(50%+theme(width.2))] flex size-0 items-center justify-center">
+        <caption className="whitespace-nowrap text-xs text-muted-foreground">
+          Games won
+        </caption>
+      </div>
+    </div>
+  )
+}
+
+export const HandicapSlider = () => {
+  const [{ handicap }, setRuleset] = useRuleset()
+
+  return (
+    <>
+      <InputLabel className="mb-2" htmlFor={"handicap"}>
+        Handicap severity
+      </InputLabel>
+      <Slider
+        id={"handicap"}
+        value={[handicap]}
+        onValueChange={([value]) => {
+          setRuleset(prev => ({
+            ...prev,
+            handicap: Math.floor((value ?? 1) * 100) / 100,
+          }))
+        }}
+        step={0.05}
+        min={0}
+        max={3}
+      />
+      <span className="block text-sm text-muted-foreground">
+        {handicap === 0 ? "off" : handicap}
+      </span>
     </>
   )
 }
@@ -82,6 +165,13 @@ export const RulesetSettings = () => (
   <Grid.Root>
     <Grid.Item>
       <GamesPerPersonInput />
+    </Grid.Item>
+
+    <Grid.Item newLine>
+      <HandicapSlider />
+    </Grid.Item>
+    <Grid.Item className="pt-2">
+      <HandicapGraph />
     </Grid.Item>
 
     <Grid.Item newLine fullWidth className="flex flex-col gap-2">

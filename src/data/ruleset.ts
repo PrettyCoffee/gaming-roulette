@@ -16,12 +16,14 @@ export interface Ruleset {
   allowDuplicates: boolean
   allowCrossDuplicates: boolean
   additional: string[]
+  handicap: number
 }
 
 export const rulesetAtom = atom<Ruleset>({
   name: "ruleset",
   defaultValue: {
     gamesPerPerson: 10,
+    handicap: 0.75,
     allowDuplicates: true,
     allowCrossDuplicates: true,
     additional: additionalRules,

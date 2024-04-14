@@ -137,7 +137,8 @@ const gamePlayerStatsAtom = derive(({ get }) => {
 
 export const useGamePlayerStats = () => useDeriveValue(gamePlayerStatsAtom)
 
-const calcHandicap = (wins: number, max: number, severity = 0.75) => {
+export const calcHandicap = (wins: number, max: number, severity = 0.75) => {
+  if (severity <= 0) return 0
   const result = Math.pow((1 / max) * wins, 1 / severity)
   return Math.round(result * 100) / 100
 }
@@ -158,7 +159,7 @@ const spinnerHandicapAtom = derive(({ get }) => {
   }
 
   return {
-    handicap: calcHandicap(wins, ruleset.gamesPerPerson),
+    handicap: calcHandicap(wins, ruleset.gamesPerPerson, ruleset.handicap),
     playerId: latestPlayer,
   }
 })
