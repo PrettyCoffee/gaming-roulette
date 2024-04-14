@@ -13,6 +13,7 @@ import { createId } from "~/utils/createId"
 import { timeBetween, timeSince, today } from "~/utils/date"
 
 import { Player, playersAtom } from "./players"
+import { rulesetAtom } from "./ruleset"
 
 export interface PlayerStats {
   rating?: number
@@ -135,3 +136,31 @@ const gamePlayerStatsAtom = derive(({ get }) => {
 })
 
 export const useGamePlayerStats = () => useDeriveValue(gamePlayerStatsAtom)
+
+const calcHandicap = (wins: number, max: number, severity = 0.75) => {
+  const result = Math.pow((1 / max) * wins, 1 / severity)
+  return Math.round(result * 100) / 100
+}
+
+const spinnerHandicapAtom = derive(({ get }) => {
+  const games = get(sortedGames).reverse()
+  const ruleset = get(rulesetAtom)
+
+  let wins = 0
+  let latestPlayer: string | undefined = undefined
+  while (!latestPlayer || games[wins]?.playerId === latestPlayer) {
+    const current = games[wins]
+    if (!current) break
+    if (!latestPlayer) {
+      latestPlayer = current.playerId
+    }
+    wins++
+  }
+
+  return {
+    handicap: calcHandicap(wins, ruleset.gamesPerPerson),
+    playerId: latestPlayer,
+  }
+})
+
+export const useSpinnerHandicap = () => useDeriveValue(spinnerHandicapAtom)

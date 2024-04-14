@@ -2,22 +2,53 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import clickSound from "~/assets/click-enhanced.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
+import { useSpinnerHandicap } from "~/data/games"
+import { Player } from "~/data/players"
 import { resetIdle } from "~/hooks/useIdle"
-import { randomIntBetween } from "~/utils/number"
+import { randomBetween, sum } from "~/utils/number"
 import { playAudio } from "~/utils/playAudio"
 
 const playClickSound = () =>
   playAudio(clickSound, { volume: audioSettingsAtom.get().spinnerVolume })
 
-export const useNumberRotation = (max: number) => {
+const getWinner = (
+  games: { player: Player; name: string }[],
+  handicap: { handicap: number; playerId?: string }
+) => {
+  const values = games.map(({ player }) =>
+    handicap.playerId === player.id ? 1 - handicap.handicap : 1
+  )
+  const max = sum(values)
+  const winnerValue = randomBetween(0, max)
+
+  const { winner } = values.reduce(
+    ({ sum, winner }, current, index) => {
+      if (winner >= 0) {
+        return { sum, winner }
+      }
+      if (sum + current >= winnerValue) {
+        return { sum, winner: index }
+      }
+      return { sum: sum + current, winner }
+    },
+    { sum: 0, winner: -1 }
+  )
+
+  return winner
+}
+
+export const useSpinner = (games: { player: Player; name: string }[]) => {
+  const handicap = useSpinnerHandicap()
+
   const [current, setCurrent] = useState<number | null>(null)
   const [transition, setTransition] = useState<number | null>(null)
   const [winner, setWinner] = useState<number | null>(null)
+  const max = games.length
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const rotate = useCallback(
-    (prev = current, winner = randomIntBetween(0, max - 1), speed = -100) => {
+    (prev = current, winner = getWinner(games, handicap), speed = -100) => {
       resetIdle()
       const transition = Math.max(Math.abs(speed), 10)
       setTransition(transition)
@@ -40,7 +71,7 @@ export const useNumberRotation = (max: number) => {
         transition
       )
     },
-    [max, current]
+    [current, games, handicap, max]
   )
 
   const reset = useCallback(() => {

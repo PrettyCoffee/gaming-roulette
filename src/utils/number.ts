@@ -1,5 +1,8 @@
-export const randomIntBetween = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1) + min)
+export const randomBetween = (min: number, max: number) =>
+  Math.random() * (max - min) + min
+
+export const sum = (...array: (number | number[])[]) =>
+  array.flat().reduce((acc, value) => acc + value, 0)
 
 export const clamp = (value: number, min = -Infinity, max = Infinity) =>
   Math.min(Math.max(value, min), max)

@@ -21,7 +21,7 @@ import { playAudio } from "~/utils/playAudio"
 import { ClassicWheel } from "./ClassicWheel"
 import { HalfWheel } from "./HalfWheel"
 import { Tags } from "./Tags"
-import { useNumberRotation } from "./useNumberRotation"
+import { useSpinner } from "./useSpinner"
 import { Wheel } from "./Wheel"
 
 const playVictory = () =>
@@ -82,9 +82,7 @@ const Spinner = () => {
 
   const items = useSpinnerGames()
 
-  const { current, rotate, reset, winner, transition } = useNumberRotation(
-    items.length
-  )
+  const { current, rotate, reset, winner, transition } = useSpinner(items)
 
   useEffect(() => {
     const game = winner != null && items[winner]
