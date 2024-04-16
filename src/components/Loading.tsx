@@ -1,44 +1,8 @@
 import { useEffect, useState } from "react"
 
-import { m } from "framer-motion"
 import { css, keyframes } from "goober"
 
-import { textColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
-
-const draw = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: {
-    pathLength: 1,
-    opacity: 1,
-    transition: {
-      pathLength: { type: "spring", duration: 1.5, bounce: 0 },
-      opacity: { duration: 0.01 },
-    },
-  },
-}
-
-export const Loading2 = () => (
-  <m.svg
-    width="600"
-    height="600"
-    viewBox="0 0 600 600"
-    initial="hidden"
-    animate="visible"
-  >
-    <m.circle
-      className={cn(
-        textColor({ color: "red" }),
-        "bg-transparent stroke-current"
-      )}
-      strokeWidth={5}
-      cx="100"
-      cy="100"
-      r="80"
-      variants={draw}
-    />
-  </m.svg>
-)
 
 const strokeOffset = keyframes`
   0% { stroke-dasharray: 0 150; stroke-dashoffset: 0; }
@@ -63,7 +27,7 @@ export const Loading = () => {
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        className="size-24 stroke-muted-foreground"
+        className="stroke-muted-foreground size-24"
       >
         <g className="origin-center animate-spin duration-1000">
           <circle
