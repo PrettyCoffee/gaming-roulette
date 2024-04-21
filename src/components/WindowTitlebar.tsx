@@ -1,7 +1,8 @@
 import { appWindow } from "@tauri-apps/api/window"
-import { Minus, Volume2, VolumeX, X } from "lucide-react"
+import { Maximize2, Minimize2, Minus, Volume2, VolumeX, X } from "lucide-react"
 
 import { useAudioSettings } from "~/data/audioSettings"
+import { useWindowSize, windowAtom } from "~/data/window"
 import { isTauriEnv } from "~/utils/isTauriEnv"
 import { cn } from "~/utils/utils"
 
@@ -55,6 +56,7 @@ isMaximized ? (
 
 const WindowActions = () => {
   const [{ muted }, setAudioSettings] = useAudioSettings()
+  const windowSize = useWindowSize()
 
   return (
     <div className="ml-auto">
@@ -66,6 +68,18 @@ const WindowActions = () => {
           setAudioSettings(prev => ({ ...prev, muted: !prev.muted }))
         }
       />
+      {!isTauriEnv() && (
+        <IconButton
+          icon={windowSize === "static" ? Maximize2 : Minimize2}
+          title={windowSize === "static" ? "Maximize" : "Minimize"}
+          size="sm"
+          onClick={() =>
+            windowAtom.set(prev => ({
+              size: prev.size === "static" ? "fluid" : "static",
+            }))
+          }
+        />
+      )}
       {isTauriEnv() && (
         <>
           <IconButton
