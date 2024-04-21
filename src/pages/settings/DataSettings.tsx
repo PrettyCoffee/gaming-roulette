@@ -139,7 +139,6 @@ export const DeleteData = ({
   const affectedData = selected.map(
     value => dataFields.find(field => field.value === value)?.label
   )
-  console.log(affectedData)
 
   return (
     <>

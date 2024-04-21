@@ -61,7 +61,6 @@ export const Tags = ({
   const ref = useRef<HTMLDivElement | null>(null)
   const { height, width } = useSize(ref)
   const size = Math.min(Math.min(height, width), 300)
-  console.log(size)
   return (
     <div
       ref={ref}
