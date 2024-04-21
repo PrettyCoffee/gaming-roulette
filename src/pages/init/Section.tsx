@@ -4,15 +4,19 @@ import { Text } from "~/components/base/Text"
 import { Button } from "~/components/ui/button"
 
 const Title = ({ children }: PropsWithChildren) => (
-  <Text asChild size="3xl">
+  <Text asChild size="3xl" className="mb-2">
     <h2>{children}</h2>
   </Text>
 )
 
 const Description = ({ children }: PropsWithChildren) => (
-  <Text asChild className="max-w-prose">
+  <Text asChild className="mb-4 max-w-prose">
     <p>{children}</p>
   </Text>
+)
+
+const Content = ({ children }: PropsWithChildren) => (
+  <div className="mb-4 w-full max-w-prose">{children}</div>
 )
 
 interface ActionProps {
@@ -27,12 +31,13 @@ const Next = ({ label, onClick, disabled }: ActionProps) => (
 )
 
 const Layout = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col items-start gap-2">{children}</div>
+  <div className="flex flex-col items-start">{children}</div>
 )
 
 export const Section = {
   Layout,
   Title,
   Description,
+  Content,
   Next,
 }

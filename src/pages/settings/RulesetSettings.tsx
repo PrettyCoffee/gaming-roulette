@@ -41,7 +41,7 @@ const normalize = (value: number, min: number, max: number) => {
   return (value - min) / (max - min)
 }
 
-const HandicapGraph = () => {
+export const HandicapGraph = () => {
   const [{ handicap, gamesPerPerson: items }] = useRuleset()
 
   const xAxis = 300
@@ -143,7 +143,7 @@ const RulesetToggle = ({ name, label }: RulesetToggleProps) => {
   )
 }
 
-const AdditionalSettings = () => {
+export const AdditionalRulesInput = () => {
   const id = useId()
   const [ruleset, setRuleset] = useRuleset()
   const [value, setValue] = useState(ruleset.additional.join("\n"))
@@ -176,6 +176,22 @@ const AdditionalSettings = () => {
   )
 }
 
+export const DuplicateRules = () => (
+  <div className="flex flex-col gap-2">
+    <InputLabel
+      htmlFor=""
+      hint="Define if one game can be added multiple times to the roulette."
+    >
+      Duplicates
+    </InputLabel>
+    <RulesetToggle label="Allow duplicates" name="allowDuplicates" />
+    <RulesetToggle
+      label="Allow cross player duplicates"
+      name="allowCrossDuplicates"
+    />
+  </div>
+)
+
 export const RulesetSettings = () => (
   <Grid.Root>
     <Grid.Item>
@@ -189,17 +205,12 @@ export const RulesetSettings = () => (
       <HandicapGraph />
     </Grid.Item>
 
-    <Grid.Item newLine fullWidth className="flex flex-col gap-2">
-      <InputLabel htmlFor="">Duplicates</InputLabel>
-      <RulesetToggle label="Allow duplicates" name="allowDuplicates" />
-      <RulesetToggle
-        label="Allow cross player duplicates"
-        name="allowCrossDuplicates"
-      />
+    <Grid.Item newLine fullWidth>
+      <DuplicateRules />
     </Grid.Item>
 
     <Grid.Item newLine fullWidth>
-      <AdditionalSettings />
+      <AdditionalRulesInput />
     </Grid.Item>
   </Grid.Root>
 )

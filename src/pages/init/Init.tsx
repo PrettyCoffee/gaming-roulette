@@ -11,7 +11,13 @@ import { usePlayers } from "~/data/players"
 import { Section } from "./Section"
 import { ImportData } from "../settings/DataSettings"
 import { PlayerSettings } from "../settings/PlayerSettings"
-import { RulesetSettings } from "../settings/RulesetSettings"
+import {
+  AdditionalRulesInput,
+  DuplicateRules,
+  GamesPerPersonInput,
+  HandicapGraph,
+  HandicapSlider,
+} from "../settings/RulesetSettings"
 
 interface StepProps {
   onContinue: () => void
@@ -66,17 +72,56 @@ const Users = ({ onContinue }: StepProps) => {
   )
 }
 
-const Ruleset = ({ onContinue }: StepProps) => (
+const GamesAmount = ({ onContinue }: StepProps) => (
   <Section.Layout>
-    <Section.Title>What are your rules?</Section.Title>
+    <Section.Title>Your games</Section.Title>
     <Section.Description>
-      How many games should be spinning? 5? 10? 42? Any number is viable! Are
-      duplicates allowed? Are there any additional rules? Take your time and
-      define a ruleset.
+      How many games should be spinning? 5? 10? 42? Any number is viable!
     </Section.Description>
-    <div className="-ml-2 mt-2 w-full">
-      <RulesetSettings />
-    </div>
+    <Section.Content>
+      <GamesPerPersonInput />
+      <div className="pt-2" />
+      <DuplicateRules />
+    </Section.Content>
+    <Section.Next label="This is fine." onClick={onContinue} />
+  </Section.Layout>
+)
+
+const Handicap = ({ onContinue }: StepProps) => (
+  <Section.Layout>
+    <Section.Title>Punishments 🔥</Section.Title>
+    <Section.Description>
+      When one player keeps winning all the time, that&apos;s no fun at all! Add
+      a handicap to reduce the probability to win multiple times in a row.
+    </Section.Description>
+    <Section.Content>
+      <div className="flex gap-8">
+        <div className="flex-1">
+          <HandicapSlider />
+        </div>
+        <HandicapGraph />
+      </div>
+    </Section.Content>
+    <Section.Description>
+      Note: The <b>higher</b> the handicap value, the <b>lower</b> the
+      probability to win. The more games won successively, the higher the
+      handicap. (see the graph)
+    </Section.Description>
+    <Section.Next label="This is fine." onClick={onContinue} />
+  </Section.Layout>
+)
+
+const AdditionalRules = ({ onContinue }: StepProps) => (
+  <Section.Layout>
+    <Section.Title>Are there any additional rules?</Section.Title>
+    <Section.Description>
+      Define some additional rules you want to apply to your gaming roulette.
+      These rules won&apos;t be enforced but can be used to spice things up a
+      bit!
+    </Section.Description>
+    <Section.Content>
+      <AdditionalRulesInput />
+    </Section.Content>
     <Section.Next label="Finish up!" onClick={onContinue} />
   </Section.Layout>
 )
@@ -169,7 +214,7 @@ const Navigation = ({ current, goBack, goNext, steps }: NavigationProps) => (
   </div>
 )
 
-const initSteps = [Intro, Users, Ruleset, Finish]
+const initSteps = [Intro, Users, GamesAmount, Handicap, AdditionalRules, Finish]
 
 interface InitProps {
   onFinish: () => void
