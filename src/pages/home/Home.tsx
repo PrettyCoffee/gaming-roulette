@@ -37,7 +37,7 @@ const Kpi = ({ title, value }: { title: string; value: string }) => (
 const Greeting = () => {
   const { players } = usePlayers()
   return (
-    <Text asChild size="3xl" className="mb-1">
+    <Text asChild size="3xl">
       <h2>
         Welcome{" "}
         {players.map((player, index) => (
@@ -143,7 +143,7 @@ const Games = () => {
           {currentGame?.name ?? "-"}
         </Text>
       </Surface>
-      <Surface title="Latest games" className="flex-1">
+      <Surface title="Latest games" className="h-max">
         <ul className="max-w-48">
           {latestGames.map(({ name, id }) => (
             <Text key={id} asChild size="md" noOverflow noWrap>
@@ -170,10 +170,10 @@ const GameStats = () => {
 
 const Home = () => {
   return (
-    <div className="flex h-full flex-col gap-2">
+    <div className="flex h-full max-w-2xl flex-col gap-2">
       <Greeting />
       <QuoteOfTheDay />
-      <div className="-mx-1 flex max-h-60 flex-1 pb-2">
+      <div className="-mx-1 flex">
         <Games />
         <Rules />
         <GameStats />

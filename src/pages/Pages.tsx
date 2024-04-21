@@ -80,7 +80,7 @@ export const Pages = () => {
       </nav>
       <main
         className={cn(
-          "m-2 ml-0 mt-0 overflow-auto rounded-lg bg-background p-4 shadow-lg",
+          "m-2 ml-0 mt-0 flex items-center justify-center overflow-auto rounded-lg bg-background p-4 shadow-lg",
           main
         )}
       >

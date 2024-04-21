@@ -138,11 +138,15 @@ const Spinner = () => {
   return (
     <div className="relative flex h-full flex-1 flex-col items-center justify-center gap-2">
       {settings.pickerView === "wheel" ? (
-        <Wheel {...props} />
+        <div className="aspect-video max-h-80 w-3/4">
+          <Wheel {...props} />
+        </div>
       ) : settings.pickerView === "classic-wheel" ? (
-        <ClassicWheel {...props} />
+        <div className="aspect-square max-h-[min(90%,24rem)] w-full">
+          <ClassicWheel {...props} />
+        </div>
       ) : settings.pickerView === "half-wheel" ? (
-        <div className="h-56 w-full">
+        <div className="aspect-video max-h-[min(75%,18rem)] w-3/4">
           <HalfWheel {...props} />
         </div>
       ) : (

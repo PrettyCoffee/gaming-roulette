@@ -115,7 +115,7 @@ const Current = () => {
   return (
     <div
       className={cn(
-        "-mt-2 grid grid-cols-2 gap-2",
+        "-mt-2 grid h-full min-w-[75%] grid-cols-2 gap-2",
         players.length > 2 && "md:grid-cols-3",
         players.length > 3 && "lg:grid-cols-4"
       )}

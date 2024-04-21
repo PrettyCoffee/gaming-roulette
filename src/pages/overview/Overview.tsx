@@ -85,7 +85,7 @@ const Overview = () => {
         />
       )}
 
-      <div className="-m-2 flex h-[calc(100%+theme(height.4))] flex-col gap-2">
+      <div className="-m-2 flex h-[calc(100%+theme(height.4))] flex-1 flex-col gap-2 overflow-hidden">
         <div className="flex flex-col overflow-auto [&>*]:h-full [&>*]:flex-1">
           <GamesTable data={games} onEdit={setEditing} onDelete={setDeleting} />
         </div>
