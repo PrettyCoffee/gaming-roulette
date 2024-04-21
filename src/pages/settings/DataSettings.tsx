@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
 
-import { Download } from "lucide-react"
+import { Download, Trash } from "lucide-react"
 
+import { Text } from "~/components/base/Text"
 import { FileInput } from "~/components/FileInput"
 import { Icon } from "~/components/Icon"
 import { InputLabel } from "~/components/InputLabel"
@@ -14,6 +15,7 @@ import { RawGame, gamesAtom } from "~/data/games"
 import { Player, playersAtom } from "~/data/players"
 import { Ruleset, rulesetAtom } from "~/data/ruleset"
 import { GeneralSettings, settingsAtom } from "~/data/settings"
+import { textColor } from "~/utils/colors"
 import { today } from "~/utils/date"
 import { download } from "~/utils/download"
 import { fileToJson } from "~/utils/fileToJson"
@@ -84,15 +86,22 @@ const importData = (selected: string[], data: object) => {
   })
 }
 
+const deleteData = (selected: string[]) => {
+  selected.forEach(item => {
+    const field = dataFields.find(field => field.value === item)
+    field?.reset()
+  })
+}
+
+interface DataButtonProps {
+  label: string
+  selected?: string[]
+}
+
 export const ImportData = ({
   label,
   selected = dataFields.map(({ value }) => value),
-  onChange,
-}: {
-  label: string
-  selected?: string[]
-  onChange?: (data: Record<string, unknown>) => void
-}) => (
+}: DataButtonProps) => (
   <FileInput
     variant="ghost"
     label={label}
@@ -104,13 +113,81 @@ export const ImportData = ({
             throw new Error("Invalid data")
           }
           importData(selected, data)
-          onChange?.(data as Record<string, unknown>)
         })
         .then(() => toast({ kind: "success", message: "Import successfull" }))
         .catch(() => toast({ kind: "error", message: "Import failed" }))
     }
   />
 )
+
+export const ExportData = ({
+  label,
+  selected = dataFields.map(({ value }) => value),
+}: DataButtonProps) => (
+  <Button variant="ghost" onClick={() => exportData(selected)}>
+    <Icon icon={Download} />
+    {label}
+  </Button>
+)
+
+export const DeleteData = ({
+  label,
+  selected = dataFields.map(({ value }) => value),
+}: DataButtonProps) => {
+  const [deleting, setDeleting] = useState(false)
+  const allSelected = selected.length >= dataFields.length
+  const affectedData = selected.map(
+    value => dataFields.find(field => field.value === value)?.label
+  )
+  console.log(affectedData)
+
+  return (
+    <>
+      <Button variant="destructive" onClick={() => setDeleting(true)}>
+        <Icon icon={Trash} color="error" />
+        {label}
+      </Button>
+
+      {deleting && (
+        <Modal
+          open={deleting}
+          title="Reset selected data"
+          description={
+            allSelected ? (
+              <>
+                Do you really want to delete{" "}
+                <Text className={textColor({ color: "red" })}>ALL</Text> of your
+                data? This action cannot be undone!
+              </>
+            ) : (
+              <>
+                Do you really want to delete the selected data? This action
+                cannot be undone!
+                <br />
+                Affected data:{" "}
+                {affectedData.map((field, index) => (
+                  <Fragment key={field}>
+                    {index > 0 && ", "}
+                    <Text className={textColor({ color: "red" })}>{field}</Text>
+                  </Fragment>
+                ))}
+              </>
+            )
+          }
+          confirm={{
+            variant: "destructive",
+            label: "Delete all data",
+            onClick: () => {
+              setDeleting(false)
+              deleteData(selected)
+            },
+          }}
+          cancel={{ label: "Cancel", onClick: () => setDeleting(false) }}
+        />
+      )}
+    </>
+  )
+}
 
 const ManageData = () => {
   const [selected, setSelected] = useState(dataFields.map(({ value }) => value))
@@ -122,7 +199,7 @@ const ManageData = () => {
           "Below you can specify which data you want to be affected by the export / import. "
         }
       >
-        Import or export data
+        Manage your data
       </InputLabel>
       <div className="flex gap-2">
         {dataFields.map(({ value, label }) => (
@@ -143,42 +220,10 @@ const ManageData = () => {
       <div className="mt-2 flex items-center gap-2">
         <ImportData label="Import data" selected={selected} />
         <span>- or -</span>
-        <Button variant="ghost" onClick={() => exportData(selected)}>
-          <Icon icon={Download} />
-          Export data
-        </Button>
+        <ExportData label="Export data" selected={selected} />
+        <span>- or -</span>
+        <DeleteData label="Delete data" selected={selected} />
       </div>
-    </>
-  )
-}
-
-const DeleteData = () => {
-  const [deleting, setDeleting] = useState(false)
-  return (
-    <>
-      <InputLabel>Delete data</InputLabel>
-      <div>
-        <Button variant="destructive" onClick={() => setDeleting(true)}>
-          Reset all data
-        </Button>
-      </div>
-
-      {deleting && (
-        <Modal
-          open={deleting}
-          title="Reset all data"
-          description="Do you really want to delete all of your data? This action cannot be undone!"
-          confirm={{
-            variant: "destructive",
-            label: "Delete all data",
-            onClick: () => {
-              setDeleting(false)
-              dataFields.forEach(({ reset }) => reset())
-            },
-          }}
-          cancel={{ label: "Cancel", onClick: () => setDeleting(false) }}
-        />
-      )}
     </>
   )
 }
@@ -187,10 +232,6 @@ export const DataSettings = () => (
   <Grid.Root>
     <Grid.Item fullWidth>
       <ManageData />
-    </Grid.Item>
-
-    <Grid.Item>
-      <DeleteData />
     </Grid.Item>
   </Grid.Root>
 )
