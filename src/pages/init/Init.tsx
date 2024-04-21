@@ -6,39 +6,12 @@ import { ArrowDown, ArrowUp } from "lucide-react"
 import { Text } from "~/components/base/Text"
 import { VisuallyHidden } from "~/components/base/VisuallyHidden"
 import { IconButton } from "~/components/IconButton"
-import { Button } from "~/components/ui/button"
 import { usePlayers } from "~/data/players"
 
+import { Section } from "./Section"
 import { ImportData } from "../settings/DataSettings"
 import { PlayerSettings } from "../settings/PlayerSettings"
 import { RulesetSettings } from "../settings/RulesetSettings"
-
-const Title = ({ children }: PropsWithChildren) => (
-  <Text asChild size="3xl">
-    <h2>{children}</h2>
-  </Text>
-)
-
-const Description = ({ children }: PropsWithChildren) => (
-  <Text asChild className="max-w-prose">
-    <p>{children}</p>
-  </Text>
-)
-
-interface ActionProps {
-  label: string
-  onClick: () => void
-  disabled?: boolean
-}
-const NextAction = ({ label, onClick, disabled }: ActionProps) => (
-  <Button onClick={onClick} variant="key" disabled={disabled}>
-    {label}
-  </Button>
-)
-
-const Section = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col items-start gap-2">{children}</div>
-)
 
 interface StepProps {
   onContinue: () => void
@@ -46,9 +19,9 @@ interface StepProps {
 }
 
 const Intro = ({ onContinue, onFinish }: StepProps) => (
-  <Section>
-    <Title>Welcome! 👋</Title>
-    <Description>
+  <Section.Layout>
+    <Section.Title>Welcome! 👋</Section.Title>
+    <Section.Description>
       This is{" "}
       <Text gradient={{ from: "red", to: "blue" }} bold>
         Gaming Roulette
@@ -65,53 +38,53 @@ const Intro = ({ onContinue, onFinish }: StepProps) => (
       <br />
       <br />
       Note: You can adjust all settings later on in the settings menu.
-    </Description>
+    </Section.Description>
     <div className="flex items-center gap-2">
-      <NextAction label="Let's go!" onClick={onContinue} />
+      <Section.Next label="Let's go!" onClick={onContinue} />
       <ImportData label="Import data instead" onChange={onFinish} />
     </div>
-  </Section>
+  </Section.Layout>
 )
 
 const Users = ({ onContinue }: StepProps) => {
   const { players } = usePlayers()
   return (
-    <Section>
-      <Title>Time to add the players!</Title>
-      <Description>
+    <Section.Layout>
+      <Section.Title>Time to add the players!</Section.Title>
+      <Section.Description>
         Playing alone? Or in a group? Add as many players as you want!
-      </Description>
+      </Section.Description>
       <div className="-mx-2 mt-2">
         <PlayerSettings />
       </div>
-      <NextAction
+      <Section.Next
         label="That's all!"
         onClick={onContinue}
         disabled={players.length < 1}
       />
-    </Section>
+    </Section.Layout>
   )
 }
 
 const Ruleset = ({ onContinue }: StepProps) => (
-  <Section>
-    <Title>What are your rules?</Title>
-    <Description>
+  <Section.Layout>
+    <Section.Title>What are your rules?</Section.Title>
+    <Section.Description>
       How many games should be spinning? 5? 10? 42? Any number is viable! Are
       duplicates allowed? Are there any additional rules? Take your time and
       define a ruleset.
-    </Description>
+    </Section.Description>
     <div className="-ml-2 mt-2 w-full">
       <RulesetSettings />
     </div>
-    <NextAction label="Finish up!" onClick={onContinue} />
-  </Section>
+    <Section.Next label="Finish up!" onClick={onContinue} />
+  </Section.Layout>
 )
 
 const Finish = ({ onContinue }: StepProps) => (
-  <Section>
-    <Title>That&apos;s it!</Title>
-    <Description>
+  <Section.Layout>
+    <Section.Title>That&apos;s it!</Section.Title>
+    <Section.Description>
       Now that that&apos;s settled, I wish you good luck and lot&apos;s of fun
       with spinning the {""}
       <Text gradient={{ from: "red", to: "blue" }} bold>
@@ -126,9 +99,9 @@ const Finish = ({ onContinue }: StepProps) => (
       </Text>{" "}
       settings you can adjust in the settings menu! Check them out if you want
       to.
-    </Description>
-    <NextAction label="Let's start spinning!" onClick={onContinue} />
-  </Section>
+    </Section.Description>
+    <Section.Next label="Let's start spinning!" onClick={onContinue} />
+  </Section.Layout>
 )
 
 const hidden = {
