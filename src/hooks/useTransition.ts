@@ -71,8 +71,13 @@ export const useTransition = ({ ref, hide, styles }: TransitionProps) => {
 
   useEffect(() => {
     if (transition !== "start") return
-    setTransition("running")
-  }, [transition])
+
+    const duration = !ref.current
+      ? 0
+      : parseFloat(window.getComputedStyle(ref.current).transitionDuration)
+
+    setTransition(duration === 0 ? "idle" : "running")
+  }, [ref, transition])
 
   useEventListener({
     ref: ref.current,
@@ -82,13 +87,11 @@ export const useTransition = ({ ref, hide, styles }: TransitionProps) => {
     },
   })
 
-  const state = useMemo(
-    () => getState(transition, lastHide.current),
-    [transition]
-  )
-
-  return {
-    state,
-    className: getStyles(state, styles),
-  }
+  return useMemo(() => {
+    const state = getState(transition, lastHide.current)
+    return {
+      state,
+      className: getStyles(state, styles),
+    }
+  }, [styles, transition])
 }
