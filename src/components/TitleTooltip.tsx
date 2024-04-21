@@ -22,7 +22,7 @@ export const TitleTooltip = ({
   !title || disabled ? (
     children
   ) : (
-    <Tooltip.Root disableHoverableContent>
+    <Tooltip.Root disableHoverableContent delayDuration={300}>
       <Tooltip.Trigger asChild={asChild}>{children}</Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content side={side} className="max-w-64">
