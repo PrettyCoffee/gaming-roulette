@@ -101,7 +101,10 @@ interface DataButtonProps {
 export const ImportData = ({
   label,
   selected = dataFields.map(({ value }) => value),
-}: DataButtonProps) => (
+  onChange,
+}: DataButtonProps & {
+  onChange?: (data: Record<string, unknown>) => void
+}) => (
   <FileInput
     variant="ghost"
     label={label}
@@ -113,6 +116,7 @@ export const ImportData = ({
             throw new Error("Invalid data")
           }
           importData(selected, data)
+          onChange?.(data as Record<string, unknown>)
         })
         .then(() => toast({ kind: "success", message: "Import successfull" }))
         .catch(() => toast({ kind: "error", message: "Import failed" }))
