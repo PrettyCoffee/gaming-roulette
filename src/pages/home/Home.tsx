@@ -163,7 +163,7 @@ const GameStats = () => {
     <div>
       <Kpi title="Total played" value={totalGames.toString()} />
       <Kpi title="Gambling since" value={readableTime(playingSince)} />
-      <Kpi title="Average playtime" value={readableTime(averageTime)} />
+      <Kpi title="Average playtime" value={readableTime(averageTime, 1)} />
     </div>
   )
 }

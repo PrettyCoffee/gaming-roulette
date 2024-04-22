@@ -17,21 +17,24 @@ export const timeBetween = (date1 = today(), date2 = today()) =>
 export const timeSince = (date: string) =>
   new Date().getTime() - new Date(date).getTime()
 
-export const readableTime = (time: number) => {
-  const days = Math.floor(time / DAY)
-  if (days < 2) return "1 Day"
+const floor = (value: number, precision: number) =>
+  Math.floor(value * 10 ** precision) / 10 ** precision
+
+export const readableTime = (time: number, precision = 0) => {
+  const days = floor(time / DAY, precision)
+  if (days === 1) return "1 Day"
   if (days < 7) return `${days} Days`
 
-  const weeks = Math.floor(time / WEEK)
-  if (weeks < 2) return "1 Week"
+  const weeks = floor(time / WEEK, precision)
+  if (weeks === 1) return "1 Week"
   if (weeks < 4) return `${weeks} Weeks`
 
-  const months = Math.floor(time / MONTH)
-  if (months < 2) return "1 Month"
+  const months = floor(time / MONTH, precision)
+  if (months === 1) return "1 Month"
   if (months < 12) return `${months} Months`
 
-  const years = Math.floor(time / YEAR)
-  if (years < 2) return "1 Year"
+  const years = floor(time / YEAR, precision)
+  if (years === 1) return "1 Year"
   return `${years} Years`
 }
 
