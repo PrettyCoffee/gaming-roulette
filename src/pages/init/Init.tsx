@@ -1,13 +1,12 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 
 import { m } from "framer-motion"
-import { ArrowDown, ArrowUp } from "lucide-react"
 
 import { Text } from "~/components/base/Text"
 import { VisuallyHidden } from "~/components/base/VisuallyHidden"
-import { IconButton } from "~/components/IconButton"
 import { usePlayers } from "~/data/players"
 
+import { Navigation } from "./Navigation"
 import { Section } from "./Section"
 import { ImportData } from "../settings/DataSettings"
 import { PlayerSettings } from "../settings/PlayerSettings"
@@ -187,33 +186,6 @@ const Slide = ({
   </m.div>
 )
 
-interface NavigationProps {
-  current: number
-  steps: number
-  goBack: () => void
-  goNext: () => void
-}
-const Navigation = ({ current, goBack, goNext, steps }: NavigationProps) => (
-  <div className="absolute right-2 top-2 z-20 flex flex-col">
-    <IconButton
-      size="sm"
-      icon={ArrowUp}
-      title="Go back"
-      titleSide="left"
-      onClick={goBack}
-      disabled={current === 0}
-    />
-    <IconButton
-      size="sm"
-      icon={ArrowDown}
-      title="Go forward"
-      titleSide="left"
-      onClick={goNext}
-      disabled={current === steps}
-    />
-  </div>
-)
-
 const initSteps = [Intro, Users, GamesAmount, Handicap, AdditionalRules, Finish]
 
 interface InitProps {
@@ -262,7 +234,8 @@ export const Init = ({ onFinish }: InitProps) => {
 
         <Navigation
           current={step}
-          steps={availableStep}
+          progress={availableStep}
+          steps={initSteps.length}
           goBack={goBack}
           goNext={goNext}
         />
