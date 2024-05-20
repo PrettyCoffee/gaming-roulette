@@ -25,6 +25,8 @@
 | Spirit of the North              | 2024-03-18 |   5h, 5.8/10 |  7.6h, 6/10 |   4h,   5/10 |
 | Melatonin                        | 2024-03-25 |   2h, 7.7/10 |  2.3h, 7/10 | 2.7h,   7/10 |
 | To the Moon                      | 2024-04-04 |   4h, 8.1/10 |  3.8h, 9/10 |   4h,   7/10 |
+| Oxenfree                         | 2024-04-15 |   Xh,   X/10 |  3.8h, 4/10 | 4.8h,   6/10 |
+| Impostor Factory                 | 2024-05-06 |   Xh,   X/10 |    Xh, X/10 |   Xh,   X/10 |
 | X                                | 2024-XX-XX |   Xh,   X/10 |    Xh, X/10 |   Xh,   X/10 |
 
 Online:
