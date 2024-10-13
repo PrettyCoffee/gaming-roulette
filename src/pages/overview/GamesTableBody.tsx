@@ -44,6 +44,7 @@ const DataCell = ({ cell }: { cell: Cell<Game, unknown> }) => (
     style={{
       width: `${cell.column.getSize()}rem`,
       textAlign: cell.column.columnDef.meta?.align,
+      flex: cell.column.columnDef.meta?.flex ? "1" : undefined,
     }}
   >
     {flexRender(cell.column.columnDef.cell, cell.getContext())}

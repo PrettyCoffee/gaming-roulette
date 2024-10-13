@@ -23,6 +23,7 @@ declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
     align?: "start" | "end" | "center"
+    flex?: boolean
   }
 }
 
@@ -36,6 +37,7 @@ const gameColumns = [
     header: "Name",
     size: 15,
     sortingFn: "text",
+    meta: { flex: true },
   }),
   columnHelper.accessor("date", {
     header: "Date",

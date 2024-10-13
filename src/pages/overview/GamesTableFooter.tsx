@@ -8,6 +8,7 @@ import { Game, useGamePlayerStats } from "~/data/games"
 import { ColorValue } from "~/utils/colors"
 
 import { unknownPlayer } from "./GameModal"
+import { actionsCellWidth } from "./TableActions"
 
 const round = (value: number) => Math.round(value * 10) / 10
 
@@ -57,7 +58,7 @@ export const GamesTableFooter = ({
   return (
     <Table.Footer>
       <Table.Row>
-        <Table.Cell style={{ width: `${countSize}rem` }}>
+        <Table.Cell style={{ width: `${countSize}rem`, flex: 1 }}>
           <div className="flex items-center gap-4">
             Count:
             {Object.values(gamesByPlayers).map(({ count, id, name, color }) => (
@@ -90,7 +91,7 @@ export const GamesTableFooter = ({
             </Table.Cell>
           </Fragment>
         ))}
-        <Table.Cell />
+        <Table.Cell style={{ width: actionsCellWidth }} />
       </Table.Row>
     </Table.Footer>
   )

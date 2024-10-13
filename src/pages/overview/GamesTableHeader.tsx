@@ -8,7 +8,7 @@ import { Button } from "~/components/ui/button"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
 
-import { TableHeaderActions } from "./TableActions"
+import { actionsCellWidth, TableHeaderActions } from "./TableActions"
 
 interface HeaderProp {
   header: Header<Game, unknown>
@@ -32,6 +32,11 @@ const SortableHead = ({ header, children }: PropsWithChildren<HeaderProp>) => {
   )
 }
 
+const isFlex = ({ subHeaders, column }: HeaderProp["header"]) =>
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  column.columnDef.meta?.flex ||
+  subHeaders.some(({ column }) => column.columnDef.meta?.flex)
+
 const HeaderCell = ({ header }: HeaderProp) => {
   return (
     <NativeTable.Head
@@ -39,6 +44,7 @@ const HeaderCell = ({ header }: HeaderProp) => {
       style={{
         width: `${header.getSize()}rem`,
         textAlign: header.column.columnDef.meta?.align,
+        flex: isFlex(header) ? "1" : undefined,
       }}
     >
       <SortableHead header={header}>
@@ -60,7 +66,10 @@ export const GamesTableHeader = ({ table }: { table: Table<Game> }) => {
           {headers.every(({ subHeaders }) => subHeaders.length === 0) ? (
             <TableHeaderActions table={table} />
           ) : (
-            <NativeTable.Head className="h-0" />
+            <NativeTable.Head
+              className="h-0"
+              style={{ width: actionsCellWidth }}
+            />
           )}
         </NativeTable.Row>
       ))}

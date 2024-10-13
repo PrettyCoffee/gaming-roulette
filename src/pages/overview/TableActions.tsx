@@ -11,6 +11,8 @@ import { cn } from "~/utils/utils"
 
 import { AddGame } from "./AddGame"
 
+export const actionsCellWidth = "5.75rem"
+
 interface TableActionsProps {
   row: Row<Game>
   onEdit: Dispatch<Game>
@@ -25,6 +27,7 @@ export const TableRowActions = ({
     className={cn(
       "sticky right-0 overflow-visible px-0 py-1 opacity-0 [tr:focus-within_&]:opacity-100 [tr:hover_&]:opacity-100"
     )}
+    style={{ width: actionsCellWidth }}
   >
     <div className="ml-auto flex w-max items-center">
       <div className="inline-block h-10 w-2 shrink-0 bg-gradient-to-r from-transparent to-alt" />
