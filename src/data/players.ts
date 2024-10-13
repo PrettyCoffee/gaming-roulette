@@ -2,11 +2,11 @@ import { useCallback } from "react"
 
 import { reduxDevtools } from "@yaasl/devtools"
 import {
-  atom,
+  createAtom,
   localStorage,
   useAtom,
-  derive,
-  useDeriveValue,
+  createDerived,
+  useAtomValue,
 } from "@yaasl/react"
 
 import { ColorValue } from "~/utils/colors"
@@ -44,13 +44,10 @@ export interface Player {
   games: string[]
 }
 
-export const playersAtom = atom<Player[]>({
+export const playersAtom = createAtom<Player[]>({
   name: "players",
   defaultValue: [],
-  middleware: [
-    localStorage(),
-    reduxDevtools({ disable: import.meta.env.PROD }),
-  ],
+  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
 })
 
 export const usePlayers = () => {
@@ -96,7 +93,7 @@ const arraysOverlap = (...arrays: string[][]) => {
   })
 }
 
-export const playerGameStats = derive(({ get }) => {
+export const playerGameStats = createDerived(({ get }) => {
   const players = get(playersAtom)
   const allGames = players.map(({ games }) => games)
 
@@ -112,4 +109,4 @@ export const playerGameStats = derive(({ get }) => {
   )
 })
 
-export const usePlayerGameStats = () => useDeriveValue(playerGameStats)
+export const usePlayerGameStats = () => useAtomValue(playerGameStats)

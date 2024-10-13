@@ -1,4 +1,4 @@
-import { atom, useAtomValue } from "@yaasl/react"
+import { createAtom, useAtomValue } from "@yaasl/react"
 import { keyframes } from "goober"
 import {
   BadgeCheck,
@@ -35,7 +35,7 @@ interface ToastState extends ToastProps {
   id: string
 }
 
-const toastsAtom = atom<ToastState[]>({
+const toastsAtom = createAtom<ToastState[]>({
   name: "toasts",
   defaultValue: [],
 })

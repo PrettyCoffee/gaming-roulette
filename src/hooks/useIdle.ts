@@ -1,8 +1,8 @@
-import { atom, useAtomValue } from "@yaasl/react"
+import { createAtom, useAtomValue } from "@yaasl/react"
 
 import { debounce } from "~/utils/debounce"
 
-const idleAtom = atom({
+const idleAtom = createAtom({
   name: "idle",
   defaultValue: false,
 })

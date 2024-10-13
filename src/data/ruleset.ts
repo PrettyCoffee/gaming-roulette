@@ -1,5 +1,5 @@
 import { reduxDevtools } from "@yaasl/devtools"
-import { atom, localStorage, useAtom } from "@yaasl/react"
+import { createAtom, localStorage, useAtom } from "@yaasl/react"
 
 const additionalRules = [
   "Costs less than 20€",
@@ -19,7 +19,7 @@ export interface Ruleset {
   handicap: number
 }
 
-export const rulesetAtom = atom<Ruleset>({
+export const rulesetAtom = createAtom<Ruleset>({
   name: "ruleset",
   defaultValue: {
     gamesPerPerson: 10,
@@ -28,10 +28,7 @@ export const rulesetAtom = atom<Ruleset>({
     allowCrossDuplicates: true,
     additional: additionalRules,
   },
-  middleware: [
-    localStorage(),
-    reduxDevtools({ disable: import.meta.env.PROD }),
-  ],
+  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
 })
 
 export const useRuleset = () => useAtom(rulesetAtom)

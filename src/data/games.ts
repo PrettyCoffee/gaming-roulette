@@ -2,11 +2,11 @@ import { useCallback } from "react"
 
 import { reduxDevtools } from "@yaasl/devtools"
 import {
-  atom,
-  derive,
+  createAtom,
+  createDerived,
   localStorage,
-  useDeriveValue,
-  useSetDerive,
+  useAtomValue,
+  useSetAtom,
 } from "@yaasl/react"
 
 import { createId } from "~/utils/createId"
@@ -35,16 +35,13 @@ export interface Game extends Omit<RawGame, "playerId"> {
   player?: Player
 }
 
-export const gamesAtom = atom<RawGame[]>({
+export const gamesAtom = createAtom<RawGame[]>({
   defaultValue: [],
   name: "games",
-  middleware: [
-    localStorage(),
-    reduxDevtools({ disable: import.meta.env.PROD }),
-  ],
+  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
 })
 
-const sortedGames = derive<RawGame[]>(
+const sortedGames = createDerived<RawGame[]>(
   ({ get }) => get(gamesAtom).sort((a, b) => a.date.localeCompare(b.date)),
   ({ set, value }) =>
     set(
@@ -53,7 +50,7 @@ const sortedGames = derive<RawGame[]>(
     )
 )
 
-const extendedGames = derive<Game[]>(({ get }) => {
+const extendedGames = createDerived<Game[]>(({ get }) => {
   const games = get(sortedGames)
   const players = get(playersAtom)
 
@@ -64,8 +61,8 @@ const extendedGames = derive<Game[]>(({ get }) => {
 })
 
 export const useGames = () => {
-  const games = useDeriveValue(extendedGames)
-  const setGames = useSetDerive(sortedGames)
+  const games = useAtomValue(extendedGames)
+  const setGames = useSetAtom(sortedGames)
 
   const addGame = useCallback(
     (data: Omit<RawGame, "id">) => {
@@ -95,7 +92,7 @@ export const useGames = () => {
   return { games, addGame, editGame, removeGame }
 }
 
-const gameStatsAtom = derive(({ get }) => {
+const gameStatsAtom = createDerived(({ get }) => {
   const games = get(sortedGames)
   const averageTime =
     games.length < 2
@@ -109,9 +106,9 @@ const gameStatsAtom = derive(({ get }) => {
   }
 })
 
-export const useGameStats = () => useDeriveValue(gameStatsAtom)
+export const useGameStats = () => useAtomValue(gameStatsAtom)
 
-const gamePlayerStatsAtom = derive(({ get }) => {
+const gamePlayerStatsAtom = createDerived(({ get }) => {
   const games = get(extendedGames)
   const players = get(playersAtom)
 
@@ -135,7 +132,7 @@ const gamePlayerStatsAtom = derive(({ get }) => {
   })
 })
 
-export const useGamePlayerStats = () => useDeriveValue(gamePlayerStatsAtom)
+export const useGamePlayerStats = () => useAtomValue(gamePlayerStatsAtom)
 
 export const calcHandicap = (wins: number, max: number, severity = 0.75) => {
   if (severity <= 0) return 0
@@ -143,7 +140,7 @@ export const calcHandicap = (wins: number, max: number, severity = 0.75) => {
   return Math.round(result * 100) / 100
 }
 
-const spinnerHandicapAtom = derive(({ get }) => {
+const spinnerHandicapAtom = createDerived(({ get }) => {
   const games = get(sortedGames).reverse()
   const ruleset = get(rulesetAtom)
 
@@ -164,4 +161,4 @@ const spinnerHandicapAtom = derive(({ get }) => {
   }
 })
 
-export const useSpinnerHandicap = () => useDeriveValue(spinnerHandicapAtom)
+export const useSpinnerHandicap = () => useAtomValue(spinnerHandicapAtom)
