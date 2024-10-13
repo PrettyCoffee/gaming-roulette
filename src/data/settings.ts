@@ -1,5 +1,4 @@
-import { reduxDevtools } from "@yaasl/devtools"
-import { createAtom, localStorage, useAtom } from "@yaasl/react"
+import { createAtom, localStorage, useAtom } from "~/lib/yaasl"
 
 export interface GeneralSettings {
   pickerView: "tags" | "wheel" | "classic-wheel" | "half-wheel"
@@ -12,7 +11,7 @@ export const settingsAtom = createAtom<GeneralSettings>({
     pickerView: "wheel",
     compactNavigation: false,
   },
-  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
+  effects: [localStorage()],
 })
 
 export const useSettings = () => useAtom(settingsAtom)

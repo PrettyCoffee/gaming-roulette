@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { reduxDevtools } from "@yaasl/devtools"
-import { createAtom, createDerived } from "@yaasl/react"
-
 import { toast } from "~/components/Toaster"
+import { createAtom, createDerived } from "~/lib/yaasl"
 import { createId } from "~/utils/createId"
 import { dateIsValid } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
@@ -29,7 +27,6 @@ const splitUserStats = (userStats: string) => {
 const rawExternalData = createAtom<string | null>({
   name: "external-game-data",
   defaultValue: null,
-  effects: [reduxDevtools({ disable: import.meta.env.PROD })],
 })
 
 const parsedGameData = createDerived(({ get }) => {

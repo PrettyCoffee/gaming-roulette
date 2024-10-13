@@ -1,4 +1,3 @@
-import { createAtom, useAtomValue } from "@yaasl/react"
 import { keyframes } from "goober"
 import {
   BadgeCheck,
@@ -9,6 +8,7 @@ import {
   X,
 } from "lucide-react"
 
+import { createAtom, useAtomValue } from "~/lib/yaasl"
 import { bgColor, textColor } from "~/utils/colors"
 import { createId } from "~/utils/createId"
 import { cn } from "~/utils/utils"

@@ -1,14 +1,12 @@
 import { useCallback } from "react"
 
-import { reduxDevtools } from "@yaasl/devtools"
 import {
   createAtom,
   localStorage,
   useAtom,
   createDerived,
   useAtomValue,
-} from "@yaasl/react"
-
+} from "~/lib/yaasl"
 import { ColorValue } from "~/utils/colors"
 import { createId } from "~/utils/createId"
 
@@ -47,7 +45,7 @@ export interface Player {
 export const playersAtom = createAtom<Player[]>({
   name: "players",
   defaultValue: [],
-  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
+  effects: [localStorage()],
 })
 
 export const usePlayers = () => {

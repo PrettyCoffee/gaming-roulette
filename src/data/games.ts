@@ -1,14 +1,12 @@
 import { useCallback } from "react"
 
-import { reduxDevtools } from "@yaasl/devtools"
 import {
   createAtom,
   createDerived,
   localStorage,
   useAtomValue,
   useSetAtom,
-} from "@yaasl/react"
-
+} from "~/lib/yaasl"
 import { createId } from "~/utils/createId"
 import { timeBetween, timeSince, today } from "~/utils/date"
 
@@ -38,7 +36,7 @@ export interface Game extends Omit<RawGame, "playerId"> {
 export const gamesAtom = createAtom<RawGame[]>({
   defaultValue: [],
   name: "games",
-  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
+  effects: [localStorage()],
 })
 
 const sortedGames = createDerived<RawGame[]>(

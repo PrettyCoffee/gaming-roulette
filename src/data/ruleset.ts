@@ -1,5 +1,4 @@
-import { reduxDevtools } from "@yaasl/devtools"
-import { createAtom, localStorage, useAtom } from "@yaasl/react"
+import { createAtom, localStorage, useAtom } from "~/lib/yaasl"
 
 const additionalRules = [
   "Costs less than 20€",
@@ -28,7 +27,7 @@ export const rulesetAtom = createAtom<Ruleset>({
     allowCrossDuplicates: true,
     additional: additionalRules,
   },
-  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
+  effects: [localStorage()],
 })
 
 export const useRuleset = () => useAtom(rulesetAtom)

@@ -1,5 +1,4 @@
-import { reduxDevtools } from "@yaasl/devtools"
-import { createAtom, useAtom, localStorage, useAtomValue } from "@yaasl/react"
+import { createAtom, useAtom, localStorage, useAtomValue } from "~/lib/yaasl"
 
 interface GithubData {
   token: string
@@ -18,7 +17,7 @@ export const githubAtom = createAtom<GithubData>({
     branch: "data",
     filePath: "played.md",
   },
-  effects: [localStorage(), reduxDevtools({ disable: import.meta.env.PROD })],
+  effects: [localStorage()],
 })
 
 const isIncomplete = (github: GithubData) =>
@@ -47,7 +46,6 @@ export const useGithub = () => {
 const showGithubOptions = createAtom({
   name: "showGithubOptions",
   defaultValue: false,
-  effects: [reduxDevtools({ disable: import.meta.env.PROD })],
 })
 
 const holding = { current: false }
