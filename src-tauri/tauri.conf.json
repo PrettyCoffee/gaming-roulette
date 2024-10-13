@@ -44,12 +44,14 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": false,
+        "resizable": true,
         "title": "Gaming Roulette",
-        "width": 800,
         "height": 400,
+        "width": 800,
         "minHeight": 400,
         "minWidth": 800,
+        "maxHeight": 600,
+        "maxWidth": 1200,
         "transparent": true,
         "decorations": false
       }
