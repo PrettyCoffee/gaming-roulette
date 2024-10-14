@@ -76,14 +76,14 @@ export const HandicapGraph = () => {
         />
       </svg>
       <div className="absolute bottom-[calc(50%+theme(height.2))] left-2 flex size-0 items-center justify-center">
-        <caption className="-rotate-90 whitespace-nowrap text-xs text-muted-foreground">
+        <span className="-rotate-90 whitespace-nowrap text-xs text-muted-foreground">
           Handicap
-        </caption>
+        </span>
       </div>
       <div className="absolute bottom-2 left-[calc(50%+theme(width.2))] flex size-0 items-center justify-center">
-        <caption className="whitespace-nowrap text-xs text-muted-foreground">
+        <span className="whitespace-nowrap text-xs text-muted-foreground">
           Games won
-        </caption>
+        </span>
       </div>
     </div>
   )
