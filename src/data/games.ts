@@ -1,14 +1,13 @@
 import { useCallback } from "react"
 
 import {
-  createAtom,
-  createDerived,
+  createSelector,
+  createSlice,
   localStorage,
   useAtomValue,
-  useSetAtom,
 } from "~/lib/yaasl"
 import { createId } from "~/utils/createId"
-import { timeBetween, timeSince, today } from "~/utils/date"
+import { dateIsValid, timeBetween, timeSince, today } from "~/utils/date"
 
 import { Player, playersAtom } from "./players"
 import { rulesetAtom } from "./ruleset"
@@ -33,65 +32,65 @@ export interface Game extends Omit<RawGame, "playerId"> {
   player?: Player
 }
 
-export const gamesAtom = createAtom<RawGame[]>({
-  defaultValue: [],
+const sortByDate = (games: RawGame[]) =>
+  games.sort((a, b) => a.date.localeCompare(b.date))
+
+export const gamesSlice = createSlice({
+  defaultValue: [] as RawGame[],
   name: "games",
   effects: [localStorage()],
+
+  reducers: {
+    add: (state, game: RawGame) => sortByDate([...state, game]),
+    edit: (state, id: string, data: Partial<RawGame>) =>
+      state.map(game => (game.id === id ? { ...game, ...data } : game)),
+    remove: (state, id: string) => state.filter(game => game.id !== id),
+
+    merge: (state, games: RawGame[]) =>
+      sortByDate(
+        games.reduce(
+          (state, game) => {
+            const gameExists = state.some(({ name }) => name === game.name)
+            if (gameExists || !dateIsValid(game.date)) {
+              return state
+            }
+            state.push(game)
+            return state
+          },
+          [...state]
+        )
+      ),
+  },
 })
 
-const sortedGames = createDerived<RawGame[]>(
-  ({ get }) => get(gamesAtom).sort((a, b) => a.date.localeCompare(b.date)),
-  ({ set, value }) =>
-    set(
-      gamesAtom,
-      value.sort((a, b) => a.date.localeCompare(b.date))
-    )
+const extendedGames = createSelector(
+  [gamesSlice, playersAtom],
+  (games, players) => {
+    return games.map(({ playerId, ...game }) => {
+      const player = players.find(player => player.id === playerId)
+      return { ...game, player }
+    })
+  }
 )
-
-const extendedGames = createDerived<Game[]>(({ get }) => {
-  const games = get(sortedGames)
-  const players = get(playersAtom)
-
-  return games.map(({ playerId, ...game }) => {
-    const player = players.find(player => player.id === playerId)
-    return { ...game, player }
-  })
-})
 
 export const useGames = () => {
   const games = useAtomValue(extendedGames)
-  const setGames = useSetAtom(sortedGames)
 
-  const addGame = useCallback(
-    (data: Omit<RawGame, "id">) => {
-      const game = { id: createId(), ...data }
-      setGames(prev => [...prev, game])
-      return game.id
-    },
-    [setGames]
-  )
+  const addGame = useCallback((data: Omit<RawGame, "id">) => {
+    const game = { id: createId(), ...data }
+    gamesSlice.actions.add({ id: createId(), ...data })
+    return game.id
+  }, [])
 
-  const editGame = useCallback(
-    (id: string, data: Partial<RawGame>) => {
-      setGames(prev =>
-        prev.map(game => (game.id === id ? { ...game, ...data } : game))
-      )
-    },
-    [setGames]
-  )
-
-  const removeGame = useCallback(
-    (id: string) => {
-      setGames(prev => prev.filter(game => game.id !== id))
-    },
-    [setGames]
-  )
-
-  return { games, addGame, editGame, removeGame }
+  return {
+    games,
+    addGame,
+    editGame: gamesSlice.actions.edit,
+    removeGame: gamesSlice.actions.remove,
+  }
 }
 
-const gameStatsAtom = createDerived(({ get }) => {
-  const games = get(sortedGames)
+const gameStatsAtom = createSelector([gamesSlice], games => {
   const averageTime =
     games.length < 2
       ? 0
@@ -106,29 +105,29 @@ const gameStatsAtom = createDerived(({ get }) => {
 
 export const useGameStats = () => useAtomValue(gameStatsAtom)
 
-const gamePlayerStatsAtom = createDerived(({ get }) => {
-  const games = get(extendedGames)
-  const players = get(playersAtom)
+const gamePlayerStatsAtom = createSelector(
+  [extendedGames, playersAtom],
+  (games, players) => {
+    return players.map(({ id }) => {
+      const timedGames = games
+        .map(({ stats }) => stats?.[id]?.playtime)
+        .filter(Boolean) as number[]
+      const ratedGames = games
+        .map(({ stats }) => stats?.[id]?.rating)
+        .filter(Boolean) as number[]
 
-  return players.map(({ id }) => {
-    const timedGames = games
-      .map(({ stats }) => stats?.[id]?.playtime)
-      .filter(Boolean) as number[]
-    const ratedGames = games
-      .map(({ stats }) => stats?.[id]?.rating)
-      .filter(Boolean) as number[]
-
-    return {
-      id,
-      averageTime:
-        timedGames.reduce((total, playtime) => total + playtime, 0) /
-        Math.max(timedGames.length, 1),
-      averageRating:
-        ratedGames.reduce((total, rating) => total + rating, 0) /
-        Math.max(ratedGames.length, 1),
-    }
-  })
-})
+      return {
+        id,
+        averageTime:
+          timedGames.reduce((total, playtime) => total + playtime, 0) /
+          Math.max(timedGames.length, 1),
+        averageRating:
+          ratedGames.reduce((total, rating) => total + rating, 0) /
+          Math.max(ratedGames.length, 1),
+      }
+    })
+  }
+)
 
 export const useGamePlayerStats = () => useAtomValue(gamePlayerStatsAtom)
 
@@ -138,25 +137,27 @@ export const calcHandicap = (wins: number, max: number, severity = 0.75) => {
   return Math.round(result * 100) / 100
 }
 
-const spinnerHandicapAtom = createDerived(({ get }) => {
-  const games = get(sortedGames).reverse()
-  const ruleset = get(rulesetAtom)
+const spinnerHandicapAtom = createSelector(
+  [gamesSlice, rulesetAtom],
+  (games, ruleset) => {
+    const reversedGames = games.reverse()
 
-  let wins = 0
-  let latestPlayer: string | undefined = undefined
-  while (!latestPlayer || games[wins]?.playerId === latestPlayer) {
-    const current = games[wins]
-    if (!current) break
-    if (!latestPlayer) {
-      latestPlayer = current.playerId
+    let wins = 0
+    let latestPlayer: string | undefined = undefined
+    while (!latestPlayer || reversedGames[wins]?.playerId === latestPlayer) {
+      const current = reversedGames[wins]
+      if (!current) break
+      if (!latestPlayer) {
+        latestPlayer = current.playerId
+      }
+      wins++
     }
-    wins++
-  }
 
-  return {
-    handicap: calcHandicap(wins, ruleset.gamesPerPerson, ruleset.handicap),
-    playerId: latestPlayer,
+    return {
+      handicap: calcHandicap(wins, ruleset.gamesPerPerson, ruleset.handicap),
+      playerId: latestPlayer,
+    }
   }
-})
+)
 
 export const useSpinnerHandicap = () => useAtomValue(spinnerHandicapAtom)

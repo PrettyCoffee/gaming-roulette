@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react"
 
 import { toast } from "~/components/Toaster"
-import { createAtom, createDerived } from "~/lib/yaasl"
+import { createAtom, createSelector } from "~/lib/yaasl"
 import { createId } from "~/utils/createId"
-import { dateIsValid } from "~/utils/date"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
 
-import { RawGame, gamesAtom } from "./games"
+import { gamesSlice } from "./games"
 import { useGithub } from "./github"
 import { playersAtom } from "./players"
 import { fetchRepoFile } from "./service/fetchRepoFile"
@@ -29,39 +28,28 @@ const rawExternalData = createAtom<string | null>({
   defaultValue: null,
 })
 
-const parsedGameData = createDerived(({ get }) => {
-  const rawData = get(rawExternalData) ?? ""
-  const players = get(playersAtom)
+const parsedGameData = createSelector(
+  [rawExternalData, playersAtom],
+  (rawData, players) => {
+    const getPlayer = (name: string) =>
+      players.find(player => player.name.toLowerCase() === name.toLowerCase())
 
-  const getPlayer = (name: string) =>
-    players.find(player => player.name.toLowerCase() === name.toLowerCase())
-
-  return parseMarkdownTable(rawData).map(({ name, game, date, ...users }) => ({
-    id: createId(),
-    playerId: "",
-    name: name ?? game ?? "",
-    date: date ?? "",
-    stats: Object.fromEntries(
-      Object.entries(users).map(([key, value]) => [
-        getPlayer(key)?.id ?? key,
-        splitUserStats(value),
-      ])
-    ),
-  }))
-})
-
-const mergeGames = (state: RawGame[], newGames: RawGame[]) =>
-  newGames.reduce(
-    (state, game) => {
-      const gameExists = state.some(({ name }) => name === game.name)
-      if (gameExists || !dateIsValid(game.date)) {
-        return state
-      }
-      state.push(game)
-      return state
-    },
-    [...state]
-  )
+    return parseMarkdownTable(rawData ?? "").map(
+      ({ name, game, date, ...users }) => ({
+        id: createId(),
+        playerId: "",
+        name: name ?? game ?? "",
+        date: date ?? "",
+        stats: Object.fromEntries(
+          Object.entries(users).map(([key, value]) => [
+            getPlayer(key)?.id ?? key,
+            splitUserStats(value),
+          ])
+        ),
+      })
+    )
+  }
+)
 
 export const useExternalGames = () => {
   const [status, setStatus] = useState<"initial" | "fetching" | "idle">("idle")
@@ -79,7 +67,7 @@ export const useExternalGames = () => {
       .then(text => {
         rawExternalData.set(text ?? "")
         const games = parsedGameData.get()
-        gamesAtom.set(state => mergeGames(state, games))
+        gamesSlice.actions.merge(games)
       })
       .then(() => toast({ kind: "success", message: "Games synced" }))
       .catch(() => toast({ kind: "error", message: "Games could not sync" }))

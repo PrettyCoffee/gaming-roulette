@@ -4,7 +4,7 @@ import {
   createAtom,
   localStorage,
   useAtom,
-  createDerived,
+  createSelector,
   useAtomValue,
 } from "~/lib/yaasl"
 import { ColorValue } from "~/utils/colors"
@@ -91,8 +91,7 @@ const arraysOverlap = (...arrays: string[][]) => {
   })
 }
 
-export const playerGameStats = createDerived(({ get }) => {
-  const players = get(playersAtom)
+export const playerGameStats = createSelector([playersAtom], players => {
   const allGames = players.map(({ games }) => games)
 
   return Object.fromEntries(

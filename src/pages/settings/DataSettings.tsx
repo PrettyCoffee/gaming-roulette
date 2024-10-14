@@ -11,7 +11,7 @@ import { toast } from "~/components/Toaster"
 import { Button } from "~/components/ui/button"
 import { Checkbox } from "~/components/ui/checkbox"
 import { AudioOptions, audioSettingsAtom } from "~/data/audioSettings"
-import { RawGame, gamesAtom } from "~/data/games"
+import { RawGame, gamesSlice } from "~/data/games"
 import { Player, playersAtom } from "~/data/players"
 import { Ruleset, rulesetAtom } from "~/data/ruleset"
 import { GeneralSettings, settingsAtom } from "~/data/settings"
@@ -26,9 +26,9 @@ const dataFields = [
   {
     value: "game-data",
     label: "Game data",
-    getValue: () => gamesAtom.get(),
-    setValue: (value: unknown) => gamesAtom.set(value as RawGame[]),
-    reset: () => gamesAtom.set(gamesAtom.defaultValue),
+    getValue: () => gamesSlice.get(),
+    setValue: (value: unknown) => gamesSlice.set(value as RawGame[]),
+    reset: () => gamesSlice.set(gamesSlice.defaultValue),
   },
   {
     value: "preferences",
