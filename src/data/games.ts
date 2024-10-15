@@ -9,7 +9,7 @@ import {
 import { createId } from "~/utils/createId"
 import { dateIsValid, timeBetween, timeSince, today } from "~/utils/date"
 
-import { Player, playersAtom } from "./players"
+import { Player, playersSlice } from "./players"
 import { rulesetAtom } from "./ruleset"
 
 export interface PlayerStats {
@@ -64,7 +64,7 @@ export const gamesSlice = createSlice({
 })
 
 const extendedGames = createSelector(
-  [gamesSlice, playersAtom],
+  [gamesSlice, playersSlice],
   (games, players) => {
     return games.map(({ playerId, ...game }) => {
       const player = players.find(player => player.id === playerId)
@@ -106,7 +106,7 @@ const gameStatsAtom = createSelector([gamesSlice], games => {
 export const useGameStats = () => useAtomValue(gameStatsAtom)
 
 const gamePlayerStatsAtom = createSelector(
-  [extendedGames, playersAtom],
+  [extendedGames, playersSlice],
   (games, players) => {
     return players.map(({ id }) => {
       const timedGames = games

@@ -17,6 +17,16 @@ export const createRange = (options: RangeOptions) => {
   )
 }
 
+export const arrayHasDuplicate = <T>(items: T[]) =>
+  items.some((item, index) => items.indexOf(item) !== index)
+
+export const arraysIntersect = <T>(...arrays: T[][]) => {
+  return arrays.some((array, index) => {
+    const others = arrays.slice(index + 1).flat()
+    return array.some(item => others.includes(item))
+  })
+}
+
 const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array]
   for (let pos1 = shuffled.length - 1; pos1 > 0; pos1--) {

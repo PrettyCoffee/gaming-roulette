@@ -1,12 +1,5 @@
-import { useCallback } from "react"
-
-import {
-  createAtom,
-  localStorage,
-  useAtom,
-  createSelector,
-  useAtomValue,
-} from "~/lib/yaasl"
+import { localStorage, useAtom, useAtomValue, createSlice } from "~/lib/yaasl"
+import { arrayHasDuplicate, arraysIntersect } from "~/utils/array"
 import { ColorValue } from "~/utils/colors"
 import { createId } from "~/utils/createId"
 
@@ -42,68 +35,56 @@ export interface Player {
   games: string[]
 }
 
-export const playersAtom = createAtom<Player[]>({
+export const playersSlice = createSlice({
   name: "players",
-  defaultValue: [],
+  defaultValue: [] as Player[],
   effects: [localStorage()],
+
+  reducers: {
+    add: (state, name: string, color: ColorValue) => [
+      ...state,
+      { name, color, id: createId(), games: [] },
+    ],
+    edit: (state, id: string, data: Partial<Player>) =>
+      state.map(player => (player.id === id ? { ...player, ...data } : player)),
+    remove: (state, id: string) => state.filter(player => player.id !== id),
+  },
+
+  selectors: {
+    gameStats: players => {
+      const allGames = players.map(({ games }) => games)
+
+      return Object.fromEntries(
+        players.map(player => [
+          player.id,
+          {
+            hasDuplicates: arrayHasDuplicate(player.games),
+            hasCrossDuplicates: arraysIntersect(...allGames),
+            games: player.games.length,
+          },
+        ])
+      )
+    },
+  },
 })
+
+const setPlayerAttribute = <Attribute extends keyof Omit<Player, "id">>(
+  id: string,
+  attribute: Attribute,
+  value: Player[Attribute]
+) => playersSlice.actions.edit(id, { [attribute]: value })
 
 export const usePlayers = () => {
-  const [players, setPlayers] = useAtom(playersAtom)
+  const [players, setPlayers] = useAtom(playersSlice)
 
-  const addPlayer = useCallback(
-    (name: string, color: ColorValue) => {
-      const newPlayer = { name, color, id: createId(), games: [] }
-      setPlayers(data => [...data, newPlayer])
-    },
-    [setPlayers]
-  )
-
-  const removePlayer = useCallback(
-    (id: string) => setPlayers(data => data.filter(player => player.id !== id)),
-    [setPlayers]
-  )
-
-  const setPlayerAttribute = useCallback(
-    <Attribute extends keyof Omit<Player, "id">>(
-      id: string,
-      attribute: Attribute,
-      value: Player[Attribute]
-    ) =>
-      setPlayers(data =>
-        data.map(player =>
-          player.id !== id ? player : { ...player, [attribute]: value }
-        )
-      ),
-    [setPlayers]
-  )
-
-  return { players, addPlayer, removePlayer, setPlayers, setPlayerAttribute }
+  return {
+    players,
+    setPlayers,
+    setPlayerAttribute,
+    addPlayer: playersSlice.actions.add,
+    removePlayer: playersSlice.actions.remove,
+  }
 }
 
-const arrayHasDuplicate = (items: string[]) =>
-  items.some((item, index) => items.indexOf(item) !== index)
-
-const arraysOverlap = (...arrays: string[][]) => {
-  return arrays.some((array, index) => {
-    const others = arrays.slice(index + 1).flat()
-    return array.some(item => others.includes(item))
-  })
-}
-
-export const playerGameStats = createSelector([playersAtom], players => {
-  const allGames = players.map(({ games }) => games)
-
-  return Object.fromEntries(
-    players.map(player => [
-      player.id,
-      {
-        hasDuplicates: arrayHasDuplicate(player.games),
-        hasCrossDuplicates: arraysOverlap(...allGames),
-        games: player.games.length,
-      },
-    ])
-  )
-})
-
-export const usePlayerGameStats = () => useAtomValue(playerGameStats)
+export const usePlayerGameStats = () =>
+  useAtomValue(playersSlice.selectors.gameStats)

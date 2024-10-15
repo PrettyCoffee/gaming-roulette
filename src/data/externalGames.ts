@@ -7,7 +7,7 @@ import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
 
 import { gamesSlice } from "./games"
 import { useGithub } from "./github"
-import { playersAtom } from "./players"
+import { playersSlice } from "./players"
 import { fetchRepoFile } from "./service/fetchRepoFile"
 
 const splitUserStats = (userStats: string) => {
@@ -29,7 +29,7 @@ const rawExternalData = createAtom<string | null>({
 })
 
 const parsedGameData = createSelector(
-  [rawExternalData, playersAtom],
+  [rawExternalData, playersSlice],
   (rawData, players) => {
     const getPlayer = (name: string) =>
       players.find(player => player.name.toLowerCase() === name.toLowerCase())

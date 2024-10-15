@@ -12,7 +12,7 @@ import { Button } from "~/components/ui/button"
 import { Checkbox } from "~/components/ui/checkbox"
 import { AudioOptions, audioSettingsAtom } from "~/data/audioSettings"
 import { RawGame, gamesSlice } from "~/data/games"
-import { Player, playersAtom } from "~/data/players"
+import { Player, playersSlice } from "~/data/players"
 import { Ruleset, rulesetAtom } from "~/data/ruleset"
 import { GeneralSettings, settingsAtom } from "~/data/settings"
 import { textColor } from "~/utils/colors"
@@ -54,9 +54,9 @@ const dataFields = [
   {
     value: "players",
     label: "Players",
-    getValue: () => playersAtom.get(),
-    setValue: (value: unknown) => playersAtom.set(value as Player[]),
-    reset: () => playersAtom.set(playersAtom.defaultValue),
+    getValue: () => playersSlice.get(),
+    setValue: (value: unknown) => playersSlice.set(value as Player[]),
+    reset: () => playersSlice.set(playersSlice.defaultValue),
   },
   {
     value: "ruleset",
