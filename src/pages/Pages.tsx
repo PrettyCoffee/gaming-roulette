@@ -3,11 +3,11 @@ import { Suspense, useEffect, useState } from "react"
 import { css } from "goober"
 import { Github } from "lucide-react"
 
-import { ErrorBoundary } from "~/components/ErrorBoundary"
 import { Icon } from "~/components/Icon"
 import { Link } from "~/components/Link"
 import { Loading } from "~/components/Loading"
 import { Navigation } from "~/components/Navigation"
+import { ErrorBoundary } from "~/components/utility/ErrorBoundary"
 import { onGithubMouseDown } from "~/data/github"
 import { usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
@@ -85,7 +85,7 @@ export const Pages = () => {
         )}
       >
         <h1 className="sr-only">{currentRoute?.label}</h1>
-        <ErrorBoundary fallback={<ErrorFallback />}>
+        <ErrorBoundary Fallback={ErrorFallback}>
           <Suspense fallback={<Loading />}>
             <ActiveView />
           </Suspense>

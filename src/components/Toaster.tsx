@@ -15,7 +15,7 @@ import { cn } from "~/utils/utils"
 
 import { Icon } from "./Icon"
 import { IconButton } from "./IconButton"
-import { Portal } from "./Portal"
+import { Portal } from "./utility/Portal"
 
 const kinds = {
   info: { color: "blue", icon: BadgeInfo, duration: 5000 },

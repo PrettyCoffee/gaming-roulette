@@ -6,9 +6,9 @@ import { Button, ButtonProps } from "~/components/ui/button"
 import { cn } from "~/utils/utils"
 
 import { ClassNameProp } from "./base/BaseProps"
-import { VisuallyHidden } from "./base/VisuallyHidden"
 import { Icon, IconProps } from "./Icon"
 import { TitleTooltip, TitleTooltipProps } from "./TitleTooltip"
+import { VisuallyHidden } from "./utility/VisuallyHidden"
 
 const iconButton = cva("shrink-0", {
   variants: {

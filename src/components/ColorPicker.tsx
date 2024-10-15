@@ -8,10 +8,10 @@ import { cn } from "~/utils/utils"
 
 import { BaseButton } from "./base/BaseButton"
 import { ClassNameProp } from "./base/BaseProps"
-import { VisuallyHidden } from "./base/VisuallyHidden"
 import { Icon } from "./Icon"
 import { Swatch } from "./Swatch"
 import { Popover } from "./ui/popover"
+import { VisuallyHidden } from "./utility/VisuallyHidden"
 
 interface ColorButtonProps {
   color: ColorValue
