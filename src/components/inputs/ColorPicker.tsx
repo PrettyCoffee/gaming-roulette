@@ -2,11 +2,11 @@ import { Dispatch } from "react"
 
 import { Check } from "lucide-react"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { ColorValue } from "~/utils/colors"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "../base/BaseProps"
 import { BaseButton } from "../buttons/BaseButton"
 import { Icon } from "../Icon"
 import { Swatch } from "../Swatch"

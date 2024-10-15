@@ -2,10 +2,10 @@ import { PropsWithChildren } from "react"
 
 import { Label } from "@radix-ui/react-label"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "../base/BaseProps"
 import { InfoHint } from "../InfoHint"
 
 interface InputLabelProps extends ClassNameProp {

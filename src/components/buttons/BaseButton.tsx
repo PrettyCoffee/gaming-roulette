@@ -5,9 +5,8 @@ import { Slot } from "@radix-ui/react-slot"
 import click from "~/assets/btn-click.mp3"
 import hover from "~/assets/btn-hover.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
+import { AsChildProp } from "~/types/BaseProps"
 import { playAudio } from "~/utils/playAudio"
-
-import { AsChildProp } from "../base/BaseProps"
 
 type ButtonMouseEvent = MouseEvent<HTMLButtonElement>
 type ButtonFocusEvent = FocusEvent<HTMLButtonElement>

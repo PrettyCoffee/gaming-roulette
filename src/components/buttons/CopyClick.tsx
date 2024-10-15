@@ -1,9 +1,9 @@
 import { cva, VariantProps } from "class-variance-authority"
 import { Copy } from "lucide-react"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "../base/BaseProps"
 import { Icon } from "../Icon"
 
 const copyToClipboard = (text: string) => navigator.clipboard.writeText(text)

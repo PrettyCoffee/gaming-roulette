@@ -3,10 +3,10 @@ import { Dispatch } from "react"
 import { cva } from "class-variance-authority"
 
 import { Route } from "~/pages/routes"
+import { ClassNameProp } from "~/types/BaseProps"
 import { focusRing, noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
 import { BaseButton } from "./buttons/BaseButton"
 import { Icon } from "./Icon"
 import { TitleTooltip } from "./TitleTooltip"

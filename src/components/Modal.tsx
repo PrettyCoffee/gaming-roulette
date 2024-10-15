@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
 import { Button, ButtonProps } from "./buttons/Button"
 import { Dialog } from "./ui/dialog"
 

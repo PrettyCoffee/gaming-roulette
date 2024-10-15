@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react"
 
-import { ClassNameProp } from "~/components/base/BaseProps"
+import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
 const Root = ({ children, className }: PropsWithChildren<ClassNameProp>) => (

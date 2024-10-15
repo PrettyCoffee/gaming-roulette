@@ -1,8 +1,8 @@
 import { useRef } from "react"
 
-import { ClassNameProp } from "~/components/base/BaseProps"
 import { CopyClick } from "~/components/buttons/CopyClick"
 import { useSize } from "~/hooks/useSize"
+import { ClassNameProp } from "~/types/BaseProps"
 import { ColorValue, bgColor, textColorDark } from "~/utils/colors"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"

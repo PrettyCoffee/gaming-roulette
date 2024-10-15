@@ -1,10 +1,9 @@
 import { PropsWithChildren } from "react"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { isTauriEnv } from "~/utils/isTauriEnv"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
-
-import { ClassNameProp } from "./base/BaseProps"
 
 interface LinkProps extends ClassNameProp {
   href: string

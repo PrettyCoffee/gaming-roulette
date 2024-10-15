@@ -1,10 +1,10 @@
 import { Fragment, PropsWithChildren } from "react"
 
-import { ClassNameProp } from "~/components/base/BaseProps"
 import { Text } from "~/components/base/Text"
 import { useGameStats, useGames } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { Ruleset, useRuleset } from "~/data/ruleset"
+import { ClassNameProp } from "~/types/BaseProps"
 import { DAY, readableTime } from "~/utils/date"
 import { cn } from "~/utils/utils"
 

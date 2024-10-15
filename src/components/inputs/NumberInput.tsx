@@ -1,10 +1,10 @@
 import { Dispatch, useState } from "react"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { parseNumber } from "~/utils/number"
 import { cn } from "~/utils/utils"
 
 import { Input } from "./Input"
-import { ClassNameProp } from "../base/BaseProps"
 import { Text } from "../base/Text"
 
 const meassureText = (text: string, reference: HTMLElement) => {

@@ -2,9 +2,9 @@ import { Dispatch } from "react"
 
 import { Upload } from "lucide-react"
 
+import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "../base/BaseProps"
 import { Button, ButtonProps } from "../buttons/Button"
 import { Icon } from "../Icon"
 
