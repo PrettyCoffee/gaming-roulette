@@ -133,10 +133,11 @@ export const Select = ({
   options,
   onChange,
   placeholder,
+  id,
   ...props
 }: SelectProps) => (
   <Root onValueChange={onChange} {...props}>
-    <Trigger>
+    <Trigger id={id}>
       <Value placeholder={placeholder ?? "Select option"} />
     </Trigger>
     <Content>

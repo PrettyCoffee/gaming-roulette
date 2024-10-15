@@ -49,10 +49,11 @@ const StatsInput = ({ stats, onChange, color, player }: StatsInputProps) => {
         {player}
       </Text>
       <div>
-        <InputLabel htmlFor={id} className="mb-0">
+        <InputLabel htmlFor={`time-${id}`} className="mb-0">
           Time
         </InputLabel>
         <NumberInput
+          id={`time-${id}`}
           placeholder="-"
           value={playtime}
           onChange={value => onChange({ rating, playtime: value })}
@@ -62,10 +63,11 @@ const StatsInput = ({ stats, onChange, color, player }: StatsInputProps) => {
         />
       </div>
       <div>
-        <InputLabel htmlFor={id} className="mb-0">
+        <InputLabel htmlFor={`rating-${id}`} className="mb-0">
           Rating
         </InputLabel>
         <NumberInput
+          id={`rating-${id}`}
           placeholder="-"
           value={rating}
           onChange={value => onChange({ playtime, rating: value })}

@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react"
 
+import { Label } from "@radix-ui/react-label"
+
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
@@ -18,12 +20,12 @@ export const InputLabel = ({
   hint,
 }: PropsWithChildren<InputLabelProps>) => (
   <div className={cn("mb-1 inline-flex items-center", noOverflow, className)}>
-    <label
+    <Label
       htmlFor={htmlFor}
       className={cn("text-sm font-semibold text-muted-foreground", noOverflow)}
     >
       {children}
-    </label>
+    </Label>
     {hint && <InfoHint>{hint}</InfoHint>}
   </div>
 )
