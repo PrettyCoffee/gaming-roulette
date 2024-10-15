@@ -4,9 +4,9 @@ import { Upload } from "lucide-react"
 
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
-import { Button, ButtonProps } from "./buttons/Button"
-import { Icon } from "./Icon"
+import { ClassNameProp } from "../base/BaseProps"
+import { Button, ButtonProps } from "../buttons/Button"
+import { Icon } from "../Icon"
 
 interface FileInputProps extends ClassNameProp, Pick<ButtonProps, "variant"> {
   label: string

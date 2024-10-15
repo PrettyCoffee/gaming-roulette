@@ -1,7 +1,7 @@
 import { useId, useState } from "react"
 
-import { InputLabel } from "~/components/InputLabel"
-import { Input } from "~/components/ui/input"
+import { Input } from "~/components/inputs/Input"
+import { InputLabel } from "~/components/inputs/InputLabel"
 import { useGithub } from "~/data/github"
 
 import { Grid } from "./Grid"

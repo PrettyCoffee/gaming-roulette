@@ -3,8 +3,8 @@ import { PropsWithChildren } from "react"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
-import { InfoHint } from "./InfoHint"
+import { ClassNameProp } from "../base/BaseProps"
+import { InfoHint } from "../InfoHint"
 
 interface InputLabelProps extends ClassNameProp {
   htmlFor?: string

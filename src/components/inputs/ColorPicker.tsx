@@ -6,12 +6,12 @@ import { ColorValue } from "~/utils/colors"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
-import { BaseButton } from "./buttons/BaseButton"
-import { Icon } from "./Icon"
-import { Swatch } from "./Swatch"
-import { Popover } from "./ui/popover"
-import { VisuallyHidden } from "./utility/VisuallyHidden"
+import { ClassNameProp } from "../base/BaseProps"
+import { BaseButton } from "../buttons/BaseButton"
+import { Icon } from "../Icon"
+import { Swatch } from "../Swatch"
+import { Popover } from "../ui/popover"
+import { VisuallyHidden } from "../utility/VisuallyHidden"
 
 interface ColorButtonProps {
   color: ColorValue

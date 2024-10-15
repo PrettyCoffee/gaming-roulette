@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Dispatch } from "react"
 
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { ChevronDown, ChevronUp } from "lucide-react"
@@ -114,3 +115,36 @@ const Item = React.forwardRef<
 Item.displayName = SelectPrimitive.Item.displayName
 
 export { Root, Value, Trigger, Content, Item }
+
+interface SelectOption {
+  value: string
+  label: string | JSX.Element
+}
+
+interface SelectProps {
+  id?: string
+  value: string
+  onChange: Dispatch<string>
+  options: SelectOption[]
+  placeholder?: string
+}
+
+export const Select = ({
+  options,
+  onChange,
+  placeholder,
+  ...props
+}: SelectProps) => (
+  <Root onValueChange={onChange} {...props}>
+    <Trigger>
+      <Value placeholder={placeholder ?? "Select option"} />
+    </Trigger>
+    <Content>
+      {options.map(({ value, label }) => (
+        <Item key={value} value={value}>
+          {label}
+        </Item>
+      ))}
+    </Content>
+  </Root>
+)

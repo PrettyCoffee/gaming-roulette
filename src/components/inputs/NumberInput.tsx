@@ -3,9 +3,9 @@ import { Dispatch, useState } from "react"
 import { parseNumber } from "~/utils/number"
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
-import { Text } from "./base/Text"
-import { Input } from "./ui/input"
+import { Input } from "./Input"
+import { ClassNameProp } from "../base/BaseProps"
+import { Text } from "../base/Text"
 
 const meassureText = (text: string, reference: HTMLElement) => {
   const element = document.createElement("span")

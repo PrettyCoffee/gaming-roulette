@@ -1,6 +1,6 @@
 import { Dispatch, useState } from "react"
 
-import { Input, InputProps } from "~/components/ui/input"
+import { Input, InputProps } from "~/components/inputs/Input"
 import { today } from "~/utils/date"
 import { cn } from "~/utils/utils"
 

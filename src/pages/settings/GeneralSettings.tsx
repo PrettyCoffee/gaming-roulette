@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react"
 
 import { BaseButton } from "~/components/buttons/BaseButton"
-import { InputLabel } from "~/components/InputLabel"
-import { Switch } from "~/components/ui/switch"
+import { InputLabel } from "~/components/inputs/InputLabel"
+import { Switch } from "~/components/inputs/Switch"
 import { gamesA, gamesB, Player } from "~/data/players"
 import { useSettings } from "~/data/settings"
 import { shuffle } from "~/utils/array"

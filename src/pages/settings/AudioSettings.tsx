@@ -1,8 +1,8 @@
 import { useEffect, useId, useRef } from "react"
 
 import clickSound from "~/assets/click-enhanced.mp3"
-import { InputLabel } from "~/components/InputLabel"
-import { Slider } from "~/components/ui/slider"
+import { InputLabel } from "~/components/inputs/InputLabel"
+import { Slider } from "~/components/inputs/Slider"
 import { AudioOptions, useAudioSettings } from "~/data/audioSettings"
 import { playAudio } from "~/utils/playAudio"
 
