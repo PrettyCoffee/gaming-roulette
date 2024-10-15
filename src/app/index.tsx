@@ -1,14 +1,14 @@
 import { IdleIndicator } from "~/components/feedback/IdleIndicator"
-import { Pages } from "~/pages/Pages"
+import { Router } from "~/pages/Router"
 
-import { AppLayout } from "./Layout"
+import { AppLayout } from "./layout/Layout"
 import { AppProviders } from "./Providers"
 
 export const App = () => {
   return (
     <AppProviders>
       <AppLayout>
-        <Pages />
+        <Router />
         <IdleIndicator />
       </AppLayout>
     </AppProviders>

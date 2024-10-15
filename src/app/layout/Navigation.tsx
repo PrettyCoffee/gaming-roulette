@@ -1,15 +1,17 @@
-import { Dispatch } from "react"
-
 import { cva } from "class-variance-authority"
+import { Github } from "lucide-react"
 
-import { Route } from "~/pages/routes"
+import { BaseButton } from "~/components/buttons/BaseButton"
+import { TitleTooltip } from "~/components/feedback/TitleTooltip"
+import { Icon } from "~/components/primitives/Icon"
+import { Link } from "~/components/primitives/Link"
+import { onGithubMouseDown } from "~/data/github"
+import { useSettings } from "~/data/settings"
+import { useHashRouter } from "~/hooks/useHashRouter"
+import { Route, routes } from "~/pages/Router"
 import { ClassNameProp } from "~/types/BaseProps"
 import { focusRing, noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
-
-import { BaseButton } from "./buttons/BaseButton"
-import { TitleTooltip } from "./feedback/TitleTooltip"
-import { Icon } from "./primitives/Icon"
 
 const navButton = cva(
   cn(
@@ -66,22 +68,13 @@ const NavButton = ({
   </TitleTooltip>
 )
 
-interface NavigationProps {
-  items: Route[]
-  value?: string
-  compact?: boolean
-  onClick: Dispatch<string>
-}
+export const Navigation = ({ className }: ClassNameProp) => {
+  const [current, setCurrent] = useHashRouter({ fallback: routes[0], routes })
+  const [{ compactNavigation }] = useSettings()
 
-export const Navigation = ({
-  items: routes,
-  value,
-  onClick,
-  compact,
-}: NavigationProps) => {
   return (
-    <nav>
-      <ul className="flex flex-col items-stretch gap-1">
+    <nav className={cn("flex h-full flex-col", className)}>
+      <ul className="flex flex-1 flex-col items-stretch gap-1">
         {routes.map(route => (
           <TitleTooltip
             key={route.value}
@@ -91,15 +84,28 @@ export const Navigation = ({
           >
             <li key={route.value}>
               <NavButton
-                active={route.value === value}
-                onClick={() => onClick(route.value)}
-                compact={compact}
+                active={route.value === current}
+                onClick={() => setCurrent(route.value)}
+                compact={compactNavigation}
                 {...route}
               />
             </li>
           </TitleTooltip>
         ))}
       </ul>
+
+      <Link
+        onMouseDown={onGithubMouseDown}
+        href="https://github.com/PrettyCoffee/gaming-roulette"
+        target="_blank"
+        className={cn(
+          "px-2 py-1 text-sm",
+          compactNavigation && "w-full justify-center"
+        )}
+      >
+        <Icon icon={Github} size="sm" />
+        {!compactNavigation && "Github"}
+      </Link>
     </nav>
   )
 }

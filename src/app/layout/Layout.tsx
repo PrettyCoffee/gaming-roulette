@@ -1,10 +1,11 @@
 import { PropsWithChildren } from "react"
 
-import { WindowTitlebar } from "~/components/WindowTitlebar"
 import { useWindowSize } from "~/data/window"
 import { useWindowFocus } from "~/hooks/useWindowFocus"
 import { isTauriEnv } from "~/utils/isTauriEnv"
 import { cn } from "~/utils/utils"
+
+import { AppShell } from "./AppShell"
 
 const TauriLayout = ({ children }: PropsWithChildren) => {
   const isFocused = useWindowFocus()
@@ -16,8 +17,7 @@ const TauriLayout = ({ children }: PropsWithChildren) => {
         !isFocused && "bg-base brightness-75 grayscale-[0.25]"
       )}
     >
-      <WindowTitlebar />
-      {children}
+      <AppShell>{children}</AppShell>
     </div>
   )
 }
@@ -33,8 +33,7 @@ const BrowserLayout = ({ children }: PropsWithChildren) => {
             "max-h-[25rem] min-h-[25rem] min-w-[50rem] max-w-[50rem]"
         )}
       >
-        <WindowTitlebar />
-        <div className="flex-1 overflow-hidden">{children}</div>
+        <AppShell>{children}</AppShell>
       </div>
     </div>
   )

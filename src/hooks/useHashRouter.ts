@@ -1,6 +1,6 @@
 import { startTransition, useCallback, useEffect, useState } from "react"
 
-import { Route } from "~/pages/routes"
+import { Route } from "~/pages/Router"
 
 interface HashRouterProps {
   routes: Route[]

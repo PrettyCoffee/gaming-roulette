@@ -9,6 +9,8 @@ import {
   Home as HomeIcon,
 } from "lucide-react"
 
+import { useHashRouter } from "~/hooks/useHashRouter"
+
 export interface Route {
   label: string
   value: string
@@ -50,3 +52,17 @@ export const routes: Route[] = [
     component: lazy(() => import("./settings/Settings")),
   },
 ]
+
+export const Router = () => {
+  const [current] = useHashRouter({ fallback: routes[0], routes })
+
+  const currentRoute = routes.find(({ value }) => value === current)
+  const ActiveView = currentRoute?.component ?? (() => null)
+
+  return (
+    <>
+      <h1 className="sr-only">{currentRoute?.label}</h1>
+      <ActiveView />
+    </>
+  )
+}
