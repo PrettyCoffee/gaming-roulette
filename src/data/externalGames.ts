@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { toast } from "~/components/Toaster"
+import { toast } from "~/components/feedback/Toaster"
 import { createAtom, createSelector } from "~/lib/yaasl"
 import { createId } from "~/utils/createId"
 import { parseMarkdownTable } from "~/utils/parseMarkdownTable"

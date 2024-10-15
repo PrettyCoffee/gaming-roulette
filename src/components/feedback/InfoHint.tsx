@@ -4,8 +4,8 @@ import { Info } from "lucide-react"
 
 import { textColor } from "~/utils/colors"
 
-import { Icon } from "./primitives/Icon"
 import { TitleTooltip } from "./TitleTooltip"
+import { Icon } from "../primitives/Icon"
 
 export const InfoHint = ({ children }: PropsWithChildren) => (
   <TitleTooltip title={children as string} asChild>

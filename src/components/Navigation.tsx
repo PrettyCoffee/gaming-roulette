@@ -8,8 +8,8 @@ import { focusRing, noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 import { BaseButton } from "./buttons/BaseButton"
+import { TitleTooltip } from "./feedback/TitleTooltip"
 import { Icon } from "./primitives/Icon"
-import { TitleTooltip } from "./TitleTooltip"
 
 const navButton = cva(
   cn(

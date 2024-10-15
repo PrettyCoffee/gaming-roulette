@@ -1,4 +1,4 @@
-import { IdleIndicator } from "~/components/IdleIndicator"
+import { IdleIndicator } from "~/components/feedback/IdleIndicator"
 import { Pages } from "~/pages/Pages"
 
 import { AppLayout } from "./Layout"

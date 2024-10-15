@@ -6,8 +6,8 @@ import { Button, ButtonProps } from "~/components/buttons/Button"
 import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
+import { TitleTooltip, TitleTooltipProps } from "../feedback/TitleTooltip"
 import { Icon, IconProps } from "../primitives/Icon"
-import { TitleTooltip, TitleTooltipProps } from "../TitleTooltip"
 import { VisuallyHidden } from "../utility/VisuallyHidden"
 
 const iconButton = cva("shrink-0", {

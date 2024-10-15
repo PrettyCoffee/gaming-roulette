@@ -4,7 +4,7 @@ import { TooltipContentProps } from "@radix-ui/react-tooltip"
 
 import { AsChildProp, DisabledProp, TitleProp } from "~/types/BaseProps"
 
-import { Tooltip } from "./ui/tooltip"
+import { Tooltip } from "./Tooltip"
 
 export interface TitleTooltipProps
   extends TitleProp,

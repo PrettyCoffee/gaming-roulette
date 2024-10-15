@@ -13,9 +13,9 @@ import { bgColor, textColor } from "~/utils/colors"
 import { createId } from "~/utils/createId"
 import { cn } from "~/utils/utils"
 
-import { IconButton } from "./buttons/IconButton"
-import { Icon } from "./primitives/Icon"
-import { Portal } from "./utility/Portal"
+import { IconButton } from "../buttons/IconButton"
+import { Icon } from "../primitives/Icon"
+import { Portal } from "../utility/Portal"
 
 const kinds = {
   info: { color: "blue", icon: BadgeInfo, duration: 5000 },

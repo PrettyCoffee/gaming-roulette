@@ -1,8 +1,8 @@
 import { Table as TableInstance } from "@tanstack/react-table"
 import { Fragment } from "react/jsx-runtime"
 
+import { TitleTooltip } from "~/components/feedback/TitleTooltip"
 import { Swatch } from "~/components/primitives/Swatch"
-import { TitleTooltip } from "~/components/TitleTooltip"
 import { Table } from "~/components/ui/table"
 import { Game, useGamePlayerStats } from "~/data/games"
 import { ColorValue } from "~/utils/colors"

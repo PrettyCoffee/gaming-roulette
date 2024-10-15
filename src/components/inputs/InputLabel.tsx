@@ -6,7 +6,7 @@ import { ClassNameProp } from "~/types/BaseProps"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { InfoHint } from "../InfoHint"
+import { InfoHint } from "../feedback/InfoHint"
 
 interface InputLabelProps extends ClassNameProp {
   htmlFor?: string

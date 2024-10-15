@@ -3,7 +3,7 @@ import { Suspense, useEffect, useState } from "react"
 import { css } from "goober"
 import { Github } from "lucide-react"
 
-import { Loading } from "~/components/Loading"
+import { Loading } from "~/components/feedback/Loading"
 import { Navigation } from "~/components/Navigation"
 import { Icon } from "~/components/primitives/Icon"
 import { Link } from "~/components/primitives/Link"
