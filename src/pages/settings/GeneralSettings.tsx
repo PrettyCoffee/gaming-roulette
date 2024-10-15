@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react"
 
-import { BaseButton } from "~/components/base/BaseButton"
+import { BaseButton } from "~/components/buttons/BaseButton"
 import { InputLabel } from "~/components/InputLabel"
 import { Switch } from "~/components/ui/switch"
 import { gamesA, gamesB, Player } from "~/data/players"

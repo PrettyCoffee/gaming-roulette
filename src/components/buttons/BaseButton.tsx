@@ -7,7 +7,7 @@ import hover from "~/assets/btn-hover.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
 import { playAudio } from "~/utils/playAudio"
 
-import { AsChildProp } from "./BaseProps"
+import { AsChildProp } from "../base/BaseProps"
 
 type ButtonMouseEvent = MouseEvent<HTMLButtonElement>
 type ButtonFocusEvent = FocusEvent<HTMLButtonElement>

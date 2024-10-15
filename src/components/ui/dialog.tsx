@@ -5,7 +5,7 @@ import { X } from "lucide-react"
 
 import { cn } from "~/utils/utils"
 
-import { IconButton } from "../IconButton"
+import { IconButton } from "../buttons/IconButton"
 
 const Root = DialogPrimitive.Root
 

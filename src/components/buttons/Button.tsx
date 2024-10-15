@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { BaseButton, BaseButtonProps } from "../base/BaseButton"
+import { BaseButton, BaseButtonProps } from "./BaseButton"
 
 const buttonVariants = cva(
   [

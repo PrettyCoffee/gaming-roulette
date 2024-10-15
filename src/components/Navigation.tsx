@@ -6,8 +6,8 @@ import { Route } from "~/pages/routes"
 import { focusRing, noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { BaseButton } from "./base/BaseButton"
 import { ClassNameProp } from "./base/BaseProps"
+import { BaseButton } from "./buttons/BaseButton"
 import { Icon } from "./Icon"
 import { TitleTooltip } from "./TitleTooltip"
 

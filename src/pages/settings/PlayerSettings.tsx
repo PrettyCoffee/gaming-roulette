@@ -2,8 +2,8 @@ import { Dispatch, useState } from "react"
 
 import { Plus, Trash } from "lucide-react"
 
+import { IconButton, IconButtonProps } from "~/components/buttons/IconButton"
 import { ColorPicker } from "~/components/ColorPicker"
-import { IconButton, IconButtonProps } from "~/components/IconButton"
 import { InputLabel } from "~/components/InputLabel"
 import { Modal } from "~/components/Modal"
 import { Input } from "~/components/ui/input"

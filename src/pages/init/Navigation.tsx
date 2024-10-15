@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUp, Check } from "lucide-react"
 
+import { IconButton } from "~/components/buttons/IconButton"
 import { Icon } from "~/components/Icon"
-import { IconButton } from "~/components/IconButton"
 import { createRange } from "~/utils/array"
 import { borderColor, textColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"

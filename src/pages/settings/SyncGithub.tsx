@@ -2,9 +2,9 @@ import { useState } from "react"
 
 import { RefreshCw } from "lucide-react"
 
+import { Button } from "~/components/buttons/Button"
 import { Icon } from "~/components/Icon"
 import { LoadingData } from "~/components/LoadingData"
-import { Button } from "~/components/ui/button"
 import { useExternalGames } from "~/data/externalGames"
 import { useGithub } from "~/data/github"
 

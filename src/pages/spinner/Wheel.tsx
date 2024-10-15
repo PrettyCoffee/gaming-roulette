@@ -2,7 +2,7 @@ import { useRef } from "react"
 
 import { css } from "goober"
 
-import { CopyClick } from "~/components/CopyClick"
+import { CopyClick } from "~/components/buttons/CopyClick"
 import { useSize } from "~/hooks/useSize"
 import { bgColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"

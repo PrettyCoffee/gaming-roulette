@@ -13,8 +13,8 @@ import { bgColor, textColor } from "~/utils/colors"
 import { createId } from "~/utils/createId"
 import { cn } from "~/utils/utils"
 
+import { IconButton } from "./buttons/IconButton"
 import { Icon } from "./Icon"
-import { IconButton } from "./IconButton"
 import { Portal } from "./utility/Portal"
 
 const kinds = {

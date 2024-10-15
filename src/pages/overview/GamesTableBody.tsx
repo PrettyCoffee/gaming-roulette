@@ -3,7 +3,7 @@ import { Dispatch, useRef } from "react"
 import { Cell, flexRender, Row, Table } from "@tanstack/react-table"
 import { PenBox, Trash } from "lucide-react"
 
-import { IconButton } from "~/components/IconButton"
+import { IconButton } from "~/components/buttons/IconButton"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
 import { useTransition } from "~/hooks/useTransition"

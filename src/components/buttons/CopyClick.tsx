@@ -3,8 +3,8 @@ import { Copy } from "lucide-react"
 
 import { cn } from "~/utils/utils"
 
-import { ClassNameProp } from "./base/BaseProps"
-import { Icon } from "./Icon"
+import { ClassNameProp } from "../base/BaseProps"
+import { Icon } from "../Icon"
 
 const copyToClipboard = (text: string) => navigator.clipboard.writeText(text)
 

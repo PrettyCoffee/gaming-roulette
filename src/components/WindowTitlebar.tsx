@@ -6,7 +6,7 @@ import { useWindowSize, windowAtom } from "~/data/window"
 import { isTauriEnv } from "~/utils/isTauriEnv"
 import { cn } from "~/utils/utils"
 
-import { IconButton } from "./IconButton"
+import { IconButton } from "./buttons/IconButton"
 
 /* Window is currently not resizable
 const useIsMaximized = () => {

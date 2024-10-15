@@ -2,8 +2,8 @@ import { useState } from "react"
 
 import { Plus } from "lucide-react"
 
-import { IconButton } from "~/components/IconButton"
-import { Button } from "~/components/ui/button"
+import { Button } from "~/components/buttons/Button"
+import { IconButton } from "~/components/buttons/IconButton"
 import { useGames } from "~/data/games"
 import { today } from "~/utils/date"
 
