@@ -4,7 +4,7 @@ import { Copy } from "lucide-react"
 import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
-import { Icon } from "../Icon"
+import { Icon } from "../primitives/Icon"
 
 const copyToClipboard = (text: string) => navigator.clipboard.writeText(text)
 

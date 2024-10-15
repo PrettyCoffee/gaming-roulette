@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { ChevronLeft } from "lucide-react"
 
 import { CopyClick } from "~/components/buttons/CopyClick"
-import { Icon } from "~/components/Icon"
+import { Icon } from "~/components/primitives/Icon"
 import { useSize } from "~/hooks/useSize"
 import { borderColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"

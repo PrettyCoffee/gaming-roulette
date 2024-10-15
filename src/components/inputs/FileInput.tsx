@@ -6,7 +6,7 @@ import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
 import { Button, ButtonProps } from "../buttons/Button"
-import { Icon } from "../Icon"
+import { Icon } from "../primitives/Icon"
 
 interface FileInputProps extends ClassNameProp, Pick<ButtonProps, "variant"> {
   label: string

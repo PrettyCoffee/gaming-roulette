@@ -1,6 +1,6 @@
 import { Fragment, PropsWithChildren } from "react"
 
-import { Text } from "~/components/base/Text"
+import { Text } from "~/components/primitives/Text"
 import { useGameStats, useGames } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { Ruleset, useRuleset } from "~/data/ruleset"

@@ -14,7 +14,7 @@ import { createId } from "~/utils/createId"
 import { cn } from "~/utils/utils"
 
 import { IconButton } from "./buttons/IconButton"
-import { Icon } from "./Icon"
+import { Icon } from "./primitives/Icon"
 import { Portal } from "./utility/Portal"
 
 const kinds = {

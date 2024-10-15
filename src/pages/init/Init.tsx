@@ -2,7 +2,7 @@ import { PropsWithChildren, useEffect, useState } from "react"
 
 import { m } from "framer-motion"
 
-import { Text } from "~/components/base/Text"
+import { Text } from "~/components/primitives/Text"
 import { VisuallyHidden } from "~/components/utility/VisuallyHidden"
 import { usePlayers } from "~/data/players"
 

@@ -27,7 +27,7 @@ export const Loading = () => {
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        className="stroke-muted-foreground size-24"
+        className="size-24 stroke-muted-foreground"
       >
         <g className="origin-center animate-spin duration-1000">
           <circle

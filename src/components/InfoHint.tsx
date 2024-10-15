@@ -4,7 +4,7 @@ import { Info } from "lucide-react"
 
 import { textColor } from "~/utils/colors"
 
-import { Icon } from "./Icon"
+import { Icon } from "./primitives/Icon"
 import { TitleTooltip } from "./TitleTooltip"
 
 export const InfoHint = ({ children }: PropsWithChildren) => (

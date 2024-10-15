@@ -3,7 +3,7 @@ import { Ghost } from "lucide-react"
 
 import { cn } from "~/utils/utils"
 
-import { Icon } from "./Icon"
+import { Icon } from "./primitives/Icon"
 
 const rotate = keyframes`
   0%, 100% {

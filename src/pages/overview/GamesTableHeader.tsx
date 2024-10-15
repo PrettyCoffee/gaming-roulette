@@ -4,7 +4,7 @@ import { flexRender, Header, Table } from "@tanstack/react-table"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 import { Button } from "~/components/buttons/Button"
-import { Icon } from "~/components/Icon"
+import { Icon } from "~/components/primitives/Icon"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
 

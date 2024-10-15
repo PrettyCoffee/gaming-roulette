@@ -2,7 +2,7 @@ import { keyframes, css } from "goober"
 
 import { cn } from "~/utils/utils"
 
-import { Swatch } from "./Swatch"
+import { Swatch } from "./primitives/Swatch"
 
 const rotate = keyframes`
   0% {

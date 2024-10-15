@@ -8,7 +8,7 @@ import {
   RowData,
 } from "@tanstack/react-table"
 
-import { Text } from "~/components/base/Text"
+import { Text } from "~/components/primitives/Text"
 import { Table as NativeTable } from "~/components/ui/table"
 import { Game } from "~/data/games"
 import { usePlayers } from "~/data/players"

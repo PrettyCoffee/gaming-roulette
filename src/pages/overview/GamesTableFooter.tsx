@@ -1,7 +1,7 @@
 import { Table as TableInstance } from "@tanstack/react-table"
 import { Fragment } from "react/jsx-runtime"
 
-import { Swatch } from "~/components/Swatch"
+import { Swatch } from "~/components/primitives/Swatch"
 import { TitleTooltip } from "~/components/TitleTooltip"
 import { Table } from "~/components/ui/table"
 import { Game, useGamePlayerStats } from "~/data/games"

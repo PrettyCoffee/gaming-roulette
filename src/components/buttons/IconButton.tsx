@@ -6,7 +6,7 @@ import { Button, ButtonProps } from "~/components/buttons/Button"
 import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
-import { Icon, IconProps } from "../Icon"
+import { Icon, IconProps } from "../primitives/Icon"
 import { TitleTooltip, TitleTooltipProps } from "../TitleTooltip"
 import { VisuallyHidden } from "../utility/VisuallyHidden"
 

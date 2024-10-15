@@ -2,9 +2,9 @@ import { Dispatch, useMemo, useState } from "react"
 
 import { AlertTriangle } from "lucide-react"
 
-import { Icon } from "~/components/Icon"
 import { InputLabel } from "~/components/inputs/InputLabel"
 import { Textarea } from "~/components/inputs/Textarea"
+import { Icon } from "~/components/primitives/Icon"
 import { Tooltip } from "~/components/ui/tooltip"
 import { Player, usePlayerGameStats, usePlayers } from "~/data/players"
 import { useRuleset } from "~/data/ruleset"
