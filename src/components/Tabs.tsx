@@ -4,7 +4,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 
 import { cn } from "~/utils/utils"
 
-import { BaseButton } from "../buttons/BaseButton"
+import { BaseButton } from "./buttons/BaseButton"
 
 const List = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,

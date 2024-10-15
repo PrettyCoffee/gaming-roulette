@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-table"
 
 import { Text } from "~/components/primitives/Text"
-import { Table as NativeTable } from "~/components/ui/table"
+import { Table as NativeTable } from "~/components/Table"
 import { Game } from "~/data/games"
 import { usePlayers } from "~/data/players"
 import { textColor } from "~/utils/colors"

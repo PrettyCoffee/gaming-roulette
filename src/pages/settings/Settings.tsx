@@ -1,4 +1,4 @@
-import { Tabs } from "~/components/ui/tabs"
+import { Tabs } from "~/components/Tabs"
 import { useShowGithubOptions } from "~/data/github"
 
 import { AudioSettings } from "./AudioSettings"

@@ -4,7 +4,7 @@ import { Cell, flexRender, Row, Table } from "@tanstack/react-table"
 import { PenBox, Trash } from "lucide-react"
 
 import { IconButton } from "~/components/buttons/IconButton"
-import { Table as NativeTable } from "~/components/ui/table"
+import { Table as NativeTable } from "~/components/Table"
 import { Game } from "~/data/games"
 import { useTransition } from "~/hooks/useTransition"
 import { cn } from "~/utils/utils"

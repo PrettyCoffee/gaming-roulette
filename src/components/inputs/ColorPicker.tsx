@@ -8,9 +8,9 @@ import { focusRing } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
 import { BaseButton } from "../buttons/BaseButton"
+import { Popover } from "../overlays/Popover"
 import { Icon } from "../primitives/Icon"
 import { Swatch } from "../primitives/Swatch"
-import { Popover } from "../ui/popover"
 import { VisuallyHidden } from "../utility/VisuallyHidden"
 
 interface ColorButtonProps {

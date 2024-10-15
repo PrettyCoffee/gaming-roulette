@@ -3,8 +3,8 @@ import { PropsWithChildren } from "react"
 import { ClassNameProp } from "~/types/BaseProps"
 import { cn } from "~/utils/utils"
 
-import { Button, ButtonProps } from "./buttons/Button"
-import { Dialog } from "./ui/dialog"
+import { Dialog } from "./Dialog"
+import { Button, ButtonProps } from "../buttons/Button"
 
 interface ModalAction {
   label: string
