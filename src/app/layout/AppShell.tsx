@@ -6,10 +6,10 @@ import { Navigation } from "~/app/layout/Navigation"
 import { Loading } from "~/components/feedback/Loading"
 import { ErrorBoundary } from "~/components/utility/ErrorBoundary"
 import { usePlayers } from "~/data/players"
-import { Init } from "~/pages/init/Init"
 import { cn } from "~/utils/utils"
 
 import { WindowTitlebar } from "./WindowTitlebar"
+import { Init } from "../routes/init/Init"
 
 const layout = css`
   display: grid;
