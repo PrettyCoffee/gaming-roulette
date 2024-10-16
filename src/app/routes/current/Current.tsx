@@ -1,11 +1,14 @@
 import { Dispatch, useMemo, useState } from "react"
 
-import { AlertTriangle } from "lucide-react"
+import { AlertTriangle, ChevronsDown } from "lucide-react"
 
+import { TitleTooltip } from "~/components/feedback/TitleTooltip"
 import { Tooltip } from "~/components/feedback/Tooltip"
 import { InputLabel } from "~/components/inputs/InputLabel"
 import { Textarea } from "~/components/inputs/Textarea"
 import { Icon } from "~/components/primitives/Icon"
+import { Text } from "~/components/primitives/Text"
+import { useHandicap } from "~/data/handicap"
 import { Player, usePlayerGameStats, usePlayers } from "~/data/players"
 import { useRuleset } from "~/data/ruleset"
 import { borderColor } from "~/utils/colors"
@@ -49,6 +52,24 @@ const ErrorHint = ({ errors }: { errors: string[] }) => (
   </Tooltip.Root>
 )
 
+const Handicap = ({ id }: { id: string }) => {
+  const handicap = useHandicap()
+  const isPlayer = handicap.playerId === id
+  if (!isPlayer || handicap.amount < 0.01) return null
+
+  const percentage = (handicap.amount * 100).toFixed(0)
+  const tooltip = `Player has a handicap of ${percentage}% due to ${handicap.wins} successive wins`
+
+  return (
+    <TitleTooltip asChild title={tooltip} side="bottom">
+      <Text className="h-full text-red-300" size="xs">
+        <Icon icon={ChevronsDown} size="xs" color="current" />
+        {` -${percentage}%`}
+      </Text>
+    </TitleTooltip>
+  )
+}
+
 const PlayerGames = ({
   id,
   color,
@@ -89,7 +110,9 @@ const PlayerGames = ({
   return (
     <div key={id} className="col-span-1">
       <div className="flex items-center gap-2 px-3">
-        <InputLabel htmlFor={id}>{name}</InputLabel>
+        <InputLabel htmlFor={id}>
+          {name} <Handicap id={id} />
+        </InputLabel>
         <div className="flex-1" />
         <Counter current={amountOfGames} limit={rules.gamesPerPerson} />
         {errors.length > 0 && <ErrorHint errors={errors} />}

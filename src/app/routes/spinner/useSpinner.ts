@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import clickSound from "~/assets/click-enhanced.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
-import { useHandicap } from "~/data/handicap"
+import { Handicap, useHandicap } from "~/data/handicap"
 import { Player } from "~/data/players"
 import { resetIdle } from "~/hooks/useIdle"
 import { randomBetween, sum } from "~/utils/number"
@@ -13,23 +13,25 @@ const playClickSound = () =>
 
 const getWinner = (
   games: { player: Player; name: string }[],
-  handicap: { handicap: number; playerId?: string }
+  handicap: Handicap
 ) => {
   const values = games.map(({ player }) =>
-    handicap.playerId === player.id ? 1 - handicap.handicap : 1
+    handicap.playerId === player.id ? 1 - handicap.amount : 1
   )
   const max = sum(values)
   const winnerValue = randomBetween(0, max)
 
   const { winner } = values.reduce(
-    ({ sum, winner }, current, index) => {
-      if (winner >= 0) {
-        return { sum, winner }
+    (result, current, index) => {
+      if (result.winner >= 0) {
+        return result
       }
-      if (sum + current >= winnerValue) {
-        return { sum, winner: index }
-      }
-      return { sum: sum + current, winner }
+
+      const newSum = result.sum + current
+      if (newSum >= winnerValue) result.winner = index
+      else result.sum = newSum
+
+      return result
     },
     { sum: 0, winner: -1 }
   )

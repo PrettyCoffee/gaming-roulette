@@ -9,24 +9,31 @@ export const calcHandicap = (wins: number, max: number, severity = 0.75) => {
   return Math.round(result * 100) / 100
 }
 
+export interface Handicap {
+  wins: number
+  amount: number
+  playerId?: string
+}
+
 const handicapAtom = createSelector(
   [gamesSlice, rulesetAtom],
-  (games, ruleset) => {
+  (games, ruleset): Handicap => {
     const reversedGames = games.reverse()
 
     let wins = 0
     let latestPlayer: string | undefined = undefined
     while (!latestPlayer || reversedGames[wins]?.playerId === latestPlayer) {
       const current = reversedGames[wins]
+      wins++
       if (!current) break
       if (!latestPlayer) {
         latestPlayer = current.playerId
       }
-      wins++
     }
 
     return {
-      handicap: calcHandicap(wins, ruleset.gamesPerPerson, ruleset.handicap),
+      wins,
+      amount: calcHandicap(wins, ruleset.gamesPerPerson, ruleset.handicap),
       playerId: latestPlayer,
     }
   }
