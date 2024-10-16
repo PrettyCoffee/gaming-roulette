@@ -12,17 +12,20 @@ import { audioSettingsAtom } from "~/data/audioSettings"
 import { useGames } from "~/data/games"
 import { Player, usePlayers } from "~/data/players"
 import { useSettings } from "~/data/settings"
+import {
+  ClassicWheel,
+  HalfWheel,
+  Tags,
+  Wheel,
+  SpinnerStateProps,
+} from "~/features/spinners"
 import { resetIdle } from "~/hooks/useIdle"
 import { shuffle } from "~/utils/array"
 import { color200 } from "~/utils/colors"
 import { today } from "~/utils/date"
 import { playAudio } from "~/utils/playAudio"
 
-import { ClassicWheel } from "./ClassicWheel"
-import { HalfWheel } from "./HalfWheel"
-import { Tags } from "./Tags"
 import { useSpinner } from "./useSpinner"
-import { Wheel } from "./Wheel"
 
 const playVictory = () =>
   playAudio(victorySound, {
@@ -61,18 +64,6 @@ const useSpinnerGames = () => {
   // Only compute on the first render, to prevent changes on the game list
   const { current } = useRef(shuffle(getSpinnerGames(players)).slice(0, 30))
   return current
-}
-
-export interface SpinnerItem {
-  name: string
-  player: Player
-}
-
-export interface SpinnerStateProps {
-  items: SpinnerItem[]
-  current?: number
-  winner?: number
-  transitionDuration: number
 }
 
 const Spinner = () => {

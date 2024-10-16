@@ -7,7 +7,7 @@ import { useSize } from "~/hooks/useSize"
 import { bgColor } from "~/utils/colors"
 import { cn } from "~/utils/utils"
 
-import { SpinnerStateProps } from "./Spinner"
+import { SpinnerStateProps } from "./types"
 
 const preserve3d = css`
   perspective: 800;

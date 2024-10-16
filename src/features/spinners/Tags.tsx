@@ -7,7 +7,7 @@ import { ColorValue, bgColor, textColorDark } from "~/utils/colors"
 import { noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
-import { SpinnerStateProps } from "./Spinner"
+import { SpinnerStateProps } from "./types"
 
 interface PillProps extends ClassNameProp {
   color: ColorValue

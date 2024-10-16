@@ -5,14 +5,11 @@ import { InputLabel } from "~/components/inputs/InputLabel"
 import { Switch } from "~/components/inputs/Switch"
 import { gamesA, gamesB, Player } from "~/data/players"
 import { useSettings } from "~/data/settings"
+import { ClassicWheel, HalfWheel, Tags, Wheel } from "~/features/spinners"
 import { shuffle } from "~/utils/array"
 import { cn } from "~/utils/utils"
 
 import { Grid } from "./Grid"
-import { ClassicWheel } from "../spinner/ClassicWheel"
-import { HalfWheel } from "../spinner/HalfWheel"
-import { Tags } from "../spinner/Tags"
-import { Wheel } from "../spinner/Wheel"
 
 const demoGames = shuffle([
   ...gamesA
