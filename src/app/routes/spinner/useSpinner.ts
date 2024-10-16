@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import clickSound from "~/assets/click-enhanced.mp3"
 import { audioSettingsAtom } from "~/data/audioSettings"
-import { useSpinnerHandicap } from "~/data/games"
+import { useHandicap } from "~/data/handicap"
 import { Player } from "~/data/players"
 import { resetIdle } from "~/hooks/useIdle"
 import { randomBetween, sum } from "~/utils/number"
@@ -38,7 +38,7 @@ const getWinner = (
 }
 
 export const useSpinner = (games: { player: Player; name: string }[]) => {
-  const handicap = useSpinnerHandicap()
+  const handicap = useHandicap()
 
   const [current, setCurrent] = useState<number | null>(null)
   const [transition, setTransition] = useState<number | null>(null)

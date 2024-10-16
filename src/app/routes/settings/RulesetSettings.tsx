@@ -5,7 +5,7 @@ import { NumberInput } from "~/components/inputs/NumberInput"
 import { Slider } from "~/components/inputs/Slider"
 import { Switch } from "~/components/inputs/Switch"
 import { Textarea } from "~/components/inputs/Textarea"
-import { calcHandicap } from "~/data/games"
+import { calcHandicap } from "~/data/handicap"
 import { Ruleset, useRuleset } from "~/data/ruleset"
 import { createRange } from "~/utils/array"
 
