@@ -59,12 +59,31 @@ interface TextProps
 }
 
 export const Text = forwardRef<HTMLSpanElement, PropsWithChildren<TextProps>>(
-  ({ asChild, children, className, gradient, ...styles }, ref) => {
+  (
+    {
+      asChild,
+      children,
+      className,
+      gradient,
+      bold,
+      color,
+      noOverflow,
+      noWrap,
+      size,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "span"
     return (
       <Comp
         ref={ref}
-        className={cn(text(styles), getGradient(gradient), className)}
+        className={cn(
+          text({ bold, color, noOverflow, noWrap, size }),
+          getGradient(gradient),
+          className
+        )}
+        {...props}
       >
         {children}
       </Comp>
