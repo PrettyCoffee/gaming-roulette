@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react"
+
 export interface ClassNameProp {
   className?: string
 }
@@ -12,4 +14,8 @@ export interface AsChildProp {
 
 export interface DisabledProp {
   disabled?: boolean
+}
+
+export interface IconProp {
+  icon?: LucideIcon
 }

@@ -3,6 +3,7 @@ import { PropsWithChildren, useEffect, useState } from "react"
 import { m } from "framer-motion"
 
 import { Text } from "~/components/primitives/Text"
+import { setHashRoute } from "~/components/utility/hash-router"
 import { VisuallyHidden } from "~/components/utility/VisuallyHidden"
 import { usePlayers } from "~/data/players"
 
@@ -198,7 +199,7 @@ export const Init = ({ onFinish }: InitProps) => {
   const maxStep = initSteps.length - 1
 
   useEffect(() => {
-    location.hash = ""
+    setHashRoute("")
   }, [])
 
   const goBack = () => {

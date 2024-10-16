@@ -2,67 +2,54 @@ import { lazy } from "react"
 
 import {
   Dices,
-  LucideIcon,
   Settings as SettingsIcon,
   Gamepad,
   GanttChartSquare,
   Home as HomeIcon,
 } from "lucide-react"
 
-import { useHashRouter } from "~/hooks/useHashRouter"
+import {
+  createRoutes,
+  HashRouter,
+  useHashRoute,
+} from "~/components/utility/hash-router"
 
-export interface Route {
-  label: string
-  value: string
-  component: React.ComponentType
-  icon: LucideIcon
-  disabled?: boolean
-  hint?: string
-}
-
-export const routes: Route[] = [
+export const routes = createRoutes([
   {
-    label: "Start",
-    value: "start",
-    icon: HomeIcon,
-    component: lazy(() => import("./home/Home")),
+    path: "",
+    Component: lazy(() => import("./home/Home")),
+    meta: { label: "Start", icon: HomeIcon },
   },
   {
-    label: "Current Games",
-    value: "current-games",
-    icon: Gamepad,
-    component: lazy(() => import("./current/Current")),
+    path: "current-games",
+    Component: lazy(() => import("./current/Current")),
+    meta: { label: "Current Games", icon: Gamepad },
   },
   {
-    label: "Game Picker",
-    value: "game-picker",
-    icon: Dices,
-    component: lazy(() => import("./spinner/Spinner")),
+    path: "game-picker",
+    Component: lazy(() => import("./spinner/Spinner")),
+    meta: { label: "Game Picker", icon: Dices },
   },
   {
-    label: "Overview",
-    value: "overview",
-    icon: GanttChartSquare,
-    component: lazy(() => import("./overview/Overview")),
+    path: "overview",
+    Component: lazy(() => import("./overview/Overview")),
+    meta: { label: "Overview", icon: GanttChartSquare },
   },
   {
-    label: "Settings",
-    value: "settings",
-    icon: SettingsIcon,
-    component: lazy(() => import("./settings/Settings")),
+    path: "settings",
+    Component: lazy(() => import("./settings/Settings")),
+    meta: { label: "Settings", icon: SettingsIcon },
   },
-]
+])
 
 export const Router = () => {
-  const [current] = useHashRouter({ fallback: routes[0], routes })
-
-  const currentRoute = routes.find(({ value }) => value === current)
-  const ActiveView = currentRoute?.component ?? (() => null)
+  const current = useHashRoute()
+  const currentRoute = routes.find(({ path }) => path === current)
 
   return (
     <>
-      <h1 className="sr-only">{currentRoute?.label}</h1>
-      <ActiveView />
+      <h1 className="sr-only">{currentRoute?.meta.label}</h1>
+      <HashRouter routes={routes} />
     </>
   )
 }

@@ -5,11 +5,12 @@ import { BaseButton } from "~/components/buttons/BaseButton"
 import { TitleTooltip } from "~/components/feedback/TitleTooltip"
 import { Icon } from "~/components/primitives/Icon"
 import { Link } from "~/components/primitives/Link"
+import { setHashRoute, useHashRoute } from "~/components/utility/hash-router"
 import { onGithubMouseDown } from "~/data/github"
 import { useSettings } from "~/data/settings"
-import { useHashRouter } from "~/hooks/useHashRouter"
-import { Route, routes } from "~/pages/Router"
+import { routes } from "~/pages/Router"
 import { ClassNameProp } from "~/types/BaseProps"
+import { RouteMeta } from "~/types/routes"
 import { focusRing, noOverflow } from "~/utils/styles"
 import { cn } from "~/utils/utils"
 
@@ -39,9 +40,7 @@ const navButton = cva(
   }
 )
 
-interface NavButtonProps
-  extends Pick<Route, "disabled" | "label" | "icon">,
-    ClassNameProp {
+interface NavButtonProps extends RouteMeta, ClassNameProp {
   active: boolean
   onClick: () => void
   compact?: boolean
@@ -54,13 +53,11 @@ const NavButton = ({
   compact,
   icon,
   onClick,
-  disabled,
 }: NavButtonProps) => (
   <TitleTooltip asChild title={label} disabled={!compact} side="right">
     <BaseButton
       onMouseDown={onClick}
       muteAudio={active}
-      disabled={disabled}
       className={cn(navButton({ active, compact }), className)}
     >
       {compact ? <Icon icon={icon} /> : label}
@@ -69,28 +66,22 @@ const NavButton = ({
 )
 
 export const Navigation = ({ className }: ClassNameProp) => {
-  const [current, setCurrent] = useHashRouter({ fallback: routes[0], routes })
+  const path = useHashRoute()
   const [{ compactNavigation }] = useSettings()
 
   return (
     <nav className={cn("flex h-full flex-col", className)}>
       <ul className="flex flex-1 flex-col items-stretch gap-1">
         {routes.map(route => (
-          <TitleTooltip
-            key={route.value}
-            asChild
-            title={route.hint}
-            side="right"
-          >
-            <li key={route.value}>
-              <NavButton
-                active={route.value === current}
-                onClick={() => setCurrent(route.value)}
-                compact={compactNavigation}
-                {...route}
-              />
-            </li>
-          </TitleTooltip>
+          <li key={route.path}>
+            <NavButton
+              active={route.path === path}
+              onClick={() => setHashRoute(route.path)}
+              compact={compactNavigation}
+              icon={route.meta.icon}
+              label={route.meta.label}
+            />
+          </li>
         ))}
       </ul>
 
