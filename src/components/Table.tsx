@@ -79,7 +79,7 @@ const Head = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "bg-background px-4 text-left font-medium text-muted-foreground",
+      "flex bg-background px-4 text-left font-medium text-muted-foreground",
       "relative after:absolute after:inset-y-0 after:right-0 after:my-auto after:block after:h-4 after:w-px after:bg-border",
       "[&:last-of-type:after]:hidden",
       className

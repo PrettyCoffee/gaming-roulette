@@ -14,8 +14,15 @@ interface HeaderProp {
   header: Header<Game, unknown>
 }
 
+const Truncated = ({ children }: PropsWithChildren) => (
+  <span className="flex-1 truncate text-left">{children}</span>
+)
+
 const SortableHead = ({ header, children }: PropsWithChildren<HeaderProp>) => {
-  if (!header.column.getCanSort()) return <>{children}</>
+  const headerText = (
+    <span className="flex-1 truncate text-left">{children}</span>
+  )
+  if (!header.column.getCanSort()) return headerText
 
   const sortState = header.column.getIsSorted()
   return (
@@ -25,7 +32,7 @@ const SortableHead = ({ header, children }: PropsWithChildren<HeaderProp>) => {
       className="-ml-2 h-8 w-[calc(100%+theme(width.4))] justify-between gap-0 px-2"
       style={{ justifyContent: header.column.columnDef.meta?.align }}
     >
-      <span className="truncate">{children}</span>
+      <Truncated>{children}</Truncated>
       {sortState === "asc" && <Icon icon={ChevronUp} />}
       {sortState === "desc" && <Icon icon={ChevronDown} />}
     </Button>
@@ -38,6 +45,7 @@ const isFlex = ({ subHeaders, column }: HeaderProp["header"]) =>
   subHeaders.some(({ column }) => column.columnDef.meta?.flex)
 
 const HeaderCell = ({ header }: HeaderProp) => {
+  const HeadContent = header.column.getCanSort() ? SortableHead : Truncated
   return (
     <NativeTable.Head
       key={header.id}
@@ -47,9 +55,9 @@ const HeaderCell = ({ header }: HeaderProp) => {
         flex: isFlex(header) ? "1" : undefined,
       }}
     >
-      <SortableHead header={header}>
+      <HeadContent header={header}>
         {flexRender(header.column.columnDef.header, header.getContext())}
-      </SortableHead>
+      </HeadContent>
     </NativeTable.Head>
   )
 }
