@@ -2,7 +2,6 @@ import { Dispatch, useMemo, useState } from "react"
 
 import { AlertTriangle, ChevronsDown } from "lucide-react"
 
-import { TitleTooltip } from "~/components/feedback/TitleTooltip"
 import { Tooltip } from "~/components/feedback/Tooltip"
 import { InputLabel } from "~/components/inputs/InputLabel"
 import { Textarea } from "~/components/inputs/Textarea"
@@ -17,7 +16,7 @@ import { cn } from "~/utils/utils"
 const Counter = ({ current, limit }: { limit: number; current: number }) => (
   <span
     className={cn(
-      "ml-2 text-nowrap text-sm font-bold text-muted-foreground",
+      "mb-1 ml-2 text-nowrap text-sm font-bold text-muted-foreground",
       current > limit && "text-red-400"
     )}
   >
@@ -32,7 +31,7 @@ interface PlayerGamesProps extends Player {
 const ErrorHint = ({ errors }: { errors: string[] }) => (
   <Tooltip.Root>
     <Tooltip.Trigger asChild>
-      <span className="inline-flex">
+      <span className="mb-1 inline-flex">
         <Icon icon={AlertTriangle} color="error" size="sm" />
       </span>
     </Tooltip.Trigger>
@@ -41,7 +40,7 @@ const ErrorHint = ({ errors }: { errors: string[] }) => (
       side="bottom"
       align="end"
       alignOffset={-8}
-      sideOffset={8}
+      sideOffset={10}
     >
       <ul>
         {errors.map(error => (
@@ -58,15 +57,21 @@ const Handicap = ({ id }: { id: string }) => {
   if (!isPlayer || handicap.amount < 0.01) return null
 
   const percentage = (handicap.amount * 100).toFixed(0)
-  const tooltip = `Player has a handicap of ${percentage}% due to ${handicap.wins} successive wins`
 
   return (
-    <TitleTooltip asChild title={tooltip} side="bottom">
-      <Text className="h-full text-red-300" size="xs">
-        <Icon icon={ChevronsDown} size="xs" color="current" />
-        {` -${percentage}%`}
-      </Text>
-    </TitleTooltip>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>
+        <Text className="whitespace-nowrap text-red-300" size="xs">
+          <Icon icon={ChevronsDown} size="xs" color="current" />
+          {` -${percentage}%`}
+        </Text>
+      </Tooltip.Trigger>
+
+      <Tooltip.Content side="bottom" align="center" sideOffset={10}>
+        Player has a handicap of {percentage}%<br />
+        due to {handicap.wins} successive wins.
+      </Tooltip.Content>
+    </Tooltip.Root>
   )
 }
 
@@ -110,10 +115,10 @@ const PlayerGames = ({
   return (
     <div key={id} className="col-span-1">
       <div className="flex items-center gap-2 px-3">
-        <InputLabel htmlFor={id}>
-          {name} <Handicap id={id} />
-        </InputLabel>
-        <div className="flex-1" />
+        <InputLabel htmlFor={id}>{name}</InputLabel>
+        <div className="mb-1 inline-flex flex-1 items-center">
+          <Handicap id={id} />
+        </div>
         <Counter current={amountOfGames} limit={rules.gamesPerPerson} />
         {errors.length > 0 && <ErrorHint errors={errors} />}
       </div>
