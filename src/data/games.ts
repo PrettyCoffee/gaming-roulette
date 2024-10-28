@@ -5,6 +5,7 @@ import {
   createSlice,
   localStorage,
   useAtomValue,
+  createEffect,
 } from "~/lib/yaasl"
 import { createId } from "~/utils/createId"
 import { dateIsValid, timeBetween, timeSince, today } from "~/utils/date"
@@ -31,33 +32,34 @@ export interface Game extends Omit<RawGame, "playerId"> {
   player?: Player
 }
 
-const sortByDate = (games: RawGame[]) =>
-  games.sort((a, b) => a.date.localeCompare(b.date))
+const sortByDate = createEffect<undefined, RawGame[]>({
+  set: ({ set }) => {
+    set(games => games.sort((a, b) => a.date.localeCompare(b.date)))
+  },
+})
 
 export const gamesSlice = createSlice({
   defaultValue: [] as RawGame[],
   name: "games",
-  effects: [localStorage()],
+  effects: [sortByDate(), localStorage()],
 
   reducers: {
-    add: (state, game: RawGame) => sortByDate([...state, game]),
+    add: (state, game: RawGame) => [...state, game],
     edit: (state, id: string, data: Partial<RawGame>) =>
       state.map(game => (game.id === id ? { ...game, ...data } : game)),
     remove: (state, id: string) => state.filter(game => game.id !== id),
 
     merge: (state, games: RawGame[]) =>
-      sortByDate(
-        games.reduce(
-          (state, game) => {
-            const gameExists = state.some(({ name }) => name === game.name)
-            if (gameExists || !dateIsValid(game.date)) {
-              return state
-            }
-            state.push(game)
+      games.reduce(
+        (state, game) => {
+          const gameExists = state.some(({ name }) => name === game.name)
+          if (gameExists || !dateIsValid(game.date)) {
             return state
-          },
-          [...state]
-        )
+          }
+          state.push(game)
+          return state
+        },
+        [...state]
       ),
   },
 })

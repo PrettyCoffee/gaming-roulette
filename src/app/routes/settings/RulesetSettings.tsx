@@ -98,7 +98,7 @@ export const HandicapSlider = () => {
         className="mb-2"
         htmlFor={"handicap"}
         hint={
-          "Defines the severity of the handicap a player will receive after winning a game. " +
+          "Defines the severity of the handicap a player will receive after winning multiple times in a row. " +
           "A value of 0 will turn the handicap off. "
         }
       >
