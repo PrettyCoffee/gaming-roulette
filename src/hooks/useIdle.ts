@@ -1,5 +1,5 @@
-import { createAtom, useAtomValue } from "~/lib/yaasl"
-import { debounce } from "~/utils/debounce"
+import { createAtom, useAtomValue } from "lib/yaasl"
+import { debounce } from "utils/debounce"
 
 const idleAtom = createAtom({
   name: "idle",
@@ -17,6 +17,4 @@ const runListener = () => resetIdle()
 window.addEventListener("keydown", runListener)
 window.addEventListener("mousemove", runListener)
 
-export const useIdle = () => {
-  return useAtomValue(idleAtom)
-}
+export const useIdle = () => useAtomValue(idleAtom)

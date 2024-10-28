@@ -1,13 +1,13 @@
 import { PropsWithChildren } from "react"
 
-import { BaseButton } from "~/components/buttons/BaseButton"
-import { InputLabel } from "~/components/inputs/InputLabel"
-import { Switch } from "~/components/inputs/Switch"
-import { gamesA, gamesB, Player } from "~/data/players"
-import { useSettings } from "~/data/settings"
-import { ClassicWheel, HalfWheel, Tags, Wheel } from "~/features/spinners"
-import { shuffle } from "~/utils/array"
-import { cn } from "~/utils/utils"
+import { BaseButton } from "components/buttons/BaseButton"
+import { InputLabel } from "components/inputs/InputLabel"
+import { Switch } from "components/inputs/switch"
+import { gamesA, gamesB, Player } from "data/players"
+import { useSettings } from "data/settings"
+import { ClassicWheel, HalfWheel, Tags, Wheel } from "features/spinners"
+import { shuffle } from "utils/array"
+import { cn } from "utils/utils"
 
 import { Grid } from "./Grid"
 

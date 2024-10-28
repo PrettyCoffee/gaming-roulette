@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react"
 
-import { ClassNameProp } from "~/types/BaseProps"
-import { cn } from "~/utils/utils"
+import { ClassNameProp } from "types/BaseProps"
+import { cn } from "utils/utils"
 
 const Root = ({ children, className }: PropsWithChildren<ClassNameProp>) => (
   <div className={cn("grid grid-cols-2 gap-4 p-2 pt-0", className)}>

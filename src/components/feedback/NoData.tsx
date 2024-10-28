@@ -1,7 +1,9 @@
+import { ReactNode } from "react"
+
 import { keyframes, css } from "goober"
 import { Ghost } from "lucide-react"
 
-import { cn } from "~/utils/utils"
+import { cn } from "utils/utils"
 
 import { Icon } from "../primitives/Icon"
 
@@ -48,7 +50,7 @@ const animate = css`
   animation: ${rotate} 2.5s infinite ease-in-out;
 `
 
-export const NoData = ({ label }: { label: string | JSX.Element }) => (
+export const NoData = ({ label }: { label: ReactNode }) => (
   <div className="flex flex-col items-center gap-8">
     <div className="relative flex size-20 items-center justify-center">
       <Icon

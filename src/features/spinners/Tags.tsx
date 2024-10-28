@@ -1,11 +1,11 @@
 import { useRef } from "react"
 
-import { CopyClick } from "~/components/buttons/CopyClick"
-import { useSize } from "~/hooks/useSize"
-import { ClassNameProp } from "~/types/BaseProps"
-import { ColorValue, bgColor, textColorDark } from "~/utils/colors"
-import { noOverflow } from "~/utils/styles"
-import { cn } from "~/utils/utils"
+import { CopyClick } from "components/buttons/CopyClick"
+import { useSize } from "hooks/useSize"
+import { ClassNameProp } from "types/BaseProps"
+import { ColorValue, bgColor, textColorDark } from "utils/colors"
+import { noOverflow } from "utils/styles"
+import { cn } from "utils/utils"
 
 import { SpinnerStateProps } from "./types"
 
@@ -81,8 +81,8 @@ export const Tags = ({
               current == null
                 ? ""
                 : current === index
-                ? "scale-105"
-                : "opacity-10"
+                  ? "scale-105"
+                  : "opacity-10"
             )}
           />
         ))}

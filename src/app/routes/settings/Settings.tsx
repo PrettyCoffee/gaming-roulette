@@ -1,5 +1,5 @@
-import { Tabs } from "~/components/Tabs"
-import { useShowGithubOptions } from "~/data/github"
+import { Tabs } from "components/Tabs"
+import { useShowGithubOptions } from "data/github"
 
 import { AudioSettings } from "./AudioSettings"
 import { DataSettings } from "./DataSettings"

@@ -1,18 +1,18 @@
 import { Dispatch, useId, useState } from "react"
 
-import { DateInput } from "~/components/inputs/DateInput"
-import { Input } from "~/components/inputs/Input"
-import { InputLabel } from "~/components/inputs/InputLabel"
-import { NumberInput } from "~/components/inputs/NumberInput"
-import { Select } from "~/components/inputs/Select"
-import { Modal } from "~/components/overlays/Modal"
-import { Swatch } from "~/components/primitives/Swatch"
-import { Text } from "~/components/primitives/Text"
-import { Game, PlayerStats } from "~/data/games"
-import { Player, usePlayers } from "~/data/players"
-import { borderColor, ColorValue, textColor } from "~/utils/colors"
-import { today } from "~/utils/date"
-import { cn } from "~/utils/utils"
+import { DateInput } from "components/inputs/DateInput"
+import { Input } from "components/inputs/input"
+import { InputLabel } from "components/inputs/InputLabel"
+import { NumberInput } from "components/inputs/NumberInput"
+import { Select } from "components/inputs/select"
+import { Modal } from "components/overlays/Modal"
+import { Swatch } from "components/primitives/Swatch"
+import { Text } from "components/primitives/Text"
+import { Game, PlayerStats } from "data/games"
+import { Player, usePlayers } from "data/players"
+import { borderColor, ColorValue, textColor } from "utils/colors"
+import { today } from "utils/date"
+import { cn } from "utils/utils"
 
 export const unknownPlayer: Player = {
   id: "unknown",
@@ -155,7 +155,7 @@ export const GameModal = ({
               value: id,
               label: (
                 <div className="flex items-center gap-1">
-                  <Swatch color={color} size={"sm"} />
+                  <Swatch color={color} size="sm" />
                   <span className="truncate">{name}</span>
                 </div>
               ),
@@ -173,7 +173,6 @@ export const GameModal = ({
             onChange={stats => {
               const newStats = { ...game.stats, [id]: stats }
               if (!stats.playtime || !stats.rating) {
-                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
                 delete newStats[id]
               }
               set("stats", { ...game.stats, [id]: stats })

@@ -21,16 +21,16 @@ interface FilterRow {
   isHidden: () => boolean
 }
 
-/* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
 declare module "@tanstack/react-table" {
   interface TableState extends FilterTableState {}
+  // eslint-disable-next-line unused-imports/no-unused-vars -- required to match the original type parameters
   interface Table<TData extends RowData> extends FilterInstance {}
+  // eslint-disable-next-line unused-imports/no-unused-vars -- required to match the original type parameters
   interface Row<TData extends RowData> extends FilterRow {}
 }
-/* eslint-enable */
 
 const normalizeString = (text: string) =>
-  text.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase()
+  text.replaceAll(/[^a-zA-Z0-9-]/g, "").toLowerCase()
 
 const find = (data: unknown[], filter: string) => {
   const text = JSON.stringify(data)
@@ -57,12 +57,10 @@ const getDeepData = (row: Row<unknown>, keys: string[]) =>
 export const FilterFeature = <TData extends RowData>(
   filterKeys: DeepKeys<TData>[]
 ): TableFeature<RowData> => ({
-  getInitialState: (state): FilterTableState => {
-    return {
-      filter: null,
-      ...state,
-    }
-  },
+  getInitialState: (state): FilterTableState => ({
+    filter: null,
+    ...state,
+  }),
 
   createTable: <TData extends RowData>(table: Table<TData>) => {
     table.setFilter = filter => {

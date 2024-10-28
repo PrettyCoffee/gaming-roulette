@@ -8,10 +8,10 @@ import {
   X,
 } from "lucide-react"
 
-import { createAtom, useAtomValue } from "~/lib/yaasl"
-import { bgColor, textColor } from "~/utils/colors"
-import { createId } from "~/utils/createId"
-import { cn } from "~/utils/utils"
+import { createAtom, useAtomValue } from "lib/yaasl"
+import { bgColor, textColor } from "utils/colors"
+import { createId } from "utils/createId"
+import { cn } from "utils/utils"
 
 import { IconButton } from "../buttons/IconButton"
 import { Icon } from "../primitives/Icon"

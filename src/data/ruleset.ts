@@ -1,4 +1,4 @@
-import { createAtom, localStorage, useAtom } from "~/lib/yaasl"
+import { createAtom, localStorage, useAtom } from "lib/yaasl"
 
 const additionalRules = [
   "Costs less than 20€",

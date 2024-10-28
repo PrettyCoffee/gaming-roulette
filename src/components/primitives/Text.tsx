@@ -3,9 +3,9 @@ import { forwardRef, PropsWithChildren } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
 
-import { AsChildProp, ClassNameProp } from "~/types/BaseProps"
-import { colorGradient, ColorGradient, colors } from "~/utils/colors"
-import { cn } from "~/utils/utils"
+import { AsChildProp, ClassNameProp } from "types/BaseProps"
+import { colorGradient, ColorGradient, colors } from "utils/colors"
+import { cn } from "utils/utils"
 
 const text = cva("text-foreground", {
   variants: {
@@ -52,9 +52,7 @@ const getGradient = ({ from, to: toProp }: TextProps["gradient"] = {}) => {
 }
 
 interface TextProps
-  extends AsChildProp,
-    ClassNameProp,
-    VariantProps<typeof text> {
+  extends AsChildProp, ClassNameProp, VariantProps<typeof text> {
   gradient?: Partial<Pick<ColorGradient, "from" | "to">>
 }
 

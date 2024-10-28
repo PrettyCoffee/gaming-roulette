@@ -1,12 +1,12 @@
 import { Fragment, PropsWithChildren } from "react"
 
-import { Text } from "~/components/primitives/Text"
-import { useGameStats, useGames } from "~/data/games"
-import { usePlayers } from "~/data/players"
-import { Ruleset, useRuleset } from "~/data/ruleset"
-import { ClassNameProp } from "~/types/BaseProps"
-import { DAY, readableTime } from "~/utils/date"
-import { cn } from "~/utils/utils"
+import { Text } from "components/primitives/Text"
+import { useGameStats, useGames } from "data/games"
+import { usePlayers } from "data/players"
+import { Ruleset, useRuleset } from "data/ruleset"
+import { ClassNameProp } from "types/BaseProps"
+import { DAY, readableTime } from "utils/date"
+import { cn } from "utils/utils"
 
 const isString = (value: unknown): value is string => typeof value === "string"
 const Surface = ({
@@ -129,7 +129,9 @@ const Rules = () => {
 const Games = () => {
   const { games } = useGames()
   const currentGame = games[games.length - 1]
-  const latestGames = games.slice(games.length - 6, games.length - 1).reverse()
+  const latestGames = games
+    .slice(games.length - 6, games.length - 1)
+    .toReversed()
   return (
     <div className="flex flex-col">
       <Surface title="Current game">
@@ -168,18 +170,16 @@ const GameStats = () => {
   )
 }
 
-const Home = () => {
-  return (
-    <div className="flex h-full max-w-2xl flex-col gap-2">
-      <Greeting />
-      <QuoteOfTheDay />
-      <div className="-mx-1 flex">
-        <Games />
-        <Rules />
-        <GameStats />
-      </div>
+const Home = () => (
+  <div className="flex h-full max-w-2xl flex-col gap-2">
+    <Greeting />
+    <QuoteOfTheDay />
+    <div className="-mx-1 flex">
+      <Games />
+      <Rules />
+      <GameStats />
     </div>
-  )
-}
+  </div>
+)
 
 export default Home

@@ -8,11 +8,11 @@ import {
   RowData,
 } from "@tanstack/react-table"
 
-import { Text } from "~/components/primitives/Text"
-import { Table as NativeTable } from "~/components/Table"
-import { Game } from "~/data/games"
-import { usePlayers } from "~/data/players"
-import { textColor } from "~/utils/colors"
+import { Text } from "components/primitives/Text"
+import { Table as NativeTable } from "components/Table"
+import { Game } from "data/games"
+import { usePlayers } from "data/players"
+import { textColor } from "utils/colors"
 
 import { FilterFeature } from "./FilterFeature"
 import { GamesTableBody } from "./GamesTableBody"
@@ -20,7 +20,7 @@ import { GamesTableFooter } from "./GamesTableFooter"
 import { GamesTableHeader } from "./GamesTableHeader"
 
 declare module "@tanstack/react-table" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars -- required to match the original type parameters
   interface ColumnMeta<TData extends RowData, TValue> {
     align?: "start" | "end" | "center"
     flex?: boolean

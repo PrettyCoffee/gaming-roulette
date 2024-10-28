@@ -2,8 +2,8 @@ import * as React from "react"
 
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { focusRing } from "~/utils/styles"
-import { cn } from "~/utils/utils"
+import { focusRing } from "utils/styles"
+import { cn } from "utils/utils"
 
 import { BaseButton, BaseButtonProps } from "./BaseButton"
 
@@ -38,15 +38,13 @@ const buttonVariants = cva(
 export type ButtonProps = BaseButtonProps & VariantProps<typeof buttonVariants>
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
-    return (
-      <BaseButton
-        className={cn(buttonVariants({ variant, size }), className)}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
+  ({ className, variant, size, ...props }, ref) => (
+    <BaseButton
+      className={cn(buttonVariants({ variant, size }), className)}
+      ref={ref}
+      {...props}
+    />
+  )
 )
 Button.displayName = "Button"
 

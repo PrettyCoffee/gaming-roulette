@@ -3,10 +3,10 @@ import { PropsWithChildren } from "react"
 import { flexRender, Header, Table } from "@tanstack/react-table"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
-import { Button } from "~/components/buttons/Button"
-import { Icon } from "~/components/primitives/Icon"
-import { Table as NativeTable } from "~/components/Table"
-import { Game } from "~/data/games"
+import { Button } from "components/buttons/Button"
+import { Icon } from "components/primitives/Icon"
+import { Table as NativeTable } from "components/Table"
+import { Game } from "data/games"
 
 import { actionsCellWidth, TableHeaderActions } from "./TableActions"
 
@@ -40,7 +40,6 @@ const SortableHead = ({ header, children }: PropsWithChildren<HeaderProp>) => {
 }
 
 const isFlex = ({ subHeaders, column }: HeaderProp["header"]) =>
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   column.columnDef.meta?.flex ||
   subHeaders.some(({ column }) => column.columnDef.meta?.flex)
 
@@ -62,25 +61,23 @@ const HeaderCell = ({ header }: HeaderProp) => {
   )
 }
 
-export const GamesTableHeader = ({ table }: { table: Table<Game> }) => {
-  return (
-    <NativeTable.Header>
-      {table.getHeaderGroups().map(({ id, headers }) => (
-        <NativeTable.Row key={id}>
-          {headers.map(header => (
-            <HeaderCell key={header.id} header={header} />
-          ))}
+export const GamesTableHeader = ({ table }: { table: Table<Game> }) => (
+  <NativeTable.Header>
+    {table.getHeaderGroups().map(({ id, headers }) => (
+      <NativeTable.Row key={id}>
+        {headers.map(header => (
+          <HeaderCell key={header.id} header={header} />
+        ))}
 
-          {headers.every(({ subHeaders }) => subHeaders.length === 0) ? (
-            <TableHeaderActions table={table} />
-          ) : (
-            <NativeTable.Head
-              className="h-0"
-              style={{ width: actionsCellWidth }}
-            />
-          )}
-        </NativeTable.Row>
-      ))}
-    </NativeTable.Header>
-  )
-}
+        {headers.every(({ subHeaders }) => subHeaders.length === 0) ? (
+          <TableHeaderActions table={table} />
+        ) : (
+          <NativeTable.Head
+            className="h-0"
+            style={{ width: actionsCellWidth }}
+          />
+        )}
+      </NativeTable.Row>
+    ))}
+  </NativeTable.Header>
+)

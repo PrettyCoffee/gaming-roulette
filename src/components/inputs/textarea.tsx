@@ -1,14 +1,14 @@
 import * as React from "react"
 
-import { getFontSize } from "~/utils/getFontSize"
-import { cn } from "~/utils/utils"
+import { getFontSize } from "utils/getFontSize"
+import { cn } from "utils/utils"
 
 const getLineHeight = (element: HTMLElement): number => {
   const rem = getFontSize()
   const fontSize = getFontSize(element)
   const lineHeight = getComputedStyle(element).lineHeight
 
-  const value = lineHeight.match(/(\d+\.?\d*)/)?.[1]
+  const value = /(\d+\.?\d*)/.exec(lineHeight)?.[1]
   const unit = lineHeight.replace(value ?? "", "")
 
   const fallback = fontSize * 1.3 // some random fallback with no meaning
@@ -16,12 +16,12 @@ const getLineHeight = (element: HTMLElement): number => {
 
   switch (unit) {
     case "px":
-      return parseFloat(value)
+      return Number.parseFloat(value)
     case "rem":
-      return parseFloat(value) * rem
+      return Number.parseFloat(value) * rem
     case "em":
     case "":
-      return parseFloat(value) * fontSize
+      return Number.parseFloat(value) * fontSize
     default:
       return fallback
   }
@@ -29,12 +29,14 @@ const getLineHeight = (element: HTMLElement): number => {
 
 const getYPadding = (element: HTMLElement) => {
   const { paddingTop, paddingBottom } = getComputedStyle(element)
-  return parseFloat(paddingTop) + parseFloat(paddingBottom)
+  return Number.parseFloat(paddingTop) + Number.parseFloat(paddingBottom)
 }
 
 const getYBorder = (element: HTMLElement) => {
   const { borderTopWidth, borderBottomWidth } = getComputedStyle(element)
-  return parseFloat(borderTopWidth) + parseFloat(borderBottomWidth)
+  return (
+    Number.parseFloat(borderTopWidth) + Number.parseFloat(borderBottomWidth)
+  )
 }
 
 const combineRefs =

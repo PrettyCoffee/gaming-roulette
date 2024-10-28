@@ -1,4 +1,4 @@
-import { createAtom, localStorage, useAtomValue } from "~/lib/yaasl"
+import { createAtom, localStorage, useAtomValue } from "lib/yaasl"
 
 type WindowSize = "fluid" | "static"
 

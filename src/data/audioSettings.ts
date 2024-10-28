@@ -1,4 +1,4 @@
-import { createAtom, localStorage, useAtom } from "~/lib/yaasl"
+import { createAtom, localStorage, useAtom } from "lib/yaasl"
 
 export interface AudioOptions {
   muted: boolean

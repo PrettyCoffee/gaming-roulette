@@ -1,8 +1,8 @@
 import { cva, VariantProps } from "class-variance-authority"
 import { Copy } from "lucide-react"
 
-import { ClassNameProp } from "~/types/BaseProps"
-import { cn } from "~/utils/utils"
+import { ClassNameProp } from "types/BaseProps"
+import { cn } from "utils/utils"
 
 import { Icon } from "../primitives/Icon"
 
@@ -21,23 +21,20 @@ const iconPosition = cva(
 )
 
 interface CopyClickProps
-  extends ClassNameProp,
-    VariantProps<typeof iconPosition> {
+  extends ClassNameProp, VariantProps<typeof iconPosition> {
   text: string
 }
 
-export const CopyClick = ({ text, className, size }: CopyClickProps) => {
-  return (
-    <button
-      className={cn(
-        "absolute inset-0 size-full hover:bg-base/10 active:bg-base/20",
-        className
-      )}
-      onClick={() => void copyToClipboard(text)}
-    >
-      <span className={cn(iconPosition({ size }))}>
-        <Icon icon={Copy} size={size === "lg" ? "sm" : "xs"} color="default" />
-      </span>
-    </button>
-  )
-}
+export const CopyClick = ({ text, className, size }: CopyClickProps) => (
+  <button
+    className={cn(
+      "absolute inset-0 size-full hover:bg-base/10 active:bg-base/20",
+      className
+    )}
+    onClick={() => void copyToClipboard(text)}
+  >
+    <span className={cn(iconPosition({ size }))}>
+      <Icon icon={Copy} size={size === "lg" ? "sm" : "xs"} color="default" />
+    </span>
+  </button>
+)

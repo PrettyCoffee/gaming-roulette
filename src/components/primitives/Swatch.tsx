@@ -3,9 +3,9 @@ import { PropsWithChildren, forwardRef } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 
-import { AsChildProp, ClassNameProp } from "~/types/BaseProps"
-import { ColorValue, bgColor } from "~/utils/colors"
-import { cn } from "~/utils/utils"
+import { AsChildProp, ClassNameProp } from "types/BaseProps"
+import { ColorValue, bgColor } from "utils/colors"
+import { cn } from "utils/utils"
 
 const swatch = cva("inline-flex items-center justify-center", {
   variants: {
@@ -20,9 +20,7 @@ const swatch = cva("inline-flex items-center justify-center", {
 })
 
 interface SwatchProps
-  extends AsChildProp,
-    ClassNameProp,
-    VariantProps<typeof swatch> {
+  extends AsChildProp, ClassNameProp, VariantProps<typeof swatch> {
   color: ColorValue
 }
 

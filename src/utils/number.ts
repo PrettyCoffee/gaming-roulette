@@ -15,8 +15,8 @@ export const parseNumber = (
   value: string,
   { min, max }: ParseNumberOptions = {}
 ) => {
-  const string = value.match(/(-?\d*\.?\d*)/)?.[0] ?? ""
-  const number = parseFloat(string)
+  const string = /(-?\d*\.?\d*)/.exec(value)?.[0] ?? ""
+  const number = Number.parseFloat(string)
 
   if (Number.isNaN(number)) {
     return { string, number: undefined }
@@ -29,6 +29,6 @@ export const parseNumber = (
 
   return {
     string,
-    number: parseFloat(string) || undefined,
+    number: Number.parseFloat(string) || undefined,
   }
 }

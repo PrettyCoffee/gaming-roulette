@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import { appWindow } from "@tauri-apps/api/window"
 
-import { isTauriEnv } from "~/utils/isTauriEnv"
+import { isTauriEnv } from "utils/isTauriEnv"
 
 export const useWindowFocus = () => {
   const [isFocused, setIsFocused] = useState(true)

@@ -2,9 +2,9 @@ import { forwardRef } from "react"
 
 import { cva, VariantProps } from "class-variance-authority"
 
-import { Button, ButtonProps } from "~/components/buttons/Button"
-import { ClassNameProp } from "~/types/BaseProps"
-import { cn } from "~/utils/utils"
+import { Button, ButtonProps } from "components/buttons/Button"
+import { ClassNameProp } from "types/BaseProps"
+import { cn } from "utils/utils"
 
 import { TitleTooltip, TitleTooltipProps } from "../feedback/TitleTooltip"
 import { Icon, IconProps } from "../primitives/Icon"
@@ -23,7 +23,8 @@ const iconButton = cva("shrink-0", {
 })
 
 export interface IconButtonProps
-  extends ClassNameProp,
+  extends
+    ClassNameProp,
     Pick<IconProps, "icon" | "filled">,
     VariantProps<typeof iconButton>,
     Pick<ButtonProps, "onClick" | "variant" | "disabled" | "muteAudio"> {

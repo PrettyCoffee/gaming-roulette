@@ -2,16 +2,16 @@ import { Dispatch, useMemo, useState } from "react"
 
 import { AlertTriangle, ChevronsDown } from "lucide-react"
 
-import { Tooltip } from "~/components/feedback/Tooltip"
-import { InputLabel } from "~/components/inputs/InputLabel"
-import { Textarea } from "~/components/inputs/Textarea"
-import { Icon } from "~/components/primitives/Icon"
-import { Text } from "~/components/primitives/Text"
-import { useHandicap } from "~/data/handicap"
-import { Player, usePlayerGameStats, usePlayers } from "~/data/players"
-import { useRuleset } from "~/data/ruleset"
-import { borderColor } from "~/utils/colors"
-import { cn } from "~/utils/utils"
+import { Tooltip } from "components/feedback/Tooltip"
+import { InputLabel } from "components/inputs/InputLabel"
+import { Textarea } from "components/inputs/textarea"
+import { Icon } from "components/primitives/Icon"
+import { Text } from "components/primitives/Text"
+import { useHandicap } from "data/handicap"
+import { Player, usePlayerGameStats, usePlayers } from "data/players"
+import { useRuleset } from "data/ruleset"
+import { borderColor } from "utils/colors"
+import { cn } from "utils/utils"
 
 const Counter = ({ current, limit }: { limit: number; current: number }) => (
   <span

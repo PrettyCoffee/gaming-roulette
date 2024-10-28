@@ -1,12 +1,12 @@
 import { appWindow } from "@tauri-apps/api/window"
 import { Maximize2, Minimize2, Minus, Volume2, VolumeX, X } from "lucide-react"
 
-import { IconButton } from "~/components/buttons/IconButton"
-import { useAudioSettings } from "~/data/audioSettings"
-import { useWindowSize, windowAtom } from "~/data/window"
-import { ClassNameProp } from "~/types/BaseProps"
-import { isTauriEnv } from "~/utils/isTauriEnv"
-import { cn } from "~/utils/utils"
+import { IconButton } from "components/buttons/IconButton"
+import { useAudioSettings } from "data/audioSettings"
+import { useWindowSize, windowAtom } from "data/window"
+import { ClassNameProp } from "types/BaseProps"
+import { isTauriEnv } from "utils/isTauriEnv"
+import { cn } from "utils/utils"
 
 /* Window is currently not resizable
 const useIsMaximized = () => {
@@ -100,24 +100,22 @@ const WindowActions = () => {
   )
 }
 
-export const WindowTitlebar = ({ className }: ClassNameProp) => {
-  return (
-    <div
-      data-tauri-drag-region
-      className={cn("relative z-20 flex h-12 items-center p-2", className)}
-    >
-      <img
-        src="./logo.svg"
-        alt="Gaming Roulette"
-        className={cn(
-          "pointer-events-none ml-3 size-6 select-none transition-all"
-        )}
-      />
-      <span className="pointer-events-none select-none pl-3 text-sm font-bold text-muted-foreground">
-        Gaming Roulette
-      </span>
+export const WindowTitlebar = ({ className }: ClassNameProp) => (
+  <div
+    data-tauri-drag-region
+    className={cn("relative z-20 flex h-12 items-center p-2", className)}
+  >
+    <img
+      src="./logo.svg"
+      alt="Gaming Roulette"
+      className={cn(
+        "pointer-events-none ml-3 size-6 select-none transition-all"
+      )}
+    />
+    <span className="pointer-events-none select-none pl-3 text-sm font-bold text-muted-foreground">
+      Gaming Roulette
+    </span>
 
-      <WindowActions />
-    </div>
-  )
-}
+    <WindowActions />
+  </div>
+)

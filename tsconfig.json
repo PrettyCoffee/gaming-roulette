@@ -1,57 +1,7 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "~/*": [
-        "./*"
-      ]
-    },
-    "useDefineForClassFields": true,
-    /* Language and Environment */
-    "target": "ES2020",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2020"
-    ],
-    "jsx": "react-jsx",
-    /* Modules */
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "allowJs": false,
-    "allowImportingTsExtensions": true,
-    /* Emit */
-    "outDir": "dist",
-    "removeComments": false,
-    "newLine": "crlf",
-    "noEmit": true,
-    /* Interop Constraints */
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    /* Type Checking */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noPropertyAccessFromIndexSignature": true,
-    /* Completeness */
-    "skipLibCheck": true
-  },
-  "include": [
-    ".",
-    ".eslintrc.cjs"
-  ],
-  "exclude": [
-    "./vite.config.ts"
-  ],
+  "files": [],
   "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+    { "path": "tsconfig.app.json" },
+    { "path": "tsconfig.node.json" }
   ]
 }

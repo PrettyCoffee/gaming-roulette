@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { toast } from "~/components/feedback/Toaster"
-import { createAtom, createSelector } from "~/lib/yaasl"
-import { createId } from "~/utils/createId"
-import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
+import { toast } from "components/feedback/Toaster"
+import { createAtom, createSelector } from "lib/yaasl"
+import { createId } from "utils/createId"
+import { parseMarkdownTable } from "utils/parseMarkdownTable"
 
 import { gamesSlice } from "./games"
 import { useGithub } from "./github"
@@ -13,8 +13,8 @@ import { fetchRepoFile } from "./service/fetchRepoFile"
 const splitUserStats = (userStats: string) => {
   const [playtime, rating] = userStats
     .split(",")
-    .map(stats => stats.trim().match(/^(\d+\.?\d*)/)?.[1] ?? "")
-    .map(parseFloat)
+    .map(stats => /^(\d+\.?\d*)/.exec(stats.trim())?.[1] ?? "")
+    .map(Number.parseFloat)
     .map(value => (Number.isNaN(value) ? undefined : value))
 
   return {

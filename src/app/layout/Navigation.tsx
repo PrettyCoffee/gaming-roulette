@@ -1,18 +1,18 @@
 import { cva } from "class-variance-authority"
 import { Github } from "lucide-react"
 
-import { routes } from "~/app/routes/Router"
-import { BaseButton } from "~/components/buttons/BaseButton"
-import { TitleTooltip } from "~/components/feedback/TitleTooltip"
-import { Icon } from "~/components/primitives/Icon"
-import { Link } from "~/components/primitives/Link"
-import { setHashRoute, useHashRoute } from "~/components/utility/hash-router"
-import { onGithubMouseDown } from "~/data/github"
-import { useSettings } from "~/data/settings"
-import { ClassNameProp } from "~/types/BaseProps"
-import { RouteMeta } from "~/types/routes"
-import { focusRing, noOverflow } from "~/utils/styles"
-import { cn } from "~/utils/utils"
+import { routes } from "app/routes/Router"
+import { BaseButton } from "components/buttons/BaseButton"
+import { TitleTooltip } from "components/feedback/TitleTooltip"
+import { Icon } from "components/primitives/Icon"
+import { Link } from "components/primitives/Link"
+import { setHashRoute, useHashRoute } from "components/utility/hash-router"
+import { onGithubMouseDown } from "data/github"
+import { useSettings } from "data/settings"
+import { ClassNameProp } from "types/BaseProps"
+import { RouteMeta } from "types/routes"
+import { focusRing, noOverflow } from "utils/styles"
+import { cn } from "utils/utils"
 
 const navButton = cva(
   cn(
@@ -94,6 +94,7 @@ export const Navigation = ({ className }: ClassNameProp) => {
           compactNavigation && "w-full justify-center"
         )}
       >
+        {/* eslint-disable-next-line @typescript-eslint/no-deprecated */}
         <Icon icon={Github} size="sm" />
         {!compactNavigation && "Github"}
       </Link>

@@ -6,9 +6,9 @@ import {
   localStorage,
   useAtomValue,
   createEffect,
-} from "~/lib/yaasl"
-import { createId } from "~/utils/createId"
-import { dateIsValid, timeBetween, timeSince, today } from "~/utils/date"
+} from "lib/yaasl"
+import { createId } from "utils/createId"
+import { dateIsValid, timeBetween, timeSince, today } from "utils/date"
 
 import { Player, playersSlice } from "./players"
 
@@ -34,7 +34,7 @@ export interface Game extends Omit<RawGame, "playerId"> {
 
 const sortByDate = createEffect<undefined, RawGame[]>({
   set: ({ set }) => {
-    set(games => games.sort((a, b) => a.date.localeCompare(b.date)))
+    set(games => games.toSorted((a, b) => a.date.localeCompare(b.date)))
   },
 })
 
@@ -66,12 +66,11 @@ export const gamesSlice = createSlice({
 
 const extendedGames = createSelector(
   [gamesSlice, playersSlice],
-  (games, players) => {
-    return games.map(({ playerId, ...game }) => {
+  (games, players) =>
+    games.map(({ playerId, ...game }) => {
       const player = players.find(player => player.id === playerId)
       return { ...game, player }
     })
-  }
 )
 
 export const useGames = () => {
@@ -108,8 +107,8 @@ export const useGameStats = () => useAtomValue(gameStatsAtom)
 
 const gamePlayerStatsAtom = createSelector(
   [extendedGames, playersSlice],
-  (games, players) => {
-    return players.map(({ id }) => {
+  (games, players) =>
+    players.map(({ id }) => {
       const timedGames = games
         .map(({ stats }) => stats?.[id]?.playtime)
         .filter(Boolean) as number[]
@@ -127,7 +126,6 @@ const gamePlayerStatsAtom = createSelector(
           Math.max(ratedGames.length, 1),
       }
     })
-  }
 )
 
 export const useGamePlayerStats = () => useAtomValue(gamePlayerStatsAtom)

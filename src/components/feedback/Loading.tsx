@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import { css, keyframes } from "goober"
 
-import { cn } from "~/utils/utils"
+import { cn } from "utils/utils"
 
 const strokeOffset = keyframes`
   0% { stroke-dasharray: 0 150; stroke-dashoffset: 0; }

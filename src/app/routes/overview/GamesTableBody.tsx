@@ -3,11 +3,11 @@ import { Dispatch, useRef } from "react"
 import { Cell, flexRender, Row, Table } from "@tanstack/react-table"
 import { PenBox, Trash } from "lucide-react"
 
-import { IconButton } from "~/components/buttons/IconButton"
-import { Table as NativeTable } from "~/components/Table"
-import { Game } from "~/data/games"
-import { useTransition } from "~/hooks/useTransition"
-import { cn } from "~/utils/utils"
+import { IconButton } from "components/buttons/IconButton"
+import { Table as NativeTable } from "components/Table"
+import { Game } from "data/games"
+import { useTransition } from "hooks/useTransition"
+import { cn } from "utils/utils"
 
 interface TableActionsProps {
   row: Row<Game>
@@ -104,12 +104,10 @@ export const GamesTableBody = ({
   table,
   onEdit,
   onDelete,
-}: GamesTableBodyProps) => {
-  return (
-    <NativeTable.Body>
-      {table.getRowModel().rows.map(row => (
-        <DataRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
-      ))}
-    </NativeTable.Body>
-  )
-}
+}: GamesTableBodyProps) => (
+  <NativeTable.Body>
+    {table.getRowModel().rows.map(row => (
+      <DataRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+    ))}
+  </NativeTable.Body>
+)

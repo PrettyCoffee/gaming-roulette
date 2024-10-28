@@ -1,16 +1,10 @@
-import { resolve } from "node:path"
-
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
+import viteTsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
   base: "./",
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "~": resolve(__dirname, "./src"),
-    },
-  },
+  plugins: [react(), viteTsconfigPaths()],
 
   // Vite options tailored for Tauri development and only applied in
   // `tauri dev` or`tauri build`

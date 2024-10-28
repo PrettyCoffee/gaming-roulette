@@ -4,7 +4,7 @@ import { Dispatch } from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
-import { cn } from "~/utils/utils"
+import { cn } from "utils/utils"
 
 const ScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
@@ -40,9 +40,7 @@ const ScrollDownButton = React.forwardRef<
 ))
 ScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName
 
-const Root = SelectPrimitive.Root
-
-const Value = SelectPrimitive.Value
+const { Root, Value } = SelectPrimitive
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
@@ -118,7 +116,7 @@ export { Root, Value, Trigger, Content, Item }
 
 interface SelectOption {
   value: string
-  label: string | JSX.Element
+  label: React.ReactNode
 }
 
 interface SelectProps {

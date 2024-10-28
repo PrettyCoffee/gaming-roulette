@@ -14,8 +14,7 @@ export const today = () => {
 export const timeBetween = (date1 = today(), date2 = today()) =>
   Math.abs(new Date(date1).getTime() - new Date(date2).getTime())
 
-export const timeSince = (date: string) =>
-  new Date().getTime() - new Date(date).getTime()
+export const timeSince = (date: string) => Date.now() - new Date(date).getTime()
 
 const floor = (value: number, precision: number) =>
   Math.floor(value * 10 ** precision) / 10 ** precision

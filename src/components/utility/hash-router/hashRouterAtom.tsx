@@ -1,5 +1,5 @@
-import { createAtom, createEffect, useAtomValue } from "~/lib/yaasl"
-import { RoutePath } from "~/types/routes"
+import { createAtom, createEffect, useAtomValue } from "lib/yaasl"
+import { RoutePath } from "types/routes"
 
 const getLocationHash = () => window.location.hash.slice(1) as RoutePath
 

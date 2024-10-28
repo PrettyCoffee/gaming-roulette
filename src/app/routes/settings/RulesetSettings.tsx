@@ -1,13 +1,13 @@
 import { useId, useState } from "react"
 
-import { InputLabel } from "~/components/inputs/InputLabel"
-import { NumberInput } from "~/components/inputs/NumberInput"
-import { Slider } from "~/components/inputs/Slider"
-import { Switch } from "~/components/inputs/Switch"
-import { Textarea } from "~/components/inputs/Textarea"
-import { calcHandicap } from "~/data/handicap"
-import { Ruleset, useRuleset } from "~/data/ruleset"
-import { createRange } from "~/utils/array"
+import { InputLabel } from "components/inputs/InputLabel"
+import { NumberInput } from "components/inputs/NumberInput"
+import { Slider } from "components/inputs/slider"
+import { Switch } from "components/inputs/switch"
+import { Textarea } from "components/inputs/textarea"
+import { calcHandicap } from "data/handicap"
+import { Ruleset, useRuleset } from "data/ruleset"
+import { createRange } from "utils/array"
 
 import { Grid } from "./Grid"
 
@@ -16,11 +16,11 @@ export const GamesPerPersonInput = () => {
 
   return (
     <>
-      <InputLabel className="mb-2" htmlFor={"games-per-person"}>
+      <InputLabel className="mb-2" htmlFor="games-per-person">
         Games per person
       </InputLabel>
       <NumberInput
-        id={"games-per-person"}
+        id="games-per-person"
         value={gamesPerPerson}
         onChange={value =>
           setRuleset(prev => ({
@@ -37,9 +37,8 @@ export const GamesPerPersonInput = () => {
   )
 }
 
-const normalize = (value: number, min: number, max: number) => {
-  return (value - min) / (max - min)
-}
+const normalize = (value: number, min: number, max: number) =>
+  (value - min) / (max - min)
 
 export const HandicapGraph = () => {
   const [{ handicap, gamesPerPerson: items }] = useRuleset()
@@ -96,7 +95,7 @@ export const HandicapSlider = () => {
     <>
       <InputLabel
         className="mb-2"
-        htmlFor={"handicap"}
+        htmlFor="handicap"
         hint={
           "Defines the severity of the handicap a player will receive after winning multiple times in a row. " +
           "A value of 0 will turn the handicap off. "
@@ -105,7 +104,7 @@ export const HandicapSlider = () => {
         Handicap severity
       </InputLabel>
       <Slider
-        id={"handicap"}
+        id="handicap"
         value={[handicap]}
         onValueChange={([value]) => {
           setRuleset(prev => ({

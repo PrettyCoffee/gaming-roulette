@@ -12,7 +12,7 @@ import {
   createRoutes,
   HashRouter,
   useHashRoute,
-} from "~/components/utility/hash-router"
+} from "components/utility/hash-router"
 
 export const routes = createRoutes([
   {

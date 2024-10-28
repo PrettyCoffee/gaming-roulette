@@ -24,7 +24,7 @@ const extractTableRows = (lines: string[]) =>
 
 const formatTable = (rows: string[][]) => {
   const separatorIndex = rows.findIndex(row =>
-    row.every(cell => cell.replace(/[\s-]*/gi, "") === "")
+    row.every(cell => cell.replaceAll(/[\s-]*/gi, "") === "")
   )
   const header = rows.slice(0, separatorIndex).at(-1) ?? []
   const body = rows.slice(separatorIndex + 1)

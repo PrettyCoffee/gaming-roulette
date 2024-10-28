@@ -1,4 +1,4 @@
-import { createSelector, useAtomValue } from "~/lib/yaasl"
+import { createSelector, useAtomValue } from "lib/yaasl"
 
 import { gamesSlice } from "./games"
 import { rulesetAtom } from "./ruleset"
@@ -21,7 +21,7 @@ export interface Handicap {
 const handicapAtom = createSelector(
   [gamesSlice, rulesetAtom],
   (games, ruleset): Handicap => {
-    const reversed = games.reverse()
+    const reversed = games.toReversed()
 
     let wins = 0 // ignore the first win
     let latestPlayer: string | undefined = undefined

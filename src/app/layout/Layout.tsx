@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react"
 
-import { useWindowSize } from "~/data/window"
-import { useWindowFocus } from "~/hooks/useWindowFocus"
-import { isTauriEnv } from "~/utils/isTauriEnv"
-import { cn } from "~/utils/utils"
+import { useWindowSize } from "data/window"
+import { useWindowFocus } from "hooks/useWindowFocus"
+import { isTauriEnv } from "utils/isTauriEnv"
+import { cn } from "utils/utils"
 
 import { AppShell } from "./AppShell"
 

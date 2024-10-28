@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
-import clickSound from "~/assets/click-enhanced.mp3"
-import { audioSettingsAtom } from "~/data/audioSettings"
-import { Handicap, useHandicap } from "~/data/handicap"
-import { Player } from "~/data/players"
-import { resetIdle } from "~/hooks/useIdle"
-import { randomBetween, sum } from "~/utils/number"
-import { playAudio } from "~/utils/playAudio"
+import clickSound from "assets/click-enhanced.mp3"
+import { audioSettingsAtom } from "data/audioSettings"
+import { Handicap, useHandicap } from "data/handicap"
+import { Player } from "data/players"
+import { resetIdle } from "hooks/useIdle"
+import { randomBetween, sum } from "utils/number"
+import { playAudio } from "utils/playAudio"
 
 const playClickSound = () =>
   playAudio(clickSound, { volume: audioSettingsAtom.get().spinnerVolume })
