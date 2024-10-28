@@ -3,11 +3,11 @@ import { Dispatch, useState } from "react"
 import { Row, Table } from "@tanstack/react-table"
 import { Filter, PenBox, Trash } from "lucide-react"
 
-import { IconButton } from "~/components/buttons/IconButton"
-import { Input } from "~/components/inputs/Input"
-import { Table as NativeTable } from "~/components/Table"
-import { Game } from "~/data/games"
-import { cn } from "~/utils/utils"
+import { IconButton } from "components/buttons/IconButton"
+import { Input } from "components/inputs/Input"
+import { Table as NativeTable } from "components/Table"
+import { Game } from "data/games"
+import { cn } from "utils/utils"
 
 import { AddGame } from "./AddGame"
 

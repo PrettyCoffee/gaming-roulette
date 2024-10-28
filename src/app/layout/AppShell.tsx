@@ -2,11 +2,11 @@ import { PropsWithChildren, Suspense, useEffect, useState } from "react"
 
 import { css } from "goober"
 
-import { Navigation } from "~/app/layout/Navigation"
-import { Loading } from "~/components/feedback/Loading"
-import { ErrorBoundary } from "~/components/utility/ErrorBoundary"
-import { usePlayers } from "~/data/players"
-import { cn } from "~/utils/utils"
+import { Navigation } from "app/layout/Navigation"
+import { Loading } from "components/feedback/Loading"
+import { ErrorBoundary } from "components/utility/ErrorBoundary"
+import { usePlayers } from "data/players"
+import { cn } from "utils/utils"
 
 import { WindowTitlebar } from "./WindowTitlebar"
 import { Init } from "../routes/init/Init"

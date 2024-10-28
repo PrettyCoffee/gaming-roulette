@@ -1,6 +1,6 @@
 import { keyframes, css } from "goober"
 
-import { cn } from "~/utils/utils"
+import { cn } from "utils/utils"
 
 import { Swatch } from "../primitives/Swatch"
 

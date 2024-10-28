@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { TooltipContentProps } from "@radix-ui/react-tooltip"
 
-import { AsChildProp, DisabledProp, TitleProp } from "~/types/BaseProps"
+import { AsChildProp, DisabledProp, TitleProp } from "types/BaseProps"
 
 import { Tooltip } from "./Tooltip"
 

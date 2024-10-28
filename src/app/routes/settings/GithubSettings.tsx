@@ -1,8 +1,8 @@
 import { useId, useState } from "react"
 
-import { Input } from "~/components/inputs/Input"
-import { InputLabel } from "~/components/inputs/InputLabel"
-import { useGithub } from "~/data/github"
+import { Input } from "components/inputs/Input"
+import { InputLabel } from "components/inputs/InputLabel"
+import { useGithub } from "data/github"
 
 import { Grid } from "./Grid"
 import { SyncGithub } from "./SyncGithub"

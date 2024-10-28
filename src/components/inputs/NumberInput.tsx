@@ -1,8 +1,8 @@
 import { Dispatch, useState } from "react"
 
-import { ClassNameProp } from "~/types/BaseProps"
-import { parseNumber } from "~/utils/number"
-import { cn } from "~/utils/utils"
+import { ClassNameProp } from "types/BaseProps"
+import { parseNumber } from "utils/number"
+import { cn } from "utils/utils"
 
 import { Input } from "./Input"
 import { Text } from "../primitives/Text"

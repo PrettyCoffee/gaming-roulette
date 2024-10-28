@@ -2,8 +2,8 @@ import * as React from "react"
 
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { focusRing } from "~/utils/styles"
-import { cn } from "~/utils/utils"
+import { focusRing } from "utils/styles"
+import { cn } from "utils/utils"
 
 import { BaseButton, BaseButtonProps } from "./BaseButton"
 

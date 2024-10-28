@@ -1,4 +1,4 @@
-import { createSelector, useAtomValue } from "~/lib/yaasl"
+import { createSelector, useAtomValue } from "lib/yaasl"
 
 import { gamesSlice } from "./games"
 import { rulesetAtom } from "./ruleset"

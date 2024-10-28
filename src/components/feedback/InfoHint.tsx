@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react"
 
 import { Info } from "lucide-react"
 
-import { textColor } from "~/utils/colors"
+import { textColor } from "utils/colors"
 
 import { TitleTooltip } from "./TitleTooltip"
 import { Icon } from "../primitives/Icon"

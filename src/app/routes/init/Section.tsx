@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react"
 
-import { Button } from "~/components/buttons/Button"
-import { Text } from "~/components/primitives/Text"
+import { Button } from "components/buttons/Button"
+import { Text } from "components/primitives/Text"
 
 const Title = ({ children }: PropsWithChildren) => (
   <Text asChild size="3xl" className="mb-2">

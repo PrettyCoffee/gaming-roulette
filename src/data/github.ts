@@ -1,4 +1,4 @@
-import { createAtom, useAtom, localStorage, useAtomValue } from "~/lib/yaasl"
+import { createAtom, useAtom, localStorage, useAtomValue } from "lib/yaasl"
 
 interface GithubData {
   token: string

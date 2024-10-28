@@ -51,13 +51,7 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.3",
-    "vite": "^5.4.8"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@pretty-cozy/eslint-config/base-ts",
-      "@pretty-cozy/eslint-config/react",
-      "@pretty-cozy/eslint-config/tailwind"
-    ]
+    "vite": "^5.4.8",
+    "vite-tsconfig-paths": "^5.0.1"
   }
 }

@@ -4,7 +4,7 @@ import { Dispatch } from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
-import { cn } from "~/utils/utils"
+import { cn } from "utils/utils"
 
 const ScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,

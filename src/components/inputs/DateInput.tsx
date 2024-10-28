@@ -1,8 +1,8 @@
 import { Dispatch, useState } from "react"
 
-import { Input, InputProps } from "~/components/inputs/Input"
-import { today } from "~/utils/date"
-import { cn } from "~/utils/utils"
+import { Input, InputProps } from "components/inputs/Input"
+import { today } from "utils/date"
+import { cn } from "utils/utils"
 
 const dateValidRegex = /^\d{1,4}-\d{1,2}-\d{1,2}$/
 

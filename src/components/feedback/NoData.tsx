@@ -1,7 +1,7 @@
 import { keyframes, css } from "goober"
 import { Ghost } from "lucide-react"
 
-import { cn } from "~/utils/utils"
+import { cn } from "utils/utils"
 
 import { Icon } from "../primitives/Icon"
 

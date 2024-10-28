@@ -1,4 +1,4 @@
-import { audioSettingsAtom } from "~/data/audioSettings"
+import { audioSettingsAtom } from "data/audioSettings"
 
 const blocked: Record<string, boolean> = {}
 

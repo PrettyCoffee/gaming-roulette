@@ -1,36 +1,28 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "~/*": [
-        "./*"
-      ]
-    },
-    "useDefineForClassFields": true,
     /* Language and Environment */
-    "target": "ES2020",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2020"
-    ],
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
+    "baseUrl": "./src",
+
     /* Modules */
-    "module": "ESNext",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "allowJs": false,
-    "allowImportingTsExtensions": true,
+
+    /* JavaScript Support */
+    "allowJs": true,
+
     /* Emit */
-    "outDir": "dist",
-    "removeComments": false,
-    "newLine": "crlf",
     "noEmit": true,
+
     /* Interop Constraints */
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+
     /* Type Checking */
     "strict": true,
     "noUnusedLocals": true,
@@ -39,19 +31,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
+
     /* Completeness */
     "skipLibCheck": true
   },
-  "include": [
-    ".",
-    ".eslintrc.cjs"
-  ],
-  "exclude": [
-    "./vite.config.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["src"]
 }

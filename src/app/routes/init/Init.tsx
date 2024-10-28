@@ -2,10 +2,10 @@ import { PropsWithChildren, useEffect, useState } from "react"
 
 import { m } from "framer-motion"
 
-import { Text } from "~/components/primitives/Text"
-import { setHashRoute } from "~/components/utility/hash-router"
-import { VisuallyHidden } from "~/components/utility/VisuallyHidden"
-import { usePlayers } from "~/data/players"
+import { Text } from "components/primitives/Text"
+import { setHashRoute } from "components/utility/hash-router"
+import { VisuallyHidden } from "components/utility/VisuallyHidden"
+import { usePlayers } from "data/players"
 
 import { Navigation } from "./Navigation"
 import { Section } from "./Section"

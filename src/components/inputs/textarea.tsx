@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import { getFontSize } from "~/utils/getFontSize"
-import { cn } from "~/utils/utils"
+import { getFontSize } from "utils/getFontSize"
+import { cn } from "utils/utils"
 
 const getLineHeight = (element: HTMLElement): number => {
   const rem = getFontSize()

@@ -1,13 +1,13 @@
 import { useId, useState } from "react"
 
-import { InputLabel } from "~/components/inputs/InputLabel"
-import { NumberInput } from "~/components/inputs/NumberInput"
-import { Slider } from "~/components/inputs/Slider"
-import { Switch } from "~/components/inputs/Switch"
-import { Textarea } from "~/components/inputs/Textarea"
-import { calcHandicap } from "~/data/handicap"
-import { Ruleset, useRuleset } from "~/data/ruleset"
-import { createRange } from "~/utils/array"
+import { InputLabel } from "components/inputs/InputLabel"
+import { NumberInput } from "components/inputs/NumberInput"
+import { Slider } from "components/inputs/Slider"
+import { Switch } from "components/inputs/Switch"
+import { Textarea } from "components/inputs/Textarea"
+import { calcHandicap } from "data/handicap"
+import { Ruleset, useRuleset } from "data/ruleset"
+import { createRange } from "utils/array"
 
 import { Grid } from "./Grid"
 

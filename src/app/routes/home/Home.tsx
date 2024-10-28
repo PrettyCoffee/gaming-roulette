@@ -1,12 +1,12 @@
 import { Fragment, PropsWithChildren } from "react"
 
-import { Text } from "~/components/primitives/Text"
-import { useGameStats, useGames } from "~/data/games"
-import { usePlayers } from "~/data/players"
-import { Ruleset, useRuleset } from "~/data/ruleset"
-import { ClassNameProp } from "~/types/BaseProps"
-import { DAY, readableTime } from "~/utils/date"
-import { cn } from "~/utils/utils"
+import { Text } from "components/primitives/Text"
+import { useGameStats, useGames } from "data/games"
+import { usePlayers } from "data/players"
+import { Ruleset, useRuleset } from "data/ruleset"
+import { ClassNameProp } from "types/BaseProps"
+import { DAY, readableTime } from "utils/date"
+import { cn } from "utils/utils"
 
 const isString = (value: unknown): value is string => typeof value === "string"
 const Surface = ({

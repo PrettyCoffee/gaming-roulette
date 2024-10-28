@@ -2,8 +2,8 @@ import { PropsWithChildren } from "react"
 
 import { AnimatePresence, m } from "framer-motion"
 
-import sleepingGif from "~/assets/sleepy-sleeping.gif"
-import { useIdle } from "~/hooks/useIdle"
+import sleepingGif from "assets/sleepy-sleeping.gif"
+import { useIdle } from "hooks/useIdle"
 
 const inital = {
   opacity: 0,

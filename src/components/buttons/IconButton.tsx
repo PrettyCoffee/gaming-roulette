@@ -2,9 +2,9 @@ import { forwardRef } from "react"
 
 import { cva, VariantProps } from "class-variance-authority"
 
-import { Button, ButtonProps } from "~/components/buttons/Button"
-import { ClassNameProp } from "~/types/BaseProps"
-import { cn } from "~/utils/utils"
+import { Button, ButtonProps } from "components/buttons/Button"
+import { ClassNameProp } from "types/BaseProps"
+import { cn } from "utils/utils"
 
 import { TitleTooltip, TitleTooltipProps } from "../feedback/TitleTooltip"
 import { Icon, IconProps } from "../primitives/Icon"

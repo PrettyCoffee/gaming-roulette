@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { toast } from "~/components/feedback/Toaster"
-import { createAtom, createSelector } from "~/lib/yaasl"
-import { createId } from "~/utils/createId"
-import { parseMarkdownTable } from "~/utils/parseMarkdownTable"
+import { toast } from "components/feedback/Toaster"
+import { createAtom, createSelector } from "lib/yaasl"
+import { createId } from "utils/createId"
+import { parseMarkdownTable } from "utils/parseMarkdownTable"
 
 import { gamesSlice } from "./games"
 import { useGithub } from "./github"

@@ -2,11 +2,11 @@ import { useState } from "react"
 
 import { RefreshCw } from "lucide-react"
 
-import { Button } from "~/components/buttons/Button"
-import { LoadingData } from "~/components/feedback/LoadingData"
-import { Icon } from "~/components/primitives/Icon"
-import { useExternalGames } from "~/data/externalGames"
-import { useGithub } from "~/data/github"
+import { Button } from "components/buttons/Button"
+import { LoadingData } from "components/feedback/LoadingData"
+import { Icon } from "components/primitives/Icon"
+import { useExternalGames } from "data/externalGames"
+import { useGithub } from "data/github"
 
 export const SyncGithub = () => {
   const [loading, setLoading] = useState(false)

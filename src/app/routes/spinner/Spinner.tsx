@@ -3,27 +3,27 @@ import { useEffect, useRef } from "react"
 import { create as createConfetti } from "canvas-confetti"
 import { Dices } from "lucide-react"
 
-import victorySound from "~/assets/victory.mp3"
-import { Button } from "~/components/buttons/Button"
-import { NoData } from "~/components/feedback/NoData"
-import { toast } from "~/components/feedback/Toaster"
-import { Icon } from "~/components/primitives/Icon"
-import { audioSettingsAtom } from "~/data/audioSettings"
-import { useGames } from "~/data/games"
-import { Player, usePlayers } from "~/data/players"
-import { useSettings } from "~/data/settings"
+import victorySound from "assets/victory.mp3"
+import { Button } from "components/buttons/Button"
+import { NoData } from "components/feedback/NoData"
+import { toast } from "components/feedback/Toaster"
+import { Icon } from "components/primitives/Icon"
+import { audioSettingsAtom } from "data/audioSettings"
+import { useGames } from "data/games"
+import { Player, usePlayers } from "data/players"
+import { useSettings } from "data/settings"
 import {
   ClassicWheel,
   HalfWheel,
   Tags,
   Wheel,
   SpinnerStateProps,
-} from "~/features/spinners"
-import { resetIdle } from "~/hooks/useIdle"
-import { shuffle } from "~/utils/array"
-import { color200 } from "~/utils/colors"
-import { today } from "~/utils/date"
-import { playAudio } from "~/utils/playAudio"
+} from "features/spinners"
+import { resetIdle } from "hooks/useIdle"
+import { shuffle } from "utils/array"
+import { color200 } from "utils/colors"
+import { today } from "utils/date"
+import { playAudio } from "utils/playAudio"
 
 import { useSpinner } from "./useSpinner"
 

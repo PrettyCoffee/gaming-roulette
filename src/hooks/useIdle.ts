@@ -1,5 +1,5 @@
-import { createAtom, useAtomValue } from "~/lib/yaasl"
-import { debounce } from "~/utils/debounce"
+import { createAtom, useAtomValue } from "lib/yaasl"
+import { debounce } from "utils/debounce"
 
 const idleAtom = createAtom({
   name: "idle",

@@ -6,9 +6,9 @@ import {
   localStorage,
   useAtomValue,
   createEffect,
-} from "~/lib/yaasl"
-import { createId } from "~/utils/createId"
-import { dateIsValid, timeBetween, timeSince, today } from "~/utils/date"
+} from "lib/yaasl"
+import { createId } from "utils/createId"
+import { dateIsValid, timeBetween, timeSince, today } from "utils/date"
 
 import { Player, playersSlice } from "./players"
 

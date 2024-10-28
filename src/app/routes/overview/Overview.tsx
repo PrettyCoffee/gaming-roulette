@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-import { NoData } from "~/components/feedback/NoData"
-import { Modal } from "~/components/overlays/Modal"
-import { Game, useGames } from "~/data/games"
-import { textColor } from "~/utils/colors"
-import { cn } from "~/utils/utils"
+import { NoData } from "components/feedback/NoData"
+import { Modal } from "components/overlays/Modal"
+import { Game, useGames } from "data/games"
+import { textColor } from "utils/colors"
+import { cn } from "utils/utils"
 
 import { AddGame } from "./AddGame"
 import { GameModal } from "./GameModal"

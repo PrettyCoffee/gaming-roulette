@@ -8,11 +8,11 @@ import {
   RowData,
 } from "@tanstack/react-table"
 
-import { Text } from "~/components/primitives/Text"
-import { Table as NativeTable } from "~/components/Table"
-import { Game } from "~/data/games"
-import { usePlayers } from "~/data/players"
-import { textColor } from "~/utils/colors"
+import { Text } from "components/primitives/Text"
+import { Table as NativeTable } from "components/Table"
+import { Game } from "data/games"
+import { usePlayers } from "data/players"
+import { textColor } from "utils/colors"
 
 import { FilterFeature } from "./FilterFeature"
 import { GamesTableBody } from "./GamesTableBody"
