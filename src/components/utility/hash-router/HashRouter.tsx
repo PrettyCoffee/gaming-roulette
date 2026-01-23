@@ -7,9 +7,8 @@ const removeEndSlash = (path: string) => path.replace(/\/$/, "")
 const isExactMatch = (matcher: string, path: string) =>
   removeEndSlash(matcher) === removeEndSlash(path)
 
-export const matchPath = (matcher: string, path: string) => {
-  return isExactMatch(matcher, path)
-}
+export const matchPath = (matcher: string, path: string) =>
+  isExactMatch(matcher, path)
 
 const useCurrentRoute = (routes: Route[]) => {
   const path = useHashRoute()

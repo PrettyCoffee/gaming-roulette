@@ -2,7 +2,7 @@ import { useEffect, useId, useRef } from "react"
 
 import clickSound from "assets/click-enhanced.mp3"
 import { InputLabel } from "components/inputs/InputLabel"
-import { Slider } from "components/inputs/Slider"
+import { Slider } from "components/inputs/slider"
 import { AudioOptions, useAudioSettings } from "data/audioSettings"
 import { playAudio } from "utils/playAudio"
 

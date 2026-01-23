@@ -23,7 +23,8 @@ const iconButton = cva("shrink-0", {
 })
 
 export interface IconButtonProps
-  extends ClassNameProp,
+  extends
+    ClassNameProp,
     Pick<IconProps, "icon" | "filled">,
     VariantProps<typeof iconButton>,
     Pick<ButtonProps, "onClick" | "variant" | "disabled" | "muteAudio"> {

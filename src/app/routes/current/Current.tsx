@@ -4,7 +4,7 @@ import { AlertTriangle, ChevronsDown } from "lucide-react"
 
 import { Tooltip } from "components/feedback/Tooltip"
 import { InputLabel } from "components/inputs/InputLabel"
-import { Textarea } from "components/inputs/Textarea"
+import { Textarea } from "components/inputs/textarea"
 import { Icon } from "components/primitives/Icon"
 import { Text } from "components/primitives/Text"
 import { useHandicap } from "data/handicap"

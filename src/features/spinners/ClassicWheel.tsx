@@ -60,11 +60,7 @@ export const ClassicWheel = ({
           fontSize: diameter / 20,
         }}
       >
-        <Icon
-          icon={ChevronLeft}
-          strokeWidth={"auto"}
-          className="size-[1.2em]"
-        />
+        <Icon icon={ChevronLeft} strokeWidth="auto" className="size-[1.2em]" />
       </div>
       {winner != null && <Winner {...items[winner]} />}
       <WheelOfFortune

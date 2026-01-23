@@ -100,24 +100,22 @@ const WindowActions = () => {
   )
 }
 
-export const WindowTitlebar = ({ className }: ClassNameProp) => {
-  return (
-    <div
-      data-tauri-drag-region
-      className={cn("relative z-20 flex h-12 items-center p-2", className)}
-    >
-      <img
-        src="./logo.svg"
-        alt="Gaming Roulette"
-        className={cn(
-          "pointer-events-none ml-3 size-6 select-none transition-all"
-        )}
-      />
-      <span className="pointer-events-none select-none pl-3 text-sm font-bold text-muted-foreground">
-        Gaming Roulette
-      </span>
+export const WindowTitlebar = ({ className }: ClassNameProp) => (
+  <div
+    data-tauri-drag-region
+    className={cn("relative z-20 flex h-12 items-center p-2", className)}
+  >
+    <img
+      src="./logo.svg"
+      alt="Gaming Roulette"
+      className={cn(
+        "pointer-events-none ml-3 size-6 select-none transition-all"
+      )}
+    />
+    <span className="pointer-events-none select-none pl-3 text-sm font-bold text-muted-foreground">
+      Gaming Roulette
+    </span>
 
-      <WindowActions />
-    </div>
-  )
-}
+    <WindowActions />
+  </div>
+)

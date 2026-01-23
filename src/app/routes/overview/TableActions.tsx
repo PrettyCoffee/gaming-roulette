@@ -4,7 +4,7 @@ import { Row, Table } from "@tanstack/react-table"
 import { Filter, PenBox, Trash } from "lucide-react"
 
 import { IconButton } from "components/buttons/IconButton"
-import { Input } from "components/inputs/Input"
+import { Input } from "components/inputs/input"
 import { Table as NativeTable } from "components/Table"
 import { Game } from "data/games"
 import { cn } from "utils/utils"
@@ -62,7 +62,6 @@ const TableFilter = ({ table }: { table: Table<Game> }) => {
           <div className="inline-block h-10 w-2 shrink-0 bg-gradient-to-r from-transparent to-background" />
           <div className="bg-background">
             <Input
-              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               className="mx-2 w-40 shadow-medium"
               placeholder="Filter"

@@ -1,2 +1,2 @@
 export const getFontSize = (element = document.documentElement) =>
-  parseFloat(getComputedStyle(element).fontSize)
+  Number.parseFloat(getComputedStyle(element).fontSize)

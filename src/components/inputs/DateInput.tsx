@@ -1,6 +1,6 @@
 import { Dispatch, useState } from "react"
 
-import { Input, InputProps } from "components/inputs/Input"
+import { Input, InputProps } from "components/inputs/input"
 import { today } from "utils/date"
 import { cn } from "utils/utils"
 
@@ -20,7 +20,7 @@ const formatSegment = (value: number, { length, max, min }: SegmentOptions) =>
 const fixDate = (value: string) => {
   const [year = 0, month = 0, day = 0] = value
     .split("-")
-    .map(value => parseInt(value))
+    .map(value => Number.parseInt(value))
 
   return [
     formatSegment(year, { length: 4, min: 1, max: 2999 }),
@@ -29,8 +29,10 @@ const fixDate = (value: string) => {
   ].join("-")
 }
 
-interface DateInputProps
-  extends Omit<InputProps, "placeholder" | "onChange" | "value"> {
+interface DateInputProps extends Omit<
+  InputProps,
+  "placeholder" | "onChange" | "value"
+> {
   onChange?: Dispatch<string>
   value?: string
 }

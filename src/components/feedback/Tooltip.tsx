@@ -4,13 +4,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "utils/utils"
 
-const Provider = TooltipPrimitive.Provider
-
-const Portal = TooltipPrimitive.Portal
-
-const Root = TooltipPrimitive.Root
-
-const Trigger = TooltipPrimitive.Trigger
+const { Provider, Portal, Root, Trigger } = TooltipPrimitive
 
 const Content = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,

@@ -4,7 +4,7 @@ import { Download, Trash } from "lucide-react"
 
 import { Button } from "components/buttons/Button"
 import { toast } from "components/feedback/Toaster"
-import { Checkbox } from "components/inputs/Checkbox"
+import { Checkbox } from "components/inputs/checkbox"
 import { FileInput } from "components/inputs/FileInput"
 import { InputLabel } from "components/inputs/InputLabel"
 import { Modal } from "components/overlays/Modal"

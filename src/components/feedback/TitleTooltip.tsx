@@ -7,9 +7,7 @@ import { AsChildProp, DisabledProp, TitleProp } from "types/BaseProps"
 import { Tooltip } from "./Tooltip"
 
 export interface TitleTooltipProps
-  extends TitleProp,
-    AsChildProp,
-    DisabledProp {
+  extends TitleProp, AsChildProp, DisabledProp {
   side?: TooltipContentProps["side"]
 }
 

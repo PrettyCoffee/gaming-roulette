@@ -13,8 +13,8 @@ import { fetchRepoFile } from "./service/fetchRepoFile"
 const splitUserStats = (userStats: string) => {
   const [playtime, rating] = userStats
     .split(",")
-    .map(stats => stats.trim().match(/^(\d+\.?\d*)/)?.[1] ?? "")
-    .map(parseFloat)
+    .map(stats => /^(\d+\.?\d*)/.exec(stats.trim())?.[1] ?? "")
+    .map(Number.parseFloat)
     .map(value => (Number.isNaN(value) ? undefined : value))
 
   return {

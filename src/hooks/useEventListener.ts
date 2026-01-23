@@ -4,12 +4,12 @@ type ElementType = HTMLElement | Window | Document | null
 type EventMap<Type extends ElementType> = Type extends HTMLElement
   ? HTMLElementEventMap
   : Type extends Window
-  ? WindowEventMap
-  : DocumentEventMap
+    ? WindowEventMap
+    : DocumentEventMap
 
 interface UseEventListenerProps<
   Type extends ElementType,
-  EventName extends keyof EventMap<Type>
+  EventName extends keyof EventMap<Type>,
 > {
   ref: Type
   event: EventName
@@ -19,7 +19,7 @@ interface UseEventListenerProps<
 
 export const useEventListener = <
   Type extends ElementType,
-  EventName extends keyof EventMap<Type>
+  EventName extends keyof EventMap<Type>,
 >({
   ref,
   event,

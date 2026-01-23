@@ -113,9 +113,7 @@ const Spinner = () => {
   if (items.length === 0)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2">
-        <NoData
-          label={"You must add some games first before you can spin the wheel."}
-        />
+        <NoData label="You must add some games first before you can spin the wheel." />
       </div>
     )
 

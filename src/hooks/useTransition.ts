@@ -28,15 +28,15 @@ const getStyles = (state: TransitionState, styles?: TransitionStyles) => {
   const { whileShow, toShow, toHide, whileHide } = { ...noStyles, ...styles }
   switch (state) {
     case "start-hide":
-      return `${toShow}`
+      return toShow
     case "to-hide":
-      return `${toHide}`
+      return toHide
     case "hide":
       return `${whileHide} ${toHide}`
     case "start-show":
-      return `${toHide}`
+      return toHide
     case "to-show":
-      return `${toShow}`
+      return toShow
     case "show":
       return `${whileShow} ${toShow}`
   }
@@ -74,7 +74,9 @@ export const useTransition = ({ ref, hide, styles }: TransitionProps) => {
 
     const duration = !ref.current
       ? 0
-      : parseFloat(window.getComputedStyle(ref.current).transitionDuration)
+      : Number.parseFloat(
+          window.getComputedStyle(ref.current).transitionDuration
+        )
 
     setTransition(duration === 0 ? "idle" : "running")
   }, [ref, transition])

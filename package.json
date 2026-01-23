@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build",
-    "lint": "eslint . --ext ts,tsx --max-warnings 0",
+    "lint": "eslint",
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
@@ -40,7 +40,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@pretty-cozy/eslint-config": "^0.4.0",
+    "@pretty-cozy/eslint-config": "^0.9.0-alpha.3",
     "@tauri-apps/cli": "^1.6.2",
     "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^20.16.11",

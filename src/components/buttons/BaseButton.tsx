@@ -21,8 +21,8 @@ const playButtonSound = ({ e, sound, muteAudio }: PlayButtonSoundProps) => {
     muteAudio == null
       ? true
       : typeof muteAudio === "function"
-      ? !muteAudio(e)
-      : !muteAudio
+        ? !muteAudio(e)
+        : !muteAudio
 
   if (!shouldPlay) return
 

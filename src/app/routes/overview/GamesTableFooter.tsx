@@ -1,5 +1,6 @@
+import { Fragment } from "react"
+
 import { Table as TableInstance } from "@tanstack/react-table"
-import { Fragment } from "react/jsx-runtime"
 
 import { TitleTooltip } from "components/feedback/TitleTooltip"
 import { Swatch } from "components/primitives/Swatch"

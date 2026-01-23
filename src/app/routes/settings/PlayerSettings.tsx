@@ -4,7 +4,7 @@ import { Plus, Trash } from "lucide-react"
 
 import { IconButton, IconButtonProps } from "components/buttons/IconButton"
 import { ColorPicker } from "components/inputs/ColorPicker"
-import { Input } from "components/inputs/Input"
+import { Input } from "components/inputs/input"
 import { InputLabel } from "components/inputs/InputLabel"
 import { Modal } from "components/overlays/Modal"
 import { Player, usePlayers } from "data/players"

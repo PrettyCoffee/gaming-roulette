@@ -34,10 +34,10 @@ const main = css`
 
 export const AppShell = ({ children }: PropsWithChildren) => {
   const { players } = usePlayers()
-  const [showInit, setShowInit] = useState(players.length < 1)
+  const [showInit, setShowInit] = useState(players.length === 0)
 
   useEffect(() => {
-    if (!showInit && players.length < 1) {
+    if (!showInit && players.length === 0) {
       setShowInit(true)
     }
   }, [showInit, players.length])

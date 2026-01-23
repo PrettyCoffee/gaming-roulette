@@ -20,7 +20,7 @@ import { GamesTableFooter } from "./GamesTableFooter"
 import { GamesTableHeader } from "./GamesTableHeader"
 
 declare module "@tanstack/react-table" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars -- required to match the original type parameters
   interface ColumnMeta<TData extends RowData, TValue> {
     align?: "start" | "end" | "center"
     flex?: boolean

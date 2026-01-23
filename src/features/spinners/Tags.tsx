@@ -81,8 +81,8 @@ export const Tags = ({
               current == null
                 ? ""
                 : current === index
-                ? "scale-105"
-                : "opacity-10"
+                  ? "scale-105"
+                  : "opacity-10"
             )}
           />
         ))}

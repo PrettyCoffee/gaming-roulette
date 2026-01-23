@@ -7,13 +7,7 @@ import { cn } from "utils/utils"
 
 import { IconButton } from "../buttons/IconButton"
 
-const Root = DialogPrimitive.Root
-
-const Trigger = DialogPrimitive.Trigger
-
-const Portal = DialogPrimitive.Portal
-
-const Close = DialogPrimitive.Close
+const { Root, Trigger, Portal, Close } = DialogPrimitive
 
 const Overlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,

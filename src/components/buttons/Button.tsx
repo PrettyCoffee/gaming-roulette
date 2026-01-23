@@ -38,15 +38,13 @@ const buttonVariants = cva(
 export type ButtonProps = BaseButtonProps & VariantProps<typeof buttonVariants>
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
-    return (
-      <BaseButton
-        className={cn(buttonVariants({ variant, size }), className)}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
+  ({ className, variant, size, ...props }, ref) => (
+    <BaseButton
+      className={cn(buttonVariants({ variant, size }), className)}
+      ref={ref}
+      {...props}
+    />
+  )
 )
 Button.displayName = "Button"
 

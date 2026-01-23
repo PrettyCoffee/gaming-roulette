@@ -4,7 +4,7 @@ import { githubAtom } from "../github"
 export const fetchRepoFile = async (path: string) => {
   const octokit = getOctokit()
   if (!octokit) {
-    return Promise.resolve(null)
+    return null
   }
 
   return octokit.rest.repos

@@ -1,6 +1,6 @@
 import { useId, useState } from "react"
 
-import { Input } from "components/inputs/Input"
+import { Input } from "components/inputs/input"
 import { InputLabel } from "components/inputs/InputLabel"
 import { useGithub } from "data/github"
 

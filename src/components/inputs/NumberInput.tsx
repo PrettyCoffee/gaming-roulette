@@ -4,7 +4,7 @@ import { ClassNameProp } from "types/BaseProps"
 import { parseNumber } from "utils/number"
 import { cn } from "utils/utils"
 
-import { Input } from "./Input"
+import { Input } from "./input"
 import { Text } from "../primitives/Text"
 
 const meassureText = (text: string, reference: HTMLElement) => {

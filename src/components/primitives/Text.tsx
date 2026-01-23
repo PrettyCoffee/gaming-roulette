@@ -52,9 +52,7 @@ const getGradient = ({ from, to: toProp }: TextProps["gradient"] = {}) => {
 }
 
 interface TextProps
-  extends AsChildProp,
-    ClassNameProp,
-    VariantProps<typeof text> {
+  extends AsChildProp, ClassNameProp, VariantProps<typeof text> {
   gradient?: Partial<Pick<ColorGradient, "from" | "to">>
 }
 

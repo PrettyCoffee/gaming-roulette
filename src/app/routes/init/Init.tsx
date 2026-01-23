@@ -66,7 +66,7 @@ const Users = ({ onContinue }: StepProps) => {
       <Section.Next
         label="That's all!"
         onClick={onContinue}
-        disabled={players.length < 1}
+        disabled={players.length === 0}
       />
     </Section.Layout>
   )
@@ -131,7 +131,7 @@ const Finish = ({ onContinue }: StepProps) => (
     <Section.Title>That&apos;s it!</Section.Title>
     <Section.Description>
       Now that that&apos;s settled, I wish you good luck and lot&apos;s of fun
-      with spinning the {""}
+      with spinning the
       <Text gradient={{ from: "red", to: "blue" }} bold>
         Gaming Roulette
       </Text>

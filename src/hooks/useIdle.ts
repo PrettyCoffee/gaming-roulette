@@ -17,6 +17,4 @@ const runListener = () => resetIdle()
 window.addEventListener("keydown", runListener)
 window.addEventListener("mousemove", runListener)
 
-export const useIdle = () => {
-  return useAtomValue(idleAtom)
-}
+export const useIdle = () => useAtomValue(idleAtom)

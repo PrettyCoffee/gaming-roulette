@@ -104,12 +104,10 @@ export const GamesTableBody = ({
   table,
   onEdit,
   onDelete,
-}: GamesTableBodyProps) => {
-  return (
-    <NativeTable.Body>
-      {table.getRowModel().rows.map(row => (
-        <DataRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
-      ))}
-    </NativeTable.Body>
-  )
-}
+}: GamesTableBodyProps) => (
+  <NativeTable.Body>
+    {table.getRowModel().rows.map(row => (
+      <DataRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+    ))}
+  </NativeTable.Body>
+)

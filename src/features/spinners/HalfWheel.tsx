@@ -61,7 +61,7 @@ export const HalfWheel = ({
           fontSize: radius / 10,
         }}
       >
-        <Icon icon={ChevronDown} strokeWidth={"auto"} className="size-[1em]" />
+        <Icon icon={ChevronDown} strokeWidth="auto" className="size-[1em]" />
       </div>
       {winner != null && <Winner {...items[winner]} />}
       <div

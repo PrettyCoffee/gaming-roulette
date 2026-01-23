@@ -50,7 +50,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       className={cn(icon({ color, filled, size }), className)}
       absoluteStrokeWidth={strokeWidth == null}
-      strokeWidth={strokeWidth ?? size === "xs" ? 3 : undefined}
+      strokeWidth={(strokeWidth ?? size === "xs") ? 3 : undefined}
       {...delegated}
     />
   )

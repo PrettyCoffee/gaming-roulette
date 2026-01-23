@@ -30,8 +30,8 @@ const WheelSegment = ({
           name.length > 15
             ? "text-[0.5em]"
             : name.length > 10
-            ? "text-[0.625em]"
-            : "text-[0.75em]"
+              ? "text-[0.625em]"
+              : "text-[0.75em]"
         )}
       >
         {name}

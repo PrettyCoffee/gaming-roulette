@@ -20,9 +20,7 @@ const swatch = cva("inline-flex items-center justify-center", {
 })
 
 interface SwatchProps
-  extends AsChildProp,
-    ClassNameProp,
-    VariantProps<typeof swatch> {
+  extends AsChildProp, ClassNameProp, VariantProps<typeof swatch> {
   color: ColorValue
 }
 

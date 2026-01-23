@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react"
+import { PropsWithChildren, ReactNode } from "react"
 
 import { ClassNameProp } from "types/BaseProps"
 import { cn } from "utils/utils"
@@ -16,7 +16,7 @@ interface ModalAction {
 interface ModalProps extends ClassNameProp {
   open: boolean
   title: string
-  description: string | JSX.Element
+  description: ReactNode
   confirm: ModalAction
   cancel: ModalAction
 }

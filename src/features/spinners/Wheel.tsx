@@ -121,7 +121,6 @@ export const Wheel = ({
     >
       {items.map(({ name, player }, index) => (
         <div
-          // eslint-disable-next-line react/no-array-index-key
           key={name + String(index)}
           className={cn(
             "absolute top-1/2 flex h-[4.5em] w-[24em] items-center justify-center text-ellipsis whitespace-nowrap rounded-md bg-muted px-[2em]",
