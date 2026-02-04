@@ -61,7 +61,7 @@ export const useExternalGames = () => {
 
   useEffect(() => {
     if (incomplete || status !== "initial") return
-
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- legacy code, fix when actively working on this
     setStatus("fetching")
     void fetchRepoFile(filePath)
       .then(text => {

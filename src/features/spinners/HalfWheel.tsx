@@ -39,6 +39,7 @@ export const HalfWheel = ({
 
   useEffect(() => {
     if (current === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- legacy code, fix when actively working on this
       setRounds(prev => prev + 1)
     }
   }, [current, items.length])

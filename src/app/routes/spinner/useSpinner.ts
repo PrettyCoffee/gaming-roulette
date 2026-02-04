@@ -69,6 +69,7 @@ export const useSpinner = (games: { player: Player; name: string }[]) => {
       const change = Math.max(Math.abs(speed) / 20, 1)
 
       timeoutRef.current = setTimeout(
+        // eslint-disable-next-line react-hooks/immutability -- legacy code, fix when actively working on this
         () => rotate(next, winner, speed + change),
         transition
       )
