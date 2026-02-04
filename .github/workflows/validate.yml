@@ -1,11 +1,21 @@
 name: Validate code
 
-on: [push, pull_request, workflow_dispatch]
+on: [push, workflow_dispatch]
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+
       - name: Checkout
         uses: actions/checkout@v6
 
