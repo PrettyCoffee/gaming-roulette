@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { RefObject, useEffect, useRef } from "react"
 
 type ElementType = HTMLElement | Window | Document | null
 type EventMap<Type extends ElementType> = Type extends HTMLElement
@@ -11,7 +11,7 @@ interface UseEventListenerProps<
   Type extends ElementType,
   EventName extends keyof EventMap<Type>,
 > {
-  ref: Type
+  ref: RefObject<Type>
   event: EventName
   handler: (e: EventMap<Type>[EventName]) => void
   disabled?: boolean
@@ -26,26 +26,27 @@ export const useEventListener = <
   handler,
   disabled,
 }: UseEventListenerProps<Type, EventName>) => {
-  const clear = useRef<() => void>(() => null)
   const lastHandler = useRef(handler)
-  lastHandler.current = handler
 
   useEffect(() => {
-    clear.current()
-    if (disabled || !ref) return
+    lastHandler.current = handler
+  })
+
+  useEffect(() => {
+    const element = ref.current
+    if (disabled || !element) return
 
     const emit = (e: EventMap<Type>[EventName]) => lastHandler.current(e)
 
-    ref.addEventListener(
+    element.addEventListener(
       event as string,
       emit as EventListenerOrEventListenerObject
     )
-    clear.current = () => {
-      ref.removeEventListener(
+    return () => {
+      element.removeEventListener(
         event as string,
         emit as EventListenerOrEventListenerObject
       )
     }
-    return () => clear.current()
   }, [disabled, event, ref])
 }

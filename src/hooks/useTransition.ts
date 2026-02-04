@@ -82,7 +82,7 @@ export const useTransition = ({ ref, hide, styles }: TransitionProps) => {
   }, [ref, transition])
 
   useEventListener({
-    ref: ref.current,
+    ref: ref,
     event: "transitionend",
     handler: () => {
       setTransition("idle")
@@ -90,6 +90,7 @@ export const useTransition = ({ ref, hide, styles }: TransitionProps) => {
   })
 
   return useMemo(() => {
+    // eslint-disable-next-line react-hooks/refs -- legacy code, fix when actively working on this
     const state = getState(transition, lastHide.current)
     return {
       state,

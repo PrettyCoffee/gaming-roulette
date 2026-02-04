@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { create as createConfetti } from "canvas-confetti"
 import { Dices } from "lucide-react"
@@ -62,8 +62,9 @@ const getSpinnerGames = (players: Player[]) =>
 const useSpinnerGames = () => {
   const { players } = usePlayers()
   // Only compute on the first render, to prevent changes on the game list
-  const { current } = useRef(shuffle(getSpinnerGames(players)).slice(0, 30))
-  return current
+  // eslint-disable-next-line react/hook-use-state
+  const [games] = useState(() => shuffle(getSpinnerGames(players)).slice(0, 30))
+  return games
 }
 
 const Spinner = () => {

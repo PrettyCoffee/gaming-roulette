@@ -38,6 +38,7 @@ export const AppShell = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (!showInit && players.length === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- legacy code, fix when actively working on this
       setShowInit(true)
     }
   }, [showInit, players.length])
