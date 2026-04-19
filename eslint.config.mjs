@@ -26,7 +26,7 @@ export default defineConfig(
       },
     },
     rules: {
-      "checkFile/filename-naming-convention": "off",
+      "check-file/filename-naming-convention": "off",
     },
   },
 

@@ -125,6 +125,7 @@ interface GamesTableProps {
 export const GamesTable = ({ data, onEdit, onDelete }: GamesTableProps) => {
   const columns = useColumns()
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable<Game>({
     _features: [FilterFeature<Game>(["name", "date", "player.name"])],
     data,
