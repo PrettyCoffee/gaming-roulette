@@ -6,7 +6,7 @@ import { Circle } from "lucide-react"
 import { cn } from "utils/utils"
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, ...props }, ref) => (
   <RadioGroupPrimitive.Root
@@ -18,7 +18,7 @@ const Root = React.forwardRef<
 Root.displayName = RadioGroupPrimitive.Root.displayName
 
 const Item = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, children, ...props }, ref) => (
   <label className="inline-flex items-center gap-2">

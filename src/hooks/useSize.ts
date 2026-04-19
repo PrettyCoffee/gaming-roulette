@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useSize = (ref: React.RefObject<HTMLDivElement>) => {
+export const useSize = (ref: React.RefObject<HTMLDivElement | null>) => {
   const [size, setSize] = useState({ width: 0, height: 0 })
 
   useEffect(() => {

@@ -40,13 +40,13 @@ const getYBorder = (element: HTMLElement) => {
 }
 
 const combineRefs =
-  <T,>(...refs: React.Ref<T>[]): React.LegacyRef<T> =>
+  <T,>(...refs: React.Ref<T>[]): React.Ref<T> =>
   (element: T) => {
     refs.forEach(ref => {
       if (typeof ref === "function") {
         ref(element)
       } else if (ref != null) {
-        ;(ref as React.MutableRefObject<T | null>).current = element
+        ref.current = element
       }
     })
   }

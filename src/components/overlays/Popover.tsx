@@ -7,7 +7,7 @@ import { cn } from "utils/utils"
 const Trigger = PopoverPrimitive.Trigger
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof PopoverPrimitive.Content>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
 >(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>

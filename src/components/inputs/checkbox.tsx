@@ -6,7 +6,7 @@ import { Check } from "lucide-react"
 import { cn } from "utils/utils"
 
 const Box = React.forwardRef<
-  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 >(({ className, ...props }, ref) => (
   <CheckboxPrimitive.Root

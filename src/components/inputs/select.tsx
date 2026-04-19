@@ -7,7 +7,7 @@ import { ChevronDown, ChevronUp } from "lucide-react"
 import { cn } from "utils/utils"
 
 const ScrollUpButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
@@ -24,7 +24,7 @@ const ScrollUpButton = React.forwardRef<
 ScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
 
 const ScrollDownButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
@@ -43,7 +43,7 @@ ScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName
 const { Root, Value } = SelectPrimitive
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
@@ -63,7 +63,7 @@ const Trigger = React.forwardRef<
 Trigger.displayName = SelectPrimitive.Trigger.displayName
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Content>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
 >(({ className, children, position = "popper", ...props }, ref) => (
   <SelectPrimitive.Portal>
@@ -95,7 +95,7 @@ const Content = React.forwardRef<
 Content.displayName = SelectPrimitive.Content.displayName
 
 const Item = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Item>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Item

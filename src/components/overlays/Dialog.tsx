@@ -10,7 +10,7 @@ import { IconButton } from "../buttons/IconButton"
 const { Root, Trigger, Portal, Close } = DialogPrimitive
 
 const Overlay = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
@@ -25,7 +25,7 @@ const Overlay = React.forwardRef<
 Overlay.displayName = DialogPrimitive.Overlay.displayName
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Content>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <Portal>
@@ -76,7 +76,7 @@ const Footer = ({
 Footer.displayName = "DialogFooter"
 
 const Title = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Title>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
@@ -91,7 +91,7 @@ const Title = React.forwardRef<
 Title.displayName = DialogPrimitive.Title.displayName
 
 const Description = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description

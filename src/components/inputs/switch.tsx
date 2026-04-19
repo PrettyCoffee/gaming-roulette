@@ -5,7 +5,7 @@ import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { cn } from "utils/utils"
 
 const Switch = React.forwardRef<
-  React.ElementRef<typeof SwitchPrimitives.Root>,
+  HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
 >(({ className, ...props }, ref) => (
   <SwitchPrimitives.Root

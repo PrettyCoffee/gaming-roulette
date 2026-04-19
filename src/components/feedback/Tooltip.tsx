@@ -7,7 +7,7 @@ import { cn } from "utils/utils"
 const { Provider, Portal, Root, Trigger } = TooltipPrimitive
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Content>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
   <TooltipPrimitive.Content

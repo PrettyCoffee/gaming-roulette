@@ -7,7 +7,7 @@ import { cn } from "utils/utils"
 import { BaseButton } from "./buttons/BaseButton"
 
 const List = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.List>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.List
@@ -22,7 +22,7 @@ const List = React.forwardRef<
 List.displayName = TabsPrimitive.List.displayName
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, asChild, children, ...props }, ref) => (
   <TabsPrimitive.Trigger
@@ -48,7 +48,7 @@ const Trigger = React.forwardRef<
 Trigger.displayName = TabsPrimitive.Trigger.displayName
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Content>,
+  HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Content
