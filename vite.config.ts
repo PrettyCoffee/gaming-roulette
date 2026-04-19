@@ -1,10 +1,10 @@
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
-import viteTsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
   base: "./",
-  plugins: [react(), viteTsconfigPaths()],
+  plugins: [react()],
+  resolve: { tsconfigPaths: true },
 
   // Vite options tailored for Tauri development and only applied in
   // `tauri dev` or`tauri build`
