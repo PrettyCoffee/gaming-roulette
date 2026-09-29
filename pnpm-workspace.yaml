@@ -1,7 +1,10 @@
-ignoreDepScripts: true
 blockExoticSubdeps: true
-minimumReleaseAge: 1440 # >=1 day
+minimumReleaseAge: 4320 # >=3 days
 preferFrozenLockfile: true
+savePrefix: ""
+
+allowBuilds:
+  unrs-resolver: false
 
 trustPolicy: no-downgrade
 trustPolicyExclude:
@@ -26,6 +29,3 @@ trustPolicyExclude:
   - "@tauri-apps/cli-win32-arm64-msvc@1.6.3"
   - "@tauri-apps/cli-win32-ia32-msvc@1.6.3"
   - "@tauri-apps/cli-win32-x64-msvc@1.6.3"
-minimumReleaseAgeExclude:
-  # Renovate security update: vite@8.0.16
-  - vite@8.0.16
