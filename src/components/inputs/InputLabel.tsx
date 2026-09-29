@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 
 import { Label } from "@radix-ui/react-label"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { noOverflow } from "utils/styles"
 import { cn } from "utils/utils"
 

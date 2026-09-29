@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from "react"
+import { type RefObject, useEffect, useRef } from "react"
 
 type ElementType = HTMLElement | Window | Document | null
 type EventMap<Type extends ElementType> = Type extends HTMLElement

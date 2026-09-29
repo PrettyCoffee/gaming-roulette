@@ -10,7 +10,7 @@ import {
 import { createId } from "utils/createId"
 import { dateIsValid, timeBetween, timeSince, today } from "utils/date"
 
-import { Player, playersSlice } from "./players"
+import { type Player, playersSlice } from "./players"
 
 export interface PlayerStats {
   rating?: number

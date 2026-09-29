@@ -8,7 +8,7 @@ import { useSize } from "hooks/useSize"
 import { borderColor } from "utils/colors"
 import { cn } from "utils/utils"
 
-import { SpinnerItem, SpinnerStateProps } from "./types"
+import { type SpinnerItem, type SpinnerStateProps } from "./types"
 import { WheelOfFortune } from "./WheelOfFortune"
 
 const Winner = ({ player, name = "" }: Partial<SpinnerItem>) => (

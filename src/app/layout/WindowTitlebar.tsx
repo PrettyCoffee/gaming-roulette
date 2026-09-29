@@ -4,7 +4,7 @@ import { Maximize2, Minimize2, Minus, Volume2, VolumeX, X } from "lucide-react"
 import { IconButton } from "components/buttons/IconButton"
 import { useAudioSettings } from "data/audioSettings"
 import { useWindowSize, windowAtom } from "data/window"
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { isTauriEnv } from "utils/isTauriEnv"
 import { cn } from "utils/utils"
 

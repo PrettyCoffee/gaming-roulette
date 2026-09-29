@@ -1,4 +1,4 @@
-import { IconProp } from "./BaseProps"
+import { type IconProp } from "./BaseProps"
 
 export type RoutePath =
   | ""

@@ -1,11 +1,11 @@
-import { Dispatch } from "react"
+import { type Dispatch } from "react"
 
 import { Upload } from "lucide-react"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { cn } from "utils/utils"
 
-import { Button, ButtonProps } from "../buttons/Button"
+import { Button, type ButtonProps } from "../buttons/Button"
 import { Icon } from "../primitives/Icon"
 
 interface FileInputProps extends ClassNameProp, Pick<ButtonProps, "variant"> {

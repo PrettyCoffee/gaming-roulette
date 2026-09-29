@@ -1,7 +1,7 @@
-import { cva, VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 import { Copy } from "lucide-react"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { cn } from "utils/utils"
 
 import { Icon } from "../primitives/Icon"

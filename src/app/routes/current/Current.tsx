@@ -1,4 +1,4 @@
-import { Dispatch, useMemo, useState } from "react"
+import { type Dispatch, useMemo, useState } from "react"
 
 import { AlertTriangle, ChevronsDown } from "lucide-react"
 
@@ -8,7 +8,7 @@ import { Textarea } from "components/inputs/textarea"
 import { Icon } from "components/primitives/Icon"
 import { Text } from "components/primitives/Text"
 import { useHandicap } from "data/handicap"
-import { Player, usePlayerGameStats, usePlayers } from "data/players"
+import { type Player, usePlayerGameStats, usePlayers } from "data/players"
 import { useRuleset } from "data/ruleset"
 import { borderColor } from "utils/colors"
 import { cn } from "utils/utils"

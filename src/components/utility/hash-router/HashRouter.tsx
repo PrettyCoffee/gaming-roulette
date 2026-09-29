@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 
 import { useHashRoute } from "./hashRouterAtom"
-import { LazyOrFunctionComponent, Route } from "./types"
+import { type LazyOrFunctionComponent, type Route } from "./types"
 
 const removeEndSlash = (path: string) => path.replace(/\/$/, "")
 const isExactMatch = (matcher: string, path: string) =>

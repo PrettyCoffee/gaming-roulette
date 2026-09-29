@@ -1,12 +1,12 @@
-import { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 
-import { flexRender, Header, Table } from "@tanstack/react-table"
+import { flexRender, type Header, type Table } from "@tanstack/react-table"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 import { Button } from "components/buttons/Button"
 import { Icon } from "components/primitives/Icon"
 import { Table as NativeTable } from "components/Table"
-import { Game } from "data/games"
+import { type Game } from "data/games"
 
 import { actionsCellWidth, TableHeaderActions } from "./TableActions"
 

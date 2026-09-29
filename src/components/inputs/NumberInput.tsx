@@ -1,6 +1,6 @@
-import { Dispatch, useState } from "react"
+import { type Dispatch, useState } from "react"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { parseNumber } from "utils/number"
 import { cn } from "utils/utils"
 

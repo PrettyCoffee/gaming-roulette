@@ -1,9 +1,9 @@
 import {
-  DeepKeys,
-  Row,
-  RowData,
-  Table,
-  TableFeature,
+  type DeepKeys,
+  type Row,
+  type RowData,
+  type Table,
+  type TableFeature,
 } from "@tanstack/react-table"
 
 type FilterState = string | null

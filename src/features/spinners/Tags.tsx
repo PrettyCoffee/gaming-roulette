@@ -2,12 +2,12 @@ import { useRef } from "react"
 
 import { CopyClick } from "components/buttons/CopyClick"
 import { useSize } from "hooks/useSize"
-import { ClassNameProp } from "types/BaseProps"
-import { ColorValue, bgColor, textColorDark } from "utils/colors"
+import { type ClassNameProp } from "types/BaseProps"
+import { type ColorValue, bgColor, textColorDark } from "utils/colors"
 import { noOverflow } from "utils/styles"
 import { cn } from "utils/utils"
 
-import { SpinnerStateProps } from "./types"
+import { type SpinnerStateProps } from "./types"
 
 interface PillProps extends ClassNameProp {
   color: ColorValue

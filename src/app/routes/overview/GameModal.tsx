@@ -1,4 +1,4 @@
-import { Dispatch, useId, useState } from "react"
+import { type Dispatch, useId, useState } from "react"
 
 import { DateInput } from "components/inputs/DateInput"
 import { Input } from "components/inputs/input"
@@ -8,9 +8,9 @@ import { Select } from "components/inputs/select"
 import { Modal } from "components/overlays/Modal"
 import { Swatch } from "components/primitives/Swatch"
 import { Text } from "components/primitives/Text"
-import { Game, PlayerStats } from "data/games"
-import { Player, usePlayers } from "data/players"
-import { borderColor, ColorValue, textColor } from "utils/colors"
+import { type Game, type PlayerStats } from "data/games"
+import { type Player, usePlayers } from "data/players"
+import { borderColor, type ColorValue, textColor } from "utils/colors"
 import { today } from "utils/date"
 import { cn } from "utils/utils"
 

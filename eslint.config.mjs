@@ -26,7 +26,7 @@ export default defineConfig(
       },
     },
     rules: {
-      "check-file/filename-naming-convention": "off",
+      "@pretty-cozy/file-name-case": "off",
     },
   },
 

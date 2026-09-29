@@ -1,9 +1,9 @@
-import { Dispatch } from "react"
+import { type Dispatch } from "react"
 
 import { Check } from "lucide-react"
 
-import { ClassNameProp } from "types/BaseProps"
-import { ColorValue } from "utils/colors"
+import { type ClassNameProp } from "types/BaseProps"
+import { type ColorValue } from "utils/colors"
 import { focusRing } from "utils/styles"
 import { cn } from "utils/utils"
 

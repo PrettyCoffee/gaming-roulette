@@ -1,4 +1,4 @@
-import { PropsWithChildren, Suspense, useEffect, useState } from "react"
+import { type PropsWithChildren, Suspense, useEffect, useState } from "react"
 
 import { css } from "goober"
 

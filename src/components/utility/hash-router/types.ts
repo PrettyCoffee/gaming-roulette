@@ -1,6 +1,6 @@
-import { FunctionComponent, LazyExoticComponent } from "react"
+import { type FunctionComponent, type LazyExoticComponent } from "react"
 
-import { RouteMeta, RoutePath } from "types/routes"
+import { type RouteMeta, type RoutePath } from "types/routes"
 
 export type LazyOrFunctionComponent<Props = {}> =
   | LazyExoticComponent<FunctionComponent<Props>>

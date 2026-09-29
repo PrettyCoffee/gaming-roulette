@@ -1,10 +1,10 @@
-import { PropsWithChildren, forwardRef } from "react"
+import { type PropsWithChildren, forwardRef } from "react"
 
 import { Slot } from "@radix-ui/react-slot"
-import { VariantProps, cva } from "class-variance-authority"
+import { type VariantProps, cva } from "class-variance-authority"
 
-import { AsChildProp, ClassNameProp } from "types/BaseProps"
-import { ColorValue, bgColor } from "utils/colors"
+import { type AsChildProp, type ClassNameProp } from "types/BaseProps"
+import { type ColorValue, bgColor } from "utils/colors"
 import { cn } from "utils/utils"
 
 const swatch = cva("inline-flex items-center justify-center", {
