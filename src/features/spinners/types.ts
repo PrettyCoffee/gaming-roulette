@@ -1,4 +1,4 @@
-import { Player } from "data/players"
+import { type Player } from "data/players"
 
 export interface SpinnerItem {
   name: string

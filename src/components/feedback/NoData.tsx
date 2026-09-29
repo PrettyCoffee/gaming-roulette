@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { type ReactNode } from "react"
 
 import { keyframes, css } from "goober"
 import { Ghost } from "lucide-react"

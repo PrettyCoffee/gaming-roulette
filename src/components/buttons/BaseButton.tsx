@@ -1,11 +1,11 @@
-import { forwardRef, MouseEvent, FocusEvent } from "react"
+import { forwardRef, type MouseEvent, type FocusEvent } from "react"
 
 import { Slot } from "@radix-ui/react-slot"
 
 import click from "assets/btn-click.mp3"
 import hover from "assets/btn-hover.mp3"
 import { audioSettingsAtom } from "data/audioSettings"
-import { AsChildProp } from "types/BaseProps"
+import { type AsChildProp } from "types/BaseProps"
 import { playAudio } from "utils/playAudio"
 
 type ButtonMouseEvent = MouseEvent<HTMLButtonElement>

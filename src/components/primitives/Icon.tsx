@@ -1,9 +1,9 @@
 import { forwardRef } from "react"
 
-import { VariantProps, cva } from "class-variance-authority"
-import { LucideIcon, LucideProps } from "lucide-react"
+import { type VariantProps, cva } from "class-variance-authority"
+import { type LucideIcon, type LucideProps } from "lucide-react"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { cn } from "utils/utils"
 
 const icon = cva("inline-block shrink-0", {
@@ -49,7 +49,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
     <Icon
       ref={ref}
       className={cn(icon({ color, filled, size }), className)}
-      absoluteStrokeWidth={strokeWidth == null}
+      nonScalingStroke={strokeWidth != null}
       strokeWidth={(strokeWidth ?? size === "xs") ? 3 : undefined}
       {...delegated}
     />

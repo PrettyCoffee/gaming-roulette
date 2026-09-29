@@ -1,4 +1,4 @@
-import { Component, FunctionComponent, ReactNode } from "react"
+import { Component, type FunctionComponent, type ReactNode } from "react"
 
 const DefaultFallback = () => (
   <div className="flex size-full flex-col items-center justify-center">

@@ -10,14 +10,14 @@ import { toast } from "components/feedback/Toaster"
 import { Icon } from "components/primitives/Icon"
 import { audioSettingsAtom } from "data/audioSettings"
 import { useGames } from "data/games"
-import { Player, usePlayers } from "data/players"
+import { type Player, usePlayers } from "data/players"
 import { useSettings } from "data/settings"
 import {
   ClassicWheel,
   HalfWheel,
   Tags,
   Wheel,
-  SpinnerStateProps,
+  type SpinnerStateProps,
 } from "features/spinners"
 import { resetIdle } from "hooks/useIdle"
 import { shuffle } from "utils/array"

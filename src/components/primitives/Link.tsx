@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { isTauriEnv } from "utils/isTauriEnv"
 import { focusRing } from "utils/styles"
 import { cn } from "utils/utils"

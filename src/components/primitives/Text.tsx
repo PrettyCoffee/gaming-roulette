@@ -1,10 +1,10 @@
-import { forwardRef, PropsWithChildren } from "react"
+import { forwardRef, type PropsWithChildren } from "react"
 
 import { Slot } from "@radix-ui/react-slot"
-import { cva, VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 
-import { AsChildProp, ClassNameProp } from "types/BaseProps"
-import { colorGradient, ColorGradient, colors } from "utils/colors"
+import { type AsChildProp, type ClassNameProp } from "types/BaseProps"
+import { colorGradient, type ColorGradient, colors } from "utils/colors"
 import { cn } from "utils/utils"
 
 const text = cva("text-foreground", {

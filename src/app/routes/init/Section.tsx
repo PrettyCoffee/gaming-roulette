@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 
 import { Button } from "components/buttons/Button"
 import { Text } from "components/primitives/Text"

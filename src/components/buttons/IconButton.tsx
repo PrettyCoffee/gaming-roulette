@@ -1,13 +1,13 @@
 import { forwardRef } from "react"
 
-import { cva, VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 
-import { Button, ButtonProps } from "components/buttons/Button"
-import { ClassNameProp } from "types/BaseProps"
+import { Button, type ButtonProps } from "components/buttons/Button"
+import { type ClassNameProp } from "types/BaseProps"
 import { cn } from "utils/utils"
 
-import { TitleTooltip, TitleTooltipProps } from "../feedback/TitleTooltip"
-import { Icon, IconProps } from "../primitives/Icon"
+import { TitleTooltip, type TitleTooltipProps } from "../feedback/TitleTooltip"
+import { Icon, type IconProps } from "../primitives/Icon"
 import { VisuallyHidden } from "../utility/VisuallyHidden"
 
 const iconButton = cva("shrink-0", {

@@ -1,6 +1,6 @@
-import { Dispatch, useState } from "react"
+import { type Dispatch, useState } from "react"
 
-import { Input, InputProps } from "components/inputs/input"
+import { Input, type InputProps } from "components/inputs/input"
 import { today } from "utils/date"
 import { cn } from "utils/utils"
 

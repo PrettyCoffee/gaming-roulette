@@ -1,7 +1,7 @@
 import { bgColor } from "utils/colors"
 import { cn } from "utils/utils"
 
-import { SpinnerItem } from "./types"
+import { type SpinnerItem } from "./types"
 
 const WheelSegment = ({
   index,

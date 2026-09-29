@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 
 import { TooltipProvider } from "@radix-ui/react-tooltip"
 import { LazyMotion, domAnimation } from "framer-motion"

@@ -1,6 +1,6 @@
 import { localStorage, useAtom, useAtomValue, createSlice } from "lib/yaasl"
 import { arrayHasDuplicate, arraysIntersect } from "utils/array"
-import { ColorValue } from "utils/colors"
+import { type ColorValue } from "utils/colors"
 import { createId } from "utils/createId"
 
 export const gamesA = [

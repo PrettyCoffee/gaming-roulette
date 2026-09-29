@@ -6,7 +6,7 @@ import { Slider } from "components/inputs/slider"
 import { Switch } from "components/inputs/switch"
 import { Textarea } from "components/inputs/textarea"
 import { calcHandicap } from "data/handicap"
-import { Ruleset, useRuleset } from "data/ruleset"
+import { type Ruleset, useRuleset } from "data/ruleset"
 import { createRange } from "utils/array"
 
 import { Grid } from "./Grid"

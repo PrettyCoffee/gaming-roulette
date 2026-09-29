@@ -1,11 +1,16 @@
-import { Dispatch, useRef } from "react"
+import { type Dispatch, useRef } from "react"
 
-import { Cell, flexRender, Row, Table } from "@tanstack/react-table"
+import {
+  type Cell,
+  flexRender,
+  type Row,
+  type Table,
+} from "@tanstack/react-table"
 import { PenBox, Trash } from "lucide-react"
 
 import { IconButton } from "components/buttons/IconButton"
 import { Table as NativeTable } from "components/Table"
-import { Game } from "data/games"
+import { type Game } from "data/games"
 import { useTransition } from "hooks/useTransition"
 import { cn } from "utils/utils"
 

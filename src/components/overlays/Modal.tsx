@@ -1,10 +1,10 @@
-import { PropsWithChildren, ReactNode } from "react"
+import { type PropsWithChildren, type ReactNode } from "react"
 
-import { ClassNameProp } from "types/BaseProps"
+import { type ClassNameProp } from "types/BaseProps"
 import { cn } from "utils/utils"
 
 import { Dialog } from "./Dialog"
-import { Button, ButtonProps } from "../buttons/Button"
+import { Button, type ButtonProps } from "../buttons/Button"
 
 interface ModalAction {
   label: string

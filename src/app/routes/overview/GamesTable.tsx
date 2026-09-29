@@ -1,16 +1,16 @@
-import { Dispatch, useMemo } from "react"
+import { type Dispatch, useMemo } from "react"
 
 import {
   createColumnHelper,
   getCoreRowModel,
   useReactTable,
   getSortedRowModel,
-  RowData,
+  type RowData,
 } from "@tanstack/react-table"
 
 import { Text } from "components/primitives/Text"
 import { Table as NativeTable } from "components/Table"
-import { Game } from "data/games"
+import { type Game } from "data/games"
 import { usePlayers } from "data/players"
 import { textColor } from "utils/colors"
 
