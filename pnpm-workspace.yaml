@@ -29,3 +29,6 @@ trustPolicyExclude:
   - "@tauri-apps/cli-win32-arm64-msvc@1.6.3"
   - "@tauri-apps/cli-win32-ia32-msvc@1.6.3"
   - "@tauri-apps/cli-win32-x64-msvc@1.6.3"
+minimumReleaseAgeExclude:
+  # Renovate security update: postcss@8.5.23
+  - postcss@8.5.23
