@@ -32,3 +32,5 @@ trustPolicyExclude:
 minimumReleaseAgeExclude:
   # Renovate security update: postcss@8.5.23
   - postcss@8.5.23
+  # Renovate security update: vite@8.3.3
+  - vite@8.3.3
